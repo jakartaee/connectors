@@ -22,11 +22,11 @@
     <parent>
       <groupId>org.eclipse.ee4j</groupId>
       <artifactId>project</artifactId>
-      <version>1.0</version>
+      <version>1.0.1</version>
     </parent>
 
-    <groupId>javax.resource</groupId>
-    <artifactId>javax.resource-api</artifactId>
+    <groupId>jakarta.resource</groupId>
+    <artifactId>jakarta.resource-api</artifactId>
     <version>1.7.2-SNAPSHOT</version>
     
     <properties>
