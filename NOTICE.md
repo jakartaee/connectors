@@ -34,6 +34,10 @@ The project maintains the following source code repositories:
 
 ## Third-party Content
 
+This project leverages the following third party content.
+
+None
+
 ## Cryptography
 
 Content may contain encryption software. The country in which you are currently
