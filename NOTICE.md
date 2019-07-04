@@ -1,12 +1,12 @@
-# Notices for Eclipse Project for JCA
+# Notices for Jakarta Connectors&trade;
 
-This content is produced and maintained by the Eclipse Project for JCA project.
+This content is produced and maintained by the Jakarta Connectors project.
 
 * Project home: https://projects.eclipse.org/projects/ee4j.jca
 
 ## Trademarks
 
-Eclipse Project for JCA is a trademark of the Eclipse Foundation.
+Jakarta Connectors is a trademark of the Eclipse Foundation.
 
 ## Copyright
 

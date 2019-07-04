@@ -53,7 +53,7 @@ public interface LocalTransaction {
    *             <LI>Resource adapter internal or EIS-specific
    *                 error
    *             <LI>Connection is already participating in a 
-   *                 local or JTA transaction 
+   *                 local or Jakarta Transactions&trade; transaction 
    *           </UL> 
   **/
   public 
@@ -71,7 +71,7 @@ public interface LocalTransaction {
    *            <LI> Violation of integrity constraints, deadlock 
    *                 detection, communication failure during 
    *                 transaction completion, or any retry requirement
-   *            <LI> Connection is participating in an active JTA
+   *            <LI> Connection is participating in an active Jakarta Transactions
    *                 transaction 
    *            <LI> Invalid transaction context; commit
    *                 operation invoked without an active
@@ -88,7 +88,7 @@ public interface LocalTransaction {
    *                              error cases are:
    *           <UL>
    *             <LI> Resource adapter internal or EIS-specific error
-   *             <LI> Connection is participating in an active JTA 
+   *             <LI> Connection is participating in an active Jakarta Transactions 
    *                  transaction 
    *             <LI> Invalid transaction context; rollback
    *                  operation invoked without an active

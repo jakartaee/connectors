@@ -18,7 +18,7 @@ package javax.resource;
 
 /**
  * This is the root interface of the exception hierarchy defined
- * for the Connector architecture.
+ * for Jakarta Connectors&trade;.
  * 
  * The ResourceException provides the following information:
  * <UL>
