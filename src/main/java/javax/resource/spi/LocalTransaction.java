@@ -28,7 +28,7 @@ import javax.resource.ResourceException;
  *
  *  <p>If a resource adapter supports the LocalTransaction interface, then 
  *  the application server can choose to perform local transaction 
- *  optimization (uses local transaction instead of a JTA transaction for
+ *  optimization (uses local transaction instead of a Jakarta&trade; Transactions transaction for
  *  a single resource manager case).
  *
  *  @version     0.5

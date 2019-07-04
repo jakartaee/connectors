@@ -53,7 +53,7 @@ public interface LocalTransaction {
    *             <LI>Resource adapter internal or EIS-specific
    *                 error
    *             <LI>Connection is already participating in a 
-   *                 local or Jakarta Transactions&trade; transaction 
+   *                 local or Jakarta&trade; Transactions transaction 
    *           </UL> 
   **/
   public 

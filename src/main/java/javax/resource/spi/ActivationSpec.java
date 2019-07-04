@@ -18,7 +18,7 @@ package javax.resource.spi;
 
 /**
  * This interface serves as a marker. An instance of an ActivationSpec must be a
- * JavaBean and must be serializable. This holds the activation configuration
+ * Java&trade Bean and must be serializable. This holds the activation configuration
  * information for a message endpoint.
  * 
  * @version 1.0
@@ -34,7 +34,7 @@ public interface ActivationSpec extends ResourceAdapterAssociation {
 	 * validation. The implementation of this self-validation check behavior is
 	 * optional.
 	 * 
-	 * Note: Since Java EE Connector 1.6 specification, resource adapter
+	 * Note: Since JavaEE&trade; Connector 1.6 specification, resource adapter
 	 * implementations are recommended to use the annotations or the XML 
      * validation deployment descriptor facilities defined by the Bean Validation
      * specification to express their validation requirements of its configuration 

@@ -27,7 +27,6 @@ import java.util.HashMap;
  * 
  * @since 1.6
  * @see javax.resource.spi.work.WorkContextProvider
- * @version Java EE Connector Architecture 1.6
  */
 
 public class HintsContext implements WorkContext {
@@ -82,9 +81,9 @@ public class HintsContext implements WorkContext {
 
 	/**
 	 * Set a Hint and a related value. The hintName must be non-Null. Standard
-	 * HintNames are defined in the Connector specification. Use of
+	 * HintNames are defined in the Jakarta Connectors specification. Use of
 	 * "javax.resource." prefixed hintNames are reserved for use by the
-	 * Connector specification.
+	 * Jakarta Connectors specification.
 	 * 
 	 */
 	public void setHint(String hintName, Serializable value) {

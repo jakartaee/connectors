@@ -24,7 +24,7 @@ import java.lang.Throwable;
 /**
  * This interface models a <code>WorkManager</code> which provides a facility
  * to submit <code>Work</code> instances for execution. This frees the user
- * from having to create Java threads directly to do work. Further, this
+ * from having to create Java&trade; threads directly to do work. Further, this
  * allows efficient pooling of thread resources and more control over thread
  * usage.
  *

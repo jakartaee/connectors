@@ -24,7 +24,6 @@ package javax.resource.spi;
  * at a later point in time.
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 public class RetryableUnavailableException 
 				extends UnavailableException

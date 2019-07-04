@@ -35,7 +35,6 @@ like <code>Connector</code>.
  * supported by the resource adapter.
  *
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 public @interface AuthenticationMechanism {
 
@@ -45,7 +44,6 @@ public @interface AuthenticationMechanism {
      * of the credentials.
      *
      * @since 1.6
-     * @version Java EE Connector Architecture 1.6
      */
     public enum CredentialInterface {
         /**

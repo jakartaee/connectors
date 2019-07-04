@@ -78,7 +78,7 @@ public class ResourceWarning extends javax.resource.ResourceException {
      *
      * @return next <code>ResourceWarning</code> in the chain; null if none.
      *
-     * @deprecated J2SE release 1.4 supports a chained exception facility 
+     * @deprecated Java&trade; release 1.4 supports a chained exception facility 
      * that allows any throwable to know about another throwable, if any,
      * that caused it to get thrown. Refer to <code>getCause</code> and 
      * <code>initCause</code> methods of the 
@@ -98,7 +98,7 @@ public class ResourceWarning extends javax.resource.ResourceException {
      *
      * @param warning <code>ResourceWarning</code> to be added to the chain.
      *
-     * @deprecated J2SE release 1.4 supports a chained exception facility 
+     * @deprecated Java release 1.4 supports a chained exception facility 
      * that allows any throwable to know about another throwable, if any,
      * that caused it to get thrown. Refer to <code>getCause</code> and 
      * <code>initCause</code> methods of the 

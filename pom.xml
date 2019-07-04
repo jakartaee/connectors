@@ -228,7 +228,7 @@
                         <configuration>
                             <groups>
                                 <group>
-                                    <title>Jakarta Connectors(tm) API Documentation</title>
+                                    <title>Jakarta(tm) Connectors API Documentation</title>
                                     <packages>javax.resource</packages>
                                 </group>
                             </groups>

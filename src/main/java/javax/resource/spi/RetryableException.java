@@ -25,7 +25,6 @@ import java.io.Serializable;
  * operation.
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 public interface RetryableException extends Serializable {
 

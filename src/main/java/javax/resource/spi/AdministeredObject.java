@@ -27,7 +27,6 @@ import static java.lang.annotation.RetentionPolicy.*;
  * specific to a messaging style or message provider.
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 
 @Documented

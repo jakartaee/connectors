@@ -30,7 +30,6 @@ import static java.lang.annotation.RetentionPolicy.*;
  * 
  * @since 1.6
  * 
- * @version Java EE Connector Architecture 1.6
  */
 
 @Documented

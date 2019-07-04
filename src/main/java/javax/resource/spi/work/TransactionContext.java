@@ -31,7 +31,6 @@ package javax.resource.spi.work;
  * @see javax.resource.spi.work.WorkContext
  * @see javax.resource.spi.work.ExecutionContext
  *
- * @version Java EE Connector Architecture 1.6
  */
 
 public class TransactionContext extends ExecutionContext implements

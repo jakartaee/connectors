@@ -52,7 +52,7 @@ import javax.resource.spi.SecurityException;
  *  @see     java.security.Principal
  *  @deprecated The preferred way to represent generic credential information 
  *  is via the <code>org.ietf.jgss.GSSCredential</code> interface in 
- *  J2SE Version 1.4, which provides similar functionality.
+ *  Java&trade; Version 1.4, which provides similar functionality.
  */
 
 public interface GenericCredential {

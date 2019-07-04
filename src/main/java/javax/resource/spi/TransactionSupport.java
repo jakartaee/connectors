@@ -27,7 +27,6 @@ package javax.resource.spi;
  * resource adapter deployment descriptor or deployer configuration
  *
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 public interface TransactionSupport extends java.io.Serializable {
 
@@ -36,11 +35,10 @@ public interface TransactionSupport extends java.io.Serializable {
      * a resource adapter may support.
      *
      * @since 1.6
-     * @version Java EE Connector Architecture 1.6
      */
     public enum TransactionSupportLevel {
         /**
-         * The resource adapter supports neither resource manager nor JTA 
+         * The resource adapter supports neither resource manager nor Jakarta&trade; Transactions 
          * transactions.
          * @since 1.6
          */
@@ -53,7 +51,7 @@ public interface TransactionSupport extends java.io.Serializable {
         LocalTransaction, 
         /**
          * The resource adapter supports both resource manager local 
-         * and JTA transactions by implementing the <code>LocalTransaction</code>
+         * and Jakarta Transactions transactions by implementing the <code>LocalTransaction</code>
          * and <code>XAResource</code> interfaces.
          * @since 1.6
          */

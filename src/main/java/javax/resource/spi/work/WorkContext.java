@@ -35,7 +35,6 @@ import java.io.Serializable;
  * to that <code>WorkContext</code> has been submitted to the <code>WorkManager</code>.
  *
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 
 public interface WorkContext extends Serializable {

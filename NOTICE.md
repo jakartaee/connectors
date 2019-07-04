@@ -1,4 +1,4 @@
-# Notices for Jakarta Connectors&trade;
+# Notices for Jakarta&trade; Connectors
 
 This content is produced and maintained by the Jakarta Connectors project.
 
