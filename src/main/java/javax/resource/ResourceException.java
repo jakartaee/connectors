@@ -29,7 +29,7 @@ package javax.resource;
  *   <LI> reference to another exception. Often a resource exception
  *        will be result of a lower level problem. If appropriate, this
  *        lower level exception can be linked to the ResourceException.
- *        Note, this has been deprecated in favor of Java&trade; SE release 1.4 exception
+ *        Note, this has been deprecated in favor of J2SE release 1.4 exception
  *        chaining facility.
  * </UL>
  *
@@ -114,7 +114,7 @@ public class ResourceException extends java.lang.Exception {
      *
      * @return         linked Exception, null if none
      *
-     * @deprecated Java SE release 1.4 supports a chained exception facility 
+     * @deprecated J2SE release 1.4 supports a chained exception facility 
      * that allows any throwable to know about another throwable, if any,
      * that caused it to get thrown. Refer to <code>getCause</code> and 
      * <code>initCause</code> methods of the 
@@ -129,7 +129,7 @@ public class ResourceException extends java.lang.Exception {
      *
      * @param ex       linked Exception
      *
-     * @deprecated Java SE release 1.4 supports a chained exception facility 
+     * @deprecated J2SE release 1.4 supports a chained exception facility 
      * that allows any throwable to know about another throwable, if any,
      * that caused it to get thrown. Refer to <code>getCause</code> and 
      * <code>initCause</code> methods of the 

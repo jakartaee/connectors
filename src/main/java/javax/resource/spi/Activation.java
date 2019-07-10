@@ -23,7 +23,7 @@ import java.lang.annotation.Documented;
 import static java.lang.annotation.RetentionPolicy.*;
 
 /**
- * Designates a Java&trade; Bean as an <code>ActivationSpec</code>. This annotation may
+ * Designates a JavaBean as an <code>ActivationSpec</code>. This annotation may
  * be placed on a JavaBean. A JavaBean annotated with the Activation annotation
  * is not required to implement the {@link ActivationSpec ActivationSpec}
  * interface.
@@ -53,7 +53,7 @@ public @interface Activation {
 	/**
 	 * Indicates the message listener type(s) associated with this activation.
 	 * 
-	 * @return The Java&trade; types of the Message Listener interface this
+	 * @return The Java types of the Message Listener interface this
 	 *         activation-spec is associated with.
 	 */
 	Class[] messageListeners();

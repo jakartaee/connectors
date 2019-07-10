@@ -40,7 +40,7 @@ import javax.transaction.xa.Xid;
  * Note: Resource adapters that are developed for Jakarta Connectors specification
  * compliant application servers, are recommended to use
  * the <code>TransactionContext</code> interface instead of this 
- * class. See Chapter.11 Generic Work Context in the Java&trade; Connectors 1.6
+ * class. See Chapter.11 Generic Work Context in the Connectors 1.6
  * specification for more details.
  *
  * @version 1.0
