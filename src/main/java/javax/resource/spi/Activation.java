@@ -43,7 +43,6 @@ import static java.lang.annotation.RetentionPolicy.*;
  * messaging resource adapter.
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 
 @Documented

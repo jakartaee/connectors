@@ -26,7 +26,6 @@ import static java.lang.annotation.RetentionPolicy.*;
  * Designates a JavaBean property as a configuration property
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 
 @Documented

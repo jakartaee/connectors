@@ -28,7 +28,6 @@ import static java.lang.annotation.RetentionPolicy.*;
  * required by the resource adapter
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 
 @Documented

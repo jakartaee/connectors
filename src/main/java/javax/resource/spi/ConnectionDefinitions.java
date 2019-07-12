@@ -29,7 +29,6 @@ import static java.lang.annotation.RetentionPolicy.*;
  * ManagedConnectionFactory} interface.
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 
 @Documented

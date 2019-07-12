@@ -26,7 +26,6 @@ package javax.resource.spi.work;
  * custom <code>WorkContext</code> types.
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 public class WorkContextErrorCodes {
 

@@ -38,7 +38,6 @@ import java.io.Serializable;
  * <p>
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 public interface WorkContextProvider extends Serializable {
 

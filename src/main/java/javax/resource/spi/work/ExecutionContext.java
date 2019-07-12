@@ -37,8 +37,8 @@ import javax.transaction.xa.Xid;
  * (in the future) without forcing resource adapter implementations 
  * to change.</ul>
  *
- * Note: Resource adapters that are developed for Connectors 1.6 specification
- * compliant application servers and above, are recommended to use
+ * Note: Resource adapters that are developed for Jakarta Connectors specification
+ * compliant application servers, are recommended to use
  * the <code>TransactionContext</code> interface instead of this 
  * class. See Chapter.11 Generic Work Context in the Connectors 1.6
  * specification for more details.

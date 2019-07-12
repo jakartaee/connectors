@@ -25,7 +25,6 @@ import javax.resource.spi.RetryableException;
  * resource adapter performs some recovery steps and retries the operation.
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 public class RetryableWorkRejectedException extends WorkRejectedException
 		implements RetryableException {

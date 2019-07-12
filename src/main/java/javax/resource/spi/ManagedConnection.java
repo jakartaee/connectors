@@ -32,7 +32,7 @@ import javax.resource.ResourceException;
  *  EIS resource manager instance and to perform two-phase commit 
  *  protocol. The ManagedConnection interface is not directly used 
  *  by the transaction manager. More details on the XAResource 
- *  interface are described in the JTA specification.
+ *  interface are described in the Jakarta&trade; Transactions specification.
  *
  *  <p>The LocalTransaction interface is used by the application server
  *  to manage local transactions.
@@ -189,7 +189,7 @@ public interface ManagedConnection {
   /** Returns an <code>javax.transaction.xa.XAresource</code> instance. 
    *  An application server enlists this XAResource instance with the
    *  Transaction Manager if the ManagedConnection instance is being used
-   *  in a JTA transaction that is being coordinated by the Transaction 
+   *  in a Jakarta Transactions transaction that is being coordinated by the Transaction 
    *  Manager.
    *
    *  @return     XAResource instance

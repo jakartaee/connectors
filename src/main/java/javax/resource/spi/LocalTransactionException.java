@@ -19,7 +19,7 @@ package javax.resource.spi;
 /** 
  * A <code>LocalTransactionException</code> represents various 
  * error conditions related to the local transaction management contract. 
- * The Java Transaction API specification specifies the 
+ * The Jakarta&trade; Transactions specification specifies the 
  * <code>javax.transaction.xa.XAException</code> class for exceptions 
  * related to XAResource based transaction management contract. 
  *  

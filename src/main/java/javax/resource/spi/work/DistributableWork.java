@@ -24,7 +24,6 @@ import java.io.Serializable;
  * <code>DistributableWorkManager</code>
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 public interface DistributableWork extends Work, Serializable {
 

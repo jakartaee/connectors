@@ -1,10 +1,10 @@
-# Contributing to Eclipse Project for JCA
+# Contributing to Jakarta&trade; Connectors
 
 Thanks for your interest in this project.
 
 ## Project description
 
-The Jakarta EE Connector Architecture defines a standard architecture for
+The Jakarta Connectors specification defines a standard architecture for
 Jakarta EE application components to connect to Enterprise Information Systems.
 
 * https://projects.eclipse.org/projects/ee4j.jca

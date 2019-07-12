@@ -67,7 +67,7 @@ import javax.security.auth.callback.CallbackHandler;
  * 
  * @since 1.6
  * @see javax.resource.spi.work.WorkContextProvider
- * @version Java EE Connector Architecture 1.6
+ * 
  */
 
 public abstract class SecurityContext implements WorkContext {
@@ -99,8 +99,8 @@ public abstract class SecurityContext implements WorkContext {
 	 * 
 	 * The handler argument must not be null, and the argument handler and the
 	 * <code>CallbackHandler</code> passed to this method must support the
-	 * following <code>Callback</code>s defined in JSR 196: Java Authentication
-	 * SPI for Containers specification:
+	 * following <code>Callback</code>s defined in the Jakarta Authentication
+	 * specification:
 	 * <p>
 	 * <ul>
 	 * <li>CallerPrincipalCallback</li>
@@ -177,7 +177,7 @@ public abstract class SecurityContext implements WorkContext {
 	 * </ul>
 	 * <p>
 	 * 
-	 * @see JSR 196: Java Authentication SPI for Containers specification and
+	 * @see Jakarta Authentication specification and
 	 *      related JavaDoc
 	 * 
 	 * @param handler

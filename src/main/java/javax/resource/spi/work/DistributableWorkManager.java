@@ -23,7 +23,7 @@ package javax.resource.spi.work;
  * <p>
  * A <code>DistributableWorkManager</code> may choose to distribute a
  * <code>Work</code> instance submitted by a resource adapter to another
- * <code>WorkManager</code> instance running in a different Java virtual machine
+ * <code>WorkManager</code> instance running in a different Java&trade; virtual machine
  * (that is running in the same host or different hosts) for achieving optimal
  * resource utilization or for providing better response times.
  * 
@@ -33,7 +33,6 @@ package javax.resource.spi.work;
  * <code>DistributableWorkManager</code> marker interface.
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 public interface DistributableWorkManager extends WorkManager {
 	

@@ -30,7 +30,6 @@ import javax.resource.spi.work.WorkContext;
  * JavaBean class.
  * 
  * @since 1.6
- * @version Java EE Connector Architecture 1.6
  */
 
 @Documented
