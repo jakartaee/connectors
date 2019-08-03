@@ -210,9 +210,7 @@
                 <configuration>
                     <additionalparam>-Xdoclint:none</additionalparam>
                     <bottom>
-<![CDATA[Copyright &#169; 1999-2018,
-    <a href="http://www.oracle.com">Oracle</a>
-    and/or its affiliates. All Rights Reserved.
+<![CDATA[Copyright (c) 2019 Eclipse Foundation.
     Use is subject to
     <a href="{@docRoot}/doc-files/speclicense.html" target="_top">license terms</a>.
 ]]>
