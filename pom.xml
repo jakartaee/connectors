@@ -24,7 +24,7 @@
     <groupId>org.eclipse.ee4j.jca-api</groupId>
     <artifactId>jca-api-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.7.4-SNAPSHOT</version>
+    <version>1.7.5-SNAPSHOT</version>
     <name>${extension.name} API</name>
     <description>Jakarta Connectors</description>
     <url>https://github.com/eclipse-ee4j/jca-api</url>
