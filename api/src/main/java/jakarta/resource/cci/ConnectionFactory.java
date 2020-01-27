@@ -21,7 +21,7 @@ import jakarta.resource.ResourceException;
 import jakarta.resource.NotSupportedException;
 
 
-/** <code>ConnectionFactory provides an interface for getting
+/** <code>ConnectionFactory</code> provides an interface for getting
  *  connection to an EIS instance. An implementation of ConnectionFactory
  *  interface is provided by a resource adapter.
  *
