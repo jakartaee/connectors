@@ -41,14 +41,15 @@ package jakarta.resource.spi;
 
 public interface ConnectionRequestInfo {
 
-  /** Checks whether this instance is equal to another.Since
-  connectionRequestInfo is defined specific to a resource
-  adapter, the resource adapter is required to implement
-  this method. The conditions for equality are specific
-  to the resource adapter.
+  /** 
+   * Checks whether this instance is equal to another.Since
+   * connectionRequestInfo is defined specific to a resource
+   * adapter, the resource adapter is required to implement
+   * this method. The conditions for equality are specific
+   * to the resource adapter.
    *
    * @param other
-   *  @return True if the two instances are equal.
+   * @return True if the two instances are equal.
   **/
   public boolean equals(Object other);
 
