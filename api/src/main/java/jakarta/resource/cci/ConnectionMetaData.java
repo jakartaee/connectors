@@ -19,9 +19,10 @@ package jakarta.resource.cci;
 
 import jakarta.resource.ResourceException;
 
-/** *  The interface <code>ConnectionMetaData provides information 
+/** The interface <code>ConnectionMetaData</code> provides information 
  *  about an EIS instance connected through a Connection instance. A
- *  component calls the method <code>Connection.getMetaData<code>ConnectionMetaData 
+ *  component calls the method <code>Connection.getMetaData</code> to
+ *  get a <code>ConnectionMetaData</code> instance. 
  *
  *  @version     0.8
  *  @author      Rahul Sharma

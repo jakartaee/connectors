@@ -17,12 +17,11 @@
 package jakarta.resource.cci;
 
 
-import java.io.PrintWriter;
 import jakarta.resource.ResourceException;
 import jakarta.resource.NotSupportedException;
 
 
-/** *  <code>ConnectionFactory provides an interface for getting
+/** <code>ConnectionFactory provides an interface for getting
  *  connection to an EIS instance. An implementation of ConnectionFactory
  *  interface is provided by a resource adapter.
  *
@@ -30,7 +29,9 @@ import jakarta.resource.NotSupportedException;
  *  namespace and uses it to get EIS connections. 
  *
  *  <p>An implementation class for ConnectionFactory is required to 
- *  implement <code>java.io.Serializable<code>javax.resource.Referenceable
+ *  implement <code>java.io.Serializable</code> and 
+ *  <code>jakarta.resource.Referenceable</code>interfaces to support 
+ *  JNDI registration.
  *  
  *  @author  Rahul Sharma
  *  @version 0.8
@@ -85,7 +86,24 @@ public interface ConnectionFactory
    *  @param  properties          Connection parameters and security
    *                              information specified as 
    *                              ConnectionSpec instance
-   *  @return Connection instance@see     jakarta.resource.cci.ConnectionSpec
+   *  @return Connection instance
+   *
+   *  @throws ResourceException   Failed to get a connection to
+   *                              the EIS instance. Examples of
+   *                              error cases are:
+   *          <UL>
+   *          <LI> Invalid specification of input parameters
+   *          <LI> Invalid configuration of ManagedConnectionFactory--
+   *               example: invalid server name
+   *          <LI> Application server-internal error--example:
+   *               connection pool related error
+   *          <LI> Communication error 
+   *          <LI> EIS-specific error--example: EIS not active
+   *          <LI> Resource adapter-internal error
+   *          <LI> Security related error; example: invalid user
+   *          <LI> Failure to allocate system resources
+   *         </UL>                        
+   *  @see     jakarta.resource.cci.ConnectionSpec
   **/
   public 
   Connection getConnection(ConnectionSpec properties) 

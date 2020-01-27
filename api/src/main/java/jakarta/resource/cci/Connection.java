@@ -26,7 +26,9 @@ import jakarta.resource.NotSupportedException;
  *  represented by a ManagedConnection instance.
  *
  *  <p>A client gets a Connection instance by using the 
- *  <code>getConnection<code>ConnectionFactory
+ *  <code>getConnection</code> method on a <code>ConnectionFactory</code> 
+ *  instance. A connection can be associated with zero or more Interaction
+ *  instances.
  * 
  *  @author  Rahul Sharma
  *  @version 0.8

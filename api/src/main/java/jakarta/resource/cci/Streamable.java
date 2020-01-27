@@ -45,6 +45,7 @@ public interface Streamable {
    *  @param  istream   InputStream that represents a resource
    *                    adapter specific internal representation
    *                    of fields of a Streamable object
+   * @throws java.io.IOException
   **/
   public
   void read(InputStream istream) throws IOException;
@@ -53,6 +54,7 @@ public interface Streamable {
   /** Write fields of a Streamable object to an OutputStream
    *  @param  ostream   OutputStream that holds value of a
    *                    Streamable object
+   * @throws java.io.IOException
   **/
   public
   void write(OutputStream ostream) throws IOException;

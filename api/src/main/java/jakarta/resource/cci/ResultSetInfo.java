@@ -20,11 +20,15 @@ package jakarta.resource.cci;
 import jakarta.resource.ResourceException;
 
 /** 
- * The interface <code>javax.resource.cci.ResultSetInfo provides
+ * The interface <code>jakarta.resource.cci.ResultSetInfo</code> provides
  * information on the support provided for ResultSet by a connected 
  * EIS instance. A component calls the method 
- * <code>Connection.getResultInfo<p>A CCI implementation is not required to support 
- * <code>javax.resource.cci.ResultSetInfo
+ * <code>Connection.getResultInfo</code> to get the ResultSetInfo instance. 
+ * 
+ * <p>A CCI implementation is not required to support 
+ * <code>jakarta.resource.cci.ResultSetInfo</code> interface. The 
+ * implementation of this interface is provided only if the CCI 
+ * supports the ResultSet facility.
  * 
  * @version     0.9
  * @author      Rahul Sharma

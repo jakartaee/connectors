@@ -39,6 +39,8 @@ import java.io.Serializable;
  *         SYNC_SEND, SYNC_SEND_RECEIVE, SYNC_RECEIVE
  *     <LI>ExecutionTimeout: the number of milliseconds an Interaction 
  *         will wait for an EIS to execute the specified function
+ *  </UL>
+ *  
  *  <p>The following standard properties are used to give hints to an 
  *  Interaction instance about the ResultSet requirements:
  *  <UL>
@@ -47,6 +49,8 @@ import java.io.Serializable;
  *     <LI>MaxFieldSize
  *     <LI>ResultSetType
  *     <LI>ResultSetConcurrency
+ *  </UL>
+ *
  *  <p>A CCI implementation can provide additional properties beyond
  *  that described in the InteractionSpec interface. Note that the 
  *  format and type of the additional properties is specific to an EIS 

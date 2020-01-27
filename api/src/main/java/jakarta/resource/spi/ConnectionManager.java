@@ -19,7 +19,7 @@ package jakarta.resource.spi;
 
 import jakarta.resource.ResourceException;
 
-/** *  <p>ConnectionManager interface provides a hook for the resource adapter to
+/** <p>ConnectionManager interface provides a hook for the resource adapter to
  *  pass a connection request to the application server. 
  *  
  *  <p>An application server provides implementation of the ConnectionManager

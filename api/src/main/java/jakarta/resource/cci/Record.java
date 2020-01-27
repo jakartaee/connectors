@@ -17,7 +17,7 @@
 package jakarta.resource.cci;
 
 
-/** *  The <code>javax.resource.cci.Record interface is the base 
+/** The <code>jakarta.resource.cci.Record</code> interface is the base 
  *  interface for the representation of an input or output to the 
  *  execute methods defined on an Interaction.
  *  
@@ -31,9 +31,9 @@ package jakarta.resource.cci;
  *     <LI> JavaBean based representation of an EIS abstraction: An 
  *          example is a custom record generated to represent a purchase 
  *          order in an ERP system.
- *     <LI> <code>javax.resource.cci.ResultSet</code>: This interface 
+ *     <LI> <code>jakarta.resource.cci.ResultSet</code>: This interface 
  *          extends both <code>java.sql.ResultSet</code> and <code>
- *          javax.resource.cci.Record</code>. A ResultSet
+ *          jakarta.resource.cci.Record</code>. A ResultSet
  *          represents tabular data.
  *  </UL> 
  *

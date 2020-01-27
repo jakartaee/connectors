@@ -21,14 +21,21 @@ import jakarta.resource.ResourceException;
  *  resource manager local transactions. Note that this interface is 
  *  used for application level local transaction demarcation. The
  *  system contract level LocalTransaction interface (as defined in
- *  the <code>javax.resource.spi<p>A local transaction is managed internal to a resource manager. There
+ *  the <code>jakarta.resource.spi</code> package) is used by the container 
+ *  for local transaction management.
+ *
+ *  <p>A local transaction is managed internal to a resource manager. There
  *  is no external transaction manager involved in the coordination of 
  *  such transactions.
  *
  *  <p>A CCI implementation can (but is not required to) implement the
  *  LocalTransaction interface. If the LocalTransaction interface is supported
  *  by a CCI implementation, then the method 
- *  <code>Connection.getLocalTransaction
+ *  <code>Connection.getLocalTransaction</code> should return a
+ *  LocalTransaction instance. A component can then use the
+ *  returned LocalTransaction to demarcate a resource manager local transaction
+ *  (associated with the Connection instance) on the underlying EIS 
+ *  instance.
  *  
  *  @author  Rahul Sharma
  *  @since   0.8

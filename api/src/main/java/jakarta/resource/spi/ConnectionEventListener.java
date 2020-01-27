@@ -16,10 +16,9 @@
 
 package jakarta.resource.spi;
 
-import java.util.EventListener;
-import jakarta.resource.ResourceException;
-
-/** *   The <code>ConnectionEventListener<code>ManagedConnection instance. 
+/**  The <code>ConnectionEventListener</code> interface provides an event
+ *   callback mechanism to enable an application server to receive 
+ *   notifications from a <code>ManagedConnection</code> instance. 
  *
  *   <p>An application server uses these event notifications to manage 
  *   its connection pool, to clean up any invalid or terminated connections

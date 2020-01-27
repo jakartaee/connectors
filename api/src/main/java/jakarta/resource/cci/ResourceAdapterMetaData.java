@@ -16,14 +16,17 @@
 
 package jakarta.resource.cci;
 
-import jakarta.resource.ResourceException;
-
-/** *  The interface <code>javax.resource.cci.ResourceAdapterMetaData 
+/** The interface <code>javax.resource.cci.ResourceAdapterMetaData</code> 
  *  provides information about capabilities of a resource adapter 
  *  implementation. Note that this interface does not provide information 
  *  about an EIS instance that is connected through the resource adapter.
  *
- *  <p>A CCI client uses a <code>ConnectionFactory.getMetaData<code>getMetaData<p>The ResourceAdapterMetaData can be extended to provide more 
+ *  <p>A CCI client uses a <code>ConnectionFactory.getMetaData</code> to 
+ *  get metadata information about the resource adapter. The 
+ *  <code>getMetaData</code> method does not require that an active 
+ *  connection to an EIS instance should have been established.
+ *
+ *  <p>The ResourceAdapterMetaData can be extended to provide more 
  *  information specific to a resource adapter implementation.
  *  
  *  @author  Rahul Sharma

@@ -16,10 +16,8 @@
 
 package jakarta.resource.spi;
 
-import jakarta.resource.ResourceException;
-import java.util.EventObject;
-
-/** *  The ConnectionEvent class provides information about the source of 
+/** 
+ *  The ConnectionEvent class provides information about the source of 
  *  a connection related event.A ConnectionEvent instance contains the 
  *  following information: 
  *  <UL>
@@ -32,6 +30,8 @@ import java.util.EventObject;
  *        other event types.
  *    <LI>Optionally, an exception indicating the connection related error. 
  *        Note that exception is used for CONNECTION_ERROR_OCCURRED.
+ *  </UL>
+ * 
  *  <p>This class defines following types of event notifications:
  *  <UL>
  *     <LI>CONNECTION_CLOSED
@@ -39,6 +39,7 @@ import java.util.EventObject;
  *     <LI>LOCAL_TRANSACTION_COMMITTED
  *     <LI>LOCAL_TRANSACTION_ROLLEDBACK
  *     <LI>CONNECTION_ERROR_OCCURRED
+ *  </UL>
  *
  *  @version     0.5
  *  @author      Rahul Sharma
@@ -124,7 +125,8 @@ public class ConnectionEvent extends java.util.EventObject {
   }
 
   /**
-   * Set the connection handle. Used for CONNECTION_CLOSED event
+   * Set the connection handle.Used for CONNECTION_CLOSED event
+     * @param connectionHandle
    */
   public void setConnectionHandle(Object connectionHandle) {
     this.connectionHandle = connectionHandle;
@@ -142,9 +144,9 @@ public class ConnectionEvent extends java.util.EventObject {
 
   /**
    * Get the type of event
+     * @return id
    */
-  public
-  int getId() {
+  public int getId() {
     return id;
   }
 } 

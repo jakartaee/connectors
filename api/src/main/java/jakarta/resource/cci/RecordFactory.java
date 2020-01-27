@@ -16,8 +16,6 @@
 
 package jakarta.resource.cci;
 
-import java.util.Map;
-import java.util.Collection;
 import jakarta.resource.ResourceException;
 import jakarta.resource.NotSupportedException;
 

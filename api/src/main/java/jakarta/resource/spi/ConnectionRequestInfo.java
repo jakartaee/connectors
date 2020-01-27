@@ -16,7 +16,7 @@
 
 package jakarta.resource.spi;
 
-/** *  <p>The ConnectionRequestInfo interface enables a resource adapter to 
+/** <p>The ConnectionRequestInfo interface enables a resource adapter to 
  *  pass its own request specific data structure across the connection
  *  request flow. A resource adapter extends the empty interface to
  *  supports its own data structures for connection request.
@@ -41,23 +41,21 @@ package jakarta.resource.spi;
 
 public interface ConnectionRequestInfo {
 
-  /** Checks whether this instance is equal to another. Since
-   *  connectionRequestInfo is defined specific to a resource
-   *  adapter, the resource adapter is required to implement
-   *  this method. The conditions for equality are specific
-   *  to the resource adapter.
+  /** Checks whether this instance is equal to another.Since
+  connectionRequestInfo is defined specific to a resource
+  adapter, the resource adapter is required to implement
+  this method. The conditions for equality are specific
+  to the resource adapter.
    *
+   * @param other
    *  @return True if the two instances are equal.
   **/
-  public
-  boolean equals(Object other);
+  public boolean equals(Object other);
 
   /** Returns the hashCode of the ConnectionRequestInfo.
    *
    *  @return hash code os this instance
   **/
-  public
-  int hashCode();
-
-
+  public int hashCode();
+  
 }
