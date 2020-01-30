@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2012, 2018 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2012, 2020 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -22,16 +22,16 @@
     <parent>
       <groupId>org.eclipse.ee4j</groupId>
       <artifactId>project</artifactId>
-      <version>1.0.5</version>
+      <version>1.0.6</version>
     </parent>
 
     <groupId>jakarta.resource</groupId>
     <artifactId>jakarta.resource-api</artifactId>
-    <version>1.7.4-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     
     <properties>
         <extension.name>javax.resource</extension.name>
-        <spec.version>1.7</spec.version>
+        <spec.version>2.0</spec.version>
         <non.final>false</non.final>
         <findbugs.version>2.3.1</findbugs.version>
         <findbugs.exclude>exclude.xml</findbugs.exclude>
@@ -48,6 +48,12 @@
             <name>Yamini K B</name>
             <organization>Oracle Corporation</organization>
             <organizationUrl>http://www.oracle.com/</organizationUrl>
+        </developer>
+        <developer>
+            <id>smillidge</id>
+            <name>Steve Millidge</name>
+            <organization>Payara</organization>
+            <organizationUrl>http://www.payara.fish/</organizationUrl>
         </developer>
     </developers>
 
@@ -102,8 +108,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-Xlint:unchecked</compilerArgument>
                 </configuration>
             </plugin>
@@ -210,7 +216,7 @@
                 <configuration>
                     <additionalparam>-Xdoclint:none</additionalparam>
                     <bottom>
-<![CDATA[Copyright (c) 2019 Eclipse Foundation.
+<![CDATA[Copyright (c) 2020 Eclipse Foundation.
     Use is subject to
     <a href="{@docRoot}/doc-files/speclicense.html" target="_top">license terms</a>.
 ]]>
@@ -227,7 +233,7 @@
                             <groups>
                                 <group>
                                     <title>Jakarta(tm) Connectors API Documentation</title>
-                                    <packages>javax.resource</packages>
+                                    <packages>jakarta.resource</packages>
                                 </group>
                             </groups>
                         </configuration>
