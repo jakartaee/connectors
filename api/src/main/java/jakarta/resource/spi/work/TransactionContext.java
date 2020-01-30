@@ -17,7 +17,7 @@
 package jakarta.resource.spi.work;
 
 /**
- * A standard <code>WorkContext<code>Work instance
+ * A standard <code>WorkContext</code> that allows a <code>Work</code> instance
  * to propagate transaction related context information from an EIS to an
  * application server.
  * <p>
