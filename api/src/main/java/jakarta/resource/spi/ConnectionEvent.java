@@ -144,7 +144,7 @@ public class ConnectionEvent extends java.util.EventObject {
 
   /**
    * Get the type of event
-     * @return id
+     * @return The type of the event
    */
   public int getId() {
     return id;
