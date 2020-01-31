@@ -1,7 +1,7 @@
 Jakarta Connectors Specification
-============================
+================================
 
-This project generates the Jakarta Connectors 1.7 Specification.
+This project generates the Jakarta Connectors Specification.
 
 Building
 --------
@@ -16,7 +16,7 @@ Run the full build:
 `mvn install`
 
 Locate the html files:
-- target/generated-docs/jakarta-connectors-spec.html
+- target/generated-docs/Connectors.html
 
 Locate the PDF files:
-- target/generated-docs/jakarta-connectors-spec.pdf
+- target/generated-docs/Connectors.pdf
