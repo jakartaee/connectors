@@ -1,7 +1,7 @@
 :sectnums:
-= Jakarta EE Connector Architecture, Version 1.7
+= Jakarta Connectors, Version 2.0
 
-Copyright (c) 2013, 2019 Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2013, 2020 Oracle and/or its affiliates. All rights reserved.
 
 Oracle and Java are registered trademarks of Oracle and/or its 
 affiliates. Other names may be trademarks of their respective owners. 
@@ -14,21 +14,21 @@ Introduction
 
 image:conn-10.png[image]
 
-The Java™ Platform, Enterprise Edition (JavaTM
+The Jakarta Platform, Enterprise Edition (Jakarta
 EE platform) provides containers for client applications, web components
-based on JavaTM Servlets and JavaServer Pages™ (JSP™) and Enterprise
-JavaBeans™ (EJB™) components. These containers provide deployment and
+based on Jakarta Servlets and Jakarta Server Pages and Jakarta Enterprise
+Beans components. These containers provide deployment and
 runtime support for application components. They provide a federated
 view of the services provided by the underlying application server for
 the application components.
 
 Containers can run on existing systems; for
 example, web servers for the web containers; application servers, TP
-monitors, and database systems for EJB containers. This enables
+monitors, and database systems for Enterprise Bean containers. This enables
 enterprises to leverage both the advantages of their existing systems
-and those of Java EE. Enterprises can write, or rewrite, new
-applications using Java EE capabilities and can also encapsulate parts
-of existing applications in Enterprise JavaBeans, JavaServer Pages or
+and those of Jakarta EE. Enterprises can write, or rewrite, new
+applications using Jakarta EE capabilities and can also encapsulate parts
+of existing applications in Enterprise Beans, Jakarta Server Pages or
 servlets.
 
 Enterprise applications access functions and
@@ -40,7 +40,7 @@ frameworks to simplify the EIS integration task.
 
 For enterprise application integration,
 bi-directional connectivity between enterprise applications and EIS is
-essential. The Java EE Connector architecture defines standard contracts
+essential. Jakarta Connectors defines standard contracts
 that allow bi-directional connectivity between enterprise applications
 and EISs. It also formalizes the relationships, interactions, and the
 packaging of the integration layer, thus enabling enterprise application
@@ -52,22 +52,22 @@ image:conn-11.png[image]
 
 Overview
 
-The Java EE Connector architecture defines a
-standard architecture for connecting the Java EE platform to
+The Java Connectors defines a
+standard architecture for connecting the Jakarta EE platform to
 heterogeneous EISs. Examples of EISs include Enterprise Resource
 Planning (ERP), mainframe transaction processing (TP), and database
 systems.
 
-The connector architecture defines a set of
+Jakarta Connectors defines a set of 
 scalable, secure, and transactional mechanisms that enable the
 integration of EISs with application serverslink:#a10022[1] and
 enterprise applications.
 
-The connector architecture also defines a
+Jakarta Connectors also defines a
 Common Client Interface (CCI) for EIS access. The CCI defines a client
 API for interacting with heterogeneous EISs.
 
-The connector architecture enables an EIS
+Jakarta Connectora enables an EIS
 vendor to provide a standard resource adapter for its EIS. A resource
 adapter is a system-level software driver that is used by a Java
 application to connect to an EIS. The resource adapter plugs into an
@@ -173,6 +173,8 @@ _Work_ instance in the context of an established identity. It also
 supports the propagation of user information/Principal information from
 an EIS to a MessageEndpoint during Message Inflow.
 
+Version 2.0 of Jakarta Connectors moves the old Java Connectors Architecture specification to Jakarta EE.
+
 === 
 
 image:conn-11.png[image]
@@ -204,7 +206,7 @@ enterprise tools and EAI vendors.
 
 image:conn-11.png[image]
 
-JDBC and Connector Architecture
+JDBC and Jakarta Connectors
 
 The JavaTM DataBase Connectivity ("JDBCTM")
 API defines a standard Java API for accessing relational databases. The
