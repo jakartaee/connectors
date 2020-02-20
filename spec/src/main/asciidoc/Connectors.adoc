@@ -52,7 +52,7 @@ image:conn-11.png[image]
 
 Overview
 
-The Java Connectors defines a
+Jakarta Connectors defines a
 standard architecture for connecting the Jakarta EE platform to
 heterogeneous EISs. Examples of EISs include Enterprise Resource
 Planning (ERP), mainframe transaction processing (TP), and database
