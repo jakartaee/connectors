@@ -38,7 +38,7 @@
         <findbugs.threshold>Low</findbugs.threshold>
     </properties>
     <name>${extension.name} API</name>
-    <description>Jakarta Connectors 2.0</description>
+    <description>Jakarta Connectors ${spec.version}</description>
     
     <url>https://github.com/eclipse-ee4j/jca-api</url>
 
