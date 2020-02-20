@@ -19,7 +19,7 @@ package jakarta.resource.spi;
 import java.util.Timer;
 import jakarta.resource.spi.work.WorkManager;
 import jakarta.resource.spi.work.WorkContext;
-import javax.transaction.TransactionSynchronizationRegistry;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 /**
  * This provides a mechanism to pass a bootstrap context to a resource adapter
