@@ -250,7 +250,7 @@ and Business to Business integration (B2B) functional space may be
 considered, in an abstract sense, as forms of network service
 composition. That is, in a typical EAI/B2B scenario, an enterprise
 application may make use of network resources to realize some of its
-functionity. In this context, the network resource may be a REST
+functionality. In this context, the network resource may be a REST
 service, a SOAP service, a database server, a JMS topic/queue, some
 legacy application, etc.
 
@@ -726,7 +726,7 @@ the specific CICS TP program
 
 === Connector Architecture
 
-An architecture for integrating Java EE
+An architecture for integrating Jakarta EE
 servers with EISs. There are two parts to this architecture: an EIS
 vendor-provided resource adapter and an application server that allows
 this resource adapter to be plugged in. This architecture defines a set
@@ -776,15 +776,15 @@ system, and an ERP system.
 === Managed Environment
 
 A managed environment defines an operational
-environment for a Java EE-based, multi-tier, web-enabled application
+environment for a Jakarta EE-based, multi-tier, web-enabled application
 that accesses EISs. The application consists of one or more application
-components—EJBs, JSPs, servlets—which are deployed on containers. These
-containers can be one of the following:
+components—Jakarta Enterprise Beans, Jakarta Server Pages, servlets—which
+are deployed on containers. These containers can be one of the following:
 
-Web containers that host JSPs, servlets, and
+Web containers that host Jakarta Server Pages, servlets, and
 static HTML pages
 
-EJB containers that host EJB components
+Enterprise Bean containers that host Enterprise Bean components
 
 Application client containers that host
 standalone application clients
@@ -810,7 +810,8 @@ resource manager.
 === Application Component
 
 An application component can be a server-side
-component, such as an EJB, JSP, or servlet, that is deployed, managed,
+component, such as an Jakarta Enterprise Bean, Jakarta Server Page,
+or servlet, that is deployed, managed,
 and executed on an application server. It can also be a component
 executed on the web-client tier but made available to the web-client by
 an application server. Examples of the latter type of application
@@ -822,9 +823,9 @@ A container is a part of an application server
 that provides deployment and runtime support for application components.
 It provides a federated view of the services provided by the underlying
 application server for the application components. For more details on
-different types of standard containers, refer to the EJB (see
-link:conn.html#a9723[See Enterprise JavaBeans (EJB)
-Specification, version 3.2]), JSP, and servlet specifications.
+different types of standard containers, refer to the Jakarta Enterprise Beans (see
+link:conn.html#a9723[Jakarta™ Enterprise Beans Specification, Version 3.2]),
+Jakarta Server Pages, and servlet specifications.
 
 === 
 
@@ -833,7 +834,7 @@ image:conn-14.png[image]
 Rationale
 
 This section describes the rationale behind
-the connector architecture.
+Jakarta Connectors.
 
 === System Contracts
 
@@ -842,35 +843,35 @@ various EISs with an application server. Without a standard, EIS vendors
 and application server vendors may have to use vendor-specific
 architectures to provide EIS integration.
 
-The connector architecture provides a Java
+Jakarta Connectors provides a Java
 solution to the problem of bi-directional connectivity between the
-multitude of application servers and EISs. By using the connector
-architecture, it is no longer necessary for EIS vendors to customize
+multitude of application servers and EISs. By using the Jakarta Connectors,
+it is no longer necessary for EIS vendors to customize
 their product for each application server. An application server vendor
-who conforms to the connector architecture also does not need to add
+who conforms to the Jakarta Connectors also does not need to add
 custom code whenever it wants to extend its application server to
 support connectivity to a new EIS.
 
-The connector architecture enables an EIS
+Jakarta Connectors enables an EIS
 vendor to provide a standard resource adapter for its EIS. The resource
 adapter plugs into an application server and provides the underlying
 infrastructure for the integration between an EIS and the application
 server.
 
 An application server vendor extends its
-system only once to support the connector architecture and is then
+system only once to support Jakarta Connectors and is then
 assured of connectivity to multiple EISs. Likewise, an EIS vendor
 provides one standard resource adapter and it has the capability to plug
-in to any application server that supports the connector architecture.
+in to any application server that supports Jakarta Connectors.
 
 The following figure shows that a standard EIS
 resource adapter can plug into multiple application servers. Similarly,
 multiple resource adapters for different EISs can plug into an
 application server. This system-level pluggability is made possible
-through the connector architecture.
+through Jakarta Connectors.
 
 If there are m application servers and n EISs,
-the connector architecture reduces the scope of the integration problem
+Jakarta Connectors reduces the scope of the integration problem
 from an m x n problem to an m + n problem.
 
 System Level Pluggability
@@ -897,9 +898,9 @@ programming model common across all EISs. Adapting the API requires
 significant effort on the part of a tools vendor. In this case, the m x
 n integration problem applies to tools vendors.
 
-The connector architecture provides a solution
-for the m x n integration problem for tools and EAI vendors. The
-architecture specifies a standard Common Client Interface (CCI) that
+Jakarta Connectors provides a solution
+for the m x n integration problem for tools and EAI vendors. Jakarta Connectors
+specifies a standard Common Client Interface (CCI) that
 supports a common client API across heterogeneous EISs.
 
 All EIS resource adapters that support CCI are
@@ -917,7 +918,7 @@ image:conn-14.png[image]
 
 Goals
 
-The connector architecture has been designed
+Jakarta Connectors has been designed
 with the following goals:
 
 Simplify the development of scalable, secure,
@@ -926,13 +927,13 @@ systems, database systems, mainframe-based transaction processing
 systems.
 
 Be sufficiently general to cover a wide range
-of heterogeneous EISs. The sufficient generality of the architecture
+of heterogeneous EISs. The sufficient generality of Jakarta Connectors
 ensures that there are various implementation choices for different
 resource adapters; each choice is based on the characteristics and
 mechanisms of an underlying EIS.
 
 Be not tied to a specific application server
-implementation, but applicable to all Java EE platform compliant
+implementation, but applicable to all Jakarta EE platform compliant
 application servers from multiple vendors.
 
 Provide a standard client API for enterprise
@@ -946,7 +947,7 @@ is compatible.
 Be simple to understand and easy to follow,
 regardless of whether one is designing a resource adapter for a
 particular EIS or developing/deploying application components that need
-to access multiple EISs. This simplicity means the architecture
+to access multiple EISs. This simplicity means Jakarta Connectors
 introduces only a few new concepts, and places minimal implementation
 requirements so that it can be leveraged across different integration
 scenarios and environments.
@@ -970,12 +971,11 @@ application server.
 
 image:conn-16.png[image]
 
-The Connector Architecture
+Jakarta Connectors
 
 image:conn-17.png[image]
 
-This chapter gives an overview of the
-connector architecture.
+This chapter gives an overview of the architecture.
 
 Multiple resource adapters—that is, one
 resource adapter per type of EIS—are pluggable into an application
@@ -994,8 +994,7 @@ connectivity with multiple EISs.
 
 
 
-[[a265]]Overview of the Connector
-Architecture
+[[a265]]Overview of Jakarta Connectors architecture
 
 image:conn-18.png[image]
 
@@ -1006,8 +1005,8 @@ image:conn-19.png[image]
 System Contracts
 
 To achieve a standard system-level
-pluggability between application servers and EISs, the connector
-architecture defines a standard set of system-level contracts between an
+pluggability between application servers and EISs, Jakarta Connectors
+defines a standard set of system-level contracts between an
 application server and an EIS. The EIS side of these system-level
 contracts are implemented in a resource adapter.
 
@@ -1052,7 +1051,7 @@ threads from the application server or create its own threads.
 Bi-directional communication. The resource
 adapter supports both outbound and inbound communication.
 
-The connector architecture defines the
+Jakarta Connectors defines the
 following set of standard contracts between an application server and
 EIS:
 
@@ -1125,12 +1124,12 @@ residing in the application server independent of the specific messaging
 style, messaging semantics, and messaging infrastructure used to deliver
 messages. This contract also serves as the standard message provider
 pluggability contract that allows a wide range of message providers
-(Java Message Service (JMS), Java API for XML Messaging (JAXM), etc.) to
-be plugged into any Java EE compatible application server by way of a
+(Jakarta Messaging, Jakarta XML Web Services, etc.) to
+be plugged into any Jakarta EE compatible application server by way of a
 resource adapter.
 
 link:conn.html#a265[See Overview of
-the Connector Architecture] does not illustrate any contracts that are
+Jakarta Connectors Architecture] does not illustrate any contracts that are
 internal to an application server implementation. The specific
 mechanisms and contracts within an application server are outside the
 scope of the connector architecture specification. This specification
@@ -1172,20 +1171,20 @@ image:conn-19.png[image]
 
 Requirements
 
-The connector architecture requires that the
-connector architecture-compliant resource adapter and the application
+Jakarta Connectors requires that the
+Jakarta Connectors-compliant resource adapter and the application
 server support the system contracts. Detailed requirements for each
 system contract are specified in later chapters.
 
-The connector architecture recommends, though
+Jakarta Connectors recommends, though
 it does not mandate, that a resource adapter support CCI as the client
-API. The recommendation enables the connector architecture to provide a
+API. The recommendation enables Jakarta Connectors to provide a
 solution for the m x n integration problem for application development
 tools and EAI vendors.
 
-The connector architecture allows a resource
+Jakarta Connectors allows a resource
 adapter with an EIS-specific client API to support system contracts and
-to be capable of standard connector architecture-based pluggability into
+to be capable of standard Jakarta Connectors-based pluggability into
 an application server.
 
 === 
@@ -1194,7 +1193,7 @@ image:conn-19.png[image]
 
 Non-Managed Environment
 
-The connector architecture supports access to
+Jakarta Connectors supports access to
 EISs from non-managed application clients; for example, Java
 applications and applets.
 
@@ -1215,20 +1214,19 @@ image:conn-19.png[image]
 Standalone Container Environment
 
 Server Providers can provide a Connector
-container within a product that implements the Java EE Full Profile or
-within a subset profile such as the Java EE Web Profile. The complete
+container within a product that implements the Jakarta EE Full Profile or
+within a subset profile such as the Jakarta EE Web Profile. The complete
 set of application server requirements in this specification is required
-for a compliant Java EE Connector Architecture 1.6 container within an
-implementation of the Java EE Full Profile. The minimum set, listed
-below, must be supported for a compliant Java EE Connector Architecture
-1.6 container within an implementation of any subset of the Java EE Full
+for a compliant Jakarta EE Connectors container within an
+implementation of the Jakarta EE Full Profile. The minimum set, listed
+below, must be supported for a compliant Jakarta EE Connectors
+container within an implementation of any subset of the Jakarta EE Full
 Profile. Overall profile requirements are described within the
-link:conn.html#a9737[See Java Platform, Enterprise Edition (Java
-EE) Specification, version 7].
+link:conn.html#a9737[Jakarta™ EE Platform Specification Version 8].
 
 Non-”Full Profile” implementations may only
 support a subset of the component specifications that were mandated to
-be present in a full Java EE platform product implementation. An
+be present in a full Jakarta EE platform product implementation. An
 implementation of the Connector specification bundled in such a managed
 environment is described as standalone connector container below.
 
@@ -1243,7 +1241,8 @@ Message Inflow] must be satisfied by it.
 
 If an implementation of the Bean Validation
 specification is provided, the requirements in
-link:conn.html#a516[See JavaBean Validation] must be supported.
+link:conn.html#a516[Jakarta™ Bean Validation
+Specification, Version 2.0] must be supported.
 
 An existing resource adapter archive RAR may
 not be fully functional in a standalone implementation, though. For
@@ -1267,13 +1266,12 @@ capabilities of the resource adapter that do not rely on support for
 Message Inflow (outbound communication, use of the WorkManager etc.).
 
 The standalone connector container must
-support the baseline compatibility requirements as defined by the Java
-Authentication Service Provider Interface for Containers (JASPIC)
+support the baseline compatibility requirements as defined by the
+Jakarta™ Authentication
 specification and support the Security Inflow requirements specified in
 link:conn.html#a3707[See Security Inflow]. See
-link:conn.html#a9751[See Java Authentication Service Provider
-Interface for Containers Specification, version 1.4] for more
-information on the JASPIC specification.
+link:conn.html#a9751[Jakarta™ Authentication Specification, Version 1.1]
+for more information on the Jakarta™ Authentication specification.
 
 This specification does not define new
 application components or require any particular existing application
