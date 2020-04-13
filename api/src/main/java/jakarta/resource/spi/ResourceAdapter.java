@@ -18,7 +18,6 @@ package jakarta.resource.spi;
 
 import jakarta.resource.ResourceException;
 import jakarta.resource.NotSupportedException;
-import jakarta.resource.spi.ActivationSpec;
 import jakarta.resource.spi.endpoint.MessageEndpointFactory;
 
 import javax.transaction.xa.XAResource;

@@ -16,7 +16,6 @@
 
 package jakarta.resource.spi.security;
 
-import java.security.Principal; // to fix javadoc warning
 import jakarta.resource.spi.SecurityException;
 
 /** The interface <code>javax.resource.spi.security.GenericCredential</code> 
