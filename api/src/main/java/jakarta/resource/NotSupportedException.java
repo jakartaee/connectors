@@ -31,7 +31,7 @@ package jakarta.resource;
  * @author Ram Jeyaraman
  */
 
-public class NotSupportedException extends jakarta.resource.ResourceException {
+public class NotSupportedException extends ResourceException {
     
     /**
      * Constructs a new instance with null as its detail message.

@@ -38,7 +38,7 @@ package jakarta.resource;
  * @author Ram Jeyaraman
  */
 
-public class ResourceException extends java.lang.Exception {
+public class ResourceException extends Exception {
 
     /** Vendor specific error code */
     private String errorCode;
