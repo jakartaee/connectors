@@ -16,7 +16,6 @@
 
 package jakarta.resource.spi.endpoint;
 
-import java.lang.NoSuchMethodException;
 import jakarta.resource.ResourceException;
 import jakarta.resource.spi.ResourceAdapterInternalException;
 import jakarta.resource.spi.ApplicationServerInternalException;

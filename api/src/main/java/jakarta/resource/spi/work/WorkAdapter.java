@@ -16,11 +16,6 @@
 
 package jakarta.resource.spi.work;
 
-import java.lang.Object;
-import java.lang.Runnable;
-import java.lang.Exception;
-import java.lang.Throwable;
-
 /**
  * This class is provided as a convenience for easily creating 
  * <code>WorkListener</code> instances by extending this class

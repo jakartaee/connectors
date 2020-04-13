@@ -16,10 +16,6 @@
 
 package jakarta.resource.spi.work;
 
-import java.lang.Object;
-import java.lang.Runnable;
-import java.lang.Exception;
-import java.lang.Throwable;
 import java.util.EventObject;
 
 /**
