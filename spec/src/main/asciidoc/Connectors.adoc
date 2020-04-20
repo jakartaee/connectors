@@ -4684,8 +4684,9 @@ present an overview of the transaction management architecture.
 === Transactions Across Multiple Resource Managers
 
 In the following figure, an application client
-invokes EJB component X. EJB X accesses transaction programs managed by
-a TP system and calls EJB Y to access an ERP system.
+invokes Jakarta Enterprise Beans component X. Enterprise Bean X
+accesses transaction programs managed by a TP system and calls
+Enterprise Bean Y to access an ERP system.
 
 Scenario: Transactions
 Across Multiple Resource Managers
@@ -4699,10 +4700,10 @@ EIS resource managers. The transaction manager manages transactions
 across multiple resource managers and supports propagation of the
 transaction context across distributed systems.
 
-The transaction manager supports a JTA
+The transaction manager supports a Jakarta Transaction
 _XAResource_ -based transaction management contract with a resource
-adapter and its underlying resource manager. The ERP system supports JTA
-transactions by implementing an _XAResource_ interface through its
+adapter and its underlying resource manager. The ERP system supports
+Jakarta Transaction  by implementing an _XAResource_ interface through its
 resource adapter. The TP system also implements an _XAResource_
 interface. This interface enables the two resource managers to
 participate in transactions that are coordinated by an external
@@ -4710,7 +4711,7 @@ transaction manager. The transaction manager uses the _XAResource_
 interface to manage transactions across the two underlying resource
 managers.
 
-The EJBs X and Y access the ERP and TP system
+The Enterprise Beans X and Y access the ERP and TP system
 using the respective client access API for the two systems. Behind the
 scenes, the application server enlists the connections to both systems,
 obtained from their respective resource adapters, as part of the
@@ -4725,18 +4726,19 @@ back.
 The transactions are demarcated either by the
 container (called container-managed demarcation) or by a component
 (called component-managed demarcation). In component-managed
-demarcation, an application component can use the JTA _UserTransaction_
-interface or a transaction demarcation API specific to an EIS (for
-example, JDBC transaction demarcation using _java.sql.Connection_ ).
+demarcation, an application component can use the Jakarta Transaction
+_UserTransaction_ interface or a transaction demarcation API specific to
+an EIS (for example, JDBC transaction demarcation using _java.sql.Connection_ ).
 
-The EJB specification requires an EJB
+The Jakarta Enterprise Beans specification requires a Jakarta Enterprise Beans
 container to support both container-managed and component-managed
-transaction demarcation models. The JSP and servlet specifications
+transaction demarcation models. The Jakarta Server Pages and servlet specifications
 require a web container to support component-managed transaction
 demarcation.
 
 If multiple resource managers participate in a
-transaction, the EJB container uses a transaction manager to coordinate
+transaction, the Jakarta Enterprise Beans container uses a
+transaction manager to coordinate
 the transaction. The contract between the transaction manager and
 resource manager is defined using the _XAResource_ interface.
 
@@ -4792,7 +4794,7 @@ image:conn-52.png[image]
 
 === Interface: ManagedConnection
 
-The _javax.resource.spi.Managed_ Connection
+The _jakarta.resource.spi.Managed_ Connection
 instance represents a physical connection to an EIS and acts as a
 factory for connection handles.
 
@@ -4804,7 +4806,7 @@ the transaction management contract:
 |===
 a|
 public interface
-javax.resource.spi.ManagedConnection \{
+jakarta.resource.spi.ManagedConnection \{
 
  public XAResource getXAResource() throws
 ResourceException;
@@ -4821,8 +4823,8 @@ getLocalTransaction()
 |===
 
 A _Managed_ Connection instance provides
-access to a pair of interfaces: _javax.transaction.xa.XAResource_ and
-_javax.resource.spi.LocalTransaction_ .
+access to a pair of interfaces: _jakarta.transaction.xa.XAResource_ and
+_jakarta.resource.spi.LocalTransaction_ .
 
 Depending on the transaction support level of
 a resource adapter, these methods should raise appropriate exceptions.
@@ -4850,7 +4852,7 @@ _LocalTransaction_ interface to manage local transactions.
 
 === Interface: XAResource
 
-The _javax.transaction.xa.XAResource_
+The _jakarta.transaction.xa.XAResource_
 interface is a Java mapping of the industry standard _XA_ interface
 based on _X/Open CAE specification_ (see
 link:conn.html#a9729[See X/Open CAE Specification -- Distributed
@@ -4858,9 +4860,8 @@ Transaction Processing: the XA Specification, X/Open document]).
 
 The following code extract shows the
 interface specification for the _XAResource_ interface. For more details
-and API documentation, refer to the JTA (see
-link:conn.html#a9725[See Java Transaction API (JTA)
-Specification, version 1.2]) and XA (see
+and API documentation, refer to the Jakarta Transaction (see
+link:conn.html#a9725[See Jakarta™ Transaction Specification]) and XA (see
 link:conn.html#a9729[See X/Open CAE Specification -- Distributed
 Transaction Processing: the XA Specification, X/Open document])
 specifications:
@@ -4869,7 +4870,7 @@ specifications:
 |===
 a|
 public interface
-javax.transaction.xa.XAResource \{
+jakarta.transaction.xa.XAResource \{
 
  public void commit(Xid xid, boolean
 onePhase) throws XAException;
@@ -4925,13 +4926,13 @@ enlisted with the transaction manager for this transaction.
 === [[a1147]]Interface: LocalTransaction
 
 The following code extract shows the
-_javax.resource.spi.LocalTransaction_ interface:
+_jakarta.resource.spi.LocalTransaction_ interface:
 
 [width="100%",cols="100%",]
 |===
 a|
 public interface
-javax.resource.spi.LocalTransaction \{
+jakarta.resource.spi.LocalTransaction \{
 
  public void begin() throws
 ResourceException;
@@ -4960,16 +4961,16 @@ contract.
 
 image:conn-48.png[image]
 
-Relationship to JTA and JTS
+Relationship to Jakarta Transaction and JTS
 
-The JavaTM Transaction API (JTA) (see
-link:conn.html#a9725[See Java Transaction API (JTA)
-Specification, version 1.2]) is a specification of interfaces between a
+The Jakarta Transaction (see
+link:conn.html#a9725[See Jakarta™ Transaction Specification])
+is a specification of interfaces between a
 transaction manager and the other parties involved in a distributed
 transaction processing system: application programs, resource managers,
 and an application server.
 
-The JavaTM Transaction Service (JTS) API is a
+The Java™ Transaction Service (JTS) API is a
 Java binding of the Common Object Request Broker Architecture (CORBA)
 Object Transaction Service (OTS) 1.1 specification. JTS provides
 transaction interoperability using the standard Internet Inter-ORB
@@ -4979,24 +4980,26 @@ infrastructure for enterprise middleware. For example, an application
 server vendor can use a JTS implementation as the underlying transaction
 manager.
 
-=== JTA Interfaces
+=== Jakarta Transaction Interfaces
 
 The application server uses the
-_javax.transaction.TransactionManager_ and
-_javax.transaction.Transaction_ interfaces, specified in the JTA
-specification, for its contract with the transaction manager.
+_jakarta.transaction.TransactionManager_ and
+_jakarta.transaction.Transaction_ interfaces, specified
+in the Jakarta Transaction specification, for its contract with
+the transaction manager.
 
 The application server uses the
-_javax.transaction.TransactionManager_ interface to control the
+_jakarta.transaction.TransactionManager_ interface to control the
 transaction boundaries on behalf of the application components that are
-being managed by the application server. For example, an EJB container
-manages the transaction states for transactional EJB components. The EJB
+being managed by the application server.
+For example, an Jakarta Enterprise Beans container manages the transaction
+states for transactional Jakarta Enterprise Beans components. The Jakarta Enterprise Beans
 container uses the _TransactionManager_ interface to demarcate
 transaction boundaries based on the calling thread’s transaction
 context.
 
 The application server also uses the
-_javax.transaction.Transaction_ interface to enlist and delist
+_jakarta.transaction.Transaction_ interface to enlist and delist
 transactional connections with the transaction manager. This enables the
 transaction manager to coordinate transactional work performed by all
 enlisted resource managers within a transaction.
@@ -5041,7 +5044,7 @@ abbreviations are used: RM (Resource Manager), TM (Transaction Manager),
 
 The following table specifies various
 transaction management scenarios and mentions whether these scenarios
-are within the scope of the connector architecture.
+are within the scope of Jakarta Connectors.
 
 [width="100%",cols="50%,50%",options="header",]
 |===
@@ -5056,7 +5059,7 @@ Examples of RM: Oracle and DB2 installations
 that support 2PC in their _XAResource_ implementations.
 
 |Supported based on TM’s requirement to be
-JTA/JTS and X/Open compliant, and RM’s support for 2PC in the
+Jakarta Transaction/JTS and X/Open compliant, and RM’s support for 2PC in the
 _XAResource_ interface.
 
 a|
@@ -5070,7 +5073,7 @@ Example of RM: DB2 installation that supports
 
 a|
 Supported based on TM’s requirement to be
-JTA/JTS and X/Open compliant, and RM’s support for the XAResource
+Jakarta Transaction/JTS and X/Open compliant, and RM’s support for the XAResource
 interface.
 
 Note: This scenario will also work if TM does
@@ -5093,22 +5096,20 @@ Supported by requiring that TM must support
 comes as a result of required 1PC optimization for a TM.
 
 The rationale behind this requirement is that
-this scenario will be an important scenario to support for the connector
-architecture.
+this scenario will be an important scenario to support
+for Jakarta Connectors.
 
 |TM does last-resource commit optimization
 across multiple RMs involved in a transaction—RMs that support 2PC (for
 example: Oracle and DB2) and a single RM that supports only 1PC (for
 example: an ERP system). a|
-Out of the scope of the connector
-architecture specification
+Out of the scope of the Jakarta Connectors specification
 
 
 
 |More than one RM that support only 1PC
 involved in a transaction with none or multiple 2PC enabled RMs a|
-Out of the scope of the connector
-architecture specification
+Out of the scope of the Jakarta Connectors specification
 
 
 
@@ -5116,12 +5117,12 @@ architecture specification
 
 === Resource Adapter Requirements
 
-The connector architecture does not require
-that all resource adapters must support JTA _XAResource_ based
-transaction contract.
+Jakarta Connectors does not require
+that all resource adapters must support Jakarta Transaction
+_XAResource_ based transaction contract.
 
 If a resource adapter decides to support an
-_XAResource_ based contract, then the connector architecture places
+_XAResource_ based contract, then Jakarta Connectors places
 certain requirements on a resource adapter and its underlying resource
 manager (RM).
 
@@ -5129,17 +5130,16 @@ The following requirements refer to a resource
 adapter and its resource manager together as a resource manager (RM).
 The division of responsibility between a resource adapter and its
 underlying resource manager for supporting the transaction contract is
-implementation-specific and is out of the scope of the connector
-architecture.
+implementation-specific and is out of the scope of Jakarta Connectors.
 
 These requirements assume that a transaction
-manager (TM) supports JTA/XA and JTS requirements.
+manager (TM) supports Jakarta Transaction/XA and JTS requirements.
 
 The following set of requirements are based on
-the JTA and XA specifications and should be read in conjunction with
-these specifications. These detailed requirements are included in this
-document to clearly specify the requirements from the connector
-architecture perspective.
+the Jakarta Transaction and XA specifications and should be read
+in conjunction with these specifications. These detailed
+requirements are included in this document to clearly specify the
+requirements from the Jakarta Connectors perspective.
 
 === General
 
@@ -5227,8 +5227,7 @@ The RM must ensure that the TM invokes
 _XAResource_ calls in the legal sequence, and must return _XAER_PROTO_
 or another suitable error if the caller TM violates the state tables, as
 defined in Chapter 6 of the XA specification (see
-link:conn.html#a9725[See Java Transaction API (JTA)
-Specification, version 1.2]).
+link:conn.html#a9725[See Jakarta™ Transaction Specification, Version 1.3.]).
 
 === Unilateral Roll-back
 
