@@ -1222,7 +1222,7 @@ implementation of the Jakarta EE Full Profile. The minimum set, listed
 below, must be supported for a compliant Jakarta EE Connectors
 container within an implementation of any subset of the Jakarta EE Full
 Profile. Overall profile requirements are described within the
-link:conn.html#a9737[Jakarta™ EE Platform Specification Version 8].
+link:conn.html#a9737[Jakarta™ EE Platform Specification Version 9].
 
 Non-”Full Profile” implementations may only
 support a subset of the component specifications that were mandated to
@@ -5227,7 +5227,7 @@ The RM must ensure that the TM invokes
 _XAResource_ calls in the legal sequence, and must return _XAER_PROTO_
 or another suitable error if the caller TM violates the state tables, as
 defined in Chapter 6 of the XA specification (see
-link:conn.html#a9725[See Jakarta™ Transaction Specification, Version 1.3.]).
+link:conn.html#a9725[See Jakarta™ Transaction Specification, Version 2.0]).
 
 === Unilateral Roll-back
 
@@ -5262,7 +5262,7 @@ not altered by the communication process.
 
 === Support for Failure Recovery
 
-A full JTA compliant _XAResource_
+A full Jakarta Transaction compliant _XAResource_
 implementation that supports 2PC must maintain the status of all
 transaction branches in which it is involved. After responding
 affirmatively to the TM _prepare_ call, an RM should not erase its
@@ -5285,8 +5285,8 @@ discard its knowledge of all other branches.
 === [[a1233]]Transaction Manager Requirements
 
 The following section specifies requirements
-of a TM. This section assumes that the TM is compliant with JTA/JTS and
-X/Open (see link:conn.html#a9729[See X/Open CAE Specification --
+of a TM. This section assumes that the TM is compliant with Jakarta Transaction/JTS
+and X/Open (see link:conn.html#a9729[See X/Open CAE Specification --
 Distributed Transaction Processing: the XA Specification, X/Open
 document]) specifications.
 
@@ -5305,8 +5305,8 @@ Section 7.3, XA specification]
 
 The TM must generate XIDs conforming to the
 structure defined in section 4.2 on page 19 of the XA specification (see
-link:conn.html#a9725[See Java Transaction API (JTA)
-Specification, version 1.2]). The generated XIDs must be globally unique
+link:conn.html#a9725[See Jakarta™ Transaction Specification, Version 2.0]).
+The generated XIDs must be globally unique
 and must adequately describe a transaction branch.
 
 === One-phase Commit Optimization
@@ -5317,16 +5317,16 @@ is only one RM registered in a transaction that is making changes to
 shared resources. In this optimization, the TM makes its phase 2 commit
 request to that RM without having made a phase 1 prepare request.
 
-The TM is not required to record in a stable
-manner such transactions, and in some failure cases, the TM may not
+The TM is not required to record such transactions in a stable
+manner, and in some failure cases, the TM may not
 record the outcome of the transaction completion.
 
 === Implementation Options
 
 The support of last-resource optimization is
 an implementation-specific option for a TM. A detailed specification of
-TM and RM requirements for this optimization is outside the scope of the
-connector architecture.
+TM and RM requirements for this optimization is outside the scope of
+Jakarta Connectors.
 
 === Scenario: Transactional Setup for a ManagedConnection
 
@@ -5334,14 +5334,15 @@ The following object interactions are involved
 in the scenario shown in link:conn.html#a1259[See OID:
 Transactional Setup For Newly Created ManagedConnection Instances].
 
-The runtime scenario begins with a client
-method invocation on an EJB instance. This invocation has a transaction
+The runtime scenario begins with a client method invocation on an
+Jakarta Enterprise Beans instance. This invocation has a transaction
 context, represented by a unique transaction _Xid_ , associated with it
 if the invocation came from a client that was already participating in
-the transaction. Alternatively, the EJB container starts a transaction
-before dispatching the client request to the EJB method.
+the transaction. Alternatively, the Jakarta Enterprise Beans container
+starts a transaction before dispatching the client request to the
+Jakarta Enterprise Beans method.
 
-The EJB instance calls the _getConnection_
+The Jakarta Enterprise Beans instance calls the _getConnection_
 method on the _ConnectionFactory_ instance. The resource adapter
 delegates the connection request to the application server using the
 connection management contract. link:conn.html#a976[See OID:
@@ -5362,8 +5363,8 @@ enables the application server to receive notifications for various
 events on this connection instance. The application server uses these
 event notifications to manage connection pooling and transactions.
 
-Based on the current transaction context
-associated with the connection-requesting thread and the EJB instance,
+Based on the current transaction context associated with the
+connection-requesting thread and the Jakarta Enterprise Beans instance,
 the application server decides whether or not the transaction manager
 will participate in the coordination of the currently active
 transaction.
@@ -5379,7 +5380,7 @@ instance associated with the _ManagedConnection_ instance.
 The application server enlists the
 _XAResource_ instance with the transaction manager for the current
 transaction context. The application server uses the _Transaction_ .
-_enlistResource_ method (specified in the JTA specification) to enlist
+_enlistResource_ method (specified in the Jakarta Transaction specification) to enlist
 the _XAResource_ instance with the transaction manager. This enlistment
 informs the transaction manager about the resource manager instance
 participating in the transaction.
@@ -5408,7 +5409,7 @@ For Newly Created ManagedConnection Instances
 
 image:conn-55.png[image]
 
-=== Scenario: Connection Close and JTA Transactional Cleanup
+=== Scenario: Connection Close and Jakarta Transaction Transactional Cleanup
 
 For each _ManagedConnection_ instance in the
 pool, the application server registers a _ConnectionEventListener_
@@ -5436,8 +5437,8 @@ CONNECTION_CLOSED.
 On receiving the connection close
 notification, the application server performs transactional cleanup for
 the _ManagedConnection_ instance. If the _ManagedConnection_ instance
-was participating in a transaction manager-enlisted JTA transaction, the
-application server takes the following steps:
+was participating in a transaction manager-enlisted Jakarta Transactions
+transaction, the application server takes the following steps:
 
 The application server dissociates the
 _XAResource_ instance, corresponding to the _ManagedConnection_
@@ -5451,7 +5452,7 @@ associated with the transaction, represented by the _Xid_ passed in
 _XAResource.end_ call. This method invocation dissociates the
 transaction from the resource manager instance.
 
-After the JTA transaction completes, the
+After the transaction completes, the
 application server initiates a cleanup of the physical connection
 instance by calling _ManagedConnection.cleanup_ method. After calling
 the method _cleanup_ on the _ManagedConnection_ instance, the
@@ -5482,13 +5483,13 @@ The following steps happen in this scenario:
 The transaction manager calls
 _XAResource.prepare_ to begin the first phase of the transaction
 completion protocol. The transaction manager can call any _XAResource_
-instance is associated with the proper underlying resource manager
+instance associated with the proper underlying resource manager
 instance, and is not restricted to the _XAResource_ instance initially
 involved with the transaction. The application server can assume that
 all _XAResource_ instances produced by a _ManagedConnectionFactory_
 instance refer to the same underlying resource manager instance.
 
-Assuming that all resource manager instances
+Assuming all resource manager instances
 involved in the transaction agree to commit, the transaction manager
 calls _XAResource.commit_ to commit the transaction. Otherwise, the
 transaction manager calls _XAResource.rollback_ .
@@ -5515,7 +5516,7 @@ The local transaction management contract has
 two parts:
 
 The application server uses the
-_javax.resource.spi.LocalTransaction_ interface to manage local
+_jakarta.resource.spi.LocalTransaction_ interface to manage local
 transactions transparently to an application component. The scenarios in
 link:conn.html#a1358[See Transaction Scenarios] illustrate this
 part of the local transaction management contract.
@@ -5523,7 +5524,7 @@ part of the local transaction management contract.
 The other part of the contract relates to
 notifications for local transaction-related events. If the resource
 adapter supports a local transaction demarcation API, for example,
-_javax.resource.cci.LocalTransaction_ for the Common Client Interface,
+_jakarta.resource.cci.LocalTransaction_ for the Common Client Interface,
 the resource adapter is required to notify the application server of the
 events (transaction begin, commit, and rollback) related to the local
 transaction. An application server uses this part of the contract, as
@@ -5532,7 +5533,7 @@ Transaction Management].
 
 === [[a1285]]Interface: LocalTransaction
 
-The _javax.resource.spi.LocalTransaction_
+The _jakarta.resource.spi.LocalTransaction_
 interface defines the contract between an application server and
 resource adapter for local transaction management. This interface is
 defined in link:conn.html#a1147[See Interface:
@@ -5541,7 +5542,7 @@ LocalTransaction].
 === Interface: ConnectionEventListener
 
 An application server implements the
-_javax.resource.spi.ConnectionEventListener_ interface. It registers
+_jakarta.resource.spi.ConnectionEventListener_ interface. It registers
 this listener instance with the _ManagedConnection_ instance by using
 _ManagedConnection.addConnectionEventListener_ method.
 
@@ -5553,7 +5554,7 @@ management contract:
 |===
 a|
 public interface
-javax.resource.spi.ConnectionEventListener \{
+jakarta.resource.spi.ConnectionEventListener \{
 
  // Local Transaction Management related
 events
@@ -5604,7 +5605,7 @@ Scenarios: Local Transaction Management]. The connector specification
 provides the necessary mechanisms for transaction management. Whether
 these mechanisms are used in an application server depends on the
 application server’s implementation of the transaction requirements of
-the Java EE component specifications.
+the Jakarta EE component specifications.
 
 The resource adapter must send local
 transaction events through the _ConnectionEventListener_ interface when
@@ -5636,7 +5637,7 @@ an application component.
 In these scenarios, an application component
 starts a local transaction using an application-level transaction
 demarcation interface, for example,
-_javax.resource.cci.LocalTransaction_ as defined in the CCI, supported
+_jakarta.resource.cci.LocalTransaction_ as defined in the CCI, supported
 by the resource adapter. The resource adapter, in its implementation of
 the transaction demarcation interface, sends event notifications related
 to the local transaction, namely, local transaction begin, commit, and
@@ -5696,17 +5697,17 @@ scenario for component-managed transaction demarcation.
 
 === Scenario
 
-An EJB component with bean managed
+A Jakarta Enterprise Beans component with bean managed
 transaction demarcation starts a local transaction using the
 application-level transaction demarcation interface, for example,
-_javax.resource.cci.LocalTransaction_ as defined in the CCI, supported
+_jakarta.resource.cci.LocalTransaction_ as defined in the CCI, supported
 by the resource adapter. It then calls the _UserTransaction.begin_
-method to start a JTA transaction before it has completed the local
+method to start a Jakarta Transactions transaction before it has completed the local
 transaction.
 
-In this scenario, the EJB component has
+In this scenario, the Jakarta Enterprise Beans component has
 started but not completed the local transaction. When the application
-component attempts to start a JTA transaction by invoking the
+component attempts to start a Jakarta Transactions transaction by invoking the
 _UserTransaction.begin_ method, the application server detects it as a
 transaction demarcation error and throws an exception from the
 _UserTransaction.begin_ method.
@@ -5769,7 +5770,7 @@ connection is used or not. The application must not make assumptions
 about a single shared connection being used, and hence must use the
 connection in a shareable manner.
 
-However, a Java EE application component that
+However, a Jakarta EE application component that
 intends to use a connection in an unshareable way must leave a
 deployment hint to that effect, which will prevent the connection from
 being shared by the container. Examples of unshareable usage of a
@@ -5779,20 +5780,20 @@ character settings, and localization configuration.
 Containers must not attempt to share
 connections that are marked _unshareable_ .
 
-Java EE application components may use the
+Jakarta EE application components may use the
 optional deployment descriptor element _res-sharing-scope_ or the
 _shareable_ annotation element of _Resource_ annotation defined in the
 Common Annotations specification (see link:conn.html#a9757[See
-Common annotations for the Java Platform Specification, version 1.2]),
+Jakarta™ Annotations 2.0]),
 to indicate whether a connection to a resource manager is shareable or
 unshareable. Containers must assume connections to be shareable if no
-deployment hint is provided. Refer to EJB specification (see
-link:conn.html#a9723[See Enterprise JavaBeans (EJB)
-Specification, version 3.2]) and the servlet specification (see
-link:conn.html#a9741[See Java Servlet Specification, version
-3.1]) for a description of the deployment descriptor element.
+deployment hint is provided. Refer to the Enterprise Beans specification
+(see link:conn.html#a9723[See Jakarta™ Enterprise Beans Specification,
+ Version 3.2]) and the servlet specification (see
+link:conn.html#a9741[See Jakarta™ Servlet Specification, Version 4.0])
+for a description of the deployment descriptor element.
 
-Java EE application components may cache
+Jakarta EE application components may cache
 connection objects and reuse them across multiple transactions.
 Containers that provide connection sharing should transparently switch
 such cached connection objects, at dispatch time, to point to an
@@ -5872,43 +5873,43 @@ various transaction scenarios.
 
 === Requirements
 
-The Java EE platform specification (see
-link:conn.html#a9737[See Java Platform, Enterprise Edition (Java
-EE) Specification, version 7]) identifies the following as transactional
+The Jakarta EE platform specification (see
+link:conn.html#a9737[See Jakarta™ EE Platform Specification
+Version 9]) identifies the following as transactional
 resources:
 
 JDBC connections
 
-JMS sessions
+Jakarta Messaging sessions
 
 Resource adapter connections at the
 _XATransaction_ level
 
-The Java EE platform specification requires
-that Java EE product providers must transparently support transactions
+The Jakarta EE platform specification requires
+that Jakarta EE product providers must transparently support transactions
 that span multiple components and transactional resources. These
-requirements must be met regardless of whether a Java EE product is
+requirements must be met regardless of whether a Jakarta EE product is
 implemented as a single process, multiple processes on the same node, or
 multiple processes on multiple nodes.
 
-In addition, Java EE product providers must
+In addition, Jakarta EE product providers must
 support transactional applications that are comprised of servlets or JSP
 pages accessing multiple enterprise beans within a single transaction.
 Each component may also acquire one or more connections to access
-transactional resources. Java EE product providers must support
+transactional resources. Jakarta EE product providers must support
 scenarios where multiple components in an application access
 transactional resources as part of a single transaction.
 
-The Java EE platform specification requires
-Java EE platform products to support resource adapters at the
+The Jakarta EE platform specification requires
+Jakarta EE platform products to support resource adapters at the
 _XATransaction_ level as a transactional resource. It must be possible
 to access such resource adapters from multiple application components
 within a single transaction.
 
-The connector architecture has an additional
+Jakarta Connectors has an additional
 requirement that is applicable to resource adapters that support local
 transactions. Note that both _LocalTransaction_ and _XATransaction_
-resource adapters support local transactions. and they are both referred
+resource adapters support local transactions, and they are both referred
 to as “local transaction capable” resource adapters in the section
 below.
 
@@ -5947,16 +5948,16 @@ illustration.
 Application servers must support transaction
 scenarios where access to a non-transactional resource is combined with
 access to one or more transactional resources within a single
-transaction. For example, in a container-managed transaction, an EJB
-accesses JDBC and JMS resources and also accesses a non-transactional
-EIS using its resource adapter. If there is a failure during the above
-scenario, transactional resource managers operating under the
+transaction. For example, in a container-managed transaction, an
+Enterprise Bean accesses JDBC and Jakarta Messaging resources, and also accesses a
+non-transactional EIS using its resource adapter. If there is a failure during
+the above scenario, transactional resource managers operating under the
 transaction should rollback, but the recovery of the non-transactional
 resource is unspecified in this specification.
 
 The application server is not required to
 support any additional transaction scenarios beyond the above set of
-scenarios. A Java EE application should not depend on an application
+scenarios. A Jakarta EE application should not depend on an application
 server’s support for any optional transaction scenarios. The application
 should also not depend on whether or not the container detects that a
 specific optional transaction scenario is illegal. Any errors in
@@ -5970,51 +5971,52 @@ transaction scenarios. The following section also describes, in a
 non-prescriptive manner, issues in support for these scenarios by an
 application server:
 
-Within a transaction, an EJB component
+Within a transaction, a Jakarta Enterprise Beans component
 acquires connections to two different resource managers X and Y using
 their respective non-XA local transaction capable resource adapters.
 
 The container cannot manage a local
 transaction across two different resource managers. Since resource
 adapters and underlying resource managers are not XA capable, the
-container cannot use XA in this case. However, a Java EE application
+container cannot use XA in this case. However, a Jakarta EE application
 should not depend on the container to detect this illegal scenario.
 
-Within a transaction, EJB component A
+Within a transaction, Jakarta Enterprise Beans component A
 acquires a connection to a resource manager X using a non-XA local
-transaction capable resource adapter. Next, EJB component B under the
+transaction capable resource adapter. Next, Enterprise Beans component B under the
 same transaction context acquires a connection to a different resource
 manager Y using a non-XA local transaction capable resource adapter
 
 The container cannot manage a local
 transaction across two different resource managers. Since resource
 adapters are not XA capable, the container cannot use XA in this case.
-However, a Java EE application should not depend on the container to
+However, a Jakarta EE application should not depend on the container to
 detect this illegal scenario.
 
-Within a transaction, EJB component A
+Within a transaction, Jakarta Enterprise Beans component A
 acquires a connection to a resource manager X using a non-XA local
-transaction capable resource adapter. Next, the same EJB (or EJB B)
+transaction capable resource adapter. Next, the same
+Enterprise Bean (or Enterprise Bean B)
 under the same transaction context acquires a connection to a different
 resource manager Y using an XA capable resource adapter
 
 This scenario may be supported if the
 transaction manager supports last resource commit optimization. Since
-this optimization feature is optional and not specified in the connector
-architecture, a Java EE application should not depend on support for
+this optimization feature is optional and not specified in the Jakarta
+Connectors, a Jakarta EE application should not depend on support for
 this scenario.
 
-Within a transaction, EJB A acquires a
+Within a transaction, Enterprise Bean A acquires a
 connection to a resource manager X using an XA capable resource adapter.
-Next, the same EJB component (or another EJB component B) under the same
+Next, the same Enterprise Beans component (or another Enterprise
+Beans component B) under the same
 transaction context acquires a connection to a different resource
 manager Y using a non-XA local transaction capable resource adapter
 
 This scenario may be supported if the
 transaction manager supports last resource commit optimization. Since
-this optimization feature is optional and not specified in the connector
-architecture, a Java EE application should not depend on support for
-this scenario.
+this optimization feature is optional and not specified in Jakarta Connectors,
+a Jakarta EE application should not depend on support for this scenario.
 
 === [[a1389]]Scenario: Local Transaction
 
@@ -6022,16 +6024,16 @@ This scenario illustrates the use of the
 connection sharing mechanism to implement requirement for a local
 transaction to span components.
 
-In this scenario, two EJB components get
+In this scenario, two Jakarta Enterprise Beans components get
 connections to the same EIS resource manager within a single
-transaction. Both EJB components use the same local transaction capable
-resource adapter.
+transaction. Both Jakarta Enterprise Beans components use the
+same local transaction capable resource adapter.
 
 A local transaction is associated with a
-single physical connection. Both EJB components in this scenario share
-the same physical connection under the local transaction scope. The
-container has the responsibility of managing connection sharing as
-illustrated in this scenario.
+single physical connection. Both Jakarta Enterprise Beans components
+in this scenario share the same physical connection under the local
+transaction scope. The container has the responsibility of managing
+connection sharing as illustrated in this scenario.
 
 To share a physical connection in the local
 transaction scope, the container assumes the connection to be shareable
@@ -6052,12 +6054,12 @@ image:conn-58.png[image]
 The following steps happen in this scenario:
 
 The client invokes a method on session bean A
-with no transaction context. In its method implementation, the EJB A
-acquires a connection to the EIS instance.
+with no transaction context. In its method implementation, the
+Enterprise Bean A acquires a connection to the EIS instance.
 
 When acquiring the connection, the container
 starts a local transaction by invoking the _begin_ method of the
-_javax.resource.spi.LocalTransaction_ instance. The local transaction is
+_jakarta.resource.spi.LocalTransaction_ instance. The local transaction is
 tied to the _ManagedConnection_ instance that is associated with the
 connection handle acquired by the component in the previous step.
 
@@ -6192,8 +6194,8 @@ acts as a client of entity bean C. The C is an entity bean that may be
 shared across multiple clients.
 
 A, B and C get connections to the same EIS.
-These EJB components have marked _res-sharing-scope_ for these
-connections to be _shareable_ .
+These Jakarta Enterprise Beans components have marked _res-sharing-scope_
+for these connections to be _shareable_ .
 
 A and C define a connection sharing scope.
 Both A and C share the same physical connection across a transaction
@@ -6235,7 +6237,7 @@ method _associateConnection_ as follows:
 |===
 a|
 public interface
-javax.resource.spi.ManagedConnection \{
+jakarta.resource.spi.ManagedConnection \{
 
  public void associateConnection(Object
 connection)
@@ -6304,7 +6306,7 @@ Local Transaction Optimization
 
 If all the work done as a part of a
 transaction uses a single resource manager, the application server can
-use a local transaction in place of an externally coordinated JTA
+use a local transaction in place of an externally coordinated Jakarta Transactions
 transaction. The use of a local transaction avoids the overhead of
 initiating a global transaction, and involving the TM for transaction
 coordination, and leads to more optimized performance.
@@ -6314,7 +6316,7 @@ resource manager, the local transaction optimization is a useful
 performance enhancement for transaction management.
 
 The application server manages local
-transaction optimization transparent to the Java EE application.
+transaction optimization transparent to the Jakarta EE application.
 Whenever a container-managed or bean-managed transaction is started, the
 container may attempt local transaction optimization.
 
@@ -6324,13 +6326,13 @@ of this transaction will use a single resource manager. The container
 uses an implementation-specific mechanism to achieve local transaction
 optimization. For example, the container can choose to start a local
 transaction when the first resource manager is accessed and lazily start
-a JTA transaction only when more than one resource managers are accessed
+a Jakarta Transactions transaction only when more than one resource managers are accessed
 in an existing transaction. The mechanism through which the application
 server and its transaction manager coordinates the initial local
-transaction and lazily started JTA transactions is outside the scope of
-the connector specification. Refer to the Java EE platform specification
-(see link:conn.html#a9737[See Java Platform, Enterprise Edition
-(Java EE) Specification, version 7]) for more details on the local
+transaction and lazily started Jakarta Transaction transactions is outside the scope of
+the connector specification. Refer to the Jakarta EE platform specification
+(see link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9])
+for more details on the local
 transaction optimization.
 
 === Requirements
@@ -6353,7 +6355,7 @@ runtime.
 
 
 
- package javax.resource.spi;
+ package jakarta.resource.spi;
 
 
 
@@ -6421,9 +6423,9 @@ image:conn-48.png[image]
 Interface: TransactionSynchronizationRegistry
 
 The _TransactionSynchronizationRegistry_
-interface is defined in the JTA specification (see
-link:conn.html#a9725[See Java Transaction API (JTA)
-Specification, version 1.2]) and could be used by system level
+interface is defined in the Jakarta Transaction specification (see
+link:conn.html#a9725[See Jakarta™ Transaction Specification, Version 2.0])
+and could be used by system level
 components to interact with the transaction manager. This interface
 provides the ability to register synchronization objects, associate
 resource objects with the current transaction, get the transaction
@@ -6446,7 +6448,7 @@ artifacts in the resource adapter module with thread safety.
 |===
 a|
 public interface
-javax.resource.spi.BootstrapContext \{
+jakarta.resource.spi.BootstrapContext \{
 
  TransactionSynchronizationRegistry
 
@@ -6473,7 +6475,7 @@ A resource adapter can be classified based on
 the level of transaction support, as follows:
 
  _NoTransaction_ . The resource adapter
-supports neither resource manager local nor JTA transactions. It
+supports neither resource manager local nor Jakarta Transactions transactions. It
 implements neither the _XAResource_ nor _LocalTransaction_ interfaces.
 
  _LocalTransaction_ - The resource adapter
@@ -6483,7 +6485,7 @@ is specified in link:conn.html#a1280[See Local Transaction
 Management Contract].
 
  _XATransaction_ - The resource adapter
-supports both resource manager local and JTA transactions by
+supports both resource manager local and Jakarta Transactions transactions by
 implementing the _LocalTransaction_ and _XAResource_ interfaces. The
 requirements for supporting the _XAResource_ -based contract are
 specified in link:conn.html#a1169[See XAResource-based
@@ -6495,12 +6497,12 @@ image:conn-59.png[image]
 
 Other levels of support (includes any transaction optimizations
 supported by an underlying resource manager) are outside the scope of
-the connector architecture.
+Jakarta Connectors.
 
 image:conn-59.png[image]
 
 The above levels reflect the major steps of
-transaction support that a resource adapter is required to make to allow
+transaction support that a resource adapter is required to allow
 external transaction coordination. Depending on its transactional
 capabilities and the requirements of its underlying EIS, a resource
 adapter can choose to support any one of the above transaction support
@@ -6537,7 +6539,7 @@ The following are the requirements for an
 application server for the transaction management contract:
 
 The application server must support a
-transaction manager that manages transactions using the JTA _XAResource_
+transaction manager that manages transactions using the Jakarta Transaction _XAResource_
 -based contract. The requirements for a transaction manager to support
 an _XAResource_ -based contract are specified in
 link:conn.html#a1233[See Transaction Manager Requirements].
@@ -6673,11 +6675,11 @@ image:conn-65.png[image]
 [width="100%",cols="100%",]
 |===
 a|
-package javax.resource.spi;
+package jakarta.resource.spi;
 
 
 
-import javax.resource.ResourceException;
+import jakarta.resource.ResourceException;
 
 
 
@@ -6775,11 +6777,11 @@ connections that are lazily enlist-able.
 [width="100%",cols="100%",]
 |===
 a|
-package javax.resource.spi;
+package jakarta.resource.spi;
 
 
 
-import javax.resource.ResourceException;
+import jakarta.resource.ResourceException;
 
 import javax.transaction.xa.Xid;
 
@@ -6833,10 +6835,10 @@ image:conn-66.png[image]
 
 image:conn-67.png[image]
 
-This chapter specifies the security
-architecture for the integration of EISs with the Java EE platform. It
+This chapter specifies the security architecture for the
+integration of EISs with the Jakarta EE platform. It
 adds EIS integration-specific security details to the security
-requirements specified in other Java EE specifications.
+requirements specified in other Jakarta EE specifications.
 
 === 
 
@@ -6873,9 +6875,9 @@ Goals
 The security architecture is designed to meet
 the following goals:
 
-Extend the end-to-end security model for Java
-EE applications to include integration with EISs based on the connector
-architecture.
+Extend the end-to-end security model for Jakarta
+EE applications to include integration with EISs based
+on Jakarta Connectors.
 
 Support authentication and authorization of
 users who are accessing EISs.
@@ -6891,8 +6893,8 @@ security environments.
 Support security configuration of a resource
 adapter in an operational environment.
 
-Keep the security model for connector
-architecture-based EIS integration transparent to an application
+Keep the security model for Jakarta Connector-based EIS
+integration transparent to an application
 component provider. This includes providing support for single sign-on
 across multiple EISs.
 
@@ -6900,8 +6902,8 @@ The security model for EIS integration is not
 designed to do the following:
 
 Mandate a specific technology and describe how
-it can be used to implement the security architecture for connector
-architecture-based EIS integration.
+it can be used to implement the security architecture for
+Jakarta Connector-based EIS integration.
 
 Specify and mandate a specific security
 policy. The security architecture enables an application server and EIS
@@ -6948,7 +6950,7 @@ client.
 
 Caller Principal. A principal that is
 associated with an application component instance during a method
-invocation. For example, an EJB instance can call the
+invocation. For example, a Jakarta Enterprise Beans instance can call the
 _getCallerPrincipal_ method to get the principal associated with the
 current security context.
 
@@ -6965,14 +6967,14 @@ provides illustrative examples of how security domains can be setup and
 managed.
 
 In a managed environment, application
-components are deployed in web or EJB containers. When a method gets
-invoked on a component, the principal associated with the component
-instance is termed a caller principal.
+components are deployed in web or Jakarta Enterprise Beans containers.
+When a method gets invoked on a component, the principal associated
+with the component instance is termed a caller principal.
 
 The relationship between an initiating
 principal and a caller principal depends on the principal delegation
 option for inter-container and inter-component calls. This form of
-principal delegation is out of the scope of the connector architecture.
+principal delegation is out of the scope of Jakarta Connectors.
 
 The relationship of a resource principal and
 its security attributes, for example, credentials and access privileges,
@@ -7016,8 +7018,8 @@ principal.
 The application component provider uses a
 deployment descriptor element or metadata annotations defined in the
 corresponding application component specifications, for example,
-_res-auth_ for EJB components, to indicate the requirements for one of
-the above two approaches. If the _res-auth_ element is set to
+_res-auth_ for Jakarta Enterprise Beans components, to indicate the requirements
+for one of the above two approaches. If the _res-auth_ element is set to
 _Application_ , the component code performs a programmatic sign-on to
 the EIS. If the _res-auth_ element is _Container_ , the application
 server takes on the responsibility of setting up and managing EIS
@@ -7055,10 +7057,10 @@ Context initctx = new InitialContext();
 // perform JNDI lookup to obtain connection
 factory
 
-javax.resource.cci.ConnectionFactory cxf =
+jakarta.resource.cci.ConnectionFactory cxf =
 
 
-(javax.resource.cci.ConnectionFactory)initctx.lookup(
+(jakarta.resource.cci.ConnectionFactory)initctx.lookup(
 
  “java:comp/env/eis/MyEIS”);
 
@@ -7070,7 +7072,7 @@ security
 // information is not passed in the
 getConnection method
 
-javax.resource.cci.Connection cx =
+jakarta.resource.cci.Connection cx =
 cxf.getConnection();
 
 ...
@@ -7099,10 +7101,10 @@ Context initctx = new InitialContext();
 // perform JNDI lookup to obtain connection
 factory
 
-javax.resource.cci.ConnectionFactory cxf =
+jakarta.resource.cci.ConnectionFactory cxf =
 
 
-(javax.resource.cci.ConnectionFactory)initctx.lookup(
+(jakarta.resource.cci.ConnectionFactory)initctx.lookup(
 
  “java:comp/env/eis/MyEIS”);
 
@@ -7117,7 +7119,7 @@ properties.setUserName(“...”);
 
 properties.setPassword(“...”);
 
-javax.resource.cci.Connection cx =
+jakarta.resource.cci.Connection cx =
 cxf.getConnection(properties);
 
 ...
@@ -7155,7 +7157,7 @@ Set the access control to EIS resources.
 
 An application server and an EIS collaborate
 to ensure resource principals are properly authenticated when the
-principal connects to the underlying EIS. The connector architecture
+principal connects to the underlying EIS. Jakarta Connectors
 identifies the following as the commonly-supported authentication
 mechanisms:
 
@@ -7176,7 +7178,7 @@ link:conn.html#a4636[See @AuthenticationMechanism] ) as part of
 the Connector metadata annotation (see link:conn.html#a4581[See
 @Connector]).
 
-The connector architecture does not require
+Jakarta Connectors does not require
 that a specific authentication mechanism be supported by an application
 server and an EIS. An application server may support any other
 authentication mechanisms for EIS sign-on. The connector security
@@ -7228,7 +7230,7 @@ The support for principal delegation is
 typically specific to a security mechanism. For example, Kerberos
 supports a mechanism for the delegation of authentication. Refer to the
 Kerberos v5 specification for more details. The security technology
-specific details are out of the scope of the connector architecture.
+specific details are out of the scope of Jakarta Connectors.
 
 Credentials Mapping. This mechanism may be
 used when an application server and EIS support different authentication
@@ -7264,10 +7266,10 @@ security roles and permissions.
 Authorization checking can also be done at the
 application server level. For example, an application server can allow a
 principal to create a connection to an EIS only if the principal is
-authorized to do so. Java EE containers such as EJB and servlet
+authorized to do so. Jakarta EE containers such as Jakarta Enterprise Beans and servlet
 containers support both programmatic and declarative security that can
 be used to define authorization policies. Programmatic and declarative
-security are defined in the individual specifications. Refer to the EJB
+security are defined in the individual specifications. Refer to the Jakarta Enterprise Beans
 and servlet specifications for more details. An application component
 developer developing components for EIS access must follow the
 requirements defined in these specifications.
@@ -7309,12 +7311,12 @@ address space of the application server.
 
 A resource adapter can use any security
 mechanism to establish the secure association. GSS-API (refer to IETF
-draft on GSS-API v2[5]) is an example of such a mechanism. Note that the
-connector architecture does not require use of the GSS-API by a resource
+draft on GSS-API v2[5]) is an example of such a mechanism. Note that
+Jakarta Connectors does not require use of the GSS-API by a resource
 adapter or application server.
 
 Configuring a mechanism for establishing
-secure associations is outside the scope of the connector architecture.
+secure associations is outside the scope of Jakarta Connectors.
 This includes setting up the desired quality of protection during secure
 communication.
 
@@ -7336,12 +7338,12 @@ role from the security perspective.
 
 The roles and responsibilities of the
 Application Component Provider and Deployer are specified in detail in
-the respective Java EE component model specifications.
+the respective Jakarta EE component model specifications.
 
 === [[a1678]]Application Component Provider
 
 The following features are common across
-different Java EE component models from the perspective of an
+different Jakarta EE component models from the perspective of an
 Application Component Provider:
 
 An Application Component Provider invariably
