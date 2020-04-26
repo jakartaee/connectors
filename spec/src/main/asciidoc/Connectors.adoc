@@ -4646,7 +4646,7 @@ transaction management contract between an application server and a
 resource adapter and its underlying resource manager. The transaction
 management contract has two parts, depending on the type of transaction:
 
-a Jakarta Transactions _jakarta.transaction.xa.XAResource_ based
+a Jakarta Transactions _javax.transaction.xa.XAResource_ based
 contract between a transaction manager and a resource manager
 
 a local transaction management contract
