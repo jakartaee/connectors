@@ -2574,7 +2574,7 @@ to configure the resource adapter in the operational environment.
 
 The resource adapter provides connection and
 connection factory interfaces. A connection factory acts as a factory
-for EIS connections. For example, _jakarta.sql.DataSource_ and
+for EIS connections. For example, _javax.sql.DataSource_ and
 _java.sql.Connection_ interfaces are JDBC-based interfaces for
 connecting to a relational database.
 
@@ -2927,7 +2927,7 @@ com.myeis.ResourceException;
 
 |===
 
-The JDBC interfaces— _jakarta.sql.DataSource_ ,
+The JDBC interfaces— _javax.sql.DataSource_ ,
 _java.sql.Connection_ —are examples of non-CCI connection factory and
 connection interfaces.
 
@@ -2972,7 +2972,7 @@ in both managed and non-managed scenarios. This differs from the JDBC
 (see <<a9727, JDBC API Specification, version 4.1>>) architecture.
 
 In the JDBC architecture, an application
-server provides the implementation of _jakarta.sql.DataSource_ interface.
+server provides the implementation of _javax.sql.DataSource_ interface.
 Using a similar design approach for the connector architecture would
 have required an application server to provide implementations of
 various connection factory interfaces defined by different resource
@@ -3097,7 +3097,7 @@ connection factory instance to be stored in the JNDI naming environment.
 A connection factory implementation class must implement the interface
 _jakarta.resource.Referenceable_ . Note that the
 _jakarta.resource.Referenceable_ interface extends the
-_jakarta.naming.Referenceable_ interface. Refer to section
+_javax.naming.Referenceable_ interface. Refer to section
 <<a5327, Scenario: Referenceable>> for details on
 the JNDI reference mechanism.
 
@@ -3241,7 +3241,7 @@ jakarta.resource.spi.ManagedConnectionFactory
  public ManagedConnection
 createManagedConnection(
 
- jakarta.security.auth.Subject subject,
+ javax.security.auth.Subject subject,
 
  ConnectionRequestInfo cxRequestInfo)
 
@@ -3254,7 +3254,7 @@ matchManagedConnections(
 
  java.util.Set connectionSet,
 
- jakarta.security.auth.Subject subject,
+ javax.security.auth.Subject subject,
 
  ConnectionRequestInfo cxRequestInfo)
 
@@ -3495,7 +3495,7 @@ jakarta.resource.spi.ManagedConnection \{
 
  public Object getConnection(
 
- jakarta.security.auth.Subject subject,
+ javax.security.auth.Subject subject,
 
  ConnectionRequestInfo cxRequestInfo)
 
