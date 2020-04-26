@@ -2116,7 +2116,7 @@ perform an orderly shutdown of the resource adapter instance.
 There is at most one ResourceAdapter JavaBean
 instance per resource adapter instance. But there can be many
 ManagedConnectionFactory, ActivationSpec or administered object
-instances (link:conn.html#a2747[See Administered Objects]) per
+instances (<<a2747, Administered Objects>>) per
 resource adapter instance.
 
 The ResourceAdapter JavaBean instance is
@@ -2135,7 +2135,8 @@ internally uses a union of the configured ResourceAdapter and
 ActivationSpec JavaBean properties, to represent inbound communication
 configuration.
 
-=== [[a496]]ResourceAdapter JavaBean Instance Configuration
+[[a496]]
+=== ResourceAdapter JavaBean Instance Configuration
 
 Create a ResourceAdapter JavaBean instance.
 This will initialize the instance with the defaults specified by way of
@@ -2146,9 +2147,8 @@ properties specified in the resource adapter deployment descriptor, on
 the ResourceAdapter instance. This may override some of the default
 values specified through the JavaBean mechanism. The application server
 is required to merge values specified by way of annotations and
-deployment descriptors as specified in link:conn.html#a4531[See
-Deployment Descriptors and Annotations], before applying the
-ResourceAdapter class configuration properties.
+deployment descriptors as specified in <<a4531, Deployment Descriptors and Annotations>>,
+before applying the ResourceAdapter class configuration properties.
 
 The ResourceAdapter deployer may further
 override the values of the ResourceAdapter instance before deployment.
@@ -2160,7 +2160,8 @@ may be stored separately and reused later while configuring
 ManagedConnectionFactory, ActivationSpec, or administered object
 instances.
 
-=== [[a502]]ManagedConnectionFactory JavaBean Instance Configuration
+[[a502]]
+=== ManagedConnectionFactory JavaBean Instance Configuration
 
 Create a ManagedConnectionFactory JavaBean
 instance. This will initialize the instance with the defaults specified
@@ -2177,8 +2178,8 @@ descriptor, on the ManagedConnectionFactory instance.
 
 The application server is required to merge
 values specified by way of annotations and deployment descriptors as
-specified in link:conn.html#a4531[See Deployment Descriptors and
-Annotations], before applying the ManagedConnectionFactory class
+specified in <<a4531, Deployment Descriptors and Annotations>>,
+before applying the ManagedConnectionFactory class
 configuration properties.
 
 The ManagedConnectionFactory deployer may
@@ -2210,8 +2211,8 @@ ActivationSpec instance.
 
 The application server is required to merge
 values specified by way of annotations and deployment descriptors as
-specified in link:conn.html#a4531[See Deployment Descriptors and
-Annotations], before applying the ActivationSpec class configuration
+specified in <<a4531, Deployment Descriptors and Annotations>>,
+before applying the ActivationSpec class configuration
 properties.
 
 The ActivationSpec deployer may further
@@ -2224,30 +2225,31 @@ Note, the ActivationSpec instance and the ResourceAdapter instance may
 have intersecting property names. In such a situation, the values
 specified in the ActivationSpec instance takes precedence.
 
-=== [[a516]]JavaBean Validation
+[[a516]]
+=== JavaBean Validation
 
-The Bean Validation specification (see
-link:conn.html#a9753[See Bean Validation Specification, version
-1.1]) defines “a metadata model and API for JavaBean validation. The
+The Jakarta Bean Validation specification (see
+<<a9753, Jakarta Bean Validation Specification, version
+3.0>>) defines “a metadata model and API for JavaBean validation. The
 default metadata source is annotations, with the ability to override and
 extend the meta-data through the use of XML validation descriptors.”
 
 The JavaBeans provided by the resource
 adapter implementation, like _ResourceAdapter_ ,
 _ManagedConnectionFactory_ etc, may use the annotations or the XML
-validation descriptor facilities defined by the Bean Validation
+validation descriptor facilities defined by the Jakarta Bean Validation
 specification to express their validation requirements of its
 configuration properties to the application server. A constraint
 annotation, can be applied to a JavaBean type, on any of the type’s
-fields or on any of the JavaBeans-compliant properties.The use of Bean
+fields or on any of the JavaBeans-compliant properties.The use of Jakarta Bean
 Validation constraint annotations by the resource adapter implementation
 as a self-validation check behavior is optional.
 
-The Bean Validation specification defines a
+The Jakarta Bean Validation specification defines a
 set of standard built-in constraints. The resource adapter
 implementation is encouraged to use them instead of redefining custom
 annotations for the same use cases. The resource adapter implementation
-may (but is not limited to) use the Bean Validation facilities for the
+may (but is not limited to) use the Jakarta Bean Validation facilities for the
 following use cases:
 
  _Range or limits specification._ To ensure
@@ -2260,11 +2262,11 @@ deployer to provide a value for a configuration property. The resource
 adapter implementation may use the _@NotNull_ constraint for this use
 case.
 
-In the Java EE 6 environment, as specified in
-the Java EE platform specification, the Bean Validation facilities are
+In the Jakarta EE 9 environment, as specified in
+the Jakarta EE platform specification, the Jakarta Bean Validation facilities are
 available. The application server must check the validity of the
 configuration settings provided by the deployer for a JavaBean, using
-the capabilities provided by the Bean Validation specification. This
+the capabilities provided by the Jakarta Bean Validation specification. This
 validation must be performed before using the JavaBean. This helps to
 catch configuration errors earlier on without having to wait until the
 JavaBean is put to use. As the application server may check the
@@ -2283,27 +2285,27 @@ constraint annotations:
 Administered Objects
 
 The application server must, by default,
-target the _javax.validation.groups.Default_ group for validation. The
+target the _jakarta.validation.groups.Default_ group for validation. The
 application server must validate the JavaBean by obtaining a _Validator_
 instance from its _ValidatorFactory_ and invoking the _validate_ method
 with the targeted groups. If the set of _ConstraintViolation_ objects
 returned by the _validate_ method is not empty, the application server
 must fail validation by throwing the
-_javax.validation.ConstraintValidationException_ containing a reference
+_jakarta.validation.ConstraintValidationException_ containing a reference
 to the returned set of _ConstraintViolation_ objects, and must not put
 the JavaBean in use. The application server must treat all JavaBean
 properties as “reachable” and “cascadable” as defined by the
 BeanValidation Specification. For more details on reachability and
 cascaded validation, see Section 3.5 of the
-link:conn.html#a9753[See Bean Validation Specification, version
-1.1].
+<<a9753, Jakarta Bean Validation Specification, version 3.0>>.
 
 Application server configuration tools and
 third-party tools are recommended to leverage the constraint metadata
-request API defined in the Bean Validation specification to provide a
+request API defined in the Jakarta Bean Validation specification to provide a
 richer interaction model during configuration of the JavaBeans.
 
-=== [[a529]]Configuration Property Attributes
+[[a529]]
+=== Configuration Property Attributes
 
 === Dynamic Reconfigurable Configuration Properties
 
@@ -2313,17 +2315,16 @@ referred to as dynamically reconfigurable configuration properties. A
 resource adapter may indicate that a configuration property is
 dynamically reconfigurable through the
 _config-property-supports-dynamic-updates_ attribute in the deployment
-descriptor (see link:conn.html#a5430[See Resource Adapter XML
-Schema Definition] ) or the _supportsDynamicUpdates_ annotation element
-in the _ConfigProperty_ annotation (see link:conn.html#a4675[See
-@ConfigProperty] ).
+descriptor (see <<a5430, Resource Adapter XML Schema Definition>>)
+or the _supportsDynamicUpdates_ annotation element
+in the _ConfigProperty_ annotation (see <<a4675, @ConfigProperty>>).
 
 Neither the application server nor the
 resource adapter must support the dynamic reconfiguration of
 configuration properties. If an application server supports this feature
 and the resource adapter employs JavaBean Validation (see
-link:conn.html#a516[See JavaBean Validation] ), the application
-server must performJavaBean Validation after reconfiguring all the
+<<a516, JavaBean Validation>>), the application
+server must perform JavaBean Validation after reconfiguring all the
 modified values of the JavaBean. When the JavaBean is validated, the
 resource adapter can deduce that the reconfiguration has been completed
 by the deployer or administrator.
@@ -2332,8 +2333,7 @@ Invalid reconfiguration of the state of a
 JavaBean by an application server may be indicated by the resource
 adapter through the following means:
 
-Throwing an exception when the field is
-updated
+Throwing an exception when the field is updated
 
 For configuration properties that can only be
 validated based on the state of other configuration properties, throwing
@@ -2342,16 +2342,16 @@ an exception during the validation phase.
 === Confidential Properties
 
 Certain configuration properties of a
-JavaBean, such as _Password_ (see link:conn.html#a5237[See
-Standard Properties] for more information on _Password_ ), may be
+JavaBean, such as _Password_ (see <<a5237, Standard Properties>>
+for more information on _Password_), may be
 confidential and must not be presented as clear text in configuration
 tools. The resource adapter may indicate such properties as
 “Confidential Properties” through the _config-property-confidential_
 attribute in the deployment descriptor (see
-link:conn.html#a5430[See Resource Adapter XML Schema Definition]
+<<a5430, Resource Adapter XML Schema Definition>>
 ) or the _confidentialProperty_ annotation element in the
-_ConfigProperty_ annotation (see link:conn.html#a4675[See
-@ConfigProperty] ). The application server’s configuration tool may use
+_ConfigProperty_ annotation (see <<a4675, @ConfigProperty>>).
+The application server’s configuration tool may use
 this attribute to use special visual aids denoting confidentiality.
 
 === Resource Adapter Implementation Guidelines
@@ -2388,11 +2388,11 @@ package com.xyz.adapter;
 
 
 
-import javax.resource.spi.ResourceAdapter;
+import jakarta.resource.spi.ResourceAdapter;
 
-import javax.resource.spi.BootstrapContext;
+import jakarta.resource.spi.BootstrapContext;
 
-import javax.resource.spi.work.*;
+import jakarta.resource.spi.work.*;
 
 
 
@@ -2506,7 +2506,7 @@ An application component uses a connection
 factory to access a connection instance, which the component then uses
 to connect to the underlying EIS. A resource adapter acts as a factory
 of connections. Examples of connections include database connections,
-JMS (Java Message Service) connections, and SAP R/3 connections.
+Jakarta Messaging connections, and SAP R/3 connections.
 
 Connection pooling manages connections that
 are expensive to create and destroy. Connection pooling of expensive
@@ -2540,7 +2540,7 @@ of resource adapters.
 
 To provide support for connection pooling.
 
-The goal of the connector architecture is to
+The goal of the Jakarta Connector Architecture is to
 enable efficient, scalable, and extensible connection pooling
 mechanisms, not to specify a mechanism or implementation for connection
 pooling. The goal is accomplished by defining a standard contract for
@@ -2558,8 +2558,8 @@ Architecture: Connection Management
 The connection management contract specifies
 an architected contract between an application server and a resource
 adapter. This connection management contract is shown with bold flow
-lines in link:conn.html#a615[See Architecture Diagram: Managed
-Application scenario]. It includes the set of interfaces shown in the
+lines in <<a615, Architecture Diagram: Managed
+Application scenario>>. It includes the set of interfaces shown in the
 architecture diagram.
 
 === Overview: Managed Application Scenario
