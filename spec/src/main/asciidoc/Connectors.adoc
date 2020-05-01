@@ -7364,7 +7364,7 @@ The Deployer specifies security policies that
 ensure secure access to the underlying EISs from application components.
 The deployer adapts the intended security view of an application for EIS
 access, specified through metadata annotations described in
-link:conn.html#a4517[See Metadata Annotations] or the deployment
+<<a4517, Metadata Annotations>> or the deployment
 descriptor, to the actual security mechanisms and policies used by the
 application server and EISs in the target operational environment. The
 Deployer uses tools to accomplish the above task.
@@ -7385,7 +7385,7 @@ connections to an EIS instance.
 Binds the connection factory reference in the
 deployment descriptor of an application component to the JNDI registered
 reference for the connection factory. Refer to
-link:conn.html#a5258[See JNDI Configuration and Lookup] for the
+<<a5258, JNDI Configuration and Lookup>> for the
 JNDI configuration of a connection factory during deployment of a
 resource adapter. The deployer can use the JNDI _LinkRef_ mechanism to
 create a symbolic link to the actual JNDI name of the connection
@@ -7418,15 +7418,15 @@ administration can include setting up and maintaining both underlying
 authentication services and trusts between domains, plus managing
 principals, including identities, keys, and attributes. Such
 administration is typically security technology specific and is outside
-the scope of the connector architecture.
+the scope of the Jakarta Connector Architecture.
 
 Support a single sign-on mechanism that spans
 the application server and multiple EISs. The security mechanisms and
 policies through which single sign-on is achieved are outside the scope
-of the connector architecture.
+of the Jakarta Connector Architecture.
 
-link:conn.html#a9615[See JAAS Based
-Security Architecture] specifies how JAAS can be used by an application
+<<a9615, JAAS Based Security Architecture>>
+specifies how JAAS can be used by an application
 server to support the requirements of the connector security
 architecture.
 
@@ -7445,15 +7445,15 @@ resource adapter that supports the security requirements of the
 underlying EIS.
 
 The resource adapter implements the security
-contract specified as part of the connector architecture.
-link:conn.html#a1713[See Security Contract] specifies the
+contract specified as part of the Jakarta Connector Architecture.
+<<a1713, Security Contract>> specifies the
 security contract and related requirements for a resource adapter.
 
 The resource adapter specifies its security
 capabilities and requirements through metadata annotations or its
-deployment descriptor. link:conn.html#a5427[See Requirements]
+deployment descriptor. <<a5427, Requirements>>
 specifies a standard deployment descriptor for a resource adapter.
-link:conn.html#a4517[See Metadata Annotations] specifies the
+<<a4517, Metadata Annotations>> specifies the
 metadata annotations used to express security requirements of a resource
 adapter.
 
@@ -7502,16 +7502,14 @@ Server Vendor for supporting the security contract.
 This chapter references the following
 chapters and documents:
 
-The security model specified in the Java EE
-platform specification (see link:conn.html#a9737[See Java
-Platform, Enterprise Edition (Java EE) Specification, version 7]).
+The security model specified in the Jakarta EE platform specification
+(see <<a9737, Jakarta Platform, Enterprise Edition (Jakarta EE) Specification, version 9>>).
 
 Security architecture specified in
-link:conn.html#a1563[See Security Architecture].
+<<a1563, Security Architecture>>.
 
-Security scenarios based on the connector
-architecture (Refer to link:conn.html#a9530[See Security
-Scenarios]).
+Security scenarios based on the Jakarta Connector
+Architecture (Refer to <<a9530, Security Scenarios>>).
 
 === 
 
@@ -7521,11 +7519,10 @@ Security Contract
 
 The security contract between the application
 server and the resource adapter extends the connection management
-contract (described in link:conn.html#a588[See Connection
-Management]) by adding security-specific details.
+contract (described in <<a588, Connection Management>>)
+by adding security-specific details.
 
-This security contract supports EIS sign-on
-by:
+This security contract supports EIS sign-on by:
 
 Passing the connection request from the
 resource adapter to the application server, enabling the application
@@ -7535,7 +7532,8 @@ Propagation of the security context, that is,
 JAAS _Subject_ with principal and credentials, from the application
 server to the resource adapter.
 
-=== [[a1724]]Interfaces and Classes
+[[a1724]]
+=== Interfaces and Classes
 
 The security contract includes the following
 classes and interfaces:
@@ -7544,8 +7542,8 @@ classes and interfaces:
 
 The following text has been taken from the
 JAAS specification. For detailed information, refer to the JAAS
-specification (see link:conn.html#a9735[See Java Authentication
-and Authorization Service Specification, version 1.0]).
+specification (see <<a9735, Java Authentication
+and Authorization Service Specification, version 1.0>>).
 
 A _Subject_ represents a grouping of related
 information for a single entity, such as a person. Such information
@@ -7616,7 +7614,7 @@ J2SE Version 1.4, which provides similar functionality.
 image:conn-72.png[image]
 
 The interface
-_javax.resource.spi.security.GenericCredential_ defines a security
+_jakarta.resource.spi.security.GenericCredential_ defines a security
 mechanism-independent interface for accessing the security credential of
 a resource principal.
 
@@ -7625,7 +7623,7 @@ Java wrapper around an underlying mechanism-specific representation of a
 security credential. For example, the _GenericCredential_ interface can
 be used to wrap Kerberos credentials.
 
-The connector architecture does not define any
+The Jakarta Connector Architecture does not define any
 standard format and requirements for security mechanism specific
 credentials. For example, a security credential wrapped by a _Generic_
 _Credential_ interface can have a native representation specific to an
@@ -7637,10 +7635,10 @@ image:conn-72.png[image]
 
 A contract for the representation of mechanism-specific credentials must
 be established between an application server and a resource adapter and
-is outside the scope of the connector architecture. This includes
+is outside the scope of the Jakarta Connector Architecture. This includes
 requirements for the exchange of mechanism-specific credentials between
 a JAAS module and GSS provider. Refer to
-link:conn.html#a9615[See JAAS Based Security Architecture] for
+<<a9615, JAAS Based Security Architecture>> for
 details on JAAS-based security architecture.
 
 image:conn-72.png[image]
@@ -7655,8 +7653,8 @@ manner if the underlying EIS supports the security mechanism type
 represented by the _GenericCredential_ instance
 
 Using GSS-AP I (see
-link:conn.html#a9730[See RFC: Generic Security Service API
-(GSS-API) Specification, version 2]) if the resource adapter and
+<<a9730, RFC: Generic Security Service API
+(GSS-API) Specification, version 2>>) if the resource adapter and
 underlying EIS instance support GSS-API.
 
 === Interface
@@ -7668,7 +7666,7 @@ _GenericCredential_ interface:
 |===
 a|
 public interface
-javax.resource.spi.security.GenericCredential \{
+jakarta.resource.spi.security.GenericCredential \{
 
  public String getName();
 
@@ -7676,7 +7674,7 @@ javax.resource.spi.security.GenericCredential \{
 
  public byte[] getCredentialData()
 
- throws javax.resource.spi.SecurityException;
+ throws jakarta.resource.spi.SecurityException;
 
 
 
@@ -7700,8 +7698,8 @@ The method _getMechType_ returns the mechanism
 type for the _GenericCredential_ instance. The mechanism type definition
 for _GenericCredential_ must be consistent with the Object Identifier
 (OID) based representation specified in the GSS specification (see
-link:conn.html#a9730[See RFC: Generic Security Service API
-(GSS-API) Specification, version 2]). In the _GenericCredential_
+<<a9730, RFC: Generic Security Service API
+(GSS-API) Specification, version 2>>). In the _GenericCredential_
 interface, the mechanism type is returned as a stringified
 representation of the OID specification.
 
@@ -7710,7 +7708,7 @@ to get security data for a specific security mechanism. An example is
 authentication data required for establishing a secure association with
 an EIS instance on behalf of the associated resource principal. The
 _getCredentialData_ method returns the credential representation as an
-array of bytes. Note that the connector architecture does not define a
+array of bytes. Note that the Jakarta Connector Architecture does not define a
 standard format for the returned credential data.
 
 === Implementation
@@ -7719,10 +7717,10 @@ If an application server supports the
 deployment of a resource adapter which supports _GenericCredential_ as
 part of the security contract, the application server must provide an
 implementation of the _GenericCredential_ interface. Refer to the
-deployment descriptor specification in link:conn.html#a5427[See
-Requirements] for details on how a resource adapter specifies its
+deployment descriptor specification in <<a5427,
+Requirements>> for details on how a resource adapter specifies its
 support for _GenericCredential_ . Refer to
-link:conn.html#a4636[See @AuthenticationMechanism] for details
+<<a4636, @AuthenticationMechanism>> for details
 on how a resource adapter may use the AuthenticationMechanism annotation
 to specify its support for GenericCredential.
 
@@ -7739,8 +7737,8 @@ If an application server supports the
 deployment of a resource adapter which supports GSSCredential as part of
 the security contract, the application server must provide an
 implementation of the GSSCredential interface. Refer to the deployment
-descriptor specification in link:conn.html#a5427[See
-Requirements] for details on how a resource adapter specifies its
+descriptor specification in <<a5427, Requirements>>
+for details on how a resource adapter specifies its
 support for GSSCredential. Refer to Section 18.4.3
 “@AuthenticationMechanism”” for details on how a resource adapter may
 use the AuthenticationMechanism annotation to specify its support for
@@ -7749,7 +7747,7 @@ GSSCredential.
 === PasswordCredential
 
 The class
-_javax.resource.spi.security.PasswordCredential_ acts as a holder of
+_jakarta.resource.spi.security.PasswordCredential_ acts as a holder of
 username and password information. This class enables an application
 server to pass the username and password to the resource adapter through
 the security contract.
@@ -7765,7 +7763,7 @@ the _equals_ and _hashCode_ methods.
 |===
 a|
 public final class
-javax.resource.spi.security.PasswordCredential
+jakarta.resource.spi.security.PasswordCredential
 
  implements java.io.Serializable \{
 
@@ -7800,7 +7798,7 @@ getManagedConnectionFactory()
 The _getManagedConnectionFactory_ method
 returns the _ManagedConnectionFactory_ instance for which the user name
 and password has been set by the application server. Refer to
-link:conn.html#a1807[See ManagedConnectionFactory]to see how a
+<<a1807, ManagedConnectionFactory>> to see how a
 resource adapter uses this method.
 
 === ConnectionManager
@@ -7814,7 +7812,7 @@ the application server can hook-in security and other services.
 |===
 a|
 public interface
-javax.resource.spi.ConnectionManager
+jakarta.resource.spi.ConnectionManager
 
  extends java.io.Serializable \{
 
@@ -7838,8 +7836,8 @@ image:conn-73.png[image]
 
 Depending on whether the application server or
 application component is configured to be responsible for managing EIS
-sign-on (refer to link:conn.html#a1678[See Application Component
-Provider]), the resource adapter calls the _ConnectionManager_ .
+sign-on (refer to <<a1678, Application Component
+Provider>>), the resource adapter calls the _ConnectionManager_ .
 _allocateConnection_ method in one of the following ways:
 
 Container-managed Sign-on. The application
@@ -7864,7 +7862,8 @@ application server should rely on the resource adapter to manage EIS
 sign-on, as explained in the _ManagedConnectionFactory_ interface
 specification under option C.
 
-=== [[a1807]]ManagedConnectionFactory
+[[a1807]]
+=== ManagedConnectionFactory
 
 The following code extract shows the methods
 of the _ManagedConnectionFactory_ interface that are relevant to the
@@ -7874,7 +7873,7 @@ security contract:
 |===
 a|
 public interface
-javax.resource.spi.ManagedConnectionFactory
+jakarta.resource.spi.ManagedConnectionFactory
 
  extends java.io.Serializable \{
 
@@ -8006,15 +8005,15 @@ adapter for managing EIS sign-on.
 
 During the deployment of a resource adapter,
 the application server must be configured to use one of the above
-specified invocation options. Refer to link:conn.html#a5089[See
-Packaging Requirements] for more details.
+specified invocation options. Refer to <<a5089,
+Packaging Requirements>> for more details.
 
 === Contract for Resource Adapter
 
 A resource adapter can do EIS sign-on and
 connection creation in an implementation-specific way, or it can use the
 GSS-API. The latter option is specified in
-link:conn.html#a9615[See JAAS Based Security Architecture]. A
+<<a9615, JAAS Based Security Architecture>>. A
 resource adapter has the following options, corresponding to the options
 for an application server, for handling the invocation of the
 _createManagedConnection_ method:
@@ -8028,7 +8027,7 @@ Note that the security contract assumes that a
 resource adapter has the necessary security permissions to extract a
 private credential set from a _Subject_ instance. The specific mechanism
 through which such permission is set up is outside the scope of the
-connector architecture.
+Jakarta Connector Architecture.
 
 If the _Subject_ instance contains a
 _PasswordCredential_ instance, the resource adapter extracts the
@@ -8098,7 +8097,7 @@ information. This may happen due to a disconnect between the application
 and the resource adapter.
 
 In the case of option A and option B, a
-resource adapter should throw a _javax.resource.spi.SecurityException_ ,
+resource adapter should throw a _jakarta.resource.spi.SecurityException_ ,
 if the credential information contained in the _Subject_ instance is
 insufficient to perform authentication. A non-null _Subject_ instance
 with no credentials is not equivalent to a null _Subject_ instance,
@@ -8107,7 +8106,7 @@ adapter may handle them differently. A non-null _Subject_ instance with
 no credentials may be interpreted by the resource adapter as follows:
 
 If the EIS requires authentication, the
-resource adapter should throw a _javax.resource.spi.SecurityException_ .
+resource adapter should throw a _jakarta.resource.spi.SecurityException_ .
 That is, an empty or insufficient credential information is an error.
 
 If the EIS does not require authentication,
@@ -8116,7 +8115,8 @@ non-null _Subject_ instance, and hence may ignore the _Subject_
 instance. This may happen due to a disconnect between the application
 and the resource adapter.
 
-=== [[a1854]]ManagedConnection
+[[a1854]]
+=== ManagedConnection
 
 A resource adapter can re-authenticate a
 physical connection (that is, one that already exists in the connection
@@ -8139,7 +8139,7 @@ Support for re-authentication depends on
 whether an underlying EIS supports the re-authentication mechanism for
 existing physical connections. If a resource adapter does not support
 re-authentication, the _getConnection_ method should throw a
-_javax.resource.spi.SecurityException_ if the passed _Subject_ in the
+_jakarta.resource.spi.SecurityException_ if the passed _Subject_ in the
 _getConnection_ method is different from the security context associated
 with the _ManagedConnection_ instance.
 
@@ -8147,7 +8147,7 @@ with the _ManagedConnection_ instance.
 |===
 a|
 public interface
-javax.resource.spi.ManagedConnection \{
+jakarta.resource.spi.ManagedConnection \{
 
  public Object getConnection(
 
@@ -8178,15 +8178,14 @@ _PasswordCredential_ instance from the _Subject_ and performs an
 EIS-specific authentication. This option is similar to option A defined
 in the specification of the method _createManagedConnection_ on the
 interface _ManagedConnectionFactory_ (refer to
-link:conn.html#a1807[See ManagedConnectionFactory]).
+<<a1807, ManagedConnectionFactory>>).
 
 Option B. The resource adapter extracts
 _GSSCredential_ instance from the _Subject_ and manages authentication
 either through the GSS mechanism or an implementation-specific
 mechanism. This option is similar to option B defined in the
 specification of the method _createManagedConnection_ on the interface
-_ManagedConnectionFactory_ (refer to link:conn.html#a1807[See
-ManagedConnectionFactory]).
+_ManagedConnectionFactory_ (refer to <<a1807, ManagedConnectionFactory>>).
 
 Option C. In this case, the _Subject_
 parameter is _null_ . The resource adapter extracts security information
@@ -8194,7 +8193,7 @@ from the _ConnectionRequestInfo_ (if there is any) and performs
 authentication in an implementation-specific manner. This option is
 similar to option C defined in the specification of the method
 _createManagedConnection_ on the interface _ManagedConnectionFactory_
-(refer to link:conn.html#a1807[See ManagedConnectionFactory]).
+(refer to <<a1807, ManagedConnectionFactory>>).
 
 === 
 
@@ -8228,9 +8227,9 @@ for the security contract as part of its deployment descriptor or
 through metadata annotations. The relevant deployment descriptor
 elements are: _authentication-mechanism_ ,
 _authentication-mechanism-type_ , _reauthentication-support_ and
-_credential-interface_ (refer to link:conn.html#a5427[See
-Requirements] for details). The AuthenticationMechanism annotation
-described in link:conn.html#a4636[See @AuthenticationMechanism]
+_credential-interface_ (refer to <<a5427, Requirements>> for details).
+The AuthenticationMechanism annotation
+described in <<a4636, @AuthenticationMechanism>>
 may also be used for this purpose.
 
 === Application Server
