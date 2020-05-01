@@ -19379,6 +19379,11 @@ a Java EE application _EAR_ (also referred to as an “embedded RAR”) is
 deployed, the resource adapter must be made available only to the Java
 EE application with which it is packaged.
 
+A resource adapter must not implement or
+require a mixture of Jakarta and Java EE packages. If a resource adapter
+provider wishes to implement both specifications, it must do so by
+providing multiple _RAR_ files.
+
 === 
 
 image:conn-153.png[image]
