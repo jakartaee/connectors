@@ -8420,9 +8420,9 @@ Work Management Contract (Interfaces)
 
 image:conn-79.png[image]
 
-===  _javax.resource.spi.work_
+===  _jakarta.resource.spi.work_
 
-package javax.resource.spi.work;
+package jakarta.resource.spi.work;
 
 
 
@@ -8442,9 +8442,9 @@ import java.util.EventListener;
 
 import javax.transaction.xa.Xid;
 
-import javax.resource.ResourceException;
+import jakarta.resource.ResourceException;
 
-import javax.resource.NotSupportedException;
+import jakarta.resource.NotSupportedException;
 
 
 
@@ -8540,7 +8540,6 @@ public class WorkEvent extends EventObject \{
 
 
  public static final int WORK_ACCEPTED = 1;
-
  public static final int WORK_REJECTED = 2;
 
  public static final int WORK_STARTED = 3;
@@ -8701,7 +8700,7 @@ public class RetryableUnavailableException
  extends UnavailableException
 
  implements
-javax.resource.spi.RetryableException \{
+jakarta.resource.spi.RetryableException \{
 
 }
 
@@ -9232,14 +9231,14 @@ application server.
 [width="100%",cols="100%",]
 |===
 a|
-package javax.resource.spi;
+package jakarta.resource.spi;
 
 
 
 import java.util.Timer;
 
 import
-javax.resource.spi.UnavailableException;
+jakarta.resource.spi.UnavailableException;
 
 
 
@@ -9277,9 +9276,9 @@ package com.xyz.adapter;
 
 import java.util.*;
 
-import javax.resource.spi.*;
+import jakarta.resource.spi.*;
 
-import javax.resource.spi.work.WorkManager;
+import jakarta.resource.spi.work.WorkManager;
 
 
 
