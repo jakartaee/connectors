@@ -9399,7 +9399,7 @@ resource adapter must support distributed Work processing.
 [width="100%",cols="100%",]
 |===
 a|
-package javax.resource.spi.work;
+package jakarta.resource.spi.work;
 
 
 
@@ -9440,7 +9440,7 @@ link:conn.html#a2229[See Resource Adapter association].
 [width="100%",cols="100%",]
 |===
 a|
-package javax.resource.spi.work;
+package jakarta.resource.spi.work;
 
 
 
@@ -9721,9 +9721,9 @@ image:conn-90.png[image]
 
 
 
-===  _javax.resource.spi.work_
+===  _jakarta.resource.spi.work_
 
- package javax.resource.spi.work;
+ package jakarta.resource.spi.work;
 
 
 
@@ -9865,7 +9865,7 @@ application server for debugging purposes.
 
 
 
- package javax.resource.spi.work;
+ package jakarta.resource.spi.work;
 
  public interface WorkContext extends
 Serializable\{
@@ -9888,7 +9888,7 @@ requires to be run with a specialized execution context.
 
 
 
- package javax.resource.spi.work;
+ package jakarta.resource.spi.work;
 
  public interface WorkContextProvider extends
 Serializable \{
@@ -9975,7 +9975,7 @@ server’s support for a particular _WorkContext_ type through the
 _isContextSupported()_ method in the _BootstrapContext_ implementation
 provided by the application server. This mechanism enables a resource
 adapter developer to dynamically change the _WorkContext_ s based on the
-support provided by the application server. Fore more information, see
+support provided by the application server. For more information, see
 link:conn.html#a415[See ResourceAdapter JavaBean and
 Bootstrapping a Resource Adapter Instance].
 
@@ -10295,9 +10295,9 @@ link:conn.html#a2494[See Standard Hints]. The application server
 is not required to support the standard hint names.
 
 The specification reserves the right to use
-names with the prefix _javax.resource._ in future versions of the
+names with the prefix _jakarta.resource._ in future versions of the
 specification. Resource adapters and application servers must not use
-names with the _javax.resource._ prefix for their custom requirements.
+names with the _jakarta.resource._ prefix for their custom requirements.
 The specification also recommends that resource adapter providers choose
 _hintNames_ using the same rules that they use for _Class_ names.
 
@@ -10314,7 +10314,7 @@ by the resource adapter developer.
 === Work Name Hint
 
 The resource adapter may use the string
-_javax.resource.Name_ , defined as a constant in
+_jakarta.resource.Name_ , defined as a constant in
 _HintsContext.NAME_HINT_ , as the _hintName_ to indicate a name for a
 _Work_ instance. This _hintName_ may be used by the resource adapter and
 the application server for enhanced logging and debugging purposes. The
@@ -10323,7 +10323,7 @@ value for the hint must be a valid _java.lang.String_ .
 === Long-running Work instance Hint
 
 The resource adapter may use the String
-_javax.resource.LongRunning_ , defined as a constant in
+_jakarta.resource.LongRunning_ , defined as a constant in
 _HintsContext.LONGRUNNING_HINT_ , as the _hintName_ to indicate that a
 _Work_ instance might run for a long period of time (typically lasting
 throughout the lifecycle of the resource adapter instance) compared to
@@ -10416,8 +10416,8 @@ Inflow] are employed. As an example implementing one of the use cases
 listed there, let’s consider Wombat Systems, a finance company that has
 a variety of software systems as part of its enterprise infrastructure.
 The software systems include databases, messaging middleware, and
-mainframe systems, as well as several Java EE application servers that
-host business logic written as EJBs (session, entity, and message-driven
+mainframe systems, as well as several Jakarta EE application servers that
+host business logic written as Jakarta Enterprise Beans (session, entity, and message-driven
 beans).
 
 In order to integrate the various disparate
@@ -10425,7 +10425,7 @@ software systems, and to allow them to communicate with each other,
 Wombat Systems did the following:
 
 Used the application servers to hold the
-integration as well as business logic, developed as EJBs
+integration as well as business logic, developed as Jakarta Enterprise Beans
 
 Purchased or built resource adapters and
 deployed them on the application servers in order to provide
@@ -10548,11 +10548,11 @@ image:conn-94.png[image]
 
 This chapter provides a high level description
 of the inbound communication model; that is, the communication from an
-EIS to an application residing in an application server’s EJB container
+EIS to an application residing in an application server’s Jakarta Enterprise Beans container
 through a resource adapter. This also introduces concepts used in
 subsequent chapters related to inbound communication: Message Inflow
-(link:conn.html#a2576[See Message Inflow]), EJB Invocation
-(link:conn.html#a3530[See EJB Invocation]), and Transaction
+(link:conn.html#a2576[See Message Inflow]), Jakarta Enterprise Beans Invocation
+(link:conn.html#a3530[See Jakarta Enterprise Beans Invocation]), and Transaction
 Inflow (link:conn.html#a3613[See Transaction Inflow]).
 
 === 
@@ -10563,24 +10563,24 @@ Overview
 
 In the inbound communication model, the EIS
 initiates all communication to an application. In this case, the
-application may be composed of EJBs (session, entity and message-driven
-beans) and resides in an EJB container.
+application may be composed of Jakarta Enterprise Beans (session, entity and message-driven
+beans) and resides in a Jakarta Enterprise Beans container.
 
 Inbound Communication Model
 
 image:conn-96.png[image]
 
 In order to enable inbound communication, a
-mechanism to invoke EJBs (session, entity and message-driven beans) from
+mechanism to invoke Jakarta Enterprise Beans (session, entity and message-driven beans) from
 a resource adapter is necessary. Further, a mechanism is needed to
 propagate transaction information from an EIS to an application residing
-in an EJB container.
+in a Jakarta Enterprise Beans container.
 
 link:conn.html#a2576[See Message
 Inflow] describes a mechanism to invoke message-driven beans from a
 resource adapter. link:conn.html#a3613[See Transaction Inflow]
 provides a mechanism to import transaction information from an EIS into
-an EJB container.
+a Jakarta Enterprise Beans container.
 
 === 
 
@@ -10592,8 +10592,8 @@ Wombat Systems is a finance company which has
 a variety of software systems as part of its enterprise infrastructure.
 The software systems include databases, enterprise resource planning
 (ERP) and customer relationship management (CRM) systems, messaging
-middleware, mainframe systems, as well as several Java EE application
-servers which host business logic written as EJBs (session, entity and
+middleware, mainframe systems, as well as several Jakarta EE application
+servers which host business logic written as Jakarta Enterprise Beans (session, entity and
 message-driven beans). Further, there are web service interactions that
 occur as part of the overall corporate workflow.
 
@@ -10607,7 +10607,7 @@ software systems, and to allow them to communicate with each other,
 Wombat Systems did the following:
 
 Used the application servers to hold the
-integration as well as business logic, developed as EJBs.
+integration as well as business logic, developed as Jakarta Enterprise Beans.
 
 Purchased resource adapters and deployed them
 on the application servers, in order to provide bi-directional
@@ -10637,7 +10637,7 @@ endpoints residing in the application server independent of the specific
 messaging style, messaging semantics and messaging infrastructure used
 to deliver messages. This contract also serves as the standard message
 provider pluggability contract that allows a wide range of message
-providers to be plugged into any Java EE compatible application server
+providers to be plugged into any Jakarta EE compatible application server
 through a resource adapter.
 
 Note that the usage of the term “Endpoint” in
@@ -10680,17 +10680,17 @@ The message delivery always involves a message
 routing infrastructure, which offers varying QoS capabilities for
 storing (persistence) and routing messages reliably.
 
-The Java EE application programming model
-offers a rich set of components: EJBs (session, entity and
+The Jakarta EE application programming model
+offers a rich set of components: Jakarta Enterprise Beans (session, entity and
 message-driven beans), JSPs, and servlets for applications to use. The
 message-driven bean is an asynchronous message consumer, or message
 endpoint.
 
-Java EE applications may use two different
+Jakarta EE applications may use two different
 patterns to interact with a message provider:
 
 It may directly use specific messaging APIs,
-such as Java Messaging Service (JMS), to send and synchronously receive
+such as Jakarta Messaging, to send and synchronously receive
 messages. This is achieved using the standard connector contracts for
 connection management. See link:conn.html#a588[See Connection
 Management]. Any message provider may provide a connector resource
@@ -10698,12 +10698,12 @@ adapter that supplies connection objects for use by applications to send
 and synchronously receive messages using the specific messaging API.
 
 It may use message-driven beans to
-asynchronously receive messages through a message provider. The EJB
-specification (see link:conn.html#a9723[See Enterprise JavaBeans
-(EJB) Specification, version 3.2]) describes the message-driven bean
+asynchronously receive messages through a message provider. The Jakarta Enterprise Beans
+specification (see link:conn.html#a9723[See Jakarta™ Enterprise Beans
+Specification, Version 4.0]) describes the message-driven bean
 component contract in detail.
 
-While the above patterns allow a Java EE
+While the above patterns allow a Jakarta EE
 application to send and receive messages, they do not provide a standard
 system-level contract to plugin message providers to an application
 server and to deliver messages to message endpoints, or message-driven
@@ -10724,7 +10724,7 @@ allows a message provider to deliver messages to message endpoints
 the specific messaging style, messaging semantics, and messaging
 infrastructure used to deliver messages. Such a contract also serves as
 the standard message provider pluggability contract which allows a wide
-range of message providers to be plugged into any Java EE compatible
+range of message providers to be plugged into any Jakarta EE compatible
 application server by way of a resource adapter.
 
 === 
@@ -10734,11 +10734,11 @@ image:conn-100.png[image]
 Goals
 
 Provide a standard, generic mechanism to plug
-in a wide range of message providers, including JMS, into a Java EE
+in a wide range of message providers, including Jakarta Messaging, into a Jakarta EE
 compatible application server through a resource adapter and dispatch
-messages to message endpoints. This will allow Java EE components to act
+messages to message endpoints. This will allow Jakarta EE components to act
 as consumers of messages with no required changes to the client
-programming models. Further, the Java EE components will be able to
+programming models. Further, the Jakarta EE components will be able to
 access messages with no awareness that a resource adapter is delivering
 the message.
 
@@ -10760,18 +10760,17 @@ Message Inflow Contract (Interfaces)
 
 image:conn-103.png[image]
 
-===  _javax.resource.spi_
+===  _jakarta.resource.spi_
 
-package javax.resource.spi;
+package jakarta.resource.spi;
 
 
 
 import java.beans.PropertyDescriptor;
 
-import javax.resource.NotSupportedException;
+import jakarta.resource.NotSupportedException;
 
-import
-javax.resource.spi.endpoint.MessageEndpointFactory;
+import jakarta.resource.spi.endpoint.MessageEndpointFactory;
 
 
 
@@ -10860,11 +10859,11 @@ public class RetryableUnavailableException
  extends UnavailableException
 
  implements
-javax.resource.spi.RetryableException \{}
+jakarta.resource.spi.RetryableException \{}
 
-===  _javax.resource.spi.endpoint_
+===  _jakarta.resource.spi.endpoint_
 
-package javax.resource.spi.endpoint;
+package jakarta.resource.spi.endpoint;
 
 
 
@@ -10876,10 +10875,9 @@ import java.lang.NoSuchMethodException;
 
 import javax.transaction.xa.XAResource;
 
-import javax.resource.ResourceException;
+import jakarta.resource.ResourceException;
 
-import
-javax.resource.spi.UnavailableException;
+import jakarta.resource.spi.UnavailableException;
 
 
 
@@ -10985,9 +10983,9 @@ endpoint. The resource adapter may use the _Class_ object to discover
 annotations, interfaces implemented, etc. and modify the message
 delivery behavior of the resource adapter accordingly. In the case of
 message driven beans, the _Class_ object returned is the bean class
-provided by the application component developer. Refer to the Enterprise
-JavaBeans specification (see link:conn.html#a9723[See Enterprise
-JavaBeans (EJB) Specification, version 3.2]) for more details on the
+provided by the application component developer. Refer to the Jakarta Enterprise
+Beans specification (see link:conn.html#a9723[See Jakarta™ Enterprise Beans
+ Specification, Version 4.0]) for more details on the
 requirements for message driven beans with no-methods listener
 interface. The _MessageEndpointFactory_ must return _null_ if the
 _MessageEndpoint_ does not implement the business methods of the message
@@ -11079,12 +11077,12 @@ MDBs). This includes messaging style specific configuration details, and
 possibly message provider-specific details as well, which is used by the
 message-driven bean deployer to setup the activation.
 
-The EJB specification (see
-link:conn.html#a9723[See Enterprise JavaBeans (EJB)
-Specification, version 3.2]) has more details on the message-driven bean
+The Jakarta Enterprise Beans specification (see
+link:conn.html#a9723[See Jakarta™ Enterprise Beans Specification,
+ Version 4.0]) has more details on the message-driven bean
 deployment descriptor element activation-config used to hold the
 activation configuration information. For example, the deployment
-descriptor of a message-driven bean which consumes from a JMS resource
+descriptor of a message-driven bean which consumes from a Jakarta Messaging resource
 adapter may contain:
 
 === Message-Driven Bean Deployment Descriptor
@@ -11106,7 +11104,7 @@ descriptor -->
 
  <activation-config-property-value>
 
- javax.jms.Topic
+ jakarta.jms.Topic
 
  </activation-config-property-value>
 
@@ -11150,7 +11148,7 @@ descriptor -->
 
 ...
 
-The EJB specification does not specify
+The Jakarta Enterprise Beans specification does not specify
 messaging style-specific descriptor elements contained within the
 activation-config element. It is the responsibility of each individual
 messaging specification or product to specify the standard descriptor
@@ -11206,9 +11204,9 @@ The _ActivationSpec_ JavaBean implementation
 is recommended to use the JavaBean validation mechanisms described in
 link:conn.html#a516[See JavaBean Validation] instead of the
 _validate_ method to request validation by the container. If the
-application server provides an implementation of the BeanValidation
-specification (see link:conn.html#a9753[See Bean Validation
-Specification, version 1.1]), the application server must check the
+application server provides an implementation of the Bean Validation
+specification (see link:conn.html#a9753[See Jakarta™ Bean Validation
+Specification, Version 3.0]), the application server must check the
 validity of the configuration settings provided by the deployer for a
 JavaBean, using the capabilities provided by the Bean Validation
 specification before calling the _validate_ method.
@@ -11240,16 +11238,16 @@ The resource adapter may also provide in its
 deployment descriptor, using the _config-property_ element, a list of
 configuration property names for the activation specification.
 
-In the case of JMS message providers, the
+In the case of Jakarta Messaging message providers, the
 destination property value (refer to
 link:activation.html#UNKNOWN[See Activation Configuration for
-Message Inflow to JMS Endpoints]) may also be an object that implements
-the javax.jms.Destination interface. In such a case, the resource
+Message Inflow to Jakarta Messaging Endpoints]) may also be an object that implements
+the jakarta.jms.Destination interface. In such a case, the resource
 adapter should provide an administered object (refer to
 link:conn.html#a2747[See Administered Objects]) that implements
-the javax.jms.Destination interface. The specific type of the JMS
-destination is specified by the destinationType property value. The JMS
-ActivationSpec JavaBean properties should be standardized by the JMS
+the jakarta.jms.Destination interface. The specific type of the Jakarta Messaging
+destination is specified by the destinationType property value. The Jakarta Messaging
+ActivationSpec JavaBean properties should be standardized by the Jakarta Messaging
 community.
 
 === [[a2747]]Administered Objects
@@ -11288,7 +11286,7 @@ the administered object returns without throwing an exception.
 An administered object instance, that
 implements _ResourceAdapterAssociation_ interface must ensure that its
 Java class and the interface type implements
-_javax.resource.Referenceable_ and _java.io.Serializable_ interfaces.
+_jakarta.resource.Referenceable_ and _java.io.Serializable_ interfaces.
 This enables an application server to store the administered object
 instance in the JNDI naming environment. Refer to
 link:conn.html#a5327[See Scenario: Referenceable] for details on
