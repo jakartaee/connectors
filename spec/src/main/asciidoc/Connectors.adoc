@@ -11311,7 +11311,7 @@ of the default values specified by way of the JavaBean mechanism.
 The application server is required to merge
 values specified by way of annotations and deployment descriptors as
 specified in link:conn.html#a4531[See Deployment Descriptors and
-Annotations], before applying the administed object class configuration
+Annotations], before applying the administered object class configuration
 properties.
 
 The deployer may further override the values
@@ -11332,7 +11332,7 @@ deployer configures an ActivationSpec JavaBean instance based on the
 information provided by the application developer or assembler, which is
 contained in the endpoint deployment descriptor or by way of metadata
 annotations described in link:conn.html#a4758[See @Activation].
-The deployer may also use additional message provider-specific
+The deployer may also use additional provider-specific message
 information to configure the ActivationSpec JavaBean instance.
 
 The deployer also configures a set of
@@ -11536,11 +11536,11 @@ Unchecked exceptions
 (java.lang.RuntimeException and java.lang.Error) may be thrown by either
 the message listener implementation or may be thrown by the application
 server code during message dispatch. The application server must wrap
-such an unchecked exception within a javax.ejb.EJBException, which is a
-java.lang.RuntimeException, and throw the javax.ejb.EJBException to the
+such an unchecked exception within a jakarta.ejb.EJBException, which is a
+java.lang.RuntimeException, and throw the jakarta.ejb.EJBException to the
 resource adapter.
 
-The EJB specification describes in detail the
+The Jakarta Enterprise Beans specification describes in detail the
 structural requirements of a message listener interface implemented by a
 message-driven bean.
 
@@ -11591,16 +11591,16 @@ to receive messages. When messages arrive, the resource adapter uses the
 MessageEndpointFactory to create an endpoint instance. The resource
 adapter narrows the endpoint instance to the actual message listener
 type (it knows the endpoint type from the ActivationSpec), and delivers
-the message to the endpoint instance. The EJB specification (see
-link:conn.html#a9723[See Enterprise JavaBeans (EJB)
-Specification, version 3.2]) prescribes the rules for the message
+the message to the endpoint instance. The Jakarta Enterprise Beans
+specification (see link:conn.html#a9723[See Jakarta™ Enterprise Beans
+Specification,Version 4.0]) prescribes the rules for the message
 listener interface structure. The same endpoint instance may be used
 again to deliver subsequent messages serially, but it must not use the
 same endpoint instance concurrently.
 
 Note that the endpoint instance supplied by
 the createEndpoint method call is a proxy which implements the endpoint
-message listener type and the MessageEndpoint interface and it is not
+message listener type and the MessageEndpoint interface, and it is not
 the actual endpoint. This is necessary because the application server
 may need to intercept the message delivery in order to inject
 transactions, depending on the actual endpoint preferences, and to
@@ -11703,9 +11703,9 @@ listener type
  Object obj =
 endpointFactory.createEndpoint(xaResource);
 
- javax.jms.MessageListener endpoint =
+ jakarta.jms.MessageListener endpoint =
 
- (javax.jms.MessageListener) obj;
+ (jakarta.jms.MessageListener) obj;
 
 
 
@@ -11968,7 +11968,7 @@ Durability of message delivery may be an
 attribute of the activation setup, and thus it must be captured as part
 of the endpoint activation information. No additional contracts are
 required to support durable activations. Activation durability can be
-specified by a endpoint deployer by way of the ActivationSpec JavaBean.
+specified by an endpoint deployer by way of the ActivationSpec JavaBean.
 Note, some message providers may not support durable message deliveries
 and hence it is a QoS capability offered by the message provider.
 
@@ -12026,7 +12026,7 @@ call in order to send back an acknowledgement to its provider.
 
 Depending on the endpoint preferences, the
 application server brackets the message delivery to an endpoint instance
-with a Java Transaction API (JTA) transaction.
+with a Jakarta Transaction's transaction.
 
 This ensures that all the work done by the
 endpoint instance is enlisted as part of the transaction.
@@ -12128,7 +12128,7 @@ resource adapter not to perform any message delivery in-between a single
 _beforeDelivery_ and _afterDelivery_ method call pair. This scenario
 arises, for instance, when a resource adapter first chooses to deliver a
 message and calls _beforeDelivery_ , but later is unable to deliver the
-message (for example in the case of JMS resource adapters, the resource
+message (for example in the case of Jakarta Messaging resource adapters, the resource
 adapter may abort the message delivery and transfer the message to a
 Dead Message Queue). The resource adapter must be able to call
 _afterDelivery_ and complete the delivery cycle. The application server
@@ -12193,7 +12193,7 @@ method call must be aborted by the application server.
 === Non-Transacted Delivery
 
 The application server does not bracket the
-message delivery to an endpoint instance within a JTA transaction.
+message delivery to an endpoint instance within a Jakarta Transaction's transaction.
 
 The resource adapter relies on the successful
 return of the message delivery call on the endpoint instance for
