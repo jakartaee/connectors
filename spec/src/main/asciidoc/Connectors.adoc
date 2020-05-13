@@ -18110,13 +18110,15 @@ The _ConnectionDefinition_ annotation defines
 a set of connection interfaces and classes pertaining to a particular
 connection type (identical to the role played by the
 connection-definition element in the deployment descriptor).
+The _ConnectionDefinition annotation is repetable and can be used with or 
+without the _ConnectionDefinitions_ annotation described below.
 
 The _ConnectionDefinitions_ annotation can be
 used by the developer to specify a set of connection definitions that a
 _ManagedConnectionFactory_ JavaBean is a part of. (see
 link:conn.html#a5165[See Resource Adapter Provider] and
 link:conn.html#a5430[See Resource Adapter XML Schema Definition]
-for a discussion on connection-definition).
+for a discussion on connection-definition). 
 
 If a _ManagedConnectionFactory_ JavaBean is
 part of only one connection-definition, the developer may annotate that
@@ -18399,7 +18401,7 @@ EE) Specification, version 7]) for an overview of resource definition
 annotations.
 
 The _ConnectionFactoryDefinition_ and
-_AdministeredObjectDefinition_ annotations described below are resource
+_AdministeredObjectDefinition_ annotations described below are repeatable resource
 definition annotations that aid the application developer in defining
 and configuring resource adapter related resources needed for the
 operational environment.
@@ -18436,7 +18438,7 @@ modules.
 === @ConnectionFactoryDefinition
 
 The _ConnectionFactoryDefinition_ annotation
-is a resource definition annotation that is used to define a connector
+is a repeatable resource definition annotation that is used to define a connector
 connection factory and have it registered in JNDI. See the section
 titled “Connection Factory Definition” in the “Resources, Naming, and
 Injection” chapter of the Java EE Platform Specification for more
@@ -18458,7 +18460,7 @@ EE Platform Specification.
 
 
 
- package javax.resource;
+ package jakarta.resource;
 
  import java.lang.annotation.Target;
 
@@ -18475,6 +18477,7 @@ EE Platform Specification.
  @Target(\{ElementType.TYPE})
 
  @Retention(RetentionPolicy.RUNTIME)
+ @Repeatable(ConnectionFactoryDefinitions.class)
 
  public @interface
 ConnectionFactoryDefinition \{
@@ -18607,10 +18610,10 @@ Stateless Session Bean in the same enterprise application archive.
 
 The _ConnectionFactoryDefinition_ annotation
 is a resource definition annotation that is used to define a connector
-connection factory and have it registered in JNDI. Since repeated
-annotations are not allowed, the _ConnectionFactoryDefinitions_
+connection factory and have it registered in JNDI. The _ConnectionFactoryDefinitions_
 annotation acts as a container for multiple connector connection factory
-definitions.
+definitions. As the _ConnectionFactoryDefinition_ annotation is _Repeatable_
+use of the _ConnectionFactoryDefinitions_ annotation is optional.
 
 === ConnectionFactoryDefinitions Annotation
 
@@ -18711,7 +18714,7 @@ application archive.
 === @AdministeredObjectDefinition
 
 The _AdministeredObjectDefinition_ annotation
-is a resource definition annotation that is used to define an
+is a repeatable resource definition annotation that is used to define an
 administered object and have it registered in JNDI. See the section
 titled “Connector Administered Object Definition” in the “Resources,
 Naming, and Injection” chapter of the Java EE Platform for more details
@@ -18733,7 +18736,7 @@ Java EE Platform Specification.
 
 
 
- package javax.resource;
+ package jakarta.resource;
 
  import java.lang.annotation.Target;
 
@@ -18848,11 +18851,11 @@ archive.
 === @AdministeredObjectDefinitions
 
 The _AdministeredObjectDefinition_ annotation
-is a resource definition annotation that is used to define an
-administered object and have it registered in JNDI. Since repeated
-annotations are not allowed, the _AdministeredObjectDefinitions_
+is an optional resource definition annotation that is used to define an
+administered object and have it registered in JNDI. The _AdministeredObjectDefinitions_
 annotation acts as a container for multiple administered object
-definitions.
+definitions. Use of the _AdministeredObjectDefinition_ annotation is optional 
+as the _AdministeredObjectDefinition_ annotation is marked as _Repeatable_
 
 
 
