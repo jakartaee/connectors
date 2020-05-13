@@ -12334,31 +12334,31 @@ image:conn-110.png[image]
 
 image:conn-100.png[image]
 
-Java Message Service (JMS) Use Case
+Jakarta Messaging Use Case
 
-For illustration purposes, a JMS use case
-involving a JMS resource adapter is discussed. The intent of this use
+For illustration purposes, a Jakarta Messaging use case
+involving a Jakarta Messaging resource adapter is discussed. The intent of this use
 case is to show the following:
 
-The JMS resource adapter uses the generic
+The Jakarta Messaging resource adapter uses the generic
 message inflow contract and asynchronously delivers messages to
 message-driven beans through the onMessage method on the
-javax.jms.MessageListener interface.
+jakarta.jms.MessageListener interface.
 
-The JMS resource adapter is used by an EJB
+The Jakarta Messaging resource adapter is used by an Jakarta Enterprise Beans
 application to send and synchronously receive messages through a
-javax.jms.Connection object.
+jakarta.jms.Connection object.
 
 This use case is shown for illustration
 purposes only and an application server may or may not achieve all
 message deliveries to message-driven beans using the generic message
 inflow contract.
 
-This illustrates how a JMS provider is
-plugged into a Java EE application server using the standard connector
+This illustrates how a Jakarta Messaging provider is
+plugged into a Jakarta EE application server using the standard connector
 contracts.
 
-=== Sample JMS Resource Adapter Deployment Descriptor
+=== Sample Jakarta Messaging Resource Adapter Deployment Descriptor
 
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -12501,7 +12501,7 @@ configuration properties -->
 
  <connectionfactory-interface>
 
- javax.jms.QueueConnectionFactory
+ jakarta.jms.QueueConnectionFactory
 
  </connectionfactory-interface>
 
@@ -12516,7 +12516,7 @@ com.wombat.connector.jms.QueueConnectionFactoryImpl
 
  <connection-interface>
 
- java.jms.QueueConnection
+ jakarta.jms.QueueConnection
 
  </connection-interface>
 
@@ -12577,7 +12577,7 @@ configuration properties -->
 
  <connectionfactory-interface>
 
- javax.jms.TopicConnectionFactory
+ jakarta.jms.TopicConnectionFactory
 
  </connectionfactory-interface>
 
@@ -12592,7 +12592,7 @@ com.wombat.connector.jms.TopicConnectionFactoryImpl
 
  <connection-interface>
 
- java.jms.TopicConnection
+ jakarta.jms.TopicConnection
 
  </connection-interface>
 
@@ -12633,7 +12633,7 @@ not override any
 
  <connectionfactory-interface>
 
- javax.jms.ConnectionFactory
+ jakarta.jms.ConnectionFactory
 
  </connectionfactory-interface>
 
@@ -12648,7 +12648,7 @@ com.wombat.connector.jms.ConnectionFactoryImpl
 
  <connection-interface>
 
- java.jms.Connection
+ jakarta.jms.Connection
 
  </connection-interface>
 
@@ -12682,7 +12682,7 @@ com.wombat.connector.jms.ConnectionFactoryImpl
 
  <messagelistener-type>
 
- javax.jms.MessageListener
+ jakarta.jms.MessageListener
 
  </messagelistener-type>
 
@@ -12742,7 +12742,7 @@ ActivationSpec -->
  <adminobject>
 
 
-<adminobject-interface>javax.jms.Queue</adminobject-interface>
+<adminobject-interface>jakarta.jms.Queue</adminobject-interface>
 
  <adminobject-class>
 
@@ -12755,7 +12755,7 @@ ActivationSpec -->
  <adminobject>
 
 
-<adminobject-interface>javax.jms.Topic</adminobject-interface>
+<adminobject-interface>jakarta.jms.Topic</adminobject-interface>
 
  <adminobject-class>
 
@@ -12769,7 +12769,7 @@ ActivationSpec -->
 
  <adminobject-interface>
 
- javax.jms.Destination
+ jakarta.jms.Destination
 
  </adminobject-interface>
 
@@ -12787,7 +12787,7 @@ ActivationSpec -->
 
 </connector>
 
-=== A Sample JMS ActivationSpec Implementation
+=== A Sample Jakarta Messaging ActivationSpec Implementation
 
 [width="100%",cols="100%",]
 |===
@@ -12798,10 +12798,10 @@ package com.wombat.connector.jms;
 
 import java.io.Serializable;
 
-import javax.resource.spi.ActivationSpec;
+import jakarta.resource.spi.ActivationSpec;
 
 import
-javax.resource.spi.InvalidPropertyException;
+jakarta.resource.spi.InvalidPropertyException;
 
 
 
@@ -13052,7 +13052,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 <res-ref-name>jms/MyQueueConnectionFactory</res-ref-name>
 
 
-<res-type>javax.jms.QueueConnectionFactory</res-type>
+<res-type>jakarta.jms.QueueConnectionFactory</res-type>
 
  <res-auth>Application</res-auth>
 
@@ -13090,34 +13090,34 @@ which is used by the message-driven bean deployer to setup the
 subscription.
 
 The message-driven bean deployer selects an
-appropriate JMS resource adapter based on the quality-of-service and
+appropriate Jakarta Messaging resource adapter based on the quality-of-service and
 creates an ActivationSpec JavaBean instance and configures the required
-property "Destination" as well as other properties related to the JMS
+property "Destination" as well as other properties related to the Jakarta Messaging
 messaging style and the specific resource adapter.
 
 The endpoint deployer may need to interact
-with the JMS provider to setup an appropriate "Destination" and other
+with the Jakarta Messaging provider to setup an appropriate "Destination" and other
 steps necessary to complete message-driven bean deployment.
 
 The deployer deploys the message-driven bean
 application. During deployment, the deployer provides the configured
 ActivationSpec JavaBean to the application server, along with
-information about the chosen JMS resource adapter.
+information about the chosen Jakarta Messaging resource adapter.
 
 The application server calls the
-endpointActivation method on the JMS resource adapter and passes the
+endpointActivation method on the Jakarta Messaging resource adapter and passes the
 configured ActivationSpec JavaBean instance and a MessageEndpointFactory
-instance. During the endpointActivation method call the JMS adapter
+instance. During the endpointActivation method call the Jakarta Messaging adapter
 interacts with its provider to setup message delivery to the
 message-driven bean. This completes the endpoint activation, and the
 message-driven bean is ready to receive messages.
 
 === Message Delivery
 
-When messages start arriving, the JMS adapter
+When messages start arriving, the Jakarta Messaging adapter
 uses the MessageEndpointFactory instance to get an endpoint instance and
 delivers messages to the endpoint through the
-javax.jms.MessageListener.onMessage method.
+jakarta.jms.MessageListener.onMessage method.
 
 The application server interposes the message
 delivery and injects transactions based on the message-driven bean
@@ -13125,11 +13125,11 @@ preferences, container-managed transaction or bean-managed transaction,
 before delivering the message to a message-driven bean instance.
 
 When a delivery is transacted, the
-application server notifies the JMS resource adapter using the
-XAResource object. The JMS resource adapter may use the notifications to
+application server notifies the Jakarta Messaging resource adapter using the
+XAResource object. The Jakarta Messaging resource adapter may use the notifications to
 send acknowledgements to its message provider.
 
-The JMS resource adapter, depending on the
+The Jakarta Messaging resource adapter, depending on the
 traffic, may attempt concurrent delivery of messages by using multiple
 endpoint instances obtained through MessageEndpointFactory. The
 application server appropriately handles concurrent message deliveries
@@ -13138,42 +13138,42 @@ and dispatches messages to separate message-driven bean instances.
 === Message-Driven Bean Undeployment
 
 When the message-driven bean is undeployed,
-the application server calls the endpointDeactivation method on the JMS
-resource adapter to deactivate the message endpoint.
+the application server calls the endpointDeactivation method on the
+Jakarta Messaging resource adapter to deactivate the message endpoint.
 
-The JMS adapter in turn notifies its message
+The Jakarta Messaging adapter in turn notifies its message
 provider.
 
-=== EJB Using JMS API to Send and Synchronously Receive Messages Via a JMS Resource Adapter
+=== Jakarta Enterprise Beans Using Jakarta Messaging API to Send and Synchronously Receive Messages Via a Jakarta Messaging Resource Adapter
 
-The JMS resource adapter provides
-javax.jms.Connection objects which expose the JMS API to the EJB
-application. The EJB directly uses the JMS API to send and synchronously
-receive messages. The javax.jms.Connection objects are obtained from a
-ConnectionFactory supplied by the JMS resource adapter.
+The Jakarta Messaging resource adapter provides
+jakarta.jms.Connection objects which expose the Jakarta Messaging API to the Jakarta Enterprise Beans
+application. The Jakarta Enterprise Beans directly uses the Jakarta Messaging API to send and synchronously
+receive messages. The jakarta.jms.Connection objects are obtained from a
+ConnectionFactory supplied by the Jakarta Messaging resource adapter.
 
-Based on the EJB deployment descriptor
+Based on the Jakarta Enterprise Beans deployment descriptor
 information (resource-ref’s and resource-env-ref’s) or resource
 reference injection annotations (Resource annotation defined in
-link:conn.html#a9757[See Common annotations for the Java
-Platform Specification, version 1.2]), the EJB deployer configures the
+link:conn.html#a9757[See Jakarta™ Annotations Specification,
+ Version 2.0]), the Jakarta Enterprise Beans deployer configures the
 appropriate ConnectionFactory objects (resource-ref’s) in the component
 name space (java:comp/env). The application deployer also configures the
 necessary Queue or Topic administered objects (resource-env-ref’s) in
-the component name space. The JMS resource adapter provides the
+the component name space. The Jakarta Messaging resource adapter provides the
 implementation of the various ConnectionFactory and administered
 objects.
 
 At runtime, the component does a JNDI lookup
 of a ConnectionFactory object from its component name space
-(java:comp/env), and uses it to create a javax.jms.Connection object
+(java:comp/env), and uses it to create a jakarta.jms.Connection object
 which is used for sending and synchronously receiving messages.
 Similarly, the component uses the JNDI lookup mechanism to obtain the
 configured Queue or Topic administered objects.
 
-=== Using JMS API to Send Messages
+=== Using Jakarta Messaging API to Send Messages
 
-=== Sending Messages Using the JMS API
+=== Sending Messages Using the Jakarta Messaging API
 
 // get JNDI handle
 
@@ -13234,9 +13234,9 @@ message.setText(msgData);
 
 sender.send(message);
 
-=== Java EE Component Using JMS API to Synchronously Receive Messages
+=== Jakarta EE Component Using Jakarta Messaging API to Synchronously Receive Messages
 
-=== Synchronously Receiving Messages in a Java EE Component
+=== Synchronously Receiving Messages in a Jakarta EE Component
 
 // get JNDI handle
 
@@ -13299,10 +13299,10 @@ receiver.receive(message);
 
 image:conn-100.png[image]
 
-A Non-JMS Use Case
+A Non-Jakarta Messaging Use Case
 
 This illustration is intended to show that it
-is possible to plug a wide range of message providers into a Java EE
+is possible to plug a wide range of message providers into a Jakarta EE
 application server by way of the standard connector contracts, such that
 it is possible for an application to either asynchronously receive
 messages through the message inflow contract or to use a connection
@@ -13420,7 +13420,7 @@ configuration properties -->
 
  <connectionfactory-interface>
 
- javax.resource.cci.ConnectionFactory
+ jakarta.resource.cci.ConnectionFactory
 
  </connectionfactory-interface>
 
@@ -13434,7 +13434,7 @@ configuration properties -->
 
  <connection-interface>
 
- javax.resource.cci.Connection
+ jakarta.resource.cci.Connection
 
  </connection-interface>
 
