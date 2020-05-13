@@ -18753,7 +18753,7 @@ Java EE Platform Specification.
  @Target(\{ElementType.TYPE})
 
  @Retention(RetentionPolicy.RUNTIME)
-
+ @Repeatable(AdministeredObjectDefinitions.class)
  public @interface
 AdministeredObjectDefinition \{
 
@@ -18855,7 +18855,7 @@ is an optional resource definition annotation that is used to define an
 administered object and have it registered in JNDI. The _AdministeredObjectDefinitions_
 annotation acts as a container for multiple administered object
 definitions. Use of the _AdministeredObjectDefinition_ annotation is optional 
-as the _AdministeredObjectDefinition_ annotation is marked as _Repeatable_
+as the _AdministeredObjectDefinition_ annotation is marked as Repeatable_
 
 
 
