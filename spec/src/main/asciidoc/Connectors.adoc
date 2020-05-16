@@ -13639,7 +13639,7 @@ message-driven bean dispatch has completed.
 
 image:conn-111.png[image]
 
-[[a3530]]EJB Invocation
+[[a3530]]Jakarta Enterprise Beans Invocation
 
 image:conn-112.png[image]
 
@@ -13658,7 +13658,7 @@ entity beans for several reasons:
 To dispatch calls from an EIS to a bean in
 order to execute business logic
 
-To use EJB container-managed persistence (CMP)
+To use Jakarta Enterprise Beans container-managed persistence (CMP)
 mechanism for persistence
 
 In order to dispatch calls to a session or
@@ -13677,18 +13677,18 @@ parameters received from the EIS and call the target bean method.
 
 image:conn-113.png[image]
 
-EJB Invocation Model
+Jakarta Enterprise Beans Invocation Model
 
-EJB Invocation Model
+Jakarta Enterprise Beans Invocation Model
 
 image:conn-114.png[image]
 
 For session or entity bean invocations, the
 resource adapter’s bean dispatch logic can use the bean client view
-model by way of a message-driven bean. The EJB specification (see
-link:conn.html#a9723[See Enterprise JavaBeans (EJB)
-Specification, version 3.2]) defines the EJB client view, and describes
-how the client view is used to access session or entity beans. The EJB
+model by way of a message-driven bean. The Jakarta Enterprise Beans specification (see
+link:conn.html#a9723[See Jakarta™ Enterprise Beans
+Specification, Version 4.0]) defines the Jakarta Enterprise Beans client view, and describes
+how the client view is used to access session or entity beans. The Jakarta Enterprise Beans
 client view is available to a message-driven bean.
 
 The resource adapter could structure its code
@@ -13700,7 +13700,7 @@ chosen bean based on the request information received from the EIS.
 The resource adapter can use the message
 inflow contract to call a message-driven bean, and use the
 message-driven bean to dispatch calls to session and entity beans using
-the EJB client view model. The EJB specification allows a
+the Jakarta Enterprise Beans client view model. The Jakarta Enterprise Beans specification allows a
 request-response style message-driven bean call which could be used for
 synchronous RPC-style calls. The message-driven bean could be packaged
 either with the resource adapter or separately.
@@ -13750,7 +13750,7 @@ package com.wombat.ra;
 
 
 
-import javax.ejb.MessageDrivenBean;
+import jakarta.ejb.MessageDrivenBean;
 
 import javax.naming.InitialContext;
 
@@ -13805,7 +13805,7 @@ the request
 
  if (type == CONV_START) \{
 
- // create entity EJB for holding the specific
+ // create entity Jakarta Enterprise Beans for holding the specific
 
  // conversation state
 
@@ -13818,13 +13818,13 @@ chome.findByPrimaryKey(convId);
 
 
 
- // unmarshall EJB method parameters
+ // unmarshall Jakarta Enterprise Beans method parameters
 
  ...;
 
 
 
- // invoke EJB and return response
+ // invoke Jakarta Enterprise Beans and return response
 
  Object resp = cbean.myBusinessMethod(params);
 
@@ -14006,15 +14006,15 @@ Transaction Inflow Model
 [width="100%",cols="100%",]
 |===
 a|
-package javax.resource.spi;
+package jakarta.resource.spi;
 
 
 
 import javax.transaction.xa.Xid;
 
-import java.transaction.xa.XAException;
+import javax.transaction.xa.XAException;
 
-import javax.resource.spi.work.WorkManager;
+import jakarta.resource.spi.work.WorkManager;
 
 
 
@@ -14318,7 +14318,7 @@ are secure and unauthorized access to application components deployed in
 an application server be prevented. The security architecture for
 integration of EISs into the application server is detailed in
 link:conn.html#a1563[See Security Architecture] and the security
-contract in related to connection establishment with the EIS is
+contract related to connection establishment with the EIS is
 discussed in this chapter
 
 Resource adapters, typically employ transport
@@ -14338,9 +14338,8 @@ Security scenarios based on the connector
 architecture (Refer to Appendix D link:conn.html#a9530[See
 Security Scenarios])
 
-link:conn.html#a9751[See Java
-Authentication Service Provider Interface for Containers Specification,
-version 1.4] (JSR-196)
+link:conn.html#a9751[See Jakarta™ Authentication
+Specification, Version 2.0] (JSR-196)
 
 
 
@@ -14361,7 +14360,7 @@ Goals
 The Security Inflow contract is designed to
 meet the following goals:
 
-Enable an end-to-end security model for Java
+Enable an end-to-end security model for Jakarta
 EE applications, to support integration with EIS based on the Connector
 architecture
 
@@ -14391,8 +14390,8 @@ into corresponding identities in the receiving container or context
 
 Ensure backward compatibility with the
 existing "Security Management contract", defined in Chapter-17 of
-link:conn.html#a9723[See Enterprise JavaBeans (EJB)
-Specification, version 3.2] Core Contracts and Requirements
+link:conn.html#a9723[See Jakarta™ Enterprise Beans Specification,
+ Version 4.0] Core Contracts and Requirements
 specification, for security context inflow to _MessageEndpoint_ s
 realized as message-driven beans
 
@@ -14453,7 +14452,7 @@ _Work_ to a _WorkManager_ for execution. All activities that happen as
 part of the _Work_ instance, including message deliveries to
 _MessageEndpoint_ s then occurs in the context of an established
 identity. This avoids the drawbacks listed above and extends the
-end-to-end security model for Java EE applications to include the _Work_
+end-to-end security model for Jakarta EE applications to include the _Work_
 execution and Message Inflow aspects.
 
 A resource adapter submits a _Work_ instance,
@@ -14489,14 +14488,14 @@ image:conn-127.png[image]
 
 
 
- package javax.resource.spi.work;
+ package jakarta.resource.spi.work;
 
 
 
- import javax.security.auth.Subject;
+ import jakarta.security.auth.Subject;
 
  import
-javax.security.auth.callback.CallbackHandler;
+jakarta.security.auth.callback.CallbackHandler;
 
 
 
@@ -14613,8 +14612,7 @@ server provider while calling the _setupSecurityContext_ method:
 The _handler_ argument must not be null, and
 the _CallbackHandler_ implementation passed as the argument _handler_ to
 _setupSecurityContext_ must support the following _Callback_ s defined
-in link:conn.html#a9751[See Java Authentication Service Provider
-Interface for Containers Specification, version 1.4]:
+in link:conn.html#a9751[See Jakarta™ Authentication Specification, Version 2.0]:
 
  _CallerPrincipalCallback_
 
@@ -14683,7 +14681,7 @@ is set up to be executed with the established security identity. Any
 subsequent _MessageEndpoint_ deliveries in that _Work_ instance (to
 message-driven beans for instance) should have the security context
 established appropriately. When message-driven beans are the
-_MessageEndpoint_ s, _MessageDrivenContext.getCallerPrinicipal()_ must
+_MessageEndpoint_ s, _MessageDrivenContext.getCallerPrincipal()_ must
 return the principal corresponding to the established security identity,
 and _MessageDrivenContext.isCallerInRole()_ must return the result of
 testing the established security identity for role membership.
@@ -14715,12 +14713,10 @@ image:conn-129.png[image]
 As part of step 3 described in the section
 above, the following _Callback_ s may be employed by a resource adapter.
 The descriptions of the _Callback_ s below have been taken from the
-link:conn.html#a9751[See Java Authentication Service Provider
-Interface for Containers Specification, version 1.4] specification. For
-detailed information, refer to the link:conn.html#a9751[See Java
-Authentication Service Provider Interface for Containers Specification,
-version 1.4] and the Java API documentation of the _Callback_ s defined
-in the _javax.security.auth.message.callback_ package of that
+link:conn.html#a9751[See Jakarta™ Authentication Specification, Version 2.0]. For
+detailed information, refer to the link:conn.html#a9751[See Jakarta™ Authentication
+Specification, Version 2.0] and the Java API documentation of the _Callback_ s defined
+in the _jakarta.security.auth.message.callback_ package of that
 specification:
 
 A resource adapter may use the
