@@ -21,7 +21,8 @@ import java.lang.annotation.Retention;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 
-import static jakarta.resource.spi.TransactionSupport.TransactionSupportLevel;;
+import static jakarta.resource.spi.TransactionSupport.TransactionSupportLevel;
+import java.lang.annotation.Repeatable;
 
 /**
  *  Annotation used to define a Connector Connection Factory resource to be 
@@ -36,6 +37,7 @@ import static jakarta.resource.spi.TransactionSupport.TransactionSupportLevel;;
  */
 @Retention(RUNTIME)
 @Target({TYPE})
+@Repeatable(ConnectionFactoryDefinitions.class)
 public @interface ConnectionFactoryDefinition {
 
     /**
