@@ -877,7 +877,7 @@ from an m x n problem to an m + n problem.
 System Level Pluggability
 Between Application Servers and EISs
 
-image:conn-15.png[image]
+image:conn-15.jpg[image]
 
 === Common Client Interface
 
@@ -996,7 +996,7 @@ connectivity with multiple EISs.
 
 [[a265]]Overview of Jakarta Connectors architecture
 
-image:conn-18.png[image]
+image:conn-18.jpg[image]
 
 === 
 
@@ -1518,7 +1518,7 @@ pieces that comprise this scenario:
 
 === Illustration of a Scenario Based on the Connector Architecture
 
-image:conn-23.png[image]
+image:conn-23.jpg[image]
 
 ERP Software Inc. is an enterprise system
 vendor that provides an enterprise resource planning (ERP) system. ERP
@@ -1625,7 +1625,7 @@ its business applications (deployed on the application server).
 
 === Connector Architecture Usage in Business Integration Scenario
 
-image:conn-24.png[image]
+image:conn-24.jpg[image]
 
 
 
@@ -1688,11 +1688,11 @@ Lifecycle Management Model
 
 Lifecycle Management Contract (Interfaces)
 
-image:conn-28.png[image]
+image:conn-28.jpg[image]
 
 Lifecycle Management (Object Diagram)
 
-image:conn-29.png[image]
+image:conn-29.jpg[image]
 
 
 
@@ -2085,7 +2085,7 @@ adapter instance.
 
 Resource Adapter Lifecycle (State Diagram)
 
-image:conn-31.png[image]
+image:conn-31.jpg[image]
 
 === Resource Adapter Implementation Guidelines
 
@@ -2476,7 +2476,7 @@ monitor
 
 Lifecycle Management Model (Sequence Diagram)
 
-image:conn-32.png[image]
+image:conn-32.jpg[image]
 
 === 
 
@@ -2642,7 +2642,7 @@ resource manager).
 Architecture Diagram: Managed Application
 scenario[[a615]]
 
-image:conn-36.png[image]
+image:conn-36.jpg[image]
 
 === 
 
@@ -2838,7 +2838,7 @@ implementation:
 Class Diagram: Connection
 Management Architecture
 
-image:conn-38.png[image]
+image:conn-38.jpg[image]
 
 [[a663]]
 === ConnectionFactory and Connection <<a10024, [3]>>
@@ -3199,7 +3199,7 @@ the requirements of this specification.
 ConnectionManager and Application Server
 Specific Services
 
-image:conn-39.png[image]
+image:conn-39.jpg[image]
 
 [[a754]]
 === ManagedConnectionFactory
@@ -3986,7 +3986,7 @@ and _LocalTransaction_ ) and invocations.
 [[a942]]Object Diagram: Connection
 Management Architecture
 
-image:conn-40.png[image]
+image:conn-40.jpg[image]
 
 === 
 
@@ -4124,7 +4124,7 @@ connection request.
 OID: Connection Pool Management with New
 Connection Creation
 
-image:conn-41.png[image]
+image:conn-41.jpg[image]
 
 === Scenario: Connection Matching
 
@@ -4186,7 +4186,7 @@ connection request.
 [[a976]]OID: Connection Pool
 Management with Connection Matching
 
-image:conn-42.png[image]
+image:conn-42.jpg[image]
 
 [[a977]]
 === Scenario: Connection Event Notifications and Connection Close
@@ -4274,7 +4274,7 @@ notification that signals a fatal error on the physical connection.
 [[a992]]OID: Connection Event
 Notification
 
-image:conn-43.png[image]
+image:conn-43.jpg[image]
 
 === 
 
@@ -4314,7 +4314,7 @@ connection event mechanism to drive its internal interactions.
 Architecture Diagram:
 Non-Managed Application Scenario
 
-image:conn-44.png[image]
+image:conn-44.jpg[image]
 
 === Scenario: Programmatic Access to ConnectionFactory
 
@@ -4459,7 +4459,7 @@ request.
 [[a1043]]OID: Connection Creation
 in a Non-Managed Application Scenario
 
-image:conn-45.png[image]
+image:conn-45.jpg[image]
 
 === 
 
@@ -4622,7 +4622,7 @@ managers.
 Transaction Management
 Contract
 
-image:conn-49.png[image]
+image:conn-49.jpg[image]
 
 A resource manager can support two types of
 transactions:
@@ -4680,7 +4680,7 @@ Enterprise Bean Y to access an ERP system.
 Scenario: Transactions
 Across Multiple Resource Managers
 
-image:conn-50.png[image]
+image:conn-50.jpg[image]
 
 The application server uses a transaction
 manager to support a transaction management infrastructure that enables
@@ -4758,7 +4758,7 @@ of an XA transaction. This scenario is shown in the following figure.
 Scenario: Local Transaction
 on a Single Resource Manager
 
-image:conn-51.png[image]
+image:conn-51.jpg[image]
 
 === 
 
@@ -4779,7 +4779,7 @@ management contract.
 Architecture Diagram:
 Transaction Management
 
-image:conn-52.png[image]
+image:conn-52.jpg[image]
 
 === Interface: ManagedConnection
 
@@ -4827,7 +4827,7 @@ The following figure illustrates this concept:
 ManagedConnection Interface
 for Transaction Management
 
-image:conn-53.png[image]
+image:conn-53.jpg[image]
 
 The transaction manager uses the _XAResource_
 interface to associate and dissociate a transaction with the underlying
@@ -5011,7 +5011,7 @@ link:conn.html#a588[See Connection Management].
 Object Diagram:
 Transaction Management
 
-image:conn-54.png[image]
+image:conn-54.jpg[image]
 
 
 
@@ -5396,7 +5396,7 @@ connection request.
 [[a1259]]OID: Transactional Setup
 For Newly Created ManagedConnection Instances
 
-image:conn-55.png[image]
+image:conn-55.jpg[image]
 
 === Scenario: Connection Close and Jakarta Transaction Transactional Cleanup
 
@@ -5457,7 +5457,7 @@ requests from either the same or another component instance.
 OID: Connection Close and
 Transactional Cleanup
 
-image:conn-56.png[image]
+image:conn-56.jpg[image]
 
 === OID: Transaction Completion
 
@@ -5488,7 +5488,7 @@ transaction manager calls _XAResource.rollback_ .
 OID: Transaction
 Completion
 
-image:conn-57.png[image]
+image:conn-57.jpg[image]
 
 === 
 
@@ -6038,7 +6038,7 @@ EIS resource manager as part of their business logic.
 Scenario to illustrate Local Transaction
 Management
 
-image:conn-58.png[image]
+image:conn-58.jpg[image]
 
 The following steps happen in this scenario:
 
@@ -6160,7 +6160,7 @@ to the pool for handling subsequent connection requests.
 
 Connection Sharing Across Component Instances
 
-image:conn-60.png[image]
+image:conn-60.jpg[image]
 
 === 
 
@@ -6195,7 +6195,7 @@ connection across a transaction that spans two components.
 Connection Sharing
 Scenario
 
-image:conn-61.png[image]
+image:conn-61.jpg[image]
 
 In this scenario, entity bean C obtains an
 application-level connection handle using the method _getConnection_ on
@@ -6215,7 +6215,7 @@ part of its state with the current _ManagedConnection_ instance.
 State Diagram of Application-Level Connection
 Handle
 
-image:conn-62.png[image]
+image:conn-62.jpg[image]
 
 === [[a1430]]Connection Association
 
@@ -6645,19 +6645,19 @@ connection handle in its connection pool.
 [[a1513]]Connection Acquisition
 Processing
 
-image:conn-63.png[image]
+image:conn-63.jpg[image]
 
 
 
 [[a1515]]Connection Re-association
 Processing
 
-image:conn-64.png[image]
+image:conn-64.jpg[image]
 
 [[a1516]]State Diagram of a
 Dissociatable Application-level Connection Handle
 
-image:conn-65.png[image]
+image:conn-65.jpg[image]
 
 === API Additions
 
@@ -7832,7 +7832,7 @@ jakarta.resource.spi.ConnectionManager
 
 Security Contract
 
-image:conn-73.png[image]
+image:conn-73.jpg[image]
 
 Depending on whether the application server or
 application component is configured to be responsible for managing EIS
@@ -7938,7 +7938,7 @@ credential to the private credential set.
 Security Contract: Subject
 Interface and its Containment Hierarchy
 
-image:conn-74.png[image]
+image:conn-74.jpg[image]
 
 The preceding figure shows the relationship
 between the _Subject_ , _Principal_ , _PasswordCredential_ and
@@ -8414,11 +8414,11 @@ a specific resource adapter.
 
 Work Management Contract (Object Diagram)
 
-image:conn-78.png[image]
+image:conn-78.jpg[image]
 
 Work Management Contract (Interfaces)
 
-image:conn-79.png[image]
+image:conn-79.jpg[image]
 
 ===  _jakarta.resource.spi.work_
 
@@ -8904,7 +8904,7 @@ specified context.
 
 Work Processing Stages and their Outcomes
 
-image:conn-81.png[image]
+image:conn-81.jpg[image]
 
 === Work Accepted
 
@@ -9002,12 +9002,12 @@ duration.
 
 Blocking Durations of Various Work Submissions
 
-image:conn-82.png[image]
+image:conn-82.jpg[image]
 
 Work Submission - Blocking Behavior (Sequence
 Diagram)
 
-image:conn-83.png[image]
+image:conn-83.jpg[image]
 
 === [[a2111]]WorkListener Interface and WorkEvent Class
 
@@ -9195,7 +9195,7 @@ without forcing resource adapter implementations to change.
 Work Submission - Callback Mechanism
 (Sequence Diagram)
 
-image:conn-84.png[image]
+image:conn-84.jpg[image]
 
 === Resource Adapter Thread Usage Recommendations
 
@@ -9518,7 +9518,7 @@ submission and processing (Sequence Diagram)
 
 
 
-image:conn-85.png[image]
+image:conn-85.jpg[image]
 
 === 
 
@@ -9709,11 +9709,11 @@ the execution context for that _Work_ instance.
 
 Generic Work Context (Object Diagram)
 
-image:conn-89.png[image]
+image:conn-89.jpg[image]
 
 Generic Work Context (Interfaces)
 
-image:conn-90.png[image]
+image:conn-90.jpg[image]
 
 
 
@@ -9945,7 +9945,7 @@ information on nested _Work_ submission related requirements.
 WorkContext establishment during Work
 submission(Sequence Diagram)
 
-image:conn-91.png[image]
+image:conn-91.jpg[image]
 
 === [[a2390]]Indicating Support for a WorkContext Type
 
@@ -10401,7 +10401,7 @@ _WorkContext_ setup related notifications.
 Generic Work Context Lifecycle listener
 callback (Sequence Diagram)
 
-image:conn-92.png[image]
+image:conn-92.jpg[image]
 
 === 
 
@@ -10568,7 +10568,7 @@ beans) and resides in a Jakarta Enterprise Beans container.
 
 Inbound Communication Model
 
-image:conn-96.png[image]
+image:conn-96.jpg[image]
 
 In order to enable inbound communication, a
 mechanism to invoke Jakarta Enterprise Beans (session, entity and message-driven beans) from
@@ -10600,7 +10600,7 @@ occur as part of the overall corporate workflow.
 Inbound Communication Model (an Illustrative
 Use Case)
 
-image:conn-97.png[image]
+image:conn-97.jpg[image]
 
 In order to integrate the various disparate
 software systems, and to allow them to communicate with each other,
@@ -10715,7 +10715,7 @@ servers, which is an m x n problem.
 
 Message Inflow Contract
 
-image:conn-101.png[image]
+image:conn-101.jpg[image]
 
 Thus, there is a need for a standard, generic
 contract between an application server and a message provider which
@@ -10754,11 +10754,11 @@ image:conn-100.png[image]
 
 Message Inflow Contract (Object Diagram)
 
-image:conn-102.png[image]
+image:conn-102.jpg[image]
 
 Message Inflow Contract (Interfaces)
 
-image:conn-103.png[image]
+image:conn-103.jpg[image]
 
 ===  _jakarta.resource.spi_
 
@@ -11029,7 +11029,7 @@ Endpoint Deployment
 Endpoint (Message-Driven Bean) Deployment
 (Actors)
 
-image:conn-104.png[image]
+image:conn-104.jpg[image]
 
 There are several actors involved in the
 deployment of a message endpoint:
@@ -11424,7 +11424,7 @@ delivery.
 Endpoint (Message-Driven Bean) Deployment
 Steps
 
-image:conn-105.png[image]
+image:conn-105.jpg[image]
 
 === Endpoint Deployment Steps
 
@@ -11578,7 +11578,7 @@ JavaBeans as equals.
 
 Endpoint Deployment (Sequence Diagram)
 
-image:conn-106.png[image]
+image:conn-106.jpg[image]
 
 === 
 
@@ -12314,21 +12314,21 @@ provider.
 [[a2995]]Transacted Message
 Delivery: Option A(Sequence Diagram)
 
-image:conn-107.png[image]
+image:conn-107.jpg[image]
 
 Transacted[[a2996]] Message
 Delivery: Option B (Sequence Diagram)
 
-image:conn-108.png[image]
+image:conn-108.jpg[image]
 
 Non-transacted Message Delivery (Sequence
 Diagram)
 
-image:conn-109.png[image]
+image:conn-109.jpg[image]
 
 Endpoint Undeployment (Sequence Diagram)
 
-image:conn-110.png[image]
+image:conn-110.jpg[image]
 
 === 
 
@@ -13681,7 +13681,7 @@ Jakarta Enterprise Beans Invocation Model
 
 Jakarta Enterprise Beans Invocation Model
 
-image:conn-114.png[image]
+image:conn-114.jpg[image]
 
 For session or entity bean invocations, the
 resource adapter’s bean dispatch logic can use the bean client view
@@ -13939,7 +13939,7 @@ originator, the EIS.
 
 Transaction Inflow Contract
 
-image:conn-118.png[image]
+image:conn-118.jpg[image]
 
 === 
 
@@ -13995,7 +13995,7 @@ transaction demarcation is used.
 
 Transaction Inflow Contract (Object Diagram)
 
-image:conn-119.png[image]
+image:conn-119.jpg[image]
 
 === 
 
@@ -14143,7 +14143,7 @@ method call in the case of one-phase commit.
 Transactional Calls and Transaction
 Completion Flow (Sequence Diagram)
 
-image:conn-120.png[image]
+image:conn-120.jpg[image]
 
 === Crash Recovery Processing
 
@@ -14180,14 +14180,14 @@ completes the in-doubt transactions.
 Crash Recovery Flows When Application Server
 Crashes (Sequence Diagram)
 
-image:conn-121.png[image]
+image:conn-121.jpg[image]
 
 
 
 Crash Recovery Flows When EIS Crashes
 (Sequence Diagram)
 
-image:conn-122.png[image]
+image:conn-122.jpg[image]
 
 === Requirements
 
@@ -14349,7 +14349,7 @@ Specification, Version 2.0] (JSR-196)
 
 Security Inflow Contract
 
-image:conn-126.png[image]
+image:conn-126.jpg[image]
 
 === 
 
@@ -14482,7 +14482,7 @@ instance are processed under the same security identity.
 
 Security Inflow Conmtext (Object Diagram)
 
-image:conn-127.png[image]
+image:conn-127.jpg[image]
 
 === SecurityContext
 
@@ -14594,7 +14594,7 @@ _Work_ instance contains an instance of _SecurityContext._
 Security Context Establishment During Work
 Submission(Sequence Diagram)
 
-image:conn-128.png[image]
+image:conn-128.jpg[image]
 
 === [[a3781]]Establishing the Security Context
 
@@ -14704,7 +14704,7 @@ instance.
 Establish the Security Context (Sequence
 Diagram)
 
-image:conn-129.png[image]
+image:conn-129.jpg[image]
 
 
 
@@ -14768,7 +14768,7 @@ server security policy domain.
 Case 1: Identity in Container’s Security
 Domain (Sequence Diagram)
 
-image:conn-130.png[image]
+image:conn-130.jpg[image]
 
 === [[a3815]]Case 2: Identity Translated Between Security Domains
 
@@ -14828,7 +14828,7 @@ server specific tools and techniques to enable this mapping.
 Case 2: Identity Translated Between Security
 Domains (Sequence Diagram)
 
-image:conn-131.png[image]
+image:conn-131.jpg[image]
 
 === [[a3827]]Establising a Principal as the Caller Identity
 
@@ -14895,7 +14895,7 @@ unauthenticated identity for that _Work_ instance.
 [[a3840]]Case A: Establishing a
 Single Principal as the Caller Identity (Seq. Diagram)
 
-image:conn-132.png[image]
+image:conn-132.jpg[image]
 
 === [[a3841]]Security Configuration Responsibilities
 
@@ -15212,7 +15212,7 @@ to other application components.
 
 Common Client Interface
 
-image:conn-136.png[image]
+image:conn-136.jpg[image]
 
 === 
 
@@ -15278,7 +15278,7 @@ databases.
 
 [[a3946]]Scenario: EAI Framework
 
-image:conn-137.png[image]
+image:conn-137.jpg[image]
 
 === Metadata Repository and API
 
@@ -15319,7 +15319,7 @@ Java classes for EIS access.
 [[a3954]]Scenario: Enterprise
 Application Development Tool
 
-image:conn-139.png[image]
+image:conn-139.jpg[image]
 
 === 
 
@@ -15424,7 +15424,7 @@ this case in more detail.
 [[a3988]]Class Diagram: Common
 Client Interface
 
-image:conn-140.png[image]
+image:conn-140.jpg[image]
 
 === 
 
@@ -16298,7 +16298,7 @@ version of the connector architecture.
 Record at Development-time
 and Runtime
 
-image:conn-141.png[image]
+image:conn-141.jpg[image]
 
 The meta information used in a _Record_
 representation and type mapping may be available in a metadata
@@ -16412,7 +16412,7 @@ in an _Interaction_ .
 
 Component-view Contract
 
-image:conn-142.png[image]
+image:conn-142.jpg[image]
 
 The _Record_ interface may be extended to
 form one of the following representations:
@@ -16659,7 +16659,7 @@ figure.
 
 Streamable Interface
 
-image:conn-143.png[image]
+image:conn-143.jpg[image]
 
 The _Streamable_ interface provides a
 resource adapter’s view of the data set in a _Record_ instance by a
@@ -16731,7 +16731,7 @@ public interface javax.resource.cci.ResultSet
 
 ResultSet Interface
 
-image:conn-144.png[image]
+image:conn-144.jpg[image]
 
 The following section specifies the
 requirements for a CCI _ResultSet_ implementation.
@@ -19199,7 +19199,7 @@ descriptor along with a resource adapter module.
 Packaging and Deployment Lifecycle of a
 Resource adapter
 
-image:conn-154.png[image]
+image:conn-154.jpg[image]
 
 A resource adapter module corresponds to a
 Java EE module in terms of the Java EE composition hierarchy. Refer to
@@ -19227,7 +19227,7 @@ model of a resource adapter module with other Java EE modules.
 Deployment of a Resource
 Adapter Module
 
-image:conn-155.png[image]
+image:conn-155.jpg[image]
 
 The stand-alone deployment of a resource
 adapter module into an application server is typically done to support
@@ -20422,7 +20422,7 @@ the _ConnectionFactory_ instance as a result of the JNDI lookup.
 [[a5426]]OID:Lookup of a
 ConnectionFactory Instance from JNDI
 
-image:conn-157.png[image]
+image:conn-157.jpg[image]
 
 === [[a5427]]Requirements
 
@@ -30181,7 +30181,7 @@ coordination protocol from the transaction manager.
 
 === Synchronization Contract between Caching Manager and Application Server
 
-image:conn-175.png[image]
+image:conn-175.jpg[image]
 
 The above diagram shows a caching manager
 layered above a resource adapter. The contract between caching manager
@@ -30304,7 +30304,7 @@ illustrated in the following diagram.
 
 === Illustrative Architecture of an eStore Application
 
-image:conn-180.png[image]
+image:conn-180.jpg[image]
 
 === Scenario
 
@@ -30401,7 +30401,7 @@ for accessing the database system as illustrated in the figure below.
 
 === Resource Principal for eStore Application Scenario
 
-image:conn-182.png[image]
+image:conn-182.jpg[image]
 
 The deployment configuration ensures that all
 database access is always performed under the security context of the
@@ -30502,7 +30502,7 @@ by Kerberos to perform the initial authentication of end-users.
 
 === [[a9582]]Illustrative Architecture of an Employee Self-service Application
 
-image:conn-183.png[image]
+image:conn-183.jpg[image]
 
 === Deployment
 
@@ -30514,7 +30514,7 @@ and they perform access control based on this knowledge.
 
 === Principal Mapping
 
-image:conn-184.png[image]
+image:conn-184.jpg[image]
 
 In this scenario, both the initiating
 principal and the resource principal refer to the same principal. This
@@ -30593,7 +30593,7 @@ Y.
 
 === Illustrative Architecture of an Integrated Purchasing Application
 
-image:conn-185.png[image]
+image:conn-185.jpg[image]
 
 === Security Environment
 
@@ -30644,7 +30644,7 @@ following figure.
 
 === Principal Mapping
 
-image:conn-186.png[image]
+image:conn-186.jpg[image]
 
 This principal mapping ensures that all
 connections to the ERP system are established under the security context
@@ -30752,7 +30752,7 @@ requirements of heterogeneous EISs.
 
 === Security Architecture.
 
-image:conn-190.png[image]
+image:conn-190.jpg[image]
 
 === JAAS Modules
 
@@ -30963,7 +30963,7 @@ has the mapped resource principal with a valid _PasswordCredential_ .
 
 === Resource Adapter-Managed Authentication
 
-image:conn-192.png[image]
+image:conn-192.jpg[image]
 
 The application server invokes the method
 _ManagedConnectionFactory_ . _create-ManagedConnection_ passing in a
@@ -30990,7 +30990,7 @@ the following steps:
 
 === Kerberos Authentication with Principal Delegation
 
-image:conn-193.png[image]
+image:conn-193.jpg[image]
 
 The initiating principal has already
 authenticated itself to the application server using Kerberos. The
@@ -31072,7 +31072,7 @@ gives a brief overview of GSS-API.
 
 === GSS-API use by Resource Adapter
 
-image:conn-194.png[image]
+image:conn-194.jpg[image]
 
 A formal specification of the use of GSS-API
 by a resource adapter is beyond the scope of the connector architecture.
@@ -31087,7 +31087,7 @@ involves the following steps:
 
 === Kerberos Authentication After Principal Mapping
 
-image:conn-195.png[image]
+image:conn-195.jpg[image]
 
 The application server is configured to use
 the principal mapping module and Kerberos module. The two authentication
@@ -31125,7 +31125,7 @@ Kerberos and Principal Delegation]
 
 === Authentication Through EIS-Specific JAAS Module
 
-image:conn-196.png[image]
+image:conn-196.jpg[image]
 
 The scenario in the preceding figure involves
 the following steps:
