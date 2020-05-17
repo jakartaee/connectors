@@ -18851,10 +18851,10 @@ archive.
 === @AdministeredObjectDefinitions
 
 The _AdministeredObjectDefinition_ annotation
-is an optional resource definition annotation that is used to define an
+is a resource definition annotation that is used to define an
 administered object and have it registered in JNDI. The _AdministeredObjectDefinitions_
 annotation acts as a container for multiple administered object
-definitions. Use of the _AdministeredObjectDefinition_ annotation is optional 
+definitions. Use of the _AdministeredObjectDefinitions_ annotation is optional 
 as the _AdministeredObjectDefinition_ annotation is marked as Repeatable_
 
 
@@ -18863,7 +18863,7 @@ as the _AdministeredObjectDefinition_ annotation is marked as Repeatable_
 
 
 
- package javax.resource;
+ package jakarta.resource;
 
  import java.lang.annotation.Target;
 
