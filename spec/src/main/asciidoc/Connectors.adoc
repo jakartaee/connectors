@@ -14905,9 +14905,9 @@ responsiblities in the assignment of security roles, security domain and
 realm assignment.
 
 When _MessageEndpoint_ s are realized as
-message-driven beans, the EJB Core Contracts and Requirements of
-link:conn.html#a9723[See Enterprise JavaBeans (EJB)
-Specification, version 3.2], states the following responsibilities:
+message-driven beans, the Jakarta Enterprise Beans Core Contracts
+and Requirements of link:conn.html#a9723[See Jakarta™ Enterprise
+Beans Specification, Version 4.0], states the following responsibilities:
 
 Deployer: (section 17.4.2) : The Deployer
 assigns principals and/or groups of principals (such as individual users
@@ -14921,10 +14921,10 @@ operational environment. Typically, the deployment process consists of
 assigning to each security role one or more user groups (or individual
 users) defined in the operational environment.
 
-EJB container provider (Section 17.6.7):
+Jakarta Enterprise Beans container provider (Section 17.6.7):
 Principal Mapping If the application requires that its clients are
 deployed in a different security domain, or if multiple applications
-deployed across multiple security domains need to interoperate, the EJB
+deployed across multiple security domains need to interoperate, the Jakarta Enterprise Beans
 Container Provider is responsible for the mechanism and tools that allow
 mapping of principals. The tools are used by the System Administrator to
 configure the security for the application?s environment.
@@ -14935,7 +14935,7 @@ the target enterprise bean, the System Administrator is responsible for
 mapping the principals used by the client to the principals defined for
 the enterprise bean. The result of the mapping is available to the
 Deployer. The specification of principal mapping techniques is beyond
-the scope of the EJB architecture.
+the scope of the Jakarta Enterprise Beans architecture.
 
 === Requirements
 
@@ -15234,7 +15234,7 @@ Although it is simple, it has sufficient
 functionality and an extensible application programming model.
 
 It provides an API that both leverages and is
-consistent with various facilities defined by the Java SE and Java EE
+consistent with various facilities defined by the Java SE and Jakarta EE
 platforms.
 
 It is independent of a specific EIS. For
@@ -15295,7 +15295,7 @@ structures for the invocation parameters, existing on an EIS system.
 image:conn-138.png[image]
 
 The specification of a standard repository API and metadata format is
-outside the scope of the current version of the connector architecture.
+outside the scope of the current version of Jakarta Connectors.
 
 image:conn-138.png[image]
 
@@ -15332,41 +15332,41 @@ The CCI is divided in to the following parts:
 Connection-related interfaces that represent a
 connection factory and an application level connection:
 
- _javax.resource.cci.ConnectionFactory_
+ _jakarta.resource.cci.ConnectionFactory_
 
- _javax.resource.cci.Connection_
+ _jakarta.resource.cci.Connection_
 
- _javax.resource.cci.ConnectionSpec_
+ _jakarta.resource.cci.ConnectionSpec_
 
- _javax.resource.cci.LocalTransaction_
+ _jakarta.resource.cci.LocalTransaction_
 
 Interaction-related interfaces that enable a
 component to drive an interaction, specified through an
 _InteractionSpec_ , with an EIS instance:
 
- _javax.resource.cci.Interaction_
+ _jakarta.resource.cci.Interaction_
 
- _javax.resource.cci.InteractionSpec_
+ _jakarta.resource.cci.InteractionSpec_
 
 Service endpoint message listener interface:
 
- _javax.resource.cci.MessageListener_
+ _jakarta.resource.cci.MessageListener_
 
 Data representation-related interfaces that
 are used to represent data structures involved in an interaction with an
 EIS instance:
 
- _javax.resource.cci.Record_
+ _jakarta.resource.cci.Record_
 
- _javax.resource.cci.MappedRecord_
+ _jakarta.resource.cci.MappedRecord_
 
- _javax.resource.cci.IndexedRecord_
+ _jakarta.resource.cci.IndexedRecord_
 
- _javax.resource.cci.RecordFactory_
+ _jakarta.resource.cci.RecordFactory_
 
- _javax.resource.cci.Streamable_
+ _jakarta.resource.cci.Streamable_
 
- _javax.resource.cci.ResultSet_
+ _jakarta.resource.cci.ResultSet_
 
  _java.sql.ResultSetMetaData_
 
@@ -15374,17 +15374,17 @@ Metadata related-interfaces that provide basic
 meta information about a resource adapter implementation and an EIS
 connection:
 
- _javax.resource.cci.ConnectionMetaData_
+ _jakarta.resource.cci.ConnectionMetaData_
 
- _javax.resource.cci.ResourceAdapterMetaData_
+ _jakarta.resource.cci.ResourceAdapterMetaData_
 
- _javax.resource.cci.ResultSetInfo_
+ _jakarta.resource.cci.ResultSetInfo_
 
 Additional classes:
 
- _javax.resource.ResourceException_
+ _jakarta.resource.ResourceException_
 
- _javax.resource.cci.ResourceWarning_
+ _jakarta.resource.cci.ResourceWarning_
 
 See link:conn.html#a3988[See Class
 Diagram: Common Client Interface] for the class diagram for CCI.
@@ -15393,7 +15393,7 @@ Diagram: Common Client Interface] for the class diagram for CCI.
 
 A resource adapter provider provides an
 implementation of the CCI interfaces as part of its resource adapter
-implementation. The connector architecture does not mandate that a
+implementation. Jakarta Connectors does not mandate that a
 resource adapter support the CCI interfaces as its client API.
 
 
@@ -15406,14 +15406,14 @@ for relational databases.
 
 image:conn-138.png[image]
 
-The connector architecture also allows a
+Jakarta Connectors also allows a
 third-party vendor to provide an implementation of CCI interfaces above
 a resource adapter. For example, a base resource adapter supports the
 system contracts and provides an EIS specific client API. A third-party
 tools vendor may provide the CCI implementation above this base resource
 adapter.
 
-The connector architecture also allows a
+Jakarta Connectors also allows a
 resource adapter implementation to support all interfaces except the
 data representation-related interfaces. In this case, a third-party
 vendor provides both the development-time and runtime aspects of data
@@ -15437,7 +15437,7 @@ connection factory and application level connection.
 
 === ConnectionFactory
 
-The _javax.resource.cci.ConnectionFactory_
+The _jakarta.resource.cci.ConnectionFactory_
 provides an interface for getting a connection to an EIS instance. A
 component looks up a _ConnectionFactory_ instance from the JNDI
 namespace and then uses it to get a connection to the EIS instance.
@@ -15449,11 +15449,11 @@ _ConnectionFactory_ interface:
 |===
 a|
 public interface
-javax.resource.cci.ConnectionFactory
+jakarta.resource.cci.ConnectionFactory
 
  extends java.io.Serializable,
 
- javax.resource.Referenceable \{
+ jakarta.resource.Referenceable \{
 
 
 
@@ -15469,7 +15469,7 @@ javax.resource.cci.ConnectionFactory
 
  public Connection getConnection(
 
- javax.resource.cci.ConnectionSpec
+ jakarta.resource.cci.ConnectionSpec
 properties)
 
  throws ResourceException;
@@ -15493,7 +15493,7 @@ this case of the container-managed sign-on, the component does not pass
 any security information.
 
 A component may also use the _getConnection_
-variant with a _javax.resource.cci.ConnectionSpec_ parameter, if any
+variant with a _jakarta.resource.cci.ConnectionSpec_ parameter, if any
 resource adapter specific security information and connection parameters
 is required to be passed. In the component-managed sign-on case, an
 application component passes security information, such as username and
@@ -15519,7 +15519,7 @@ case.
 The _ConnectionFactory_ interface also
 provides a method to get a _RecordFactory_ instance. The
 _ConnectionFactory_ implementation class may throw a
-_javax.resource.NotSupportedException_ from the method
+_jakarta.resource.NotSupportedException_ from the method
 _getRecordFactory_ .
 
 === Requirements
@@ -15527,9 +15527,9 @@ _getRecordFactory_ .
 An implementation class for
 _ConnectionFactory_ must implement the _java.io.Serializable_ interface
 to support JNDI registration. A _ConnectionFactory_ implementation class
-is also required to implement _javax.resource.Referenceable_ . Note that
-the _javax.resource.Referenceable_ interface extends the
-_javax.naming.Referenceable_ interface. Refer to
+is also required to implement _jakarta.resource.Referenceable_ . Note that
+the _jakarta.resource.Referenceable_ interface extends the
+_jakarta.naming.Referenceable_ interface. Refer to
 link:conn.html#a5258[See JNDI Configuration and Lookup] for more
 details on JNDI based requirements for the _ConnectionFactory_
 implementation.
@@ -15540,7 +15540,7 @@ _ConnectionFactory_ must provide a default constructor.
 === ConnectionSpec
 
 The interface
-_javax.resource.cci.ConnectionSpec_ is used by an application component
+_jakarta.resource.cci.ConnectionSpec_ is used by an application component
 to pass connection request-specific properties to the _getConnection_
 method.
 
@@ -15556,7 +15556,7 @@ _ConnectionSpec_ interface.
 |===
 a|
 public interface
-javax.resource.cci.ConnectionSpec \{
+jakarta.resource.cci.ConnectionSpec \{
 
 }
 
@@ -15596,14 +15596,14 @@ separation between CCI interfaces and system contracts.
 _ConnectionRequestInfo_ has no explicit dependency on CCI. Note that a
 resource adapter may not implement CCI but it must implement system
 contracts. The specification of a standard repository API and metadata
-format is outside the scope of the current version of the connector
-architecture. The mapping between CCI’s _ConnectionSpec_ and
+format is outside the scope of the current version of Jakarta Connectors.
+The mapping between CCI’s _ConnectionSpec_ and
 _ConnectionRequestInfo_ is achieved in an implementation-specific manner
 by a resource adapter.
 
 === Connection
 
-A _javax.resource.cci.Connection_ represents
+A _jakarta.resource.cci.Connection_ represents
 an application level connection handle that is used by a component to
 access an EIS instance. The actual physical connection associated with a
 _Connection_ instance is represented by a _ManagedConnection_ .
@@ -15620,7 +15620,7 @@ _Connection_ interface:
 |===
 a|
 public interface
-javax.resource.cci.Connection \{
+jakarta.resource.cci.Connection \{
 
  public Interaction createInteraction()
 throws
@@ -15728,7 +15728,7 @@ demarcate resource manager local transactions.
 
 === Interaction
 
-The _javax.resource.cci.Interaction_ enables a
+The _jakarta.resource.cci.Interaction_ enables a
 component to execute EIS functions. An _Interaction_ instance supports
 the following interactions with an EIS instance:
 
@@ -15744,7 +15744,7 @@ output _Record_ as a return value.
 
 If an _Interaction_ implementation does not
 support a variant of the _execute_ method, the method must throw a
-_javax.resource.NotSupportedException_ .
+_jakarta.resource.NotSupportedException_ .
 
 Refer to link:conn.html#a4292[See
 Interaction and Record] for details on how input and output records are
@@ -15763,7 +15763,7 @@ _Interaction_ interface:
 |===
 a|
 public interface
-javax.resource.cci.Interaction \{
+jakarta.resource.cci.Interaction \{
 
 
 
@@ -15797,7 +15797,7 @@ ispec,
 
 === InteractionSpec
 
-A _javax.resource.cci.InteractionSpec_ holds
+A _jakarta.resource.cci.InteractionSpec_ holds
 properties for driving an _Interaction_ with an EIS instance. An
 _InteractionSpec_ uses an _Interaction_ to execute the specified
 function on an underlying EIS.
@@ -15812,7 +15812,7 @@ _InteractionSpec_ interface.
 |===
 a|
 public interface
-javax.resource.cci.InteractionSpec
+jakarta.resource.cci.InteractionSpec
 
  extends java.io.Serializable \{
 
