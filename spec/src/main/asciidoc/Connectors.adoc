@@ -15967,9 +15967,9 @@ entries in the component’s environment. The deployer binds a resource
 environment reference to an _InteractionSpec_ administered object in the
 operational environment.
 
-The EJB specification (see
-link:conn.html#a9723[See Enterprise JavaBeans (EJB)
-Specification, version 3.2]) specifies resource environment references
+The Jakarta Enterprise Beans specification (see
+link:conn.html#a9723[See Jakarta™ Enterprise Beans
+ Specification, Version 4.0]) specifies resource environment references
 in more detail.
 
 === Illustrative Scenario
@@ -15986,7 +15986,7 @@ instance using a logical name from the JNDI namespace.
 
 === LocalTransaction
 
-The _javax.resource.cci.LocalTransaction_
+The _jakarta.resource.cci.LocalTransaction_
 defines a transaction demarcation interface for resource manager local
 transactions. An application component uses the _LocalTransaction_
 interface to demarcate local transactions. Refer to
@@ -15995,7 +15995,7 @@ details on local transactions.
 
 Note that this interface is used for local
 transaction demarcation at the application level, while the
-_javax.resource.spi.LocalTransaction_ interface is defined as part of
+_jakarta.resource.spi.LocalTransaction_ interface is defined as part of
 the system contracts and is used by a container for local transaction
 management.
 
@@ -16006,7 +16006,7 @@ _LocalTransaction_ interface:
 |===
 a|
 public interface
-javax.resource.cci.LocalTransaction \{
+jakarta.resource.cci.LocalTransaction \{
 
  public void begin() throws
 ResourceException;
@@ -16033,8 +16033,8 @@ use the returned _LocalTransaction_ to demarcate a resource manager
 local transaction on the underlying EIS instance.
 
 A resource adapter is allowed to implement the
-_javax.resource.spi.LocalTransaction_ interface without implementing the
-application-level _javax.resource.cci.LocalTransaction_ interface. In
+_jakarta.resource.spi.LocalTransaction_ interface without implementing the
+application-level _jakarta.resource.cci.LocalTransaction_ interface. In
 this case, a container uses the system contract-level _LocalTransaction_
 interface for managing local transactions. Refer to
 link:conn.html#a1280[See Local Transaction Management Contract]
@@ -16052,7 +16052,7 @@ and an EIS connection.
 
 === ConnectionMetaData
 
-The _javax.resource.cci.ConnectionMetaData_
+The _jakarta.resource.cci.ConnectionMetaData_
 interface provides information about an EIS instance connected through a
 _Connection_ instance. A component calls the _Connection.getMetaData_
 method to get a _ConnectionMetaData_ instance.
@@ -16064,7 +16064,7 @@ _ConnectionMetaData_ interface:
 |===
 a|
 public interface
-javax.resource.cci.ConnectionMetaData \{
+jakarta.resource.cci.ConnectionMetaData \{
 
  public String getEISProductName() throws
 ResourceException;
@@ -16105,7 +16105,7 @@ specification.
 === ResourceAdapterMetaData
 
 The
-_javax.resource.cci.ResourceAdapterMetaData_ interface provides
+_jakarta.resource.cci.ResourceAdapterMetaData_ interface provides
 information about the capabilities of a resource adapter implementation.
 Note that this interface does not provide information about an EIS
 instance that is connected through a resource adapter.
@@ -16122,7 +16122,7 @@ _ResourceAdapterMetaData_ interface:
 |===
 a|
 public interface
-javax.resource.cci.ResourceAdapterMetaData \{
+jakarta.resource.cci.ResourceAdapterMetaData \{
 
  public String getAdapterVersion();
 
@@ -16157,7 +16157,7 @@ supportsLocalTransactionDemarcation();
 |===
 
 The _getSpecVersion_ method returns a string
-representation of the version of the connector architecture
+representation of the version of the Jakarta Connectors
 specification that is supported by the resource adapter.
 
 The _getInteractionSpecsSupported_ method
@@ -16210,7 +16210,7 @@ style.
 [width="100%",cols="100%",]
 |===
 a|
-interface javax.resource.cci.MessageListener
+interface jakarta.resource.cci.MessageListener
 \{
 
  Record onMessage(Record inputData) throws
@@ -16231,7 +16231,7 @@ class defined by the CCI.
 
 === ResourceException
 
-The _javax.resource.ResourceException_ class
+The _jakarta.resource.ResourceException_ class
 is used as the root of the exception hierarchy for CCI. A
 _ResourceException_ provides the following information:
 
@@ -16255,7 +16255,7 @@ _ResourceException_ .
 
 === ResourceWarning
 
-The _javax.resource.cci.ResourceWarning_ class
+The _jakarta.resource.cci.ResourceWarning_ class
 provides information on the warnings related to interactions with EIS. A
 _ResourceWarning_ is silently chained to an _Interaction_ instance that
 has caused the warning to be reported.
@@ -16293,7 +16293,7 @@ the repository at runtime.
 
 Note: The specification of a standard
 repository API and metadata format is outside the scope of the current
-version of the connector architecture.
+version of Jakarta Connectors.
 
 Record at Development-time
 and Runtime
@@ -16354,7 +16354,7 @@ There is no standardized mapping across
 various type systems. For example, the existing type systems range from
 Java, CORBA, COM, COBOL and many more. It is difficult to standardize
 the type specification and mappings across such a diverse set of type
-systems within the connector architecture scope.
+systems within the Jakarta Connectors scope.
 
 Building a limited type mapping facility into
 the CCI data representation interfaces will constrain the use of CCI
@@ -16368,8 +16368,7 @@ limit the future extensibility of these interfaces. This applies
 specifically to the support for standards that are emerging for
 XML-based data representation. An important goal for CCI data
 representation interfaces is to support XML-based facilities. This goal
-is difficult to achieve in the current scope of the connector
-architecture.
+is difficult to achieve in the current scope of Jakarta Connectors.
 
 This specification proposes that the type
 mapping support for the CCI be kept open for future versions. A future
@@ -16405,7 +16404,7 @@ either at development-time or runtime.
 
 === Record Interface
 
-The _javax.resource.cci.Record_ interface is
+The _jakarta.resource.cci.Record_ interface is
 the base interface for the representation of a record. A _Record_
 instance is used as an input or output to the _execute_ methods defined
 in an _Interaction_ .
@@ -16417,17 +16416,17 @@ image:conn-142.png[image]
 The _Record_ interface may be extended to
 form one of the following representations:
 
- _javax.resource.cci.MappedRecord_ : A
+ _jakarta.resource.cci.MappedRecord_ : A
 key-value pair based collection represents a record. This interface is
 based on _java.util.Map._
 
- _javax.resource.cci.IndexedRecord_ : An
+ _jakarta.resource.cci.IndexedRecord_ : An
 ordered and indexed collection represents a record. This interface is
 based on _java.util.List._
 
- _javax.resource.cci.ResultSet_ : This
+ _jakarta.resource.cci.ResultSet_ : This
 interface extends both _java.sql.ResultSet_ and
-_javax.resource.cci.Record_ . A result set represents tabular data.
+_jakarta.resource.cci.Record_ . A result set represents tabular data.
 link:conn.html#a4320[See ResultSet] specifies the requirements
 for the _ResultSet_ interface in detail.
 
@@ -16459,7 +16458,7 @@ interface:
 [width="100%",cols="100%",]
 |===
 a|
-public interface javax.resource.cci.Record
+public interface jakarta.resource.cci.Record
 
  extends java.lang.Cloneable,
 java.io.Serializable \{
@@ -16504,7 +16503,7 @@ is used primarily by tools to show a description of a _Record_ instance.
 
 === MappedRecord and IndexedRecord Interfaces
 
-The _javax.resource.cci.MappedRecord_
+The _jakarta.resource.cci.MappedRecord_
 interface is used for representing a key-value map based collection of
 record elements. The _MappedRecord_ interface extends both the _Record_
 and _java.util.Map_ interface.
@@ -16513,7 +16512,7 @@ and _java.util.Map_ interface.
 |===
 a|
 public interface
-javax.resource.cci.MappedRecord
+jakarta.resource.cci.MappedRecord
 
  extends Record, java.util.Map,
 
@@ -16523,7 +16522,7 @@ javax.resource.cci.MappedRecord
 
 |===
 
-The _javax.resource.cci.IndexedRecord_
+The _jakarta.resource.cci.IndexedRecord_
 interface represents an ordered collection of record elements based on
 the _java.util.List_ interface. This interface allows a component to
 access record elements by their integer index, position in the list, and
@@ -16533,7 +16532,7 @@ search for elements in the list.
 |===
 a|
 public interface
-javax.resource.cci.IndexedRecord
+jakarta.resource.cci.IndexedRecord
 
  extends Record, java.util.List,
 
@@ -16545,7 +16544,7 @@ javax.resource.cci.IndexedRecord
 
 === RecordFactory
 
-The _javax.resource.cci.RecordFactory_
+The _jakarta.resource.cci.RecordFactory_
 interface is used for creating _MappedRecord_ and _IndexedRecord_
 instances. Note that the _RecordFactory_ is only used for creating
 generic record instances. A CCI implementation provides an
@@ -16558,7 +16557,7 @@ _RecordFactory_ interface:
 |===
 a|
 public interface
-javax.resource.cci.RecordFactory \{
+jakarta.resource.cci.RecordFactory \{
 
  public MappedRecord
 createMappedRecord(String recordName)
@@ -16652,7 +16651,7 @@ resource adapter-view contract.
 
 === Streamable Interface
 
-The _javax.resource.cci.Streamable_ interface
+The _jakarta.resource.cci.Streamable_ interface
 enables a resource adapter to extract data from an input _Record_ or set
 data into an output _Record_ as a stream of bytes. See the following
 figure.
@@ -16677,7 +16676,7 @@ _Streamable_ interface:
 |===
 a|
 public interface
-javax.resource.cci.Streamable \{
+jakarta.resource.cci.Streamable \{
 
  public void read(InputStream istream) throws
 IOException;
@@ -16713,7 +16712,7 @@ instance.
 
 The CCI _ResultSet_ interface is based on the
 JDBC _ResultSet_ interface. The _ResultSet_ extends the
-_java.sql.ResultSet_ and _javax.resource.cci.-Record_ interfaces.
+_java.sql.ResultSet_ and _jakarta.resource.cci.-Record_ interfaces.
 
 The following code extract shows the
 _ResultSet_ interface:
@@ -16721,7 +16720,7 @@ _ResultSet_ interface:
 [width="100%",cols="100%",]
 |===
 a|
-public interface javax.resource.cci.ResultSet
+public interface jakarta.resource.cci.ResultSet
 
  extends Record, java.sql.ResultSet \{
 
@@ -16766,7 +16765,7 @@ been for the JDBC _ResultSet_ .
 image:conn-138.png[image]
 
 A CCI implementation is not required to support the
-_javax.resource.cci.ResultSet_ interface. If a CCI implementation does
+_jakarta.resource.cci.ResultSet_ interface. If a CCI implementation does
 not support result set functionality, it should not support interfaces
 and methods that are associated with the result set functionality. An
 example is the _java.sql.ResultSetMetaData_ interface.
@@ -16961,13 +16960,13 @@ detailed specification of the _ResultSetMetaData_ interface.
 
 === ResultSetInfo
 
-The _javax.resource.cci.ResultSetInfo_
+The _jakarta.resource.cci.ResultSetInfo_
 interface provides information on the support provided for _ResultSet_
 functionality by a connected EIS instance. A component calls the
 _Connection.getResultInfo_ method to get the _ResultSetInfo_ instance.
 
 A CCI implementation is not required to
-support the _javax.resource.cci.ResultSetInfo_ interface. The
+support the _jakarta.resource.cci.ResultSetInfo_ interface. The
 implementation of this interface is provided only if the CCI supports
 the _ResultSet_ facility.
 
@@ -16978,7 +16977,7 @@ _ResultSetInfo_ interface:
 |===
 a|
 public interface
-javax.resource.cci.ResultSetInfo \{
+jakarta.resource.cci.ResultSetInfo \{
 
  public boolean updatesAreDetected(int type)
 
@@ -17108,20 +17107,20 @@ a|
 javax.naming.Context nc = new
 InitialContext();
 
-javax.resource.cci.ConnectionFactory cf =
+jakarta.resource.cci.ConnectionFactory cf =
 
  (ConnectionFactory)nc.lookup(
 
  "java:comp/env/eis/ConnectionFactory");
 
-javax.resource.cci.Connection cx =
+jakarta.resource.cci.Connection cx =
 cf.getConnection();
 
 |===
 
 Create an _Interaction_ instance:
 
-javax.resource.cci.Interaction ix =
+jakarta.resource.cci.Interaction ix =
 cx.createInteraction();
 
 === InteractionSpec
@@ -17150,7 +17149,7 @@ ixSpec.setInteractionVerb(InteractionSpec.SYNC_SEND_RECEIVE);
 
 Get a _RecordFactory_ instance:
 
-javax.resource.cci.RecordFactory rf = // ...
+jakarta.resource.cci.RecordFactory rf = // ...
 get a RecordFactory
 
 Create a generic _MappedRecord_ using the
@@ -17162,7 +17161,7 @@ specific record type.
 [width="100%",cols="100%",]
 |===
 a|
-javax.resource.cci.MappedRecord input =
+jakarta.resource.cci.MappedRecord input =
 
  rf.createMappedRecord(“<NAME_OF_RECORD>”);
 
@@ -17190,7 +17189,7 @@ output values that are set by the execution of the interaction.
 [width="100%",cols="100%",]
 |===
 a|
-javax.resource.cci.IndexedRecord output =
+jakarta.resource.cci.IndexedRecord output =
 
  rf.createIndexedRecord(“<NAME_OF_RECORD>”);
 
@@ -17249,8 +17248,8 @@ _ResultSet_ :
 [width="100%",cols="100%",]
 |===
 a|
-javax.resource.cci.ResultSet rs =
-(javax.resource.cci.ResultSet)
+jakarta.resource.cci.ResultSet rs =
+(jakarta.resource.cci.ResultSet)
 
  ix.execute(ixSpec, input);
 
@@ -17307,9 +17306,9 @@ tool generates the implementation class of the _CustomerRecord_ .
 |===
 a|
 public interface CustomerRecord extends
-javax.resource.cci.Record,
+jakarta.resource.cci.Record,
 
- javax.resource.cci.Streamable \{
+ jakarta.resource.cci.Streamable \{
 
 
 
@@ -17412,7 +17411,7 @@ The simplified API makes extensive use of Java
 language annotations, that was introduced in Java SE 5.0 (see
 link:conn.html#a9755[See A Metadata Facility for the Java
 Programming Language]). The purpose of the API is to improve the
-existing Connector architecture by reducing its complexity from a
+existing Jakarta Connectors by reducing its complexity from a
 resource adapter developer’s point of view.
 
 The use of annotations reduces or completely
@@ -17420,8 +17419,8 @@ eliminates the need to deal with a deployment descriptor in many cases.
 The use of annotations also reduces the need to keep the deployment
 descriptor synchronized with changes to source code.
 
-Other component specifications in the Java EE
-platform, like Enterprise JavaBeans and Web Services through the
+Other component specifications in the Jakarta EE
+platform, like Jakarta Enterprise Beans and Web Services through the
 annotations defined in the Web Services Metadata specification have
 already brought such ease of development simplifications to the
 developer.
@@ -17442,7 +17441,7 @@ reducing the number of classes required to build a resource adapter
 implementation.
 
 Reduce the need to write redundant code by
-leveraging existing facilities in the Java EE platform.
+leveraging existing facilities in the Jakarta EE platform.
 
 Limit and reduce the need for a deployment
 descriptor for common scenarios by defining related metadata annotations
@@ -17466,8 +17465,7 @@ stage of the development or application assembly etc).
 For additional requirements on annotations
 discovery and processing by the application server, see the Deployment
 Section of the “Application Assembly and Deployment” chapter of
-link:conn.html#a9737[See Java Platform, Enterprise Edition (Java
-EE) Specification, version 7].
+link:conn.html#a9737[See Jakarta™ EE Platform Specification, Version 9].
 
 Deployment descriptors may be “sparse”,
 unlike the full deployment descriptors required as part of the J2EE
@@ -17543,9 +17541,9 @@ Yes
 An application assembler or deployer may use
 the deployment descriptor to override the metadata annotations specified
 by the resource adapter developer. See the chapter titled “Resources,
-Naming, and Injection” in the Java EE Platform specification (see
-link:conn.html#a9737[See Java Platform, Enterprise Edition (Java
-EE) Specification, version 7]) for general rules on annotations and
+Naming, and Injection” in the Jakarta EE Platform specification (see
+link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9])
+for general rules on annotations and
 injection and override behavior. The rules below complement the rules
 specified in that section.
 
@@ -17569,9 +17567,8 @@ deployment descriptor, the deployment tool must examine the classes of
 the resource adapter for annotations. The deployment tool must follow
 the annotation discovery and processing requirements specified in the
 “Deployment Section” of the “Application Assembly and Deployment”
-chapter of the Java EE Platform Specification (see
-link:conn.html#a9737[See Java Platform, Enterprise Edition (Java
-EE) Specification, version 7]).
+chapter of the Jakarta EE Platform Specification (see
+link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9]).
 
 The information provided by the annotations
 must be merged with the deployment descriptor packaged along with the
@@ -17660,7 +17657,7 @@ or setter methods of all superclasses of the subclass.
 
 
 All the metadata annotations described in
-this chapter are in the _javax.resource.spi_ package unless otherwise
+this chapter are in the _jakarta.resource.spi_ package unless otherwise
 specified. The following sections will describe the metadata annotations
 that are required to be supported by the application server.
 
@@ -17693,7 +17690,7 @@ _Connector_ annotation and not providing a deployment descriptor.
 
 
 
- package javax.resource.spi;
+ package jakarta.resource.spi;
 
  @Documented
 
@@ -17805,7 +17802,7 @@ server to support.
 
 It is optional for a resource adapter
 implementation to bundle a JavaBean class implementing the
-_javax.resource.spi.ResourceAdapter_ interface (see
+_jakarta.resource.spi.ResourceAdapter_ interface (see
 link:conn.html#a415[See ResourceAdapter JavaBean and
 Bootstrapping a Resource Adapter Instance]). In particular, a resource
 adapter implementation that only performs outbound communication to the
