@@ -25,5 +25,5 @@ include::license-efsl.adoc[]
 
 // == Jakarta Concurrency
 :sectnums:
-include::jakarta-connectors.adoc[]
+include::Connectors.adoc[]
 
