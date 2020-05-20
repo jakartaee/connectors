@@ -17860,7 +17860,7 @@ specify the authentication mechanism supported by the resource adapter
 
 
 
- package javax.resource.spi;
+ package jakarta.resource.spi;
 
 
 
@@ -17915,7 +17915,7 @@ link:conn.html#a5165[See Resource Adapter Provider]).
 
 === SecurityPermission annotation
 
- package javax.resource.spi;
+ package jakarta.resource.spi;
 
 
 
@@ -17966,7 +17966,7 @@ corresponding to the JavaBean property.
 
 
 
- package javax.resource.spi;
+ package jakarta.resource.spi;
 
 
 
@@ -18128,7 +18128,7 @@ these two annotations.
 
 
 
- package javax.resource.spi;
+ package jakarta.resource.spi;
 
 
 
@@ -18152,7 +18152,7 @@ these two annotations.
 
 
 
- package javax.resource.spi;
+ package jakarta.resource.spi;
 
  @Documented
 
@@ -18225,7 +18225,7 @@ The _ActivationSpec_ JavaBean contains the
 configuration information pertaining to inbound connectivity from an EIS
 instance. A resource adapter capable of message delivery to message
 endpoints must provide a JavaBean class that implements the
-_javax.resource.spi.ActivationSpec_ interface (see
+_jakarta.resource.spi.ActivationSpec_ interface (see
 link:conn.html#a446[See ActivationSpec JavaBean and Inbound
 Communication]) or annotate a JavaBean with the _Activation_ annotation
 for each supported endpoint message listener type.
@@ -18236,14 +18236,14 @@ JavaBean (see link:conn.html#a446[See ActivationSpec JavaBean
 and Inbound Communication]). The _Activation_ annotation is applied to
 the JavaBean class. The resource adapter provider may annotate one or
 more JavaBeans with the _Activation_ annotation. The JavaBean is
-required to implement the _javax.resource.spi.ActivationSpec_ interface
+required to implement the _jakarta.resource.spi.ActivationSpec_ interface
 even if the JavaBean is annotated with the _Activation_ annotation.
 
 === Activation Annotation
 
 
 
- package javax.resource.spi;
+ package jakarta.resource.spi;
 
 
 
@@ -18331,7 +18331,7 @@ the _AdministeredObject_ annotation.
 
 
 
- package javax.resource.spi;
+ package jakarta.resource.spi;
 
 
 
@@ -18364,7 +18364,7 @@ while determining the Java interfaces of the administered object:
  _java.io.Externalizable_
 
 
-_javax.resource.spi.ResourceAdapterAssociation_
+_jakarta.resource.spi.ResourceAdapterAssociation_
 
 If the JavaBean implements only one
 interface, that interface is chosen as the Java Interface implemented by
@@ -18385,13 +18385,12 @@ image:conn-147.png[image]
 [[a4814]]Resource Definition Annotations
 
 Resource definition annotations allow an
-application to be deployed into a Java EE environment with less
+application to be deployed into a Jakarta EE environment with less
 administrative configuration. Refer to the section titled “Resource
 Definition and Configuration” in the “Resources, Naming and Injection”
-chapter of the Java EE Platform Specification (see
-link:conn.html#a9737[See Java Platform, Enterprise Edition (Java
-EE) Specification, version 7]) for an overview of resource definition
-annotations.
+chapter of the Jakarta EE Platform Specification (see
+link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9])
+for an overview of resource definition annotations.
 
 The _ConnectionFactoryDefinition_ and
 _AdministeredObjectDefinition_ annotations described below are repeatable resource
@@ -18402,12 +18401,12 @@ operational environment.
 These resource definition annotations refer
 to a resource adapter by name, from which the resources needs to be
 created. The name of a resource adapter is decided as per the rules
-defined in the sections titled “Deploying a Stand-Alone Java EE Module”
-and “Deploying a Java EE Application” in the “Application Assembly and
-Deployment” chapter of the Java EE Platform Specification.
+defined in the sections titled “Deploying a Stand-Alone Jakarta EE Module”
+and “Deploying a Jakarta EE Application” in the “Application Assembly and
+Deployment” chapter of the Jakarta EE Platform Specification.
 
 When a resource adapter RAR packaged within a
-Java EE application EAR needs to be referenced, the resource adapter
+Jakarta EE application EAR needs to be referenced, the resource adapter
 name may be prefixed with a “ _#_ ” character to portably refer to the
 embedded resource adapter within the EAR. As an example, a Servlet
 bundled in an enterprise archive EAR, may access the embedded resource
@@ -18419,9 +18418,9 @@ per the rules defined in link:conn.html#a5147[See Requirements].
 
 These resource definition annotations must be
 supported in all products that support the deployment process as defined
-by the Java EE Platform Specification, and that support the Connector
-API. For example, a product that includes support for both the Connector
-API and the Servlet API must support the use of these resource
+by the Jakarta EE Platform Specification, and that support Jakarta
+Connectors. For example, a product that includes support for both Jakarta
+Connectors and the Servlet API must support the use of these resource
 definition annotations in web applications.
 
 It is not required to support the placement
@@ -18434,17 +18433,17 @@ The _ConnectionFactoryDefinition_ annotation
 is a repeatable resource definition annotation that is used to define a connector
 connection factory and have it registered in JNDI. See the section
 titled “Connection Factory Definition” in the “Resources, Naming, and
-Injection” chapter of the Java EE Platform Specification for more
+Injection” chapter of the Jakarta EE Platform Specification for more
 details on the connection factory resource definition annotation.
 
 The section titled “Annotations and
 Deployment Descriptors” of the “Resources, Naming, and Injection”
-chapter of the Java EE Platform Specification describes how environment
+chapter of the Jakarta EE Platform Specification describes how environment
 entries created by these annotations may be specified or overridden
 using deployment descriptor elements. The deployment descriptor element
 _connection-factory_ that may be used to define or override the values
 defined in the _ConnectionFactoryDefinition_ annotation is described in
-the section titled “Common Java EE 7 XML Schema definitions” of the Java
+the section titled “Common Jakarta EE XML Schema definitions” of the Jakarta
 EE Platform Specification.
 
 
@@ -18507,7 +18506,7 @@ TransactionSupport.TransactionSupportLevel.NoTransaction;
 
 The connection factory will be registered in
 JNDI under the name specified in the mandatory _name_ annotation
-element. It may be defined to be in any valid Java EE namespace, and the
+element. It may be defined to be in any valid Jakarta EE namespace, and the
 namespace will determine the accessibility of the connection factory
 from other components. The optional _description_ element specifies a
 description of the connection factory.
@@ -18533,12 +18532,12 @@ than the resource adapter’s transaction support classification.
 
 The _minPoolSize_ annotation element
 specifies the minimum number of connections that should be allocated for
-a connection pool that backs this connnection factory resource. The
+a connection pool that backs this connection factory resource. The
 _maxPoolSize_ annotation element specifies the maximum number of
 connections that should be allocated for a connection pool that backs
-this connnection factory resource. The defaults for these attributes are
+this connection factory resource. The defaults for these attributes are
 vendor specific (See the section titled “Resource Definition and
-Configuration” in the “Resources, Naming, and Injection” of the Java EE
+Configuration” in the “Resources, Naming, and Injection” of the Jakarta EE
 Platform Specification for more details on these default values).
 
 The connection factory may be configured by
@@ -18612,7 +18611,7 @@ use of the _ConnectionFactoryDefinitions_ annotation is optional.
 
 
 
- package javax.resource;
+ package jakarta.resource;
 
  import java.lang.annotation.Target;
 
@@ -18710,18 +18709,18 @@ The _AdministeredObjectDefinition_ annotation
 is a repeatable resource definition annotation that is used to define an
 administered object and have it registered in JNDI. See the section
 titled “Connector Administered Object Definition” in the “Resources,
-Naming, and Injection” chapter of the Java EE Platform for more details
+Naming, and Injection” chapter of the Jakarta EE Platform for more details
 on the administered object definition annotation.
 
 The section titled “Annotations and
 Deployment Descriptors” of the “Resources, Naming, and Injection”
-chapter of the Java EE Platform Specification describes how environment
+chapter of the Jakarta EE Platform Specification describes how environment
 entries created by these annotations may be specified or overridden
 using deployment descriptor elements. The deployment descriptor element
 _administered-object_ that may be used to define or override the values
 defined in the _AdministeredObjectDefinition_ annotation, is described
-in the section titled “Common Java EE 7 XML Schema definitions” of the
-Java EE Platform Specification.
+in the section titled “Common Jakarta EE XML Schema definitions” of the
+Jakarta EE Platform Specification.
 
 
 
@@ -18772,7 +18771,7 @@ AdministeredObjectDefinition \{
 
 The administered object will be registered in
 JNDI under the name specified in the mandatory _name_ annotation
-element. It may be defined to be in any valid Java EE namespace, and the
+element. It may be defined to be in any valid Jakarta EE namespace, and the
 namespace will determine the accessibility of the administered object
 from other components. The optional _description_ element specifies a
 description of the administered object.
@@ -18835,7 +18834,7 @@ archive.
 
  @Resource(lookup = "java:comp/eis/MyQueue")
 
- javax.jms.Queue myQ;
+ jakarta.jms.Queue myQ;
 
  ...
 
@@ -18939,13 +18938,13 @@ application archive.
 
  @Resource(lookup = "java:comp/eis/MyQueue")
 
- javax.jms.Queue myQ;
+ jakarta.jms.Queue myQ;
 
  ...
 
  @Resource(lookup = "java:comp/eis/MyTopic")
 
- javax.jms.Queue myT;
+ jakarta.jms.Queue myT;
 
  ...
 
@@ -18971,13 +18970,13 @@ image:conn-150.png[image]
 Requirements of the Application Server
 
 The application server must support the
-deployment of a resource adapter in EJB and Web containers.
+deployment of a resource adapter in Jakarta Enterprise Beans and Web containers.
 
 The application server must support all the
-connector architecture API requirements in EJB and Web containers.
+Jakarta Connectors requirements in Jakarta Enterprise Beans and Web containers.
 
 A single resource adapter instance may be
-shared by both a Web container and an EJB container.
+shared by both a Web container and an Jakarta Enterprise Beans container.
 
 The application server must support all
 versions of the resource adapter DTDs (Document Type Definitions) and
@@ -19164,7 +19163,7 @@ image:conn-152.png[image]
 
 This chapter specifies requirements for
 packaging and deploying a resource adapter. These requirements support a
-modular, portable deployment of a resource adapter into a Java EE
+modular, portable deployment of a resource adapter into a Jakarta EE
 compliant application server.
 
 === 
@@ -19175,7 +19174,7 @@ Overview
 
 A resource adapter provider develops a set of
 Java interfaces and classes as part of its implementation of a resource
-adapter. These Java classes implement connector architecture-specified
+adapter. These Java classes implement Jakarta Connectors-specified
 contracts and EIS-specific functionality provided by the resource
 adapter. The development of a resource adapter may also require the use
 of native libraries specific to the underlying EIS.
@@ -19199,12 +19198,12 @@ Resource adapter
 image:conn-154.jpg[image]
 
 A resource adapter module corresponds to a
-Java EE module in terms of the Java EE composition hierarchy. Refer to
-the Java EE Platform specification (see link:conn.html#a9737[See
-Java Platform, Enterprise Edition (Java EE) Specification, version 7])
-for more details on the deployment of Java EE modules and applications.
-A Java EE module represents the basic unit of composition of a Java EE
-application. Examples of Java EE modules include EJB modules,
+Jakarta EE module in terms of the Jakarta EE composition hierarchy. Refer to
+the Jakarta EE Platform specification (see link:conn.html#a9737[See
+Jakarta™ EE Platform Specification Version 9])
+for more details on the deployment of Jakarta EE modules and applications.
+A Jakarta EE module represents the basic unit of composition of a Jakarta EE
+application. Examples of Jakarta EE modules include Jakarta Enterprise Beans modules,
 application client modules, and web client modules.
 
 A resource adapter module must be deployed
@@ -19213,13 +19212,13 @@ either:
 Directly into an application server as a
 stand-alone unit or,
 
-Deployed with a Java EE application that
-consists of one or more Java EE modules in addition to a resource
-adapter module. The Java EE specification specifies requirements for the
-assembly and packaging of Java EE applications.
+Deployed with a Jakarta EE application that
+consists of one or more Jakarta EE modules in addition to a resource
+adapter module. The Jakarta EE specification specifies requirements for the
+assembly and packaging of Jakarta EE applications.
 
 The following figure shows the composition
-model of a resource adapter module with other Java EE modules.
+model of a resource adapter module with other Jakarta EE modules.
 
 Deployment of a Resource
 Adapter Module
@@ -19228,10 +19227,10 @@ image:conn-155.jpg[image]
 
 The stand-alone deployment of a resource
 adapter module into an application server is typically done to support
-scenarios in which multiple Java EE applications share a single resource
+scenarios in which multiple Jakarta EE applications share a single resource
 adapter module. However, in certain scenarios, a resource adapter module
-is required only by components within a single Java EE application. The
-deployment option of a resource adapter module bundled with a Java EE
+is required only by components within a single Jakarta EE application. The
+deployment option of a resource adapter module bundled with a Jakarta EE
 application supports the latter scenario.
 
 At deployment time, a resource adapter
@@ -19251,7 +19250,7 @@ A packaged resource adapter includes the
 following elements:
 
 Java classes and interfaces that are required
-for the implementation of both the connector architecture contracts and
+for the implementation of both the Jakarta Connectors contracts and
 the functionality of the resource adapter.
 
 Utility Java classes for the resource adapter.
@@ -19284,10 +19283,10 @@ or more JAR files as part of the resource adapter module. A JAR file
 must use the _.jar_ file extension.
 
 The resource adapter may also use the library
-support mechanisms described in the Java EE Platform Specification to
+support mechanisms described in the Jakarta EE Platform Specification to
 specify library dependencies. See the link:conn.html#a9737[See
-Java Platform, Enterprise Edition (Java EE) Specification, version 7]
-for more information on the Java EE Platform’s support for libraries.
+Jakarta™ EE Platform Specification Version 9]
+for more information on the Jakarta EE Platform’s support for libraries.
 
 The platform-specific libraries required by
 the resource adapter must be packaged with the resource adapter module.
@@ -19362,15 +19361,15 @@ subdirectories.
 === [[a5147]]Requirements
 
 When a standalone resource adapter _RAR_ is
-deployed, the resource adapter may be made available to all Java EE
+deployed, the resource adapter may be made available to all Jakarta EE
 applications in the application server. The application server, however,
 must make the standalone resource adapter RAR available to applications
 that meet the requirements listed in link:conn.html#a5151[See
 Class Loading Requirements].
 
 When a resource adapter _RAR_ packaged within
-a Java EE application _EAR_ (also referred to as an “embedded RAR”) is
-deployed, the resource adapter must be made available only to the Java
+a Jakarta EE application _EAR_ (also referred to as an “embedded RAR”) is
+deployed, the resource adapter must be made available only to the Jakarta
 EE application with which it is packaged.
 
 A resource adapter must not implement or
@@ -19390,9 +19389,9 @@ container. This section of the specification defines the requirements in
 terms of what applications must have visibility to a resource adapter
 RAR.
 
-A resource adapter RAR packaged within a Java
+A resource adapter RAR packaged within a Jakarta
 EE application EAR, as specified in link:conn.html#a5147[See
-Requirements] above, must be made available only to the Java EE
+Requirements] above, must be made available only to the Jakarta EE
 application with which it is packaged.
 
 The requirements below specify the
@@ -19407,8 +19406,8 @@ resource adapter must be made available to the application.
 If an application references an extension
 using the Extension Mechanism Architecture (see the section titled
 “Library Support” in the “Application Assembly and Deployment” chapter
-of the link:conn.html#a9737[See Java Platform, Enterprise
-Edition (Java EE) Specification, version 7]) and a jar file within a
+of the link:conn.html#a9737[See Jakarta™ EE Platform
+Specification Version 9)] and a jar file within a
 standalone resource adapter supplies that extension, the standalone
 resource adapter must be made available to the application.
 
@@ -19477,14 +19476,13 @@ Name of the vendor who provides the resource
 adapter.
 
 Licensing requirement and description. Note
-that the management of licensing is outside the scope of the connector
-architecture.
+that the management of licensing is outside the scope of Jakarta Connectors.
 
 Type of the EIS system supported. For example,
 the name of a specific database, ERP system, or mainframe TP system
 without any versioning information.
 
-Version of the connector architecture
+Version of the Jakarta Connectors
 specification, represented as a string, supported by the resource
 adapter.
 
@@ -19496,11 +19494,11 @@ adapter may optionally provide a list of _required-work-context_
 elements representing a list of _WorkContext_ classes that a resource
 adapter requires the application server to support. . The resource
 adapter provider must specify the name of a Java _Class_ that implements
-the _javax.resource.spi.work.WorkContext_ interface.
+the _jakarta.resource.spi.work.WorkContext_ interface.
 
 ResourceAdapter class: The resource adapter
 provider must specify, if available, the name of a Java class that
-implements the _javax.resource.spi.ResourceAdapter_ interface. The
+implements the _jakarta.resource.spi.ResourceAdapter_ interface. The
 implementation of this class must be a JavaBean. A ResourceAdapter
 JavaBean is configured by the resource adapter deployer during
 deployment. The application server must instantiate exactly one
@@ -19519,7 +19517,7 @@ Outbound resource adapter information:
 
  _ManagedConnectionFactory_ class: The
 resource adapter provider must specify the name of the Java class that
-implements the _javax.resource.spi.ManagedConnectionFactory_ interface.
+implements the jakarta.resource.spi.ManagedConnectionFactory_ interface.
 The implementation must be a JavaBean.
 
 Typically, a _ManagedConnectionFactory_ class
@@ -19547,7 +19545,7 @@ be any one of the following: _NoTransaction_ , _LocalTransaction_ , or
 _XATransaction_ . Note that this support is specified for a resource
 adapter and not for the underlying EIS instance. +
 _NoTransaction_ : The resource adapter does not support either the
-resource manager local or JTA transactions. It does not implement either
+resource manager local or Jakarta Transaction's transactions. It does not implement either
 _XAResource_ or _LocalTransaction_ interfaces. +
 _LocalTransaction_ : The resource adapter supports resource manager
 local transactions by implementing the _LocalTransaction_ interface. The
@@ -19555,7 +19553,7 @@ local transaction management contract is specified in
 link:conn.html#a1280[See Local Transaction Management
 Contract]. +
 _XATransaction_ : The resource adapter supports both resource manager
-local and JTA transactions by implementing the _LocalTransaction_ and
+local and Jakarta Transaction's transactions by implementing the _LocalTransaction_ and
 _XAResource_ interfaces respectively. The requirements for supporting
 the _XAResource_ based contract are specified in
 link:conn.html#a1169[See XAResource-based Transaction Contract].
