@@ -19642,7 +19642,7 @@ detailed in link:conn.html#a4517[See Metadata Annotations].
 
 image:conn-156.png[image]
 
-The connector architecture does not specify standard deployment
+Jakarta Connectors does not specify standard deployment
 properties for the configuration of non-Java parts, such as native
 libraries, of a resource adapter. This applies only to the properties of
 the non-Java part not exposed through the Java part of the resource
@@ -19667,12 +19667,12 @@ deploys a resource adapter based on the deployment descriptor
 information. The deployer may choose to override the information in the
 deployment descriptor.
 
-=== Resource Adapter Module with Java EE Application
+=== Resource Adapter Module with Jakarta EE Application
 
-Refer to the Java EE platform specification
-(see link:conn.html#a9737[See Java Platform, Enterprise Edition
-(Java EE) Specification, version 7]) for the requirements specified for
-the deployment of a Java EE application.
+Refer to the Jakarta EE platform specification
+(see link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9])
+for the requirements specified for
+the deployment of a Jakarta EE application.
 
 === Configuration
 
@@ -19748,7 +19748,7 @@ operational environment.
 === [[a5222]]ResourceAdapter
 
 The Java class which implements the interface
-_javax.resource.spi.ResourceAdapter_ must be a JavaBean. The
+_jakarta.resource.spi.ResourceAdapter_ must be a JavaBean. The
 _ResourceAdapter_ JavaBean may also be specified through the _Connector_
 annotation (see link:conn.html#a4581[See @Connector]).
 
@@ -19829,7 +19829,7 @@ properties.
 
 === [[a5237]]Standard Properties
 
-The connector architecture identifies a
+Jakarta Connectors identifies a
 standard set of properties common across various types of resource
 adapters and EISs. A resource adapter is not required to support a
 standard property if that property does not apply to its configuration.
@@ -19837,7 +19837,7 @@ standard property if that property does not apply to its configuration.
 These standard properties are defined as
 follows:
 
-=== Standard Properties of the Connector Architecture
+=== Standard Properties of Jakarta Connectors
 
 Property
 
@@ -19906,7 +19906,7 @@ link:conn.html#a617[See Application Programming Model]
 specifies the application programming model in more detail.
 
 The following code extract shows the JNDI
-lookup of a _javax.resource.cci.ConnectionFactory_ instance.
+lookup of a _jakarta.resource.cci.ConnectionFactory_ instance.
 
 [width="100%",cols="100%",]
 |===
@@ -19922,14 +19922,14 @@ Context initctx = new InitialContext();
 // perform JNDI lookup to obtain connection
 factory
 
-javax.resource.cci.ConnectionFactory cxf =
+jakarta.resource.cci.ConnectionFactory cxf =
 
 
-(javax.resource.cci.ConnectionFactory)initctx.lookup(“java:comp/env/eis/MyEIS”);
+(jakarta.resource.cci.ConnectionFactory)initctx.lookup(“java:comp/env/eis/MyEIS”);
 
 
 
-javax.resource.cci.Connection cx =
+jakarta.resource.cci.Connection cx =
 cxf.getConnection();
 
 |===
@@ -19972,15 +19972,15 @@ both managed and non-managed environments.
 
 The implementation class for a connection
 factory interface must implement both the _java.io.Serializable_ and
-_javax.resource.Referenceable_ interfaces to support JNDI registration.
+_jakarta.resource.Referenceable_ interfaces to support JNDI registration.
 
 The following code extract shows the
-_javax.resource.Referenceable_ interface:
+_jakarta.resource.Referenceable_ interface:
 
 [width="100%",cols="100%",]
 |===
 a|
-public interface javax.resource.Referenceable
+public interface jakarta.resource.Referenceable
 
  extends javax.naming.Referenceable \{
 
@@ -19991,17 +19991,17 @@ public interface javax.resource.Referenceable
 |===
 
 The _ManagedConnectionFactory_ implementation
-class must implement the j _ava.io.Serializable_ interface.
+class must implement the _java.io.Serializable_ interface.
 
 To support the _Reference_ mechanism in a
 non-managed environment, a resource adapter or a helper class must
-provide an implementation of the j _avax.naming.spi.ObjectFactory_
+provide an implementation of the _javax.naming.spi.ObjectFactory_
 interface.
 
 === Application Server
 
 The implementation class for
-_javax.resource.spi.ConnectionManager_ must implement the
+_jakarta.resource.spi.ConnectionManager_ must implement the
 _java.io.Serializable_ interface.
 
 An application server must provide an
@@ -20016,8 +20016,8 @@ JNDI configuration in a managed environment.
 === Scenario: Serializable
 
 The implementation classes for both the
-_javax.resource.cci.ConnectionFactory_ and
-_javax.resource.spi.ManagedConnectionFactory_ interfaces implement the
+_jakarta.resource.cci.ConnectionFactory_ and
+_jakarta.resource.spi.ManagedConnectionFactory_ interfaces implement the
 _java.io.Serializable_ interface.
 
 The deployment code retrieves the
@@ -20051,7 +20051,7 @@ implementation class and
 // not in the
 
 //
-javax.resource.spi.ManagedConnectionFactory interface
+jakarta.resource.spi.ManagedConnectionFactory interface
 
 mcf.setServerName(“...”);
 
@@ -20121,14 +20121,14 @@ manner.
 The following section illustrates JNDI
 configuration in a managed environment based on the _Reference_
 mechanism. This section uses the CCI interfaces
-_javax.resource.cci.ConnectionFactory_ and
-_javax.resource.cci.Connection_ as the connection factory and connection
+_jakarta.resource.cci.ConnectionFactory_ and
+_jakarta.resource.cci.Connection_ as the connection factory and connection
 interfaces respectively.
 
 === [[a5327]]Scenario: Referenceable
 
 The implementation class for the
-_ConnectionFactory_ interface implements _javax.resource.Referenceable_
+_ConnectionFactory_ interface implements _jakarta.resource.Referenceable_
 shown in the following code extract. Refer to the JNDI specification for
 more details on the _Referenceable_ interface.
 
@@ -20138,11 +20138,11 @@ a|
 public class com.myeis.ConnectionFactoryImpl
 implements
 
- javax.resource.Referenceable,
+ jakarta.resource.Referenceable,
 
  java.io.Serializable,
 
- javax.resource.cci.ConnectionFactory \{
+ jakarta.resource.cci.ConnectionFactory \{
 
 
 
@@ -20266,7 +20266,7 @@ mechanism.
 
 
 
- javax.resource.spi.ManagedConnectionFactory
+ jakarta.resource.spi.ManagedConnectionFactory
 mcf = ...
 
 
@@ -20438,9 +20438,9 @@ image:conn-153.png[image]
 
 This section specifies the XML Schema
 Definition (XSD) for the deployment descriptor for a resource adapter.
-Some of the types used in this XSD are defined in the Java EE platform
-specification (link:conn.html#a9737[See Java Platform,
-Enterprise Edition (Java EE) Specification, version 7]). The comments in
+Some of the types used in this XSD are defined in the Jakarta EE platform
+specification (link:conn.html#a9737[See Jakarta™ EE Platform
+Specification Version 9]). The comments in
 the XSD specify additional requirements for syntax and semantics that
 cannot be specified by using the XML Schema language. Note, the
 description-group element defined in javaee_7.xsd allows multiple
@@ -20500,7 +20500,7 @@ file. All Connector
  deployment descriptors must indicate the
 connector resource
 
- adapter schema by using the Java EE
+ adapter schema by using the Jakarta EE
 namespace:
 
 
@@ -20540,7 +20540,7 @@ http://xmlns.jcp.org/xml/ns/javaee/connector_1_7.xsd”
 published version of
 
  the schema using the xsi:schemaLocation
-attribute for Java EE
+attribute for Jakarta EE
 
  namespace with the following location:
 
@@ -20565,7 +20565,7 @@ http://xmlns.jcp.org/xml/ns/javaee/connector_1_7.xsd
 
 
 
- The following conventions apply to all Java
+ The following conventions apply to all Jakarta
 EE
 
  deployment descriptor elements unless
@@ -20712,7 +20712,7 @@ the fully
  specification class. This class must
 implement the
 
- javax.resource.spi.ActivationSpec interface.
+ jakarta.resource.spi.ActivationSpec interface.
 The
 
  implementation of this class is required to
@@ -20862,7 +20862,7 @@ object.
 
  Example:
 
- <adminobject-interface>javax.jms.Destination
+ <adminobject-interface>jakarta.jms.Destination
 
  </adminobject-interface>
 
@@ -20971,7 +20971,7 @@ mechanism.
 should support the
 
 
-javax.resource.spi.security.PasswordCredential interface.
+jakarta.resource.spi.security.PasswordCredential interface.
 
  The Kerbv5 mechanism type should support the
 
@@ -20979,7 +20979,7 @@ javax.resource.spi.security.PasswordCredential interface.
 deprecated
 
 
-javax.resource.spi.security.GenericCredential interface.
+jakarta.resource.spi.security.GenericCredential interface.
 
 
 
@@ -21038,7 +21038,7 @@ specifies
  Any additional security mechanisms are
 outside the
 
- scope of the Connector architecture
+ scope of the Jakarta Connectors
 specification.
 
 
@@ -21088,7 +21088,7 @@ name of a
 
 
 
- The connector architecture defines a set of
+ Jakarta Connectors defines a set of
 well-defined
 
  properties all of type java.lang.String.
@@ -21551,14 +21551,13 @@ specifies
 
  implements the
 
- javax.resource.spi.ManagedConnectionFactory
+ jakarta.resource.spi.ManagedConnectionFactory
 interface.
 
  This Java class is provided as part of
 resource
 
- adapter’s implementation of connector
-architecture
+ adapter’s implementation of Jakarta Connectors
 
  specified contracts. The implementation of
 this
@@ -21629,7 +21628,7 @@ specifies
 
 
 
-<connectionfactory-interface>javax.resource.cci.ConnectionFactory
+<connectionfactory-interface>jakarta.resource.cci.ConnectionFactory
 
  </connectionfactory-interface>
 
@@ -21715,7 +21714,7 @@ supported
 
 
 
-<connection-interface>javax.resource.cci.Connection
+<connection-interface>jakarta.resource.cci.Connection
 
  </connection-interface>
 
@@ -21831,10 +21830,7 @@ module-name
  is determined as defined in Section EE.8.1.1
 and EE.8.1.2
 
- of the Java Platform, Enterprise Edition
-(Java EE)
-
- Specification, version 6.
+ of the Jakarta™ EE Platform Specification Version 9.
 
  </xsd:documentation>
 
@@ -22165,12 +22161,12 @@ security
 
 
 
-javax.resource.spi.security.PasswordCredential
+jakarta.resource.spi.security.PasswordCredential
 
  org.ietf.jgss.GSSCredential
 
 
-javax.resource.spi.security.GenericCredential
+jakarta.resource.spi.security.GenericCredential
 
 
 
@@ -22186,7 +22182,7 @@ base="javaee:fully-qualified-classType">
  <xsd:enumeration
 
 
-value="javax.resource.spi.security.PasswordCredential"/>
+value="jakarta.resource.spi.security.PasswordCredential"/>
 
  <xsd:enumeration
 
@@ -22195,7 +22191,7 @@ value="javax.resource.spi.security.PasswordCredential"/>
  <xsd:enumeration
 
 
-value="javax.resource.spi.security.GenericCredential"/>
+value="jakarta.resource.spi.security.GenericCredential"/>
 
  </xsd:restriction>
 
@@ -22487,7 +22483,7 @@ the fully
 
 
 
-<messagelistener-type>javax.jms.MessageListener
+<messagelistener-type>jakarta.jms.MessageListener
 
  </messagelistener-type>
 
@@ -22538,7 +22534,7 @@ information includes fully
  qualified names of classes/interfaces
 required as part of
 
- the connector architecture specified
+ the Jakarta Connectors specified
 contracts for
 
  connection management, level of transaction
@@ -22595,7 +22591,7 @@ must
  consider that the resource adapter does not
 support either
 
- the resource manager local or JTA
+ the resource manager local or Jakarta Transaction's
 transactions and must consider
 
  the transaction support as NoTransaction.
@@ -22834,15 +22830,13 @@ the
 
  name of a Java class that implements
 
- the javax.resource.spi.ResourceAdapter
+ the jakarta.resource.spi.ResourceAdapter
 
  interface. This Java class is provided as
 part of
 
  resource adapter’s implementation of
-connector
-
- architecture specified contracts. The
+ Jakarta Connectors specified contracts. The
 implementation
 
  of this class is required to be a JavaBean.
@@ -23096,9 +23090,9 @@ environment. A Java runtime environment is provided by an application
 server and its containers.
 
 The chapter specifies the Java APIs that a
-Java EE-compliant application server and its containers must make
+Jakarta EE-compliant application server and its containers must make
 available to a resource adapter at runtime. A portable resource adapter
-can rely on these APIs to be available on all Java EE-compliant
+can rely on these APIs to be available on all Jakarta EE-compliant
 application servers.
 
 The chapter also specifies programming
@@ -23112,7 +23106,7 @@ image:conn-160.png[image]
 
 Programming APIs
 
-A resource adapter provider relies on a Java
+A resource adapter provider relies on a Jakarta
 EE compliant application server to provide the following APIs:
 
 Java SDK, Standard Edition, version 6.0 that
@@ -23122,9 +23116,9 @@ link:conn.html#a9745[See Java Platform, Standard Edition 7API
 Specification])
 
 Required APIs for Java _TM_ Platform,
-Enterprise Edition, Version 6 as specified in the Java EE platform
-specification (see link:conn.html#a9737[See Java Platform,
-Enterprise Edition (Java EE) Specification, version 7]).
+Enterprise Edition, Version 6 as specified in the Jakarta EE platform
+specification (see link:conn.html#a9737[See Jakarta™ EE
+Platform Specification Version 9]).
 
 Java Authentication and Authorization Service
 (JAAS) 1.0 that requires at least Java 2 SDK, Standard Edition, version
@@ -23144,7 +23138,7 @@ permissions to access system resources.
 Since the exact set of required security
 permissions for a resource adapter depends on the overall security
 policy for an operational environment and the implementation
-requirements of a resource adapter, the connector architecture does not
+requirements of a resource adapter, Jakarta Connectors does not
 define a fixed set of permissions.
 
 The following permission set represents the
@@ -23521,12 +23515,12 @@ image:conn-160.png[image]
 [[a6725]]Dependency Injection
 
 A resource adapter archive can be a bean
-archive (see Chapter 12 of link:conn.html#a9759[See Contexts and
-Dependency Injection for the Java EE Platform 1.1]). The section titled
+archive (see Chapter 12 of link:conn.html#a9759[See Jakarta™ Contexts and Dependency
+Injection Specification, Version 3.0]). The section titled
 “Support for Dependency Injection” in the “Resources, Naming and
-Injection” chapter of the Java EE Platform Specification (see
-link:conn.html#a9737[See Java Platform, Enterprise Edition (Java
-EE) Specification, version 7]) provides more details on the dependency
+Injection” chapter of the Jakarta EE Platform Specification (see
+link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9])
+provides more details on the dependency
 injection requirements of an application server.
 
 The following JavaBeans of a resource adapter
@@ -23575,10 +23569,9 @@ image:conn-161.png[image]
 image:conn-162.png[image]
 
 This chapter specifies standard exceptions
-that identify error conditions which may occur as part of the connector
-architecture.
+that identify error conditions which may occur as part of Jakarta Connectors.
 
-The connector architecture defines two classes
+Jakarta Connectors defines two classes
 of exceptions:
 
 System Exceptions - Indicate an unexpected
@@ -23595,12 +23588,12 @@ application exception may indicate an error in the execution of a
 function on a target EIS. These exceptions are meant to be handled
 directly by an application component.
 
-The connector architecture defines the
-_javax.resource.ResourceException_ class as the root of the system
+Jakarta Connectors defines the
+_jakarta.resource.ResourceException_ class as the root of the system
 exception hierarchy. The _ResourceException_ class extends the
 _java.lang.Exception_ class and is a checked exception.
 
-The _javax.resource.ResourceException_ is also
+The _jakarta.resource.ResourceException_ is also
 the root of the application exception hierarchy for CCI. Application
 level exceptions are specified in more detail in the API documentation
 for CCI.
@@ -23636,7 +23629,7 @@ image:conn-163.png[image]
 
 [[a6752]]System Exceptions
 
-The connector architecture requires that
+Jakarta Connectors requires that
 methods, as part of a system contract implementation, use the checked
 _ResourceException_ and other standard exceptions derived from it to
 indicate system-level error conditions. Using checked exceptions leads
@@ -23668,7 +23661,7 @@ The following exceptions are derived from
 _ResourceException_ to indicate more specific classes of system error
 conditions:
 
- _javax.resource.spi.SecurityException_ . A
+ jakarta.resource.spi.SecurityException_ . A
 _SecurityException_ indicates error conditions related to the security
 contract between an application server and resource adapter. The common
 error conditions represented by this exception are:
@@ -23692,9 +23685,9 @@ requested access to an EIS resource or a request to create a new
 connection has been denied.
 
 
-_javax.resource.spi.LocalTransactionException_ . A
+_jakarta.resource.spi.LocalTransactionException_ . A
 _LocalTransaction-Exception_ represents various error conditions related
-to the local transaction management contract. The JTA specification
+to the local transaction management contract. The Jakarta Transaction specification
 specifies the _javax.transaction-.xa.XAException_ class for exceptions
 related to an _XAResource_ -based transaction management contract. The
 _LocalTransactionException_ is used for the local transaction management
@@ -23719,7 +23712,7 @@ detection, communication failure during transaction completion, or any
 retry requirement.
 
 
-_javax.resource.spi.ResourceAdapterInternalException_ . This exception
+_jakarta.resource.spi.ResourceAdapterInternalException_ . This exception
 indicates all system-level error conditions related to a resource
 adapter. The common error conditions indicated by this exception type
 are:
@@ -23728,21 +23721,21 @@ Invalid configuration of the
 _ManagedConnectionFactory_ for creating a new physical connection. An
 example is an invalid server name for a target EIS instance.
 
-Failure to create a physical connection to a
+Failure to create a physical connection to an
 EIS instance due to a communication protocol error or a resource adapter
 implementation-specific error.
 
 Error conditions internal to a resource
 adapter implementation.
 
- _javax.resource.spi.EISSystemException_ . An
+ _jakarta.resource.spi.EISSystemException_ . An
 _EISSystemException_ is used to indicate any EIS-specific system-level
 error conditions. Examples of common error conditions are failure or
 inactivity of an EIS instance, communication failure, and an
 EIS-specific error during the creation of a physical connection.
 
 
-_javax.resource.spi.ApplicationServerInternalException_ . This exception
+_jakarta.resource.spi.ApplicationServerInternalException_ . This exception
 is thrown by an application server to indicate error conditions specific
 to an application server. Example error conditions are: errors related
 to an application server configuration or implementation of mechanisms
@@ -23750,19 +23743,19 @@ internal to an application server, such as connection pooling and thread
 management.
 
 
-_javax.resource.spi.ResourceAllocationException_ . This exception is
+_jakarta.resource.spi.ResourceAllocationException_ . This exception is
 thrown by an application server or resource adapter to indicate a
 failure to allocate system resources, such as threads and physical
 connections. An example is an error condition that results when an upper
 bound is reached for the maximum number of physical connections that can
 be managed by an application server-specific connection pool.
 
- _javax.resource.spi.IllegalStateException_ .
+ _jakarta.resource.spi.IllegalStateException_ .
 This exception is thrown from a method if the invoked code, either the
 resource adapter or the application server for system contracts, is in
 an illegal or inappropriate state for the method invocation.
 
- _javax.resource.NotSupportedException_ . This
+ _jakarta.resource.NotSupportedException_ . This
 exception is thrown to indicate that invoked code, either the resource
 adapter or the application server for system contracts, cannot execute
 an operation because the operation is not a supported feature. For
@@ -23770,17 +23763,17 @@ example, if the transaction support level for a resource adapter is
 _NoTransaction_ , an invocation of the _ManagedConnection.getXAResource_
 method throws a _NotSupportedException_ exception.
 
- _javax.resource.spi.CommException_ . This
+ _jakarta.resource.spi.CommException_ . This
 exception indicates errors related to failed or interrupted
 communication with an EIS instance. Examples of common error conditions
 represented by this exception type include communication protocol errors
 and invalidated connections due to server failure.
 
-javax.resource.spi.InvalidPropertyException.
+jakarta.resource.spi.InvalidPropertyException.
 This exception is thrown to indicate invalid configuration property
 settings.
 
-javax.resource.spi.UnavailableException. This
+jakarta.resource.spi.UnavailableException. This
 exception is thrown to indicate that a service is unavailable.
 
 === 
@@ -23793,17 +23786,17 @@ These exceptions are thrown by an application
 server to report error conditions related to the work management
 contract.
 
- _javax.resource.spi.work.WorkException._ A
+ _jakarta.resource.spi.work.WorkException._ A
 common base class for all Work processing related exceptions.
 
 
-_javax.resource.spi.work.WorkRejectedException._ This exception is
+_jakarta.resource.spi.work.WorkRejectedException._ This exception is
 thrown to indicate that a submitted _Work_ instance has been rejected.
 The rejection may be due to internal factors or start timeout
 expiration.
 
 
-_javax.resource.spi.work.WorkCompletedException._ This exception is
+_jakarta.resource.spi.work.WorkCompletedException._ This exception is
 thrown to indicate that a submitted _Work_ instance has completed with
 an exception.
 
@@ -23813,9 +23806,9 @@ image:conn-163.png[image]
 
 Additional Exceptions
 
-The JTA specification (see
-link:conn.html#a9725[See Java Transaction API (JTA)
-Specification, version 1.2]) specifies the
+The Jakarta Transaction specification (see
+link:conn.html#a9725[See Jakarta™ Transaction Specification,
+Version 1.3]) specifies the
 javax.transaction.xa.XAException class for exceptions related to the
 XAResource-based transaction management contract.
 
@@ -23832,12 +23825,11 @@ Compatibility and Migration
 image:conn-165.png[image]
 
 This chapter summarizes compatibility and
-migration issues for the Java EE Connectors specification. For a
+migration issues for the Jakarta EE Connectors specification. For a
 detailed description on Compatibility and Migration and how they relate
-to the Java EE Platform in general, refer the chapter on “Compatibility
-and Migration” in the Java EE platform specification (see
-link:conn.html#a9737[See Java Platform, Enterprise Edition (Java
-EE) Specification, version 7]).
+to the Jakarta EE Platform in general, refer the chapter on “Compatibility
+and Migration” in the Jakarta EE platform specification (see
+link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9]).
 
 === 
 
@@ -23845,12 +23837,12 @@ image:conn-166.png[image]
 
 Compatibility
 
-Java EE application servers are compatible
-with the Java EE Connector Architecture specification if they implement
+Jakarta EE application servers are compatible
+with the Jakarta EE Connector Architecture specification if they implement
 the APIs and behavior required by this specification. Resource adapter
-modules are compatible with a release of the Java EE Connector
+modules are compatible with a release of the Jakarta EE Connector
 Architecture specification if they only depend on APIs and behavior
-defined by that release of the specification. A new release of the Java
+defined by that release of the specification. A new release of the Jakarta
 EE Connector architecture specification is compatible with previous
 releases of the specification if all portable resource adapters written
 to the previous release of the specification will also run unchanged and
