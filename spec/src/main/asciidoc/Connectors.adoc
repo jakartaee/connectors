@@ -315,10 +315,10 @@ Note that the scenarios described in this
 document are illustrative in scope. The intent of the scenarios is not
 to specify a prescriptive way of implementing a particular contract.
 
-This document uses the EJB component model to
-describe some scenarios. The EJB specification (see
-link:conn.html#a9723[See Enterprise JavaBeans (EJB)
-Specification, version 3.2]) provides the latest details of the EJB
+This document uses the Jakarta Enterprise Beans component model to
+describe some scenarios. The Jakarta Enterprise Beans specification (see
+link:conn.html#a9723[See Jakarta Enterprise Beans
+Specification, version 3.2]) provides the latest details of the
 component model.
 
 === 
@@ -23848,6 +23848,11 @@ releases of the specification if all portable resource adapters written
 to the previous release of the specification will also run unchanged and
 with identical behavior on the new release of the specification.
 
+=== Changes since Connector 1.6 Specification
+
+For the move to Jakarta EE and open source at the Eclipse Foundation all
+api package names were changed to jakarta rather than javax.
+
 === Changes Since Connector 1.5 Specification
 
 This section lists the compatibility issues of
@@ -23948,7 +23953,7 @@ image:conn-170.png[image]
 This appendix contains Document Type
 Definitions (DTDs) and XML schemas (XSD) for Deployment Descriptors from
 previous versions of the J2EE Connector Architecture specification. All
-Java EE products are required to support these DTDs as well as the XML
+Jakarta EE products are required to support these DTDs as well as the XML
 Schema Definition specified in this version of the specification. This
 ensures that resource adapters written to previous versions of this
 specification can be deployed on products supporting the current version
@@ -24471,12 +24476,12 @@ security contract.
 The possible values are:
 
 
-<credential-interface>javax.resource.spi.security.PasswordCredential
+<credential-interface>jakarta.resource.spi.security.PasswordCredential
 
  </credential-interface>
 
 
-<credential-interface>javax.resource.spi.security.GenericCredential
+<credential-interface>jakarta.resource.spi.security.GenericCredential
 
  </credential-interface>
 
@@ -24691,7 +24696,7 @@ The element managedconnectionfactory-class
 specifies the
 
 name of the Java class that implements the
-javax.resource.spi.Managed-
+jakarta.resource.spi.Managed-
 
 ConnectionFactory interface. This Java class
 is provided as part of
@@ -30197,7 +30202,7 @@ contract between the application server and the caching manager.
 === Interface
 
 Each caching manager implements the
-_javax.transaction.Synchronization_ interface. A caching manager
+_jakarta.transaction.Synchronization_ interface. A caching manager
 registers its _Synchronization_ instance with the application server
 when it is configured with the application server.
 
@@ -30222,7 +30227,7 @@ notification to do any cache cleanups if a rollback has occurred.
 === Implementation
 
 The caching manager must support the
-_javax.transaction.Synchronization_ interface. If the caching manager
+_jakarta.transaction.Synchronization_ interface. If the caching manager
 implements the _Synchronization_ interface and registers it with the
 application server, then the application server must invoke the
 _beforeCompletion_ and _afterCompletion_ notifications.
@@ -30256,15 +30261,15 @@ link:conn.html#a1563[See Security Architecture] and
 link:conn.html#a1713[See Security Contract] specify the
 requirements that are supported in this version of the specification.
 
-A Java EE application is a multi-tier,
+A Jakarta EE application is a multi-tier,
 web-enabled application that accesses EISs. It consists of one or more
-application components—EJBs, JSPs, servlets—which are deployed on
+application components—Jakarta Enterprise Beans, Jakarta Server Pages, servlets—which are deployed on
 containers. These containers can be one of the following:
 
-Web containers that host JSP, servlets, and
+Web containers that host Jakarta Server Pages, servlets, and
 static HTML pages
 
-EJB containers that host EJB components
+Jakarta Enterprise Beans containers that host Jakarta Enterprise Beans components
 
 Application client containers that host
 standalone application clients
@@ -30279,8 +30284,8 @@ image:conn-179.png[image]
 [[a9539]]eStore Application
 
 Company A has an eStore application based on
-the Java EE platform. The eStore application is composed of EJBs and
-JSP/servlets; together they collaborate to provide the overall
+the Jakarta EE platform. The eStore application is composed of Jakarta Enterprise Beans and
+servlets; together they collaborate to provide the overall
 functionality of the application. The application also utilizes an
 eStore database to store data related to product catalog, shopping
 carts, customer registration and profiles, transaction status and
@@ -30329,7 +30334,7 @@ Internet access.
 The security domain configuration for the
 eStore application includes secure web access to the eStore application.
 Secure web access is set up based on the requirements specified in the
-Java EE specification. Note that the focus of this section is security
+Jakarta EE specification. Note that the focus of this section is security
 related to EIS integration, not on web access security. As a result,
 this description ignores web access security.
 
@@ -30366,10 +30371,10 @@ transactions.
 image:conn-181.png[image]
 
 This document does not address how principal delegation happens between
-the web and EJB containers. When an EJB instance acquires an EIS
-connection, a caller principal is associated with the EJB instance. This
+the web and Jakarta Enterprise Bean containers. When an Jakarta Enterprise Bean instance acquires an EIS
+connection, a caller principal is associated with the Jakarta Enterprise Bean instance. This
 document does not address determining which caller principal is
-associated with the EJB instance.
+associated with the Jakarta Enterprise Bean instance.
 
 image:conn-181.png[image]
 
@@ -30430,14 +30435,14 @@ image:conn-179.png[image]
 [[a9572]]Employee Self-Service Application
 
 Company B has developed and deployed an
-employee self-service (ESS) application based on the Java EE platform.
+employee self-service (ESS) application based on the Jakarta EE platform.
 This application supports a web interface to the existing Human
 Resources (HR) applications, which are supported by the ERP system from
 Vendor X. The ESS application also provides additional business
 processes customized to the requirements of Company B.
 
-The application tier is composed of EJBs and
-JSPs that provide the customization of the business processes and
+The application tier is composed of Jakarta Enterprise Beans and
+Jakarta Server Pages that provide the customization of the business processes and
 support a company-standardized web interface. The ESS application
 enables an employee (under the roles of Manager, HR manager, and
 Employee) to perform various HR functions, including personal
@@ -30562,8 +30567,8 @@ financial aspects of the procurement business processes can be tracked.
 
 The following figure illustrates an
 architecture for this purchasing application. The application has been
-developed and deployed based on the Java EE platform and is composed of
-EJBs and JSPs. The EJB components provide the integration across the
+developed and deployed based on the Jakarta EE platform and is composed of
+Jakarta Enterprise Beans and Jakarta Server Pages. The Jakarta Enterprise Bean components provide the integration across the
 different applications—the logistics application from a separate vendor
 (this application provides integrated purchasing and inventory
 management functions) and the financial accounting applications (the
@@ -31175,13 +31180,13 @@ Related Documents
 
 image:conn-198.png[image]
 
-[[a9723]]Enterprise JavaBeans (EJB)
-Specification, version 3.2
+[[a9723]]Jakarta Enterprise JavaBeans
+Specification, version 4.0
 
 http://jcp.org/en/jsr/detail?id=345
 
-[[a9725]]Java Transaction API (JTA)
-Specification, version 1.2
+[[a9725]]Jaakarta Transaction API
+Specification, version 2.0
 
 http://jcp.org/en/jsr/detail?id=907
 
@@ -31209,35 +31214,30 @@ Authorization Service Specification, version 1.0
 
 http://www.oracle.com/technetwork/java/javase/jaas/
 
-[[a9737]]Java Platform, Enterprise
-Edition (Java EE) Specification, version 7
+[[a9737]]Jakarta Platform, Enterprise
+Edition (Jakarta EE) Specification, version 9
 
 http://jcp.org/en/jsr/detail?id=342
 
-JavaServer Pages (JSP) Specification, version
-2.3
+Jakarta Server Pages Specification, version
+3.0
 
 http://jcp.org/en/jsr/detail?id=245
 
-[[a9741]]Java Servlet
-Specification, version 3.1
+[[a9741]]Jakarta Servlet
+Specification, version 5.0
 
 http://jcp.org/en/jsr/detail?id=340
 
-[[a9743]]Java Message Service
-Specification, version 2.0
+[[a9743]]Jakarta Message Service
+Specification, version 3.0
 
 http://jcp.org/en/jsr/detail?id=343
 
 [[a9745]]Java Platform, Standard
-Edition 7API Specification
+Edition 8 API Specification
 
-http://docs.oracle.com/javase/7/docs/api/
-
-[[a9747]]J2EE Deployment API
-Specification
-
-http://jcp.org/en/jsr/detail?id=088
+http://docs.oracle.com/javase/8/docs/api/
 
 [[a9749]]JavaBeans Specification
 1.01 Final Release
@@ -31249,8 +31249,8 @@ Service Provider Interface for Containers Specification, version 1.4
 
 http://jcp.org/en/jsr/detail?id=196
 
-[[a9753]]Bean Validation
-Specification, version 1.1
+[[a9753]]Jakarta Bean Validation
+Specification, version 2.0
 
 http://jcp.org/en/jsr/detail?id=303
 
@@ -31259,13 +31259,11 @@ the Java Programming Language
 
 http://jcp.org/en/jsr/detail?id=175
 
-[[a9757]]Common annotations for the
-Java Platform Specification, version 1.2
+[[a9757]]Jakarta Annotations, version 1.2
 
 http://jcp.org/en/jsr/detail?id=250
 
-[[a9759]]Contexts and Dependency
-Injection for the Java EE Platform 1.1
+[[a9759]]Jakarta Contexts and Dependency Injection 3.0
 
 http://jcp.org/en/jsr/detail?id=346
 
