@@ -1837,7 +1837,7 @@ ManagedConnectionFactory and ActivationSpec JavaBeans.
 Resource Adapter Instance
 (Composition)
 
-image:conn-30.png[image]
+image:conn-30.jpg[image]
 
 [[a428]]
 === ManagedConnectionFactory JavaBean and Outbound Communication
