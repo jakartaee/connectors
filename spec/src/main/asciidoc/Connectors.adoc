@@ -5667,13 +5667,7 @@ detect whether a resource adapter supports this optimization or not.
 
 
 
-=== 
-
-=== 
-
-image:conn-66.png[image]
-
-[[a1563]]Security Architecture
+== [[a1563]]Security Architecture
 
 image:conn-67.png[image]
 
@@ -5682,11 +5676,7 @@ integration of EISs with the Jakarta EE platform. It
 adds EIS integration-specific security details to the security
 requirements specified in other Jakarta EE specifications.
 
-=== 
-
-image:conn-68.png[image]
-
-Overview
+=== Overview
 
 It is critical that an enterprise be able to
 depend on the information in its EIS for its business activities. Any
@@ -5695,47 +5685,43 @@ can be extremely costly to an enterprise. There are several mechanisms
 that can be used to protect an EIS against such security threats,
 including:
 
-Identification and authentication of
+* Identification and authentication of
 principals, human users to verify they are who they claim to be.
 
-Authorization and access control to determine
+* Authorization and access control to determine
 whether a principal is allowed to access an application server and/or an
 EIS.
 
-Secure communication between an application
+* Secure communication between an application
 server and an EIS. Communication over insecure links can be protected
 using a protocol, for example, Kerberos, that provides authentication,
 integrity, and confidentiality services. Communication can also be
 protected by using a secure link protocol, for example, SSL.
 
-=== 
-
-image:conn-68.png[image]
-
-Goals
+=== Goals
 
 The security architecture is designed to meet
 the following goals:
 
-Extend the end-to-end security model for Jakarta
+* Extend the end-to-end security model for Jakarta
 EE applications to include integration with EISs based
 on Jakarta Connectors.
 
-Support authentication and authorization of
+* Support authentication and authorization of
 users who are accessing EISs.
 
-Keep the security architecture technology
+* Keep the security architecture technology
 neutral and enable the specified security contract to be supported by
 various security technologies.
 
-Enable the security architecture to support a
+* Enable the security architecture to support a
 range of EISs with different levels of security support and existing
 security environments.
 
-Support security configuration of a resource
+* Support security configuration of a resource
 adapter in an operational environment.
 
-Keep the security model for Jakarta Connector-based EIS
+* Keep the security model for Jakarta Connector-based EIS
 integration transparent to an application
 component provider. This includes providing support for single sign-on
 across multiple EISs.
@@ -5743,63 +5729,59 @@ across multiple EISs.
 The security model for EIS integration is not
 designed to do the following:
 
-Mandate a specific technology and describe how
+* Mandate a specific technology and describe how
 it can be used to implement the security architecture for
 Jakarta Connector-based EIS integration.
 
-Specify and mandate a specific security
+* Specify and mandate a specific security
 policy. The security architecture enables an application server and EIS
 to support the implementation and administration of security policies
 based on their respective requirements.
 
-=== 
-
-image:conn-68.png[image]
-
-[[a1583]]Terminology
+=== [[a1583]]Terminology
 
 The following terms are used in this chapter:
 
- _Principal_ . A principal is an entity that
+* *_Principal_* . A principal is an entity that
 can be authenticated by an authentication mechanism deployed in an
 enterprise. A principal is identified using a principal name and
 authenticated using authentication data. The content and format of the
 principal name and the authentication data depend upon the
 authentication mechanism.
 
-Security Attributes. A principal has a set of
+* *Security Attributes.* A principal has a set of
 security attributes associated with it. These security attributes are
 related to the authentication and authorization mechanisms. Some
 examples are security permissions, and credentials for a principal.
 
-Credential. A credential contains or
+* *Credential.* A credential contains or
 references security information that can authenticate a principal to
 additional services. A principal acquires a credential upon
 authentication or from another principal that allows its credential to
 be used. The latter is termed principal delegation.
 
-End user. An end user is an entity, human or
+* *End user.* An end user is an entity, human or
 service, that acts as a source of a request to an application. An end
 user is represented as a security principal within a _Subject_ as
 specified in the JAAS framework (see <<a9735,
 Java Authentication and Authorization Service Specification, version
 1.0>>).
 
-Initiating Principal. The security principal
+* *Initiating Principal.* The security principal
 representing the end-user that interacts directly with the application.
 An end-user can authenticate using either a web client or an application
 client.
 
-Caller Principal. A principal that is
+* *Caller Principal.* A principal that is
 associated with an application component instance during a method
 invocation. For example, a Jakarta Enterprise Beans instance can call the
 _getCallerPrincipal_ method to get the principal associated with the
 current security context.
 
-Resource Principal. A security principal under
+* *Resource Principal.* A security principal under
 whose security context a connection to an EIS instance is established.
 
-Security domain. A scope within which certain
+* *Security domain.* A scope within which certain
 common security mechanisms and policies are established. This
 specification does not specify the scope of a security domain. An
 enterprise can contain more than one security domain. Thus an
@@ -5826,11 +5808,7 @@ principal has been setup by the system administrator or deployer.
 Refer to <<a1724, Interfaces and Classes>> for details on interfaces and classes that are
 used to represent a resource principal and its credentials.
 
-=== 
-
-image:conn-68.png[image]
-
-Application Security Model
+=== Application Security Model
 
 This section is a brief summary of the
 security model from the perspective of an application component
@@ -5847,12 +5825,12 @@ security context of the resource principal.
 The application component provider has the
 following two choices related to EIS sign-on:
 
-Allow the deployer to set up the resource
+* Allow the deployer to set up the resource
 principal and EIS sign-on information. For example, the deployer sets
 the user name and password for establishing a connection to an EIS
 instance.
 
-Perform sign-on to an EIS from the component
+* Perform sign-on to an EIS from the component
 code by providing explicit security information for a resource
 principal.
 
@@ -5866,7 +5844,7 @@ the EIS. If the _res-auth_ element is _Container_ , the application
 server takes on the responsibility of setting up and managing EIS
 sign-on.
 
-=== Scenario: Container-Managed Sign-on
+==== Scenario: Container-Managed Sign-on
 
 The application component provider sets the
 _res-auth_ deployment descriptor element, or the equivalent metadata
@@ -5886,41 +5864,25 @@ parameters. The component relies on the application server to manage
 sign-on to the EIS instance based on the security information configured
 by the Deployer.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 // Method in an application component
 
 Context initctx = new InitialContext();
 
-
-
-// perform JNDI lookup to obtain connection
-factory
-
+// perform JNDI lookup to obtain connection factory
 jakarta.resource.cci.ConnectionFactory cxf =
+ (jakarta.resource.cci.ConnectionFactory)initctx.lookup(“java:comp/env/eis/MyEIS”);
 
+// Invoke factory to obtain a connection. The security
+// information is not passed in the getConnection method
 
-(jakarta.resource.cci.ConnectionFactory)initctx.lookup(
-
- “java:comp/env/eis/MyEIS”);
-
-
-
-// Invoke factory to obtain a connection. The
-security
-
-// information is not passed in the
-getConnection method
-
-jakarta.resource.cci.Connection cx =
-cxf.getConnection();
+jakarta.resource.cci.Connection cx = cxf.getConnection();
 
 ...
+----
 
-|===
-
-=== Scenario: Component-Managed Sign-on
+==== Scenario: Component-Managed Sign-on
 
 The application component provider sets the
 _res-auth_ element to be _Application._
@@ -5930,48 +5892,31 @@ sign-on to the EIS. The application component passes explicit security
 information, for example, the username and password, to the
 _getConnection_ method of the _ConnectionFactory_ instance.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 // Method in an application component
 
 Context initctx = new InitialContext();
 
 
-
-// perform JNDI lookup to obtain connection
-factory
-
+// perform JNDI lookup to obtain connectionfactory
 jakarta.resource.cci.ConnectionFactory cxf =
-
-
-(jakarta.resource.cci.ConnectionFactory)initctx.lookup(
-
- “java:comp/env/eis/MyEIS”);
-
-
+     (jakarta.resource.cci.ConnectionFactory)initctx.lookup(“java:comp/env/eis/MyEIS”);
 
 // Invoke factory to obtain a connection
 
 com.myeis.ConnectionSpecImpl properties = ..
 // get a new ConnectionSpec
-
 properties.setUserName(“...”);
-
 properties.setPassword(“...”);
 
-jakarta.resource.cci.Connection cx =
-cxf.getConnection(properties);
+jakarta.resource.cci.Connection cx = cxf.getConnection(properties);
 
 ...
 
-|===
+----
 
-=== 
-
-image:conn-68.png[image]
-
-EIS Sign-on
+=== EIS Sign-on
 
 Creating a new physical connection requires a
 sign-on to an EIS instance. Changing the security context on an existing
@@ -5981,20 +5926,20 @@ re-authentication.
 An EIS sign-on typically involves one or more
 of the following steps:
 
-Determine a resource principal under whose
+* Determine a resource principal under whose
 security context a physical connection to an EIS will be established.
 
-Authenticate a resource principal if it is not
+* Authenticate a resource principal if it is not
 already authenticated.
 
-Establish a secure association between the
+* Establish a secure association between the
 application server and the EIS. This enables additional security
 mechanisms, for example, data confidentiality and integrity, to be
 applied to communication between the two entities.
 
-Set the access control to EIS resources.
+* Set the access control to EIS resources.
 
-=== [[a1644]]Authentication Mechanism
+==== [[a1644]]Authentication Mechanism
 
 An application server and an EIS collaborate
 to ensure resource principals are properly authenticated when the
@@ -6002,10 +5947,10 @@ principal connects to the underlying EIS. Jakarta Connectors
 identifies the following as the commonly-supported authentication
 mechanisms:
 
- _BasicPassword -_ Basic password based
+* _BasicPassword -_ Basic password based
 authentication mechanism specific to an EIS
 
- _Kerbv5 -_ Kerberos version 5-based
+* _Kerbv5 -_ Kerberos version 5-based
 authentication mechanism
 
 The _authentication-mechanism-type_ element is
@@ -6024,14 +5969,14 @@ server and an EIS. An application server may support any other
 authentication mechanisms for EIS sign-on. The connector security
 architecture is independent of security mechanisms.
 
-=== [[a1650]]Resource Principal
+==== [[a1650]]Resource Principal
 
 When an application component requests a
 connection from a resource adapter, the connection request is made under
 the security context of a resource principal. The Deployer can set a
 resource principal based on the following options:
 
-Configured Identity. In this case, a resource
+* *Configured Identity.* In this case, a resource
 principal has its own configured identity and security attributes
 independent of the identity of the initiating or caller principal. The
 identity of the resource principal can be configured either at
@@ -6045,7 +5990,7 @@ principal is A, then the configured resource principals can be B and C
 on two different EIS instances, where A, B, and C are independent
 identities.
 
-Principal Mapping. A resource principal is
+* *Principal Mapping.* A resource principal is
 determined by mapping from the identity and/or security attributes of
 the initiating or caller principal. In this case, a resource principal
 does not inherit identity or security attributes of a principal that it
@@ -6054,7 +5999,7 @@ security attributes based on the mapping. For example, if the caller
 principal has identity A, then the mapped resource principal is
 _mapping(A,EIS1)_ and _mapping(A, EIS2)_ on two different EIS instances.
 
-Caller Impersonation. A resource principal
+* *Caller Impersonation.* A resource principal
 acts on behalf of an initiating or caller principal. Acting on behalf of
 a caller principal requires that the caller’s identity and credentials
 be delegated to the EIS. The mechanism by which this is accomplished is
@@ -6072,7 +6017,7 @@ supports a mechanism for the delegation of authentication. Refer to the
 Kerberos v5 specification for more details. The security technology
 specific details are out of the scope of Jakarta Connectors.
 
-Credentials Mapping. This mechanism may be
+* *Credentials Mapping.* This mechanism may be
 used when an application server and EIS support different authentication
 domains. For example, the initiating principal has been authenticated
 and has public key certificate-based credentials. The security
@@ -6088,15 +6033,14 @@ principal. For example, a principal with identity A has initial
 credentials _cred(A,mech1)_ and has credentials _cred(A,mech2)_ after
 mapping. _mech1_ and _mech2_ represents different mechanism types.
 
-=== Authorization Model
+==== Authorization Model
 
 Authorization checking to ensure that a
 principal has access to an EIS resource can be applied at one or more of
 the following:
 
-At the EIS
-
-At the application server
+* At the EIS
+* At the application server
 
 Authorization checking at the target EIS can
 be done in an EIS-specific way and is not specified here. For example,
@@ -6114,7 +6058,7 @@ and servlet specifications for more details. An application component
 developer developing components for EIS access must follow the
 requirements defined in these specifications.
 
-=== [[a1665]]Secure Association
+==== [[a1665]]Secure Association
 
 The communication between an application
 server and an EIS can be subject to security threats such as data
@@ -6126,16 +6070,16 @@ communicate securely with an EIS.
 Establishing a secure association includes
 several steps:
 
-The resource principal is authenticated to the
+* The resource principal is authenticated to the
 EIS. This may require that the target principal in the EIS domain
 authenticate itself back to the application server. A target principal
 can be set up by the system administrator as a security principal
 associated with a running EIS instance or specific EIS resource.
 
-Negotiate quality of protection such as
+* Negotiate quality of protection such as
 confidentiality and integrity.
 
-A pair of communicating entities—an
+* A pair of communicating entities—an
 application server and an EIS instance—establish a shared security
 context using the credentials of the resource principal. The security
 context encapsulates shared state information, required so that
@@ -6166,11 +6110,7 @@ the resource principal. Subsequently, all application-level invocations
 to the EIS instance using the connection happen under the security
 context of the resource principal.
 
-=== 
-
-image:conn-68.png[image]
-
-Roles and Responsibilities
+=== Roles and Responsibilities
 
 This section describes various roles involved
 in the security architecture. It also describes responsibilities of each
@@ -6180,36 +6120,36 @@ The roles and responsibilities of the
 Application Component Provider and Deployer are specified in detail in
 the respective Jakarta EE component model specifications.
 
-=== [[a1678]]Application Component Provider
+==== [[a1678]]Application Component Provider
 
 The following features are common across
 different Jakarta EE component models from the perspective of an
 Application Component Provider:
 
-An Application Component Provider invariably
+* An Application Component Provider invariably
 avoids the burden of securing its application and focuses on developing
 the business functionality of its application.
 
-A security-aware Application Component
+* A security-aware Application Component
 Provider can use a simple programmatic interface to manage security at
 an application level. The programmatic interface enables the Application
 Component Provider to program access control decisions based on the
 security context—the principal and role—associated with the caller of a
 method and to manage programmatic sign-on to an EIS.
 
-An Application Component Provider specifies
+* An Application Component Provider specifies
 security requirements for its application declaratively through metadata
 annotation and deployment descriptor. The security requirements include
 security roles, method permissions, and an authentication approach for
 EIS sign-on.
 
-More qualified roles - Application Server
+* More qualified roles - Application Server
 Vendor, Deployer, System Administrator - have the responsibility of
 satisfying overall security requirements through the deployment
 mechanism for resource adapters and components, and managing the
 security environment.
 
-=== Deployer
+==== Deployer
 
 The Deployer specifies security policies that
 ensure secure access to the underlying EISs from application components.
@@ -6229,11 +6169,11 @@ The Deployer performs the following deployment
 tasks for each connection factory reference declared in the deployment
 descriptor of an application component:
 
-Provides a connection factory specific
+* Provides a connection factory specific
 security configuration that is needed for opening and managing
 connections to an EIS instance.
 
-Binds the connection factory reference in the
+* Binds the connection factory reference in the
 deployment descriptor of an application component to the JNDI registered
 reference for the connection factory. Refer to
 <<a5258, JNDI Configuration and Lookup>> for the
@@ -6242,12 +6182,12 @@ resource adapter. The deployer can use the JNDI _LinkRef_ mechanism to
 create a symbolic link to the actual JNDI name of the connection
 factory.
 
-Configures the security information for EIS
+* Configures the security information for EIS
 sign-on, if the value of the _res-auth_ deployment descriptor element is
 _Container_ . For example, the Deployer sets up the principal mapping
 for EIS sign-on.
 
-=== Application Server
+==== Application Server
 
 The application server provides a security
 environment with specific security policies and mechanisms that support
@@ -6258,12 +6198,12 @@ EISs.
 The typical responsibilities of an application
 server are as follows:
 
-Provide tools to set up security information
+* Provide tools to set up security information
 for a resource principal and EIS sign-on when _res-auth_ element is set
 to _Container_ . This includes support for principal delegation and
 mapping for configuring a resource principal.
 
-Provide tools to support management and
+* Provide tools to support management and
 administration of its security domain. For example, security domain
 administration can include setting up and maintaining both underlying
 authentication services and trusts between domains, plus managing
@@ -6271,7 +6211,7 @@ principals, including identities, keys, and attributes. Such
 administration is typically security technology specific and is outside
 the scope of the Jakarta Connector Architecture.
 
-Support a single sign-on mechanism that spans
+* Support a single sign-on mechanism that spans
 the application server and multiple EISs. The security mechanisms and
 policies through which single sign-on is achieved are outside the scope
 of the Jakarta Connector Architecture.
@@ -6281,7 +6221,7 @@ specifies how JAAS can be used by an application
 server to support the requirements of the connector security
 architecture.
 
-=== EIS Vendor
+==== EIS Vendor
 
 EIS provides a security infrastructure and
 environment that supports the security requirements of the client
@@ -6289,7 +6229,7 @@ applications. An EIS can have its own security domain with a specific
 set of security policies and mechanisms, or it can be set up as part of
 an enterprise-wide security domain.
 
-=== Resource Adapter Provider
+==== Resource Adapter Provider
 
 The resource adapter provider provides a
 resource adapter that supports the security requirements of the
@@ -6308,7 +6248,7 @@ specifies a standard deployment descriptor for a resource adapter.
 metadata annotations used to express security requirements of a resource
 adapter.
 
-=== System Administrator
+==== System Administrator
 
 The system administrator typically works in
 close association with administrators of multiple EISs that have been
@@ -6318,16 +6258,16 @@ can also be performed by the Deployer.
 The following tasks are illustrative examples
 of the responsibilities of the system administrator:
 
-Set up an operational environment based on the
+* Set up an operational environment based on the
 technology and requirements of the authentication service, and if an
 enterprise directory is supported.
 
-Configure the user account information for
+* Configure the user account information for
 both the application server and the EIS in the enterprise directory. The
 user account information from the enterprise directory can then be used
 for authentication of users requesting connectivity to the EIS.
 
-Establish a password synchronization mechanism
+* Establish a password synchronization mechanism
 between the application server and the EIS. This ensures that the user’s
 security information is identical on both the application server and the
 EIS. When an EIS requires authentication, the application server passes
@@ -6335,15 +6275,8 @@ the user’s password to the EIS.
 
 
 
-=== 
+== [[a1713]]Security Contract
 
-=== 
-
-image:conn-69.png[image]
-
-[[a1713]]Security Contract
-
-image:conn-70.png[image]
 
 This chapter specifies the security contract
 between the application server and the EIS. It also specifies the
