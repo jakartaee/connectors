@@ -1,18 +1,12 @@
 :sectnums:
-= Jakarta Connectors, Version 2.0
+== Jakarta Connectors, Version 2.0
 
-Copyright (c) 2013, 2020 Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2013, 2020 Oracle and/or its affiliates
 
 Oracle and Java are registered trademarks of Oracle and/or its 
 affiliates. Other names may be trademarks of their respective owners. 
 
-=== 
-
-image:conn-9.png[image]
-
-Introduction
-
-image:conn-10.png[image]
+== Introduction
 
 The Jakarta Platform, Enterprise Edition (Jakarta
 EE platform) provides containers for client applications, web components
@@ -46,11 +40,7 @@ and EISs. It also formalizes the relationships, interactions, and the
 packaging of the integration layer, thus enabling enterprise application
 integration.
 
-=== 
-
-image:conn-11.png[image]
-
-Overview
+=== Overview
 
 Jakarta Connectors defines a
 standard architecture for connecting the Jakarta EE platform to
@@ -82,33 +72,26 @@ seamless connectivity to multiple EISs. Likewise, an EIS vendor provides
 one standard resource adapter which has the capability to plug in to any
 application server that supports the connector architecture.
 
-=== 
+=== Scope
 
-image:conn-11.png[image]
-
-Scope
-
-Version 1.0 of the connector architecture
+Version 2.0 of the connector architecture
 defines:
 
-A standard set of system-level contracts
+* A standard set of system-level contracts
 between an application server and EIS. These contracts focus on the
 important system-level aspects of integration: connection management,
 transaction management, and security.
 
-A Common Client Interface (CCI) that defines a
+* A Common Client Interface (CCI) that defines a
 client API for interacting with multiple EISs.
 
-A standard deployment and packaging protocol
+* A standard deployment and packaging protocol
 for resource adapters.
 
 Refer to section 2.2.2 for the rationale
 behind the Common Client Interface.
 
-Version 1.5 of the connector architecture
-defines:
-
-Lifecycle management contract. A contract
+* *Lifecycle management contract*. A contract
 between an application server and a resource adapter that allows an
 application server to manage the lifecycle of a resource adapter. This
 contract provides a mechanism for the application server to bootstrap a
@@ -116,7 +99,7 @@ resource adapter instance during its deployment or application server
 startup, and to notify the resource adapter instance during its
 undeployment or during an orderly shutdown of the application server.
 
-Work management contract. A contract between
+* *Work management contract*. A contract between
 an application server and a resource adapter that allows a resource
 adapter to do work (monitor network endpoints, call application
 components, etc.) by submitting _Work_ instances to an application
@@ -128,7 +111,7 @@ runtime environment. The resource adapter can control the security
 context and transaction context with which _Work_ instances are
 executed.
 
-Transaction inflow contract. A contract
+* *Transaction inflow contract*. A contract
 between an application server and a resource adapter that allows a
 resource adapter to propagate an imported transaction to an application
 server. This contract also allows a resource adapter to transmit
@@ -136,7 +119,7 @@ transaction completion and crash recovery calls initiated by an EIS, and
 ensures that the ACID (Atomicity, Consistency, Isolation and Durability)
 properties of the imported transaction are preserved.
 
-Message inflow contract. A standard, generic
+* *Message inflow contract*. A standard, generic
 contract between an application server and a resource adapter that
 allows a resource adapter to asynchronously deliver messages to message
 endpoints residing in the application server independent of the specific
@@ -147,14 +130,11 @@ providers (Java Message Service (JMS), Java API for XML Messaging
 (JAXM), etc.) to be plugged into any Java EE compatible application
 server by way of a resource adapter.
 
-Packaging Model. Describes the packaging model
+* *Packaging Model*. Describes the packaging model
 for different types of resource adapters (outbound only, inbound only,
 or both).
 
-Version 1.6 of the Connector Architecture
-defines:
-
-Generic work context contract. A generic
+* *Generic work context contract*. A generic
 contract that enables a resource adapter to control the execution
 context of a _Work_ instance that it has submitted to the application
 server for execution. The Generic work contract provides the mechanism
@@ -164,7 +144,7 @@ This contract enables a resource adapter to control, in a more flexible
 manner, the contexts in which the _Work_ instances submitted by it are
 executed by the application server’s _WorkManager_ .
 
-Security work context. A standard contract
+* *Security work context*. A standard contract
 that enables a resource adapter to establish security information while
 submiting a _Work_ instance for execution to a _WorkManager_ and while
 delivering messages to message endpoints residing in the application
@@ -175,26 +155,18 @@ an EIS to a MessageEndpoint during Message Inflow.
 
 Version 2.0 of Jakarta Connectors moves the old Java Connectors Architecture specification to Jakarta EE.
 
-=== 
-
-image:conn-11.png[image]
-
-Target Audience
+=== Target Audience
 
 The target audience for this specification
 includes:
 
-EIS vendors and resource adapter providers
-
-Messaging system vendors
-
-Application server vendors and container
+* EIS vendors and resource adapter providers
+* Messaging system vendors
+* Application server vendors and container
 providers
-
-Enterprise application developers and system
+* Enterprise application developers and system
 integrators
-
-Enterprise tool and EAI vendors
+* Enterprise tool and EAI vendors
 
 The system-level contracts between an
 application server and an EIS are targeted towards EIS vendors (or
@@ -202,11 +174,7 @@ resource adapter providers, if the two roles are different) and
 application server vendors. The CCI is targeted primarily towards
 enterprise tools and EAI vendors.
 
-=== 
-
-image:conn-11.png[image]
-
-JDBC and Jakarta Connectors
+=== JDBC and Jakarta Connectors
 
 The JavaTM DataBase Connectivity ("JDBCTM")
 API defines a standard Java API for accessing relational databases. The
@@ -238,11 +206,8 @@ with those of a transactional resource manager. The JDBC 3.0
 specification <<a9727, JDBC API Specification, version 4.1>> specifies the relationship of JDBC to the
 SPI specified in the connector architecture.
 
-=== 
 
-image:conn-11.png[image]
-
-Relationship With Other Integration Technologies (JBI and SCA)
+=== Relationship With Other Integration Technologies (JBI and SCA)
 
 The Enterprise Application Integration (EAI)
 and Business to Business integration (B2B) functional space may be
@@ -269,11 +234,7 @@ typically fall into this category of network resource. The Connector
 architecture is the mechanism that the Java EE platform provides to
 simplify use of such network resources.
 
-=== 
-
-image:conn-11.png[image]
-
-Organization
+=== Organization
 
 This document begins by describing the
 rationale and goals for creating a standard architecture to integrate an
@@ -288,13 +249,9 @@ deployment of enterprise applications that integrate with multiple EISs.
 
 After these descriptive sections, this
 document focuses on the prescriptive aspects of the connector
-architecture.
+architecture. 
 
-=== 
-
-image:conn-11.png[image]
-
-Document Conventions
+=== Document Conventions
 
 A regular Palatino font is used for describing
 the connector architecture.
@@ -319,410 +276,34 @@ describe some scenarios. The Jakarta Enterprise Beans specification (see
 <<a9723, Jakarta Enterprise Beans Specification, version 3.2>> provides the latest details of the
 component model.
 
-=== 
+== Overview
 
-image:conn-11.png[image]
+This chapter introduces key concepts that are required to understand Jakarta Connectors.
+It lays down a reference framework to facilitate a formal specification of
+the connector architecture in the subsequent chapters of this document.
 
-Connector Architecture Version 1.7 Contributor Details
+=== Definitions
 
-=== Expert Group Details (JSR-322)
-
-Refer to the URL
-_http://www.jcp.org/en/jsr/detail?id=322_ for details on the first
-maintenance release of JSR-322. The following table lists the members of
-the Connector Expert Group.
-
-=== Connector 1.7 Expert Group Members
-
-Company
-
-Expert Member
-
-IBM
-
-Fred Rowe
-
-Oracle
-
-Weijun Tian, Sivakumar Thygaarajan
-(Specification Lead)
-
-Red Hat Middleware LLC
-
-Jesper Pedersen
-
-=== Acknowledgements
-
-This maintenance release of the specification
-is the result of the collaborative efforts of the Java EE Connector
-Architecture 1.7 Expert Group (JSR-322) (individual members listed
-above) through discussions in the java.net project at
-_http://connector-spec.java.net_ .
-
-The specification leads of the Java EE 7
-Platform, Bill Shannon and Linda DeMichiel, provided overall guidance
-and helped review the specification. Nigel Deakin and Marina Vatkina
-provided valuable inputs for this specification related to enhancements
-in the Message Inflow chapter. Byung-Woo Jun from Ericsson Infotech AB
-participated as an expert group member earlier in this maintenance
-release and gave valuable inputs for this specification.
-
-Binod PG reviewed drafts of the specification
-and gave valuable feedback. Jagadish Ramu and Dapeng Hu from the Java EE
-Reference Implementation team (Project GlassFish) and Paul Hendley from
-the Java EE Compatibility Test Suite team provided a lot of useful
-comments and inputs to the content of this specification.
-
-Murthy Narayanan and Prasad Subramanian
-provided management support.
-
-
-
-=== 
-
-image:conn-11.png[image]
-
-Connector Architecture Version 1.6 Contributor Details
-
-=== Expert Group Details (JSR-322)
-
-Refer to the URL
-http://www.jcp.org/en/jsr/detail?id=322 for details on JSR-322. The
-following table lists the members of the Connector Expert Group.
-
-=== Connector 1.6 Expert Group Members
-
-Company
-
-Expert Member
-
-Ericsson Infotech AB
-
-Eltjo Boersma
-
-IBM
-
-Piotr Przybylski
-
-Oracle
-
-Jim Gish, Michael Gilbode, Weijun Tian
-
-Red Hat Middleware LLC
-
-Adrian Brock, Jesper Pedersen
-
-SAP AG Walldorf
-
-Nikolai Tankov
-
-Sun Microsystems, Inc.
-
-Binod PG and Sivakumar Thyagarajan
-(Specification Leads)
-
-Tmax Soft, Inc
-
-Bongjae Chang, Eugene Chung
-
-=== Acknowledgements
-
-Many people contributed to the preparation
-and review of this specification and we would like to thank them.
-
-This specification is the result of the
-collaborative efforts of the Java EE Connector Architecture 1.6 Expert
-Group whose individual members, listed above, contributed countless
-hours to ensure the success of this specification.
-
-The specification leads of the Java EE 6
-Platform, Bill Shannon and Roberto Chinnici, provided overall guidance
-and helped review the specification. Ron Monzillo provided technical and
-design assistance for the Security Inflow Contract of the specification.
-Kenneth Saks, Lance Andersen, Rajiv Mordani, George Tharakan, Frank
-Kieviet and Jan Luehe provided guidance and reviewed drafts of the
-specification.
-
-Jagadish Ramu and Shalini Muthukrishnan from
-the Java EE Reference Implementation team (Project GlassFish) and Paul
-Hendley from the Java EE Compatibility Test Suite team provided a lot of
-useful comments and feedback on the various drafts of the specification.
-
-Prabha MS, Paromita Dutta and Chinmayee
-Srivathsa helped with the editorial tools and Janice Helb provided
-excellent editorial assistance. Clemens Tator, Stephen Connolly and M.
-Ganesh Sudhakar provided invaluable comments through the JSR 322
-comments alias.
-
-Tom Kincaid, Murthy Narayanan and Srikanth
-Anandal provided management support.
-
-=== 
-
-image:conn-11.png[image]
-
-Connector Architecture Version 1.5 Contributor Details
-
-=== Expert Group Details (JSR-112)
-
-Refer to the URL
-http://www.jcp.org/en/jsr/detail?id=112 for details on JSR-112. The
-following table lists the members of the Connector Expert Group.
-
-=== Connector 1.5 Expert Group Members
-
-Company
-
-Expert Member
-
-BEA
-
-Jim Gish, Mitch Upton, Tom Mitchell
-
-Bull S.A.
-
-Michael Giroux
-
-Ericsson Infotech AB
-
-Peter Kristiansson
-
-Fujitsu Limited
-
-Ivar Alexander
-
-Hewlett-Packard
-
-John Speidel
-
-IBM
-
-Michael Beisiegel, Piotr Przybylski
-
-Bahwan Cybertek Technologies Inc.
-
-Vijay Sundhar
-
-Individual Expert
-
-Charlton Barreto
-
-IONA Technologies PLC
-
-Gary Tully
-
-MicroFocus
-
-Stephen Gennard
-
-NEON Systems, Inc.
-
-Yongtao You
-
-Oracle
-
-Anthony Lai
-
-SAP AG Walldorf
-
-Nikolai Tankov
-
-Siemens AG
-
-Ulf Lange
-
-Silverstream Software
-
-Roman Kishchenko
-
-Sonic Software
-
-Jaime Meritt
-
-Sun Microsystems, Inc.
-
-Ram Jeyaraman (Specification Lead)
-
-Sybase
-
-Mark DeLaFranier
-
-TIBCO Software Inc.
-
-Jon Dart, Anuradha M. Sastri
-
-Unisys
-
-Albert DeNigris
-
-WebMethods Corp
-
-Bruce Tran, Bruno Kurtic
-
-=== Acknowledgements
-
-This specification is the work of many people.
-Bill Shannon, Mark Hapner, Kenneth Saks, Rahul Sharma, and Kate Stout
-contributed to the overall design. Umit Yalcinalp designed the Connector
-1.5 XML Schema Definition.
-
-Venkat Amirisetty, Qingqing Ouyang, Binod P G,
-Balaji Raghunathan, Srikanth Padakandla and Aditya Gore from the J2EETM
-Implementation team, Gursharan Singh from J2EE Compatibility Test Suite
-team, provided useful feedback on the various drafts of the
-specification. Ian Evans provided excellent editorial assistance.
-
-Vijay Sarathy and Vivek Khandelwal did a great
-job evangelizing, strategizing, and guiding the overall direction of
-this specification. Anita Jindal, Jennifer Douglas, David Heisser,
-Bonnie Kellett, and Peter Walker provided management support.
-
-Sanjeev Krishnan, Max Mortazavi, Tony Ng,
-Linda DeMichiel, George Tharakan, Colleen Evans (Sonic Software),
-Hemanth Puttaswamy, Sheetal Vartak and Shivaram Mysore provided useful
-comments on the specification.
-
-And of course, this specification was formed
-and molded based on conversations with and review feedback from the
-expert group members.
-
-=== 
-
-image:conn-11.png[image]
-
-Connector Architecture Version 1.0 Contributor Details
-
-=== Expert Group Details (JSR-16)
-
-Refer to the URL
-http://www.jcp.org/en/jsr/detail?id=16 for details on JSR-16. The
-following are part of the expert group and have made invaluable
-contributions to the Connector architecture specification:
-
-=== Connector 1.0 Expert Group Members
-
-Company
-
-Expert Member
-
-BEA
-
-Pete Homan
-
-Fujitsu
-
-Yoshi Otagiri, Ivar Alexander
-
-IBM
-
-Tom Freund, Michael Beisiegel
-
-Inline
-
-Jack Greenfield
-
-Inprise
-
-Charlton Barreto
-
-IPlanet
-
-Tony Pan, Pavan Bhatnagar
-
-Motorola
-
-Guy Bieber
-
-Oracle
-
-Dan Coyle
-
-SAP
-
-Marek Barwicki
-
-Sun
-
-Rahul Sharma (Specification Lead)
-
-Fred H. Carter
-
-Sybase
-
-Rajini Balay, K. Swaminathan
-
-Tibco
-
-Jon Dart
-
-Unisys
-
-Lester Lee
-
-=== Acknowledgements
-
-Shel Finkelstein, Mark Hapner, Vlada Matena,
-Tony Ng, Bill Shannon, and Sekhar Vajjhala (all from Sun Microsystems)
-have provided invaluable technical input and guidance to the Connector
-architecture specification. Jean Zeng and Pong Ching also provided
-useful input to the specification.
-
-Rick Cattell, Shel Finkelstein, Bonnie
-Kellett, and Jeff Jackson have provided huge support to the
-specification lead in the management of the Connectors expert group.
-
-Tony Ng is leading the effort of providing a
-reference implementation for the Connector architecture as part of J2EE
-1.3 platform. Liz Blair has worked on providing the Compatibility Test
-Suite (CTS) plan for the Connector architecture.
-
-Beth Stearns was a great help in doing an
-editorial review of this document.
-
-=== 
-
-=== 
-
-image:conn-12.png[image]
-
-Overview
-
-image:conn-13.png[image]
-
-This chapter introduces key concepts that are
-required to understand the connector architecture. It lays down a
-reference framework to facilitate a formal specification of the
-connector architecture in the subsequent chapters of this document.
-
-=== 
-
-image:conn-14.png[image]
-
-Definitions
-
-=== Enterprise Information System (EIS)
+==== Enterprise Information System (EIS)
 
 An EIS provides the information infrastructure
 for an enterprise. An EIS offers a set of services to its clients. These
 services are exposed to clients as local and/or remote interfaces.
 Examples of an EIS include:
 
-Enterprise Resource Planning (ERP) system
-
-Mainframe transaction processing (TP) system
-
-Legacy database system
+* Enterprise Resource Planning (ERP) system
+* Mainframe transaction processing (TP) system
+* Legacy database system
 
 There are two aspects of an EIS:
 
-System level services - for example, SAP RFC,
+* System level services - for example, SAP RFC,
 CICS ECI
-
-An application specific interface - for
+* An application specific interface - for
 example, the table schema and specific stored procedures of a database,
 the specific CICS TP program
 
-=== Connector Architecture
+==== Connector Architecture
 
 An architecture for integrating Jakarta EE
 servers with EISs. There are two parts to this architecture: an EIS
@@ -739,20 +320,18 @@ use the resource adapter for outbound communication to the EIS, and it
 may also use the resource adapter for inbound communication from the
 EIS.
 
-=== EIS Resource
+==== EIS Resource
 
 An EIS resource provides EIS-specific
 functionality to its clients. Examples are:
 
-A record or set of records in a database
+* A record or set of records in a database
 system
-
-A business object in an ERP system
-
-A transaction program in a transaction
+* A business object in an ERP system
+* A transaction program in a transaction
 processing system
 
-=== Resource Manager (RM)
+==== Resource Manager (RM)
 
 A resource manager manages a set of shared EIS
 resources. A client requests access to a resource manager to use its
@@ -771,7 +350,7 @@ manager when it is mentioned in the context of transaction management.
 Examples of resource managers are a database system, a mainframe TP
 system, and an ERP system.
 
-=== Managed Environment
+==== Managed Environment
 
 A managed environment defines an operational
 environment for a Jakarta EE-based, multi-tier, web-enabled application
@@ -779,22 +358,20 @@ that accesses EISs. The application consists of one or more application
 components—Jakarta Enterprise Beans, Jakarta Server Pages, servlets—which
 are deployed on containers. These containers can be one of the following:
 
-Web containers that host Jakarta Server Pages, servlets, and
+* Web containers that host Jakarta Server Pages, servlets, and
 static HTML pages
-
-Enterprise Bean containers that host Enterprise Bean components
-
-Application client containers that host
+* Enterprise Bean containers that host Enterprise Bean components
+* Application client containers that host
 standalone application clients
 
-=== Non-Managed Environment
+==== Non-Managed Environment
 
 A non-managed environment defines an
 operational environment for a two-tier application. An application
 client directly uses a resource adapter to access the EIS, which defines
 the second tier of a two-tier application.
 
-=== Connection
+==== Connection
 
 A connection provides connectivity to a
 resource manager. It enables an application client to connect to a
@@ -805,7 +382,7 @@ connection. A connection to a resource manager may be used by a client
 for bi-directional communication, depending on the capabilities of the
 resource manager.
 
-=== Application Component
+==== Application Component
 
 An application component can be a server-side
 component, such as an Jakarta Enterprise Bean, Jakarta Server Page,
@@ -815,7 +392,7 @@ executed on the web-client tier but made available to the web-client by
 an application server. Examples of the latter type of application
 component include a Java applet, and a DHTML page.
 
-=== Container
+==== Container
 
 A container is a part of an application server
 that provides deployment and runtime support for application components.
@@ -825,16 +402,12 @@ different types of standard containers, refer to the Jakarta Enterprise Beans (s
 <<a9723, Jakarta™ Enterprise Beans Specification, Version 3.2>>,
 Jakarta Server Pages, and servlet specifications.
 
-=== 
-
-image:conn-14.png[image]
-
-Rationale
+=== Rationale
 
 This section describes the rationale behind
 Jakarta Connectors.
 
-=== System Contracts
+==== System Contracts
 
 A standard architecture is needed to integrate
 various EISs with an application server. Without a standard, EIS vendors
@@ -872,12 +445,11 @@ If there are m application servers and n EISs,
 Jakarta Connectors reduces the scope of the integration problem
 from an m x n problem to an m + n problem.
 
-System Level Pluggability
-Between Application Servers and EISs
+*Figure* System Level Pluggability Between Application Servers and EISs
 
 image:conn-15.jpg[image]
 
-=== Common Client Interface
+==== Common Client Interface
 
 An enterprise tools vendor provides tools that
 lead to a simple application programming model for EIS access, thereby
@@ -910,39 +482,35 @@ The CCI drastically reduces the effort and
 learning requirements for tools vendor by narrowing the scope of an m x
 n problem to an m + n problem if there are m tools and n EISs.
 
-=== 
-
-image:conn-14.png[image]
-
-Goals
+=== Goals
 
 Jakarta Connectors has been designed
 with the following goals:
 
-Simplify the development of scalable, secure,
+* Simplify the development of scalable, secure,
 and transactional resource adapters for a wide range of EISs—ERP
 systems, database systems, mainframe-based transaction processing
 systems.
 
-Be sufficiently general to cover a wide range
+* Be sufficiently general to cover a wide range
 of heterogeneous EISs. The sufficient generality of Jakarta Connectors
 ensures that there are various implementation choices for different
 resource adapters; each choice is based on the characteristics and
 mechanisms of an underlying EIS.
 
-Be not tied to a specific application server
+* Be not tied to a specific application server
 implementation, but applicable to all Jakarta EE platform compliant
 application servers from multiple vendors.
 
-Provide a standard client API for enterprise
+* Provide a standard client API for enterprise
 tools and EAI vendors. The standard API will be common across
 heterogeneous EISs.
 
-Express itself in a manner that allows an
+* Express itself in a manner that allows an
 organization to unambiguously determine whether or not an implementation
 is compatible.
 
-Be simple to understand and easy to follow,
+* Be simple to understand and easy to follow,
 regardless of whether one is designing a resource adapter for a
 particular EIS or developing/deploying application components that need
 to access multiple EISs. This simplicity means Jakarta Connectors
@@ -950,28 +518,18 @@ introduces only a few new concepts, and places minimal implementation
 requirements so that it can be leveraged across different integration
 scenarios and environments.
 
-Define contracts and responsibilities for
+* Define contracts and responsibilities for
 various roles that provide pieces for standard bi-directional
 connectivity to an EIS. This enables a standard resource adapter from a
 EIS vendor to be pluggable across multiple application servers.
 
-Enable an enterprise application programmer in
+* Enable an enterprise application programmer in
 a non-managed application environment to directly use the resource
 adapter to access the underlying EIS. This is in addition to managed
 access to an EIS, with the resource adapter deployed in the middle-tier
 application server.
 
-
-
-=== 
-
-=== 
-
-image:conn-16.png[image]
-
-Jakarta Connectors
-
-image:conn-17.png[image]
+== Architecture of Jakarta Connectors
 
 This chapter gives an overview of the architecture.
 
@@ -992,15 +550,12 @@ connectivity with multiple EISs.
 
 
 
-[[a265]]Overview of Jakarta Connectors architecture
+[[a265]] *Figure* Overview of the Jakarta Connectors architecture
 
 image:conn-18.jpg[image]
 
-=== 
 
-image:conn-19.png[image]
-
-System Contracts
+=== System Contracts
 
 To achieve a standard system-level
 pluggability between application servers and EISs, Jakarta Connectors
@@ -1020,65 +575,59 @@ pooling, and dispatch to application components.
 A resource adapter is used within the address
 space of the application server. Examples of resource adapters are:
 
-{empty}A JDBC driver to connect to a
+* A JDBC driver to connect to a
 relational database, as specified in the JDBC specification. For more
+<<<<<<< HEAD
 information on JDBC, see <<a9727, JDBC API Specification, version 4.1>>
+=======
+information on JDBC, see link:conn.html#a9727[See JDBC API
+Specification, version 4.1]
+* A resource adapter to connect to an ERP system
+* A resource adapter to connect to a TP system
+* A resource adapter to plug-in a messaging system
+>>>>>>> Tidy formatting up to the end of chapter 7 Transaction Management
 
-A resource adapter to connect to an ERP system
+A resource adapter may provide different types of connectivity between an application and an EIS.
 
-A resource adapter to connect to a TP system
-
-A resource adapter to plug-in a messaging
-system
-
-A resource adapter may provide different types
-of connectivity between an application and an EIS.
-
-Outbound communication. The resource adapter
+* *Outbound communication.* The resource adapter
 allows an application to connect to an EIS system and perform work. All
 communication is initiated by the application. In this case, the
 resource adapter serves as a passive library for connecting to an EIS,
 and executes in the context of the application threads.
-
-Inbound communication. The resource adapter
+* *Inbound communication.* The resource adapter
 allows an EIS to call application components and perform work. All
 communication is initiated by the EIS. The resource adapter may request
 threads from the application server or create its own threads.
-
-Bi-directional communication. The resource
+* *Bi-directional communication.* The resource
 adapter supports both outbound and inbound communication.
 
 Jakarta Connectors defines the
 following set of standard contracts between an application server and
 EIS:
 
-A connection management contract that enables
+* A connection management contract that enables
 an application server to pool connections to an underlying EIS, and
 enables application components to connect to an EIS. This leads to a
 scalable application environment that can support a large number of
 clients requiring access to EISs.
-
-A transaction management contract between the
+* A transaction management contract between the
 transaction manager and an EIS that supports transactional access to EIS
 resource managers. This contract enables an application server to use a
 transaction manager to manage transactions across multiple resource
 managers. This contract also supports transactions that are managed
 internal to an EIS resource manager without the necessity of involving
 an external transaction manager.
-
-A security contract that enables secure access
+* A security contract that enables secure access
 to an EIS. This contract provides support for a secure application
 environment that reduces security threats to the EIS and protects
 valuable information resources managed by the EIS.
-
-A lifecycle management contract that allows an
+* A lifecycle management contract that allows an
 application server to manage the lifecycle of a resource adapter. This
 contract provides a mechanism for the application server to bootstrap a
 resource adapter instance during its deployment or application server
 startup, and to notify the resource adapter instance during its
 undeployment or during an orderly shutdown of the application server.
-
-A work management contract that allows a
+* A work management contract that allows a
 resource adapter to do work (monitor network endpoints, call application
 components, etc.) by submitting _Work_ instances to an application
 server for execution. The application server dispatches threads to
@@ -1088,8 +637,7 @@ server to efficiently pool threads and have more control over its
 runtime environment. The resource adapter can control the security
 context and transaction context with which _Work_ instances are
 executed.
-
-A generic work context contract that enables a
+* A generic work context contract that enables a
 resource adapter to control the execution context of a _Work_ instance
 that it has submitted to the application server for execution. The
 Generic Work Context Contract provides the mechanism for a resource
@@ -1098,15 +646,13 @@ additional contextual information flown-in from the EIS. This contract
 enables a resource adapter to control, in a more flexible manner, the
 contexts in which the _Work_ instances submitted by it are executed by
 the application server’s _WorkManager_ .
-
-A transaction inflow contract that allows a
+* A transaction inflow contract that allows a
 resource adapter to propagate an imported transaction to an application
 server. This contract also allows a resource adapter to transmit
 transaction completion and crash recovery calls initiated by an EIS, and
 ensures that the ACID properties of the imported transaction are
 preserved.
-
-A security work context that enables a
+* A security work context that enables a
 resource adapter to establish security information while submiting a
 _Work_ instance for execution to a _WorkManager_ and while delivering
 messages to message endpoints residing in the application server. This
@@ -1114,8 +660,7 @@ contract provides a mechanism to support the execution of a _Work_
 instance in the context of an established identity. It also supports the
 propagation of user information/Principal information from an EIS to a
 MessageEndpoint during Message Inflow.
-
-A message inflow contract that allows a
+* A message inflow contract that allows a
 resource adapter to asynchronously deliver messages to message endpoints
 residing in the application server independent of the specific messaging
 style, messaging semantics, and messaging infrastructure used to deliver
@@ -1140,19 +685,21 @@ contracts. However, this separation does not imply a physical
 separation, as in an application server, application component and a
 resource adapter running in separate processes.
 
-=== 
-
-image:conn-19.png[image]
-
-Client API
+=== Client API
 
 The client API used by application components
 for EIS access may be defined as:
 
+<<<<<<< HEAD
 The standard Common Client Interface (CCI) as
 specified in <<a3927, Common Client Interface>>.
 
 A client API specific to the type of a
+=======
+* The standard Common Client Interface (CCI) as
+specified in link:conn.html#a3927[See Common Client Interface].
+* A client API specific to the type of a
+>>>>>>> Tidy formatting up to the end of chapter 7 Transaction Management
 resource adapter and its underlying EIS. An example of such an EIS
 specific client API is JDBC for relational databases.
 
@@ -1160,11 +707,7 @@ The Common Client Interface (CCI) defines a
 common client API for accessing EISs. The CCI is targeted towards
 Enterprise Application Integration (EAI) and enterprise tools vendors.
 
-=== 
-
-image:conn-19.png[image]
-
-Requirements
+=== Requirements
 
 Jakarta Connectors requires that the
 Jakarta Connectors-compliant resource adapter and the application
@@ -1182,11 +725,7 @@ adapter with an EIS-specific client API to support system contracts and
 to be capable of standard Jakarta Connectors-based pluggability into
 an application server.
 
-=== 
-
-image:conn-19.png[image]
-
-Non-Managed Environment
+=== Non-Managed Environment
 
 Jakarta Connectors supports access to
 EISs from non-managed application clients; for example, Java
@@ -1202,11 +741,7 @@ using the low-level APIs exposed by the resource adapter. This model is
 similar to the way a two-tier JDBC application client accesses a
 database system in a non-managed environment.
 
-=== 
-
-image:conn-19.png[image]
-
-Standalone Container Environment
+=== Standalone Container Environment
 
 Server Providers can provide a Connector
 container within a product that implements the Jakarta EE Full Profile or
@@ -1229,11 +764,11 @@ Based on the availability of other dependent
 component specification implementations, the following requirements must
 be satisfied by a standalone connector container.
 
-If a _MessageEndpointFactory_ implementation
+* If a _MessageEndpointFactory_ implementation
 (such as support for message-driven beans) is available, the Message
 Inflow requirements specified in <<a2576, Message Inflow>> must be satisfied by it.
 
-If an implementation of the Bean Validation
+* If an implementation of the Bean Validation
 specification is provided, the requirements in
 <<a516, Jakarta™ Bean Validation Specification, Version 2.0>> must be supported.
 
@@ -1271,15 +806,7 @@ application components or require any particular existing application
 component to be supported in the standalone connector container
 environment.
 
-=== 
-
-=== 
-
-image:conn-20.png[image]
-
-Roles and Scenarios
-
-image:conn-21.png[image]
+== Roles and Scenarios
 
 This chapter describes a set of roles specific
 to the connector architecture. The goal of this chapter is to specify
@@ -1287,16 +814,12 @@ contracts that ensure that the output of each role is compatible with
 the input of the other role. Later chapters specify a detailed set of
 responsibilities for each role, relative to the system-level contracts.
 
-=== 
-
-image:conn-22.png[image]
-
-Roles
+=== Roles
 
 This section describes the roles and
 responsibilities specific to the connector architecture.
 
-=== Resource Adapter Provider
+==== Resource Adapter Provider
 
 The resource adapter provider is an expert in
 the technology related to an EIS and is responsible for providing a
@@ -1309,7 +832,7 @@ of application development tools. Such a provider typically specializes
 in writing resource adapters and related tools for a large number of
 EISs.
 
-=== Application Server Vendor
+==== Application Server Vendor
 
 The application server vendor provides an
 implementation of a Jakarta EE-compliant application server that provides
@@ -1323,7 +846,7 @@ The Jakarta EE platform specification (see
 EE) Specification, version 8>>) specifies requirements for a Jakarta EE
 platform provider.
 
-=== Container Provider
+==== Container Provider
 
 The container provider is responsible for
 providing a container implementation for a specific type of application
@@ -1335,17 +858,15 @@ provider. The respective specifications outline these responsibilities.
 A container implementation typically provides
 the following functionality:
 
-It provides deployed application components
+* It provides deployed application components
 with transaction and security management, distribution of clients,
 scalable management of resources, and other services that are generally
 required as part of a managed server platform.
-
-It provides application components with
+* It provides application components with
 connectivity to an EIS by transparently managing security, resources,
 and transactions using the system-level contracts with the EIS-specific
 resource adapter.
-
-It insulates application components from the
+* It insulates application components from the
 specifics of the underlying system-level mechanisms by supporting a
 simple, standard contract with the application component. Refer to the
 Jakarta Enterprise Beans specification (<<a9723,
@@ -1365,7 +886,7 @@ The container provider typically provides
 tools that allow the system administrator to monitor and manage a
 container and application components during runtime.
 
-=== Application Component Provider
+==== Application Component Provider
 
 In the context of the connector architecture,
 the application component provider produces an application component
@@ -1397,7 +918,7 @@ The output of an application component
 provider is a Java(TM) Archive (JAR) file that contains the application
 components and any additional Java classes required to connect to EISs.
 
-=== Enterprise Tools Vendors
+==== Enterprise Tools Vendors
 
 The application component provider relies on
 tools to simplify application development and EIS integration. Since
@@ -1408,26 +929,22 @@ the effort and complexity involved in this task.
 Enterprise tools serve different roles in the
 application development process, as follows:
 
-Data and function mining tool - enables
+* *Data and function mining tool* - enables
 application component providers to look at the scope and structure of
 data and functions existing in an EIS
-
-Analysis and design tool - enables application
+* *Analysis and design tool* - enables application
 component providers to design an application in terms of EIS data and
 functions
-
-Code generation tool- generates Java classes
+* *Code generation tool* - generates Java classes
 for accessing EIS data and functions. A mapping tool that bridges across
 two different programming models (object to relational or vice-versa)
 falls into this category of tools.
-
-Application composition tool - enables
+* *Application composition tool* - enables
 application component providers to compose application components from
 Java classes generated by a code generation tool. This type of tool
 typically uses the JavaBeans(TM) component model to enhance the ease of
 programming and composition.
-
-Deployment tool - used by application
+* *Deployment tool* - used by application
 component providers and deployers to set transaction, security, and
 other deployment time requirements.
 
@@ -1438,7 +955,7 @@ In addition, various tools and middleware
 vendors offer EAI frameworks that simplify integration across
 heterogeneous EISs.
 
-=== Application Assembler
+==== Application Assembler
 
 The application assembler combines various
 application components into a larger set of deployable units. The input
@@ -1455,7 +972,7 @@ enterprise application. To achieve this goal, the application assembler
 takes application components, possibly from multiple application
 component providers, and assembles these components.
 
-=== Deployer
+==== Deployer
 
 The deployer takes one or more deployable
 units of application components, produced by the application assembler
@@ -1477,7 +994,7 @@ complex than that in a non-EIS scenario. The deployer has to understand
 security, transaction, and connection management-related aspects of
 multiple EISs that are configured in an operational environment.
 
-=== System Administrator
+==== System Administrator
 
 The system administrator is responsible for
 the configuration and administration of a complete enterprise
@@ -1494,11 +1011,7 @@ This chapter introduced the roles involved in
 the connector architecture. The later chapters specify responsibilities
 for each role in more detail.
 
-=== 
-
-image:conn-22.png[image]
-
-Scenario: Integrated Purchase Order System
+=== Scenario: Integrated Purchase Order System
 
 This section describes a scenario that
 illustrates the use of the connector architecture. The following
@@ -1509,7 +1022,7 @@ communications are described in subsequent chapters.
 The following diagram shows the different
 pieces that comprise this scenario:
 
-=== Illustration of a Scenario Based on the Connector Architecture
+==== Illustration of a Scenario Based on the Connector Architecture
 
 image:conn-23.jpg[image]
 
@@ -1580,11 +1093,7 @@ After deploying and successfully testing the
 integrated purchase order system, the MIS department makes the system
 available for other departments to use.
 
-=== 
-
-image:conn-22.png[image]
-
-Scenario: Business Integration
+=== Scenario: Business Integration
 
 This scenario illustrates the use of the
 connector architecture in a business integration scenario.
@@ -1616,21 +1125,13 @@ its business applications (deployed on the application server).
 
 
 
-=== Connector Architecture Usage in Business Integration Scenario
+==== Connector Architecture Usage in Business Integration Scenario
 
 image:conn-24.jpg[image]
 
 
 
-=== 
-
-=== 
-
-image:conn-25.png[image]
-
-[[a387]]Lifecycle Management
-
-image:conn-26.png[image]
+== [[a387]]Lifecycle Management
 
 This chapter specifies a contract between an
 application server and a resource adapter that allows an application
@@ -1640,11 +1141,7 @@ adapter instance during its deployment or application server startup,
 and to notify the resource adapter instance during its undeployment or
 during an orderly shutdown of the application server.
 
-=== 
-
-image:conn-27.png[image]
-
-Overview
+=== Overview
 
 A resource adapter is a system component which
 is deployed in an application server. When a resource adapter is
@@ -1664,20 +1161,12 @@ facilities to the resource adapter instance. It also provides a
 mechanism to notify the resource adapter instance while it is undeployed
 or during an orderly shutdown of the application server.
 
-=== 
+=== Goals
 
-image:conn-27.png[image]
-
-Goals
-
-Provide a mechanism for an application server
+* Provide a mechanism for an application server
 to manage the lifecycle of a resource adapter instance.
 
-=== 
-
-image:conn-27.png[image]
-
-Lifecycle Management Model
+=== Lifecycle Management Model
 
 Lifecycle Management Contract (Interfaces)
 
@@ -1689,48 +1178,34 @@ image:conn-29.jpg[image]
 
 
 
-[width="100%",cols="100%",]
-|===
-a|
-package jakarta.resource.spi;
+[source,java]
+----
+ package jakarta.resource.spi;
 
+ import jakarta.resource.spi.work.WorkManager;
 
+ public interface ResourceAdapter {
 
-import jakarta.resource.spi.work.WorkManager;
+     void start(BootstrapContext) // startup notification
+          throws ResourceAdapterInternalException;
 
+     void stop(); // shutdown notification
+     ... // other operations
+ }
 
+public interface BootstrapContext {
 
-public interface ResourceAdapter \{
-
- void start(BootstrapContext) // startup
-notification
-
- throws ResourceAdapterInternalException;
-
- void stop(); // shutdown notification
-
- ... // other operations
-
+    WorkManager getWorkManager();
+    ... // other operations
 }
-
-
-
-public interface BootstrapContext \{
-
- WorkManager getWorkManager();
-
- ... // other operations
-
-}
-
-|===
+----
 
 An application server implements the
 _BootstrapContext_ and _WorkManager_ interfaces. A resource adapter
 implements the _ResourceAdapter_ interface.
 
 [[a415]]
-=== ResourceAdapter JavaBean and Bootstrapping a Resource Adapter Instance
+==== _ResourceAdapter_ JavaBean and Bootstrapping a Resource Adapter Instance
 
 The implementation class name of the
 ResourceAdapter interface is specified in the resource adapter
@@ -1827,13 +1302,12 @@ ManagedConnectionFactory and ActivationSpec JavaBeans.
 
 
 
-Resource Adapter Instance
-(Composition)
+*Resource Adapter Instance (Composition)*
 
 image:conn-30.jpg[image]
 
 [[a428]]
-=== ManagedConnectionFactory JavaBean and Outbound Communication
+==== _ManagedConnectionFactory_ JavaBean and Outbound Communication
 
 A _ManagedConnectionFactory_ JavaBean
 represents outbound connectivity information to an EIS instance from an
@@ -1862,34 +1336,22 @@ in the interaction. Note, a resource adapter may use the work management
 contract (refer to <<a1891, Work Management>>) to
 request threads to do work.
 
-[width="100%",cols="100%",]
-|===
-a|
-import
-jakarta.resource.spi.ResourceAdapterAssociation;
-
-import
-jakarta.resource.spi.ManagedConnectionFactory;
-
-
+[source,java]
+----
+import jakarta.resource.spi.ResourceAdapterAssociation;
+import jakarta.resource.spi.ManagedConnectionFactory;
 
 public class ManagedConnectionFactoryImpl
+         implements ManagedConnectionFactory,
+         ResourceAdapterAssociation {
+         
+   ResourceAdapter getResourceAdapter();
 
- implements ManagedConnectionFactory,
-ResourceAdapterAssociation \{
+   void setResourceAdapter(ResourceAdapter) throws ResourceException;
 
-
-
- ResourceAdapter getResourceAdapter();
-
- void setResourceAdapter(ResourceAdapter)
-throws ResourceException;
-
- ... // other methods
-
+   ... // other methods
 }
-
-|===
+----
 
 The _ResourceAdapterAssociation_ interface
 specifies the methods to associate a ManagedConnectionFactory JavaBean
@@ -1909,7 +1371,7 @@ the association must not change during the lifetime of a
 ManagedConnectionFactory JavaBean.
 
 [[a446]]
-=== ActivationSpec JavaBean and Inbound Communication
+==== ActivationSpec JavaBean and Inbound Communication
 
 An ActivationSpec JavaBean represents inbound
 connectivity information from an EIS instance to an application by way
@@ -1937,31 +1399,21 @@ resource adapter may use the work management contract (refer to
 <<a1891, Work Management>>) to request threads to
 do work.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 import jakarta.resource.spi.ActivationSpec;
 
+// ActivationSpec interface extends ResourceAdapterAssociation interface.
 
+public class ActivationSpecImpl implements ActivationSpec {
 
-// ActivationSpec interface extends
-ResourceAdapterAssociation interface.
+    ResourceAdapter getResourceAdapter();
 
+    void setResourceAdapter(ResourceAdapter) throws ResourceException;
 
-
-public class ActivationSpecImpl implements
-ActivationSpec \{
-
- ResourceAdapter getResourceAdapter();
-
- void setResourceAdapter(ResourceAdapter)
-throws ResourceException;
-
- ... // other methods
-
+    ... // other methods
 }
-
-|===
+----
 
 The ResourceAdapterAssociation interface
 specifies the methods to associate an ActivationSpec JavaBean with a
@@ -1979,21 +1431,20 @@ ActivationSpec JavaBean must be called exactly once; that is, the
 association must not change during the lifetime of an ActivationSpec
 JavaBean.
 
-=== Resource Adapter Shutdown Procedure
+==== Resource Adapter Shutdown Procedure
 
 The following are some likely situations
 during which an application server would shutdown a resource adapter
 instance:
 
-The application server is being shutdown.
-
-The resource adapter is being undeployed.
+* The application server is being shutdown.
+* The resource adapter is being undeployed.
 
 Irrespective of what causes a resource adapter
 instance to be shutdown, the application server must use the following
 two phases to shutdown a resource adapter instance.
 
-=== Phase One
+===== Phase One
 
 Before calling the stop method on the
 ResourceAdapter JavaBean, the application server must ensure that all
@@ -2015,7 +1466,7 @@ Thus, phase one ensures that even if a
 resource adapter instance does not properly shutdown during phase two,
 the resource adapter instance is practically unusable.
 
-=== Phase Two
+===== Phase Two
 
 The application server calls the stop method
 on the ResourceAdapter JavaBean to notify the resource adapter instance
@@ -2052,23 +1503,21 @@ A future version of the specification may add
 a forced shutdown method in addition to the current graceful stop
 method.
 
-=== Requirements
+==== Requirements
 
-The application server must use a new
+* The application server must use a new
 ResourceAdapter JavaBean for managing the lifecycle of each resource
 adapter instance and must discard the ResourceAdapter JavaBean after its
 stop method has been called. That is, the application server must not
 reuse the same ResourceAdapter JavaBean object to manage multiple
 instances of a resource adapter, since the ResourceAdapter JavaBean
 object may contain resource adapter instance specific state information.
-
-The application server must call the start
+* The application server must call the start
 method on the ResourceAdapter JavaBean (in order to create a functional
 resource adapter instance), before accessing other methods on the
 ResourceAdapter JavaBean instance or before using other objects that
 belong to the same resource adapter instance.
-
-The application server thread which calls the
+* The application server thread which calls the
 start and the stop method on the ResourceAdapter JavaBean executes in an
 unspecified context. However, the application server thread must have at
 least the same level of security permissions as that of the resource
@@ -2076,11 +1525,11 @@ adapter instance.
 
 
 
-Resource Adapter Lifecycle (State Diagram)
+*Resource Adapter Lifecycle (State Diagram)*
 
 image:conn-31.jpg[image]
 
-=== Resource Adapter Implementation Guidelines
+==== Resource Adapter Implementation Guidelines
 
 The ResourceAdapter JavaBean should be treated
 as a central authority or registry for resource adapter instance
@@ -2091,12 +1540,11 @@ orderly shutdown.
 
 Some conventions to follow:
 
-Any resource adapter specific object (for
+* Any resource adapter specific object (for
 example, ManagedConnectionFactory JavaBean, ActivationSpec JavaBean, or
 others) which creates network endpoints should register them with the
 ResourceAdapter JavaBean.
-
-The resource adapter threads should
+* The resource adapter threads should
 periodically scan the ResourceAdapter JavaBean state and behave
 accordingly. It is desirable that such threads avoid boundless blocking
 on I/O calls, and instead use a bounded blocking duration. This helps in
@@ -2107,78 +1555,72 @@ The above conventions enable a ResourceAdapter
 JavaBean to effectively manage the resource adapter instance and to
 perform an orderly shutdown of the resource adapter instance.
 
-=== JavaBean Configuration and Deployment
+==== JavaBean Configuration and Deployment
 
-There is at most one ResourceAdapter JavaBean
+There is at most one _ResourceAdapter_ JavaBean
 instance per resource adapter instance. But there can be many
 ManagedConnectionFactory, ActivationSpec or administered object
 instances (<<a2747, Administered Objects>>) per
 resource adapter instance.
 
-The ResourceAdapter JavaBean instance is
+The _ResourceAdapter_ JavaBean instance is
 created and configured during resource adapter deployment. The
-ManagedConnectionFactory, ActivationSpec and administered object
+_ManagedConnectionFactory_, _ActivationSpec_ and administered object
 instances are created and configured during the lifetime of a resource
 adapter instance.
 
 At runtime, the resource adapter internally
-uses a union of the configured ResourceAdapter and
-ManagedConnectionFactory JavaBean properties, to represent outbound
+uses a union of the configured _ResourceAdapter_ and
+_ManagedConnectionFactory_ JavaBean properties, to represent outbound
 communication configuration.
 
 Similarly, at runtime, the resource adapter
-internally uses a union of the configured ResourceAdapter and
-ActivationSpec JavaBean properties, to represent inbound communication
+internally uses a union of the configured _ResourceAdapter_ and
+_ActivationSpec_ JavaBean properties, to represent inbound communication
 configuration.
 
 [[a496]]
-=== ResourceAdapter JavaBean Instance Configuration
+===== _ResourceAdapter_ JavaBean Instance Configuration
 
-Create a ResourceAdapter JavaBean instance.
+* Create a _ResourceAdapter_ JavaBean instance.
 This will initialize the instance with the defaults specified by way of
 the JavaBean mechanism.
-
-Apply the ResourceAdapter class configuration
+* Apply the _ResourceAdapter_ class configuration
 properties specified in the resource adapter deployment descriptor, on
-the ResourceAdapter instance. This may override some of the default
+the _ResourceAdapter_ instance. This may override some of the default
 values specified through the JavaBean mechanism. The application server
 is required to merge values specified by way of annotations and
 deployment descriptors as specified in <<a4531, Deployment Descriptors and Annotations>>,
-before applying the ResourceAdapter class configuration properties.
+before applying the _ResourceAdapter_ class configuration properties.
+* The _ResourceAdapter_ deployer may further
+override the values of the _ResourceAdapter_ instance before deployment.
 
-The ResourceAdapter deployer may further
-override the values of the ResourceAdapter instance before deployment.
+===== Resource Adapter Deployment
 
-=== Resource Adapter Deployment
-
-The ResourceAdapter instance property values
+The _ResourceAdapter_ instance property values
 may be stored separately and reused later while configuring
-ManagedConnectionFactory, ActivationSpec, or administered object
+_ManagedConnectionFactory_, _ActivationSpec_, or administered object
 instances.
 
 [[a502]]
-=== ManagedConnectionFactory JavaBean Instance Configuration
+===== _ManagedConnectionFactory_ JavaBean Instance Configuration
 
-Create a ManagedConnectionFactory JavaBean
+* Create a ManagedConnectionFactory JavaBean
 instance. This will initialize the instance with the defaults specified
 by way of the JavaBean mechanism.
-
-Apply the ResourceAdapter instance property
+* Apply the ResourceAdapter instance property
 values, that were stored earlier, on the ManagedConnectionFactory
 instance. Note, that the ManagedConnectionFactory JavaBean may have
 none, some or all of the properties of the ResourceAdapter JavaBean.
-
-Apply the ManagedConnectionFactory class
+* Apply the ManagedConnectionFactory class
 configuration properties specified in the resource adapter deployment
 descriptor, on the ManagedConnectionFactory instance.
-
-The application server is required to merge
+* The application server is required to merge
 values specified by way of annotations and deployment descriptors as
 specified in <<a4531, Deployment Descriptors and Annotations>>,
 before applying the ManagedConnectionFactory class
 configuration properties.
-
-The ManagedConnectionFactory deployer may
+* The ManagedConnectionFactory deployer may
 further override the values of the ManagedConnectionFactory instance
 before deployment.
 
@@ -2190,28 +1632,24 @@ and the ResourceAdapter instance may have intersecting property names.
 In such a situation, the values specified in the
 ManagedConnectionFactory instance takes precedence.
 
-=== ActivationSpec JavaBean Instance Configuration
+===== ActivationSpec JavaBean Instance Configuration
 
-Create an ActivationSpec JavaBean instance.
+* Create an ActivationSpec JavaBean instance.
 This will initialize the instance with the defaults specified by way of
 the JavaBean mechanism.
-
-Apply the ResourceAdapter instance property
+* Apply the ResourceAdapter instance property
 values, that were stored earlier, on the ActivationSpec instance. Note,
 that the ActivationSpec JavaBean may have none, some, or all of the
 properties of the ResourceAdapter JavaBean.
-
-Apply the ActivationSpec class configuration
+* Apply the ActivationSpec class configuration
 properties specified in the application deployment descriptor, on the
 ActivationSpec instance.
-
-The application server is required to merge
+* The application server is required to merge
 values specified by way of annotations and deployment descriptors as
 specified in <<a4531, Deployment Descriptors and Annotations>>,
 before applying the ActivationSpec class configuration
 properties.
-
-The ActivationSpec deployer may further
+* The ActivationSpec deployer may further
 override the values of the ActivationSpec instance before deployment.
 
 At runtime, the resource adapter internally
@@ -2222,7 +1660,7 @@ have intersecting property names. In such a situation, the values
 specified in the ActivationSpec instance takes precedence.
 
 [[a516]]
-=== JavaBean Validation
+===== JavaBean Validation
 
 The Jakarta Bean Validation specification (see
 <<a9753, Jakarta Bean Validation Specification, version
@@ -2248,12 +1686,11 @@ annotations for the same use cases. The resource adapter implementation
 may (but is not limited to) use the Jakarta Bean Validation facilities for the
 following use cases:
 
- _Range or limits specification._ To ensure
+ * *Range or limits specification.* To ensure
 that the value provided by a deployer for a configuration property falls
 within prescribed limits. The resource adapter implementation may use
 _@Min_ , _@Max_ , _@Size_ constraints for this purpose.
-
- _Mandatory attributes._ To require the
+* *Mandatory attributes.* To require the
 deployer to provide a value for a configuration property. The resource
 adapter implementation may use the _@NotNull_ constraint for this use
 case.
@@ -2272,13 +1709,10 @@ of the availability of a live resource adapter instance. The application
 server must support the decoration of the following JavaBeans with
 constraint annotations:
 
- _ResourceAdapter_
-
- _ManagedConnectionFactory_
-
- _ActivationSpec_
-
-Administered Objects
+* _ResourceAdapter_
+* _ManagedConnectionFactory_
+* _ActivationSpec_
+* Administered Objects
 
 The application server must, by default,
 target the _jakarta.validation.groups.Default_ group for validation. The
@@ -2301,9 +1735,9 @@ request API defined in the Jakarta Bean Validation specification to provide a
 richer interaction model during configuration of the JavaBeans.
 
 [[a529]]
-=== Configuration Property Attributes
+===== Configuration Property Attributes
 
-=== Dynamic Reconfigurable Configuration Properties
+====== Dynamic Reconfigurable Configuration Properties
 
 Configuration properties whose values could
 be configured dynamically during the lifetime of the JavaBean are
@@ -2335,7 +1769,7 @@ For configuration properties that can only be
 validated based on the state of other configuration properties, throwing
 an exception during the validation phase.
 
-=== Confidential Properties
+====== Confidential Properties
 
 Certain configuration properties of a
 JavaBean, such as _Password_ (see <<a5237, Standard Properties>>
@@ -2350,7 +1784,7 @@ _ConfigProperty_ annotation (see <<a4675, @ConfigProperty>>).
 The application server’s configuration tool may use
 this attribute to use special visual aids denoting confidentiality.
 
-=== Resource Adapter Implementation Guidelines
+===== Resource Adapter Implementation Guidelines
 
 A resource adapter implementation may choose
 to use common properties, that is, a ManagedConnectionFactory or an
@@ -2369,117 +1803,73 @@ ManagedConnectionFactory deployer to override the ResourceAdapter
 property values and configure the ManagedConnectionFactory
 appropriately.
 
-=== Lifecycle Management in a Non-Managed Environment
+==== Lifecycle Management in a Non-Managed Environment
 
 Although the lifecycle management contract is
 primarily intended for a managed environment, it may still be used in a
 non-managed environment provided that the application that bootstraps a
 resource adapter instance is capable of managing its lifecycle.
 
-=== A Sample Resource Adapter Implementation
+==== A Sample Resource Adapter Implementation
 
-=== Sample Resource Adapter
+.Sample Resource Adapter
+[source,java]
+----
 
 package com.xyz.adapter;
 
-
-
 import jakarta.resource.spi.ResourceAdapter;
-
 import jakarta.resource.spi.BootstrapContext;
-
 import jakarta.resource.spi.work.*;
 
+public class MyResourceAdapterImpl implements ResourceAdapter {
 
+    void start(BootstrapContext serverCtx) {
+        // 1. setup network endpoints
+        ...
 
-public class MyResourceAdapterImpl implements
-ResourceAdapter \{
+        // 2. get WorkManager reference
+        WorkManager wm = serverCtx.getWorkManager();
 
+       // 3. provide Work objects to WorkManager
+       for (i = 0; i < 10; i++) {
+           Work work = new MyWork(...);
+           try {
+               wm.startWork(work);
+          } catch (WorkException we) { 
+              // handle the exception 
+          }
+      }
+   }
 
-
- void start(BootstrapContext serverCtx) \{
-
- // 1. setup network endpoints
-
- ...
-
-
-
- // 2. get WorkManager reference
-
- WorkManager wm = serverCtx.getWorkManager();
-
-
-
- // 3. provide Work objects to WorkManager
-
- for (i = 0; i < 10; i++) \{
-
- Work work = new MyWork(...);
-
- try \{
-
- wm.startWork(work);
-
- } catch (WorkException we) \{ // handle the
-exception }
-
- }
-
- }
-
-
-
- void stop() \{ // release Work instances, do
-cleanup and return.}
-
+   void stop() { 
+       // release Work instances, do cleanup and return.
+   }
 }
 
+public class MyWork implements Work {
 
+    void release() {
+        // set a flag to hint the Work instance to complete.
+        // Note, the calling thread is different from
+        // the active thread in which this instance is executing.
+    }
 
-public class MyWork implements Work \{
+    void run() {
+        // do work (call application components, monitor 
+        // network ports, etc.).
 
-
-
- void release() \{
-
- // set a flag to hint the Work instance to
-complete.
-
- // Note, the calling thread is different
-from
-
- // the active thread in which this instance
-is executing.
-
- }
-
-
-
- void run() \{
-
- // do work (call application components,
-monitor
-
- // network ports, etc.).
-
- }
-
+    }
 }
+----
 
-Lifecycle Management Model (Sequence Diagram)
+*Lifecycle Management Model (Sequence Diagram)*
 
 image:conn-32.jpg[image]
 
-=== 
 
-=== 
+== [[a588]]Connection Management
 
-image:conn-33.png[image]
-
-[[a588]]Connection Management
-
-image:conn-34.png[image]
 
 This chapter specifies the connection
 management contract between an application server and a resource
@@ -2492,11 +1882,7 @@ chapter also refers to the responsibilities of the application component
 provider and deployer. The chapter includes scenarios to illustrate the
 connection management contract.
 
-=== 
-
-image:conn-35.png[image]
-
-Overview
+=== Overview
 
 An application component uses a connection
 factory to access a connection instance, which the component then uses
@@ -2510,31 +1896,24 @@ connections leads to better scalability and performance in an
 operational environment. The connection management contract provides
 support for connection pooling.
 
-=== 
-
-image:conn-35.png[image]
-
-Goals
+=== Goals
 
 The connection management contract has been
 designed with the following goals:
 
-To provide a consistent application
+* To provide a consistent application
 programming model for connection acquisition for both managed and
 non-managed (two-tier) applications.
-
-To enable a resource adapter to provide a
+* To enable a resource adapter to provide a
 connection factory and connection interfaces based on the CCI specific
 to the type of resource adapter and EIS. This enables JDBC drivers to be
 aligned with the connector architecture with minimum impact on the
 existing JDBC APIs.
-
-To provide a generic mechanism by which an
+* To provide a generic mechanism by which an
 application server can provide different services—transactions,
 security, advanced pooling, error tracing/logging—for its configured set
 of resource adapters.
-
-To provide support for connection pooling.
+* To provide support for connection pooling.
 
 The goal of the Jakarta Connector Architecture is to
 enable efficient, scalable, and extensible connection pooling
@@ -2545,11 +1924,7 @@ resource adapters. An application server should use the connection
 management contract to implement a connection pooling mechanism in its
 own implementation-specific way.
 
-=== 
-
-image:conn-35.png[image]
-
-Architecture: Connection Management
+=== Architecture: Connection Management
 
 The connection management contract specifies
 an architected contract between an application server and a resource
@@ -2558,7 +1933,7 @@ lines in <<a615, Architecture Diagram: Managed
 Application scenario>>. It includes the set of interfaces shown in the
 architecture diagram.
 
-=== Overview: Managed Application Scenario
+==== Overview: Managed Application Scenario
 
 The application server uses the deployment
 information specified by way of the deployment descriptor mechanism
@@ -2632,16 +2007,13 @@ resource manager).
 
 
 
-Architecture Diagram: Managed Application
-scenario[[a615]]
+*Architecture Diagram: Managed Application
+scenario[[a615]]*
 
 image:conn-36.jpg[image]
 
-=== 
 
-image:conn-35.png[image]
-
-[[a617]]Application Programming Model
+=== [[a617]]Application Programming Model
 
 The application programming model for getting
 an EIS connection is similar across both managed (application server
@@ -2649,12 +2021,12 @@ based) and non-managed scenarios. The following sections explain a
 typical application programming model scenario.
 
 [[a619]]
-=== Managed Application Scenario
+==== Managed Application Scenario
 
 The following steps are involved in a managed
 scenario:
 
-The application assembler or component
+*1* The application assembler or component
 provider specifies connection factory requirements for an application
 component using a deployment descriptor mechanism. For example, a bean
 provider specifies the following elements in the deployment descriptor
@@ -2664,43 +2036,31 @@ not the resource adapter. Refer Jakarta Enterprise Beans specification (see
 <<a9723, Jakarta Enterprise Beans Specification, version 4.0>>)
 for details on the deployment mechanism for Jakarta Enterprise Bean components:
 
- _res-ref-name: eis/MyEIS_
+* _res-ref-name: eis/MyEIS_
+* _res-type: jakarta.resource.cci.ConnectionFactory_
+* _res-auth: Application_ or _Container_
 
- _res-type:
-jakarta.resource.cci.ConnectionFactory_
-
- _res-auth: Application_ or _Container_
-
-During resource adapter deployment, the
+*2* During resource adapter deployment, the
 deployer sets the configuration information (example: server name, port
 number) for the resource adapter. The application server uses a
 configured resource adapter to create physical connections to the
 underlying EIS. Refer to <<a5015, API Requirements>>
 for details on packaging and deployment of a resource adapter.
 
-The application component looks up a
+*3* The application component looks up a
 connection factory instance in the component’s environment using the
 JNDI interface.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 // obtain the initial JNDI Naming context
-
 Context initctx = new InitialContext();
 
-
-
-// perform JNDI lookup to obtain the
-connection factory
-
+// perform JNDI lookup to obtain the connection factory
 jakarta.resource.cci.ConnectionFactory cxf =
-
- (jakarta.resource.cci.ConnectionFactory)
-
- initctx.lookup(“java:comp/env/eis/MyEIS”);
-
-|===
+   (jakarta.resource.cci.ConnectionFactory)
+      initctx.lookup(“java:comp/env/eis/MyEIS”);
+----
 
 The JNDI name passed in the method
 _NamingContext.lookup_ is the same as that specified in the
@@ -2709,7 +2069,7 @@ results in a connection factory instance of type
 _jakarta.resource.cci.ConnectionFactory_ as specified in the _res-type_
 element.
 
-The application component invokes the
+*4* The application component invokes the
 _getConnection_ method on the connection factory to get an EIS
 connection. The returned connection instance represents an
 application-level handle to an underlying physical connection.
@@ -2718,30 +2078,29 @@ An application component obtains multiple
 connections by calling the method _getConnection_ on the connection
 factory multiple times.
 
-jakarta.resource.cci.Connection cx = cxf.getConnection();
+`jakarta.resource.cci.Connection cx = cxf.getConnection();`
 
-The application component uses the returned
+*5* The application component uses the returned
 connection to access the underlying EIS by way of the resource adapter.
 <<a3927, Common Client Interface>> specifies in
 detail the application programming model for EIS access.
 
 
 
-image:conn-37.png[image]
-
+[NOTE]
+====
 The JNDI context of an accessing application is available to a resource
 adapter through the application thread that uses its connection object.
 The resource adapter may use the JNDI context to access other resources.
+====
 
-image:conn-37.png[image]
-
-After the component finishes with the
+*6* After the component finishes with the
 connection, it closes the connection using the _close_ method on the
 _Connection_ interface.
 
-cx.close();
+`cx.close();`
 
-If an application component fails to close an
+*7* If an application component fails to close an
 allocated connection after its use, that connection is considered an
 unused connection. The application server manages the cleanup of unused
 connections. When a container terminates a component instance, the
@@ -2750,7 +2109,7 @@ Refer section <<a813, ManagedConnection>> and
 <<a977, Scenario: Connection Event Notifications and Connection Close>>
 for details on the cleanup of connections.
 
-=== Non-Managed Application Scenario
+==== Non-Managed Application Scenario
 
 In a non-managed application scenario, the
 application developer follows a similar programming model to the managed
@@ -2759,7 +2118,7 @@ connection factory instance, getting an EIS connection, using the
 connection for EIS access, and finally closing the connection.
 
 [[a645]]
-=== Guidelines
+==== Guidelines
 
 Connection handles are application level
 handles to underlying physical connections and are light-weight objects,
@@ -2779,32 +2138,19 @@ obtain a connection handle from the connection factory, use the
 connection handle to interact with the EIS by way of the resource
 adapter, and close the connection handle after finishing with it.
 
-[width="100%",cols="100%",]
-|===
-a|
- //recommended: connection handle creation,
-use and close
-
+[source,Java]
+----
+ //recommended: connection handle creation, use and close
  Connection con = null;
-
- try \{
-
- con = cf.getConnection();
-
- //use the con handle to interact with the
-EIS
-
- } finally \{
-
- if (con != null)\{
-
- con.close();
-
+ try {
+     con = cf.getConnection();
+    //use the con handle to interact with the EIS
+ } finally {
+    if (con != null){
+        con.close();
+    }
  }
-
- }
-
-|===
+----
 
 The application component is recommended to
 explicitly close the connection handle as soon as the handle has been
@@ -2812,11 +2158,7 @@ used and is not required later. This reduces the possibility of
 connection leaks and enhances the application server’s ability to pool
 physical connections to the EIS (see <<a796, Connection Pool Implementation>>).
 
-=== 
-
-image:conn-35.png[image]
-
-Interface/Class Specification
+=== Interface/Class Specification
 
 This section specifies the Java classes and
 interfaces defined as part of the connection management contract. For a
@@ -2828,13 +2170,12 @@ for the connection management contract. The diagram also illustrates the
 responsibilities for the definition of an interface and its
 implementation:
 
-Class Diagram: Connection
-Management Architecture
+*Class Diagram: Connection Management Architecture*
 
 image:conn-38.jpg[image]
 
 [[a663]]
-=== ConnectionFactory and Connection <<a10024, [3]>>
+==== ConnectionFactory and Connection <<a10024, [3]>>
 
 A connection factory provides an interface to
 get a connection to an EIS instance. A connection provides connectivity
@@ -2852,74 +2193,43 @@ the above design pattern. Refer to <<a3990, Connection Interfaces>>
 for details on the CCI connection factory and connection interfaces.
 The following code sample shows the CCI interfaces:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.ConnectionFactory
+[source,Java]
+----
+public interface jakarta.resource.cci.ConnectionFactory extends java.io.Serializable,
+                 jakarta.resource.Referenceable{
 
- extends java.io.Serializable,
-jakarta.resource.Referenceable \{
-
-
-
- public jakarta.resource.cci.Connection
-getConnection()
-
- throws jakarta.resource.ResourceException;
-
+    public jakarta.resource.cci.Connection getConnection() 
+                throws jakarta.resource.ResourceException;
  ...
-
 }
 
+public interface jakarta.resource.cci.Connection {
 
-
-public interface
-jakarta.resource.cci.Connection \{
-
- public void close() throws
-jakarta.resource.ResourceException;
-
- ...
-
+    public void close() throws jakarta.resource.ResourceException;
+    ...
 }
-
-|===
+----
 
 An example of a non-CCI interface is a
 resource adapter that uses the package _com.myeis_ for its EIS specific
 interfaces, as follows:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface com.myeis.ConnectionFactory
-
- extends java.io.Serializable,
-jakarta.resource.Referenceable \{
-
-
-
- public com.myeis.Connection getConnection()
-
- throws com.myeis.ResourceException;
-
- ...
-
+[source,Java]
+----
+public interface com.myeis.ConnectionFactory extends java.io.Serializable,
+                 jakarta.resource.Referenceable {
+                 
+    public com.myeis.Connection getConnection()
+             throws com.myeis.ResourceException;
+    ...
 }
 
+public interface com.myeis.Connection {
 
-
-public interface com.myeis.Connection \{
-
- public void close() throws
-com.myeis.ResourceException;
-
- ...
-
+    public void close() throws com.myeis.ResourceException;
+    ...
 }
-
-|===
+----
 
 The JDBC interfaces— _javax.sql.DataSource_ ,
 _java.sql.Connection_ —are examples of non-CCI connection factory and
@@ -2933,19 +2243,17 @@ _java.sql.SQLException_ for JDBC (see <<a9727, JDBC API Specification, version 4
 The following are additional guidelines for
 the recommended interface template:
 
-A resource adapter is allowed to add
+* A resource adapter is allowed to add
 additional _getConnection_ methods to its definition of a connection
 factory interface. These additional methods are specific to a resource
 adapter and its EIS. For example, CCI defines a variant of the
 _getConnection_ method that takes _jakarta.resource.cci.ConnectionSpec_ as
 a parameter.
-
-A resource adapter should only introduce
+* A resource adapter should only introduce
 additional _getConnection_ methods if it requires additional flexibility
 (beyond that offered by the default _getConnection_ method) in the
 connection request invocations.
-
-A connection interface must provide a close
+* A connection interface must provide a close
 method to close the connection. The behavior of such an
 application-level connection closure is described in the OID
 <<a992, OID: Connection Event Notification>>.
@@ -2954,7 +2262,7 @@ The above design pattern leads to a consistent
 application programming model for connection creation and connection
 closing.
 
-=== Requirements
+===== Requirements
 
 A resource adapter must provide
 implementations for both the connection factory and connection
@@ -2993,40 +2301,27 @@ responsible for taking connection request information and passing it in
 a form required by the _ConnectionManager_ . _allocateConnection_
 method.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ConnectionManager
+[source,Java]
+----
+public interface jakarta.resource.spi.ConnectionManager
+          extends java.io.Serializable {
 
- extends java.io.Serializable \{
-
-
-
- public Object allocateConnection(
-
- ManagedConnectionFactory mcf,
-
- ConnectionRequestInfo cxRequestInfo)
-
- throws ResourceException;
-
+    public Object allocateConnection( ManagedConnectionFactory mcf,
+                  ConnectionRequestInfo cxRequestInfo)
+                  throws ResourceException;
 }
 
 
+public interface jakarta.resource.spi.ConnectionRequestInfo {
 
-public interface
-jakarta.resource.spi.ConnectionRequestInfo \{
+    public boolean equals(Object other);
 
- public boolean equals(Object other);
-
- public int hashCode();
+    public int hashCode();
 
 }
+----
 
-|===
-
-=== ConnectionRequestInfo
+===== ConnectionRequestInfo
 
 The _ConnectionRequestInfo_ parameter to the
 _ConnectionManager.allocateConnection_ method enables a resource adapter
@@ -3078,7 +2373,7 @@ way. Since _ConnectionRequestInfo_ represents a resource adapter
 specific data structure, the conditions for equality are defined and
 implemented by a resource adapter.
 
-=== Additional Requirements
+===== Additional Requirements
 
 A resource adapter implementation is not
 required to support the mechanism for passing resource adapter-specific
@@ -3100,7 +2395,7 @@ its methods in a resource adapter implementation-specific way. It must
 use a _jakarta.resource.spi.ManagedConnection_ instance as its underlying
 physical connection.
 
-=== ConnectionManager
+==== ConnectionManager
 
 The _jakarta.resource.spi.ConnectionManager_
 interface provides a hook for a resource adapter to pass a connection
@@ -3108,32 +2403,21 @@ request to an application server. An application server provides
 different quality-of-service as part of its handling of the connection
 request.
 
-=== Interface
+===== Interface
 
 The connection management contract defines a
 standard interface for the _ConnectionManager_ as follows:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ConnectionManager
+[source,Java]
+----
+public interface jakarta.resource.spi.ConnectionManager
+       extends java.io.Serializable {
 
- extends java.io.Serializable \{
-
-
-
- public Object allocateConnection(
-
- ManagedConnectionFactory mcf,
-
- ConnectionRequestInfo cxRequestInfo)
-
- throws ResourceException;
-
+ public Object allocateConnection(ManagedConnectionFactory mcf,
+                   ConnectionRequestInfo cxRequestInfo)
+                   throws ResourceException;
 }
-
-|===
+----
 
 The method _allocateConnection_ is called by a
 resource adapter’s connection factory instance so that the instance can
@@ -3143,7 +2427,7 @@ The _ConnectionRequestInfo_ parameter
 represents information specific to a resource adapter to handle the
 connection request.
 
-=== Requirements
+===== Requirements
 
 An application server must provide an
 implementation of the _ConnectionManager_ interface. This implementation
@@ -3189,82 +2473,48 @@ interface may only be provided by a resource adapter, for the purpose
 described in this section, or by an application server that fully meets
 the requirements of this specification.
 
-ConnectionManager and Application Server
-Specific Services
+*ConnectionManager and Application Server Specific Services*
 
 image:conn-39.jpg[image]
 
 [[a754]]
-=== ManagedConnectionFactory
+==== ManagedConnectionFactory
 
-A
-_jakarta.resource.spi.ManagedConnectionFactory_ instance is a factory of
+A _jakarta.resource.spi.ManagedConnectionFactory_ instance is a factory of
 both _ManagedConnection_ and connection factory instances. This
 interface supports connection pooling by defining methods for matching
 and creating connections.
 
-=== Interface
+===== Interface
 
 The following code extract shows the interface
 specification for the _ManagedConnectionFactory_ .
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ManagedConnectionFactory
+[source,Java]
+----
+public interface jakarta.resource.spi.ManagedConnectionFactory
+       extends java.io.Serializable {
 
- extends java.io.Serializable \{
+     public Object createConnectionFactory( ConnectionManager connectionManager)
+                   throws ResourceException;
 
+     public Object createConnectionFactory()
+                   throws ResourceException;
 
+     public ManagedConnection createManagedConnection(javax.security.auth.Subject subject,
+                                                   ConnectionRequestInfo cxRequestInfo)
+                                                   throws ResourceException;
 
- public Object createConnectionFactory(
+     public ManagedConnection matchManagedConnections( java.util.Set connectionSet,
+                                                       javax.security.auth.Subject subject,
+                                                       ConnectionRequestInfo cxRequestInfo)
+                                                       throws ResourceException;
 
- ConnectionManager connectionManager)
+    public boolean equals(Object other);
 
- throws ResourceException;
-
-
-
- public Object createConnectionFactory()
-
- throws ResourceException;
-
-
-
- public ManagedConnection
-createManagedConnection(
-
- javax.security.auth.Subject subject,
-
- ConnectionRequestInfo cxRequestInfo)
-
- throws ResourceException;
-
-
-
- public ManagedConnection
-matchManagedConnections(
-
- java.util.Set connectionSet,
-
- javax.security.auth.Subject subject,
-
- ConnectionRequestInfo cxRequestInfo)
-
- throws ResourceException;
-
-
-
- public boolean equals(Object other);
-
- public int hashCode();
-
-
-
+    public int hashCode();
 }
-
-|===
+----
 
 The method createConnectionFactory creates a
 connection factory instance. For CCI, the connection factory instance is
@@ -3325,7 +2575,7 @@ connection matching, it must throw a NotSupportedException when
 _matchManagedConnections_ method is invoked. This allows an application
 server to avoid pooling connections obtained from that resource adapter.
 
-=== Requirements
+===== Requirements
 
 A resource adapter must provide an
 implementation of the _ManagedConnectionFactory_ interface.
@@ -3345,7 +2595,7 @@ _ManagedConnectionFactory_ interface must be a JavaBean. Refer to
 <<a5071, JavaBean Requirements>>.
 
 [[a796]]
-=== Connection Pool Implementation
+===== Connection Pool Implementation
 
 The Jakarta Connector Architecture does not specify
 how an application server implements connection pooling. However, it
@@ -3382,24 +2632,18 @@ specific. The _equals_ and _hashCode_ methods defined in both
 _ManagedConnectionFactory_ and _ConnectionRequestInfo_ facilitate
 connection pool management and structuring by an application server.
 
-=== Detecting Invalid Connections
+===== Detecting Invalid Connections
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 import java.util.Set;
 
+interface ValidatingManagedConnectionFactory {
 
-
-interface ValidatingManagedConnectionFactory
-\{
-
- Set getInvalidConnections(Set connectionSet)
-throws ResourceException;
+ Set getInvalidConnections(Set connectionSet) throws ResourceException;
 
 }
-
-|===
+----
 
 This interface may be implemented by a
 _ManagedConnectionFactory_ instance that supports the ability to
@@ -3414,7 +2658,7 @@ functionality to test for the validity of a _ManagedConnection_ by
 passing in a _Set_ of size one (with the _ManagedConnection_ that has to
 be tested for validity as the only member of the _Set_).
 
-=== Requirement for XA Recovery
+===== Requirement for XA Recovery
 
 The _ManagedConnectionFactory_ implementation
 for a transaction authority (XA) protocol capable resource adapter
@@ -3434,22 +2678,21 @@ recovery. Refer to <<a1807, ManagedConnectionFactory>> for additional details on
 _ManagedConnectionFactory.createManagedConnection_ method.
 
 [[a813]]
-=== ManagedConnection
+==== ManagedConnection
 
 A _jakarta.resource.spi.ManagedConnection_
 instance represents a physical connection to an underlying EIS.
 
 
 
-image:conn-37.png[image]
-
+[NOTE]
+====
 The Jakarta Connector Architecture allows one or more _ManagedConnection_
 instances to be multiplexed over a single physical pipe to an EIS.
 However, for simplicity, this specification describes a
 _ManagedConnection_ instance as being mapped 1-1 to a physical
 connection.
-
-image:conn-37.png[image]
+====
 
 The creation of a _ManagedConnection_ instance
 typically results in the allocation of EIS and resource adapter
@@ -3473,7 +2716,7 @@ The _ManagedConnection_ interface also
 provides methods to support error logging and tracing in a managed
 environment.
 
-=== Interface
+===== Interface
 
 The connection management contract defines the
 following interface for a _ManagedConnection_ . The following code
@@ -3481,56 +2724,32 @@ extract shows only the methods that are used for connection pool
 management. The remaining methods are introduced in other parts of the
 specification.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ManagedConnection \{
+[source,Java]
+----
+public interface jakarta.resource.spi.ManagedConnection {
 
- public Object getConnection(
+ public Object getConnection( javax.security.auth.Subject subject,
+                    ConnectionRequestInfo cxRequestInfo)
+                    throws ResourceException;
 
- javax.security.auth.Subject subject,
+ public void destroy() throws ResourceException;
 
- ConnectionRequestInfo cxRequestInfo)
+ public void cleanup() throws ResourceException;
 
- throws ResourceException;
+ // Methods for Connection and transaction event notifications
 
- public void destroy() throws
-ResourceException;
+ public void addConnectionEventListener(ConnectionEventListener listener);
 
- public void cleanup() throws
-ResourceException;
+ public void removeConnectionEventListener(ConnectionEventListener listener);
 
+ public ManagedConnectionMetaData getMetaData() throws ResourceException;
 
-
- // Methods for Connection and transaction
-event notifications
-
- public void addConnectionEventListener(
-
- ConnectionEventListener listener);
-
- public void removeConnectionEventListener(
-
- ConnectionEventListener listener);
-
-
-
- public ManagedConnectionMetaData
-getMetaData()
-
- throws ResourceException;
-
-
-
- // Additional methods - specified in the
-other sections
+ // Additional methods - specified in the other sections
 
  ...
 
 }
-
-|===
+----
 
 The _getConnection_ method creates a new
 application-level connection handle. A connection handle is tied to an
@@ -3568,7 +2787,7 @@ information (represented by the _ManagedConnectionMetaData_ interface)
 for a _ManagedConnection_ and the connected EIS instance.
 
 [[a847]]
-=== Connection Sharing and Multiple Connection Handles
+===== Connection Sharing and Multiple Connection Handles
 
 To support connection sharing, the application
 server can call _getConnection_ multiple times on a _ManagedConnection_
@@ -3583,15 +2802,14 @@ Because multiple connection handles to a
 single _ManagedConnection_ can exist concurrently, a resource adapter
 implementation may:
 
-Provide thread-safe semantics for a
+* Provide thread-safe semantics for a
 _ManagedConnection_ implementation to support concurrent access to a
 _ManagedConnection_ instance from multiple connection handles. It is
 strongly recommended that resource adapters provide support for
 concurrent access to a _ManagedConnection_ instance from multiple
 connection handles. This may be required in a future release of the
 specification.
-
-Ensure that there is at most one connection
+* Ensure that there is at most one connection
 handle associated actively with a _ManagedConnection_ instance. The
 active connection handle is the only connection using the
 _ManagedConnection_ instance until an application-level _close_ is
@@ -3609,7 +2827,7 @@ extends the _jakarta.resource.ResourceException_ interface and is specific
 to a resource adapter. A scenario illustrating this implementation is
 shown in the <<a1389, Scenario: Local Transaction>>.
 
-=== Connection Matching Contract
+===== Connection Matching Contract
 
 The application server invokes the
 _ManagedConnectionFactory.matchManagedConnections_ method (implemented
@@ -3642,7 +2860,7 @@ application server should take the responsibility of checking whether or
 not the chosen _ManagedConnection_ instance can service such a request.
 Refer to <<a1329, Connection Sharing>> for details.
 
-=== Cleanup of ManagedConnection
+===== Cleanup of ManagedConnection
 
 A resource adapter typically allocates system
 resources (outside a JVM instance) for a _ManagedConnection_ instance.
@@ -3686,12 +2904,12 @@ A resource adapter should destroy all
 allocated system resources for this _ManagedConnection_ instance when
 the method _destroy_ is called.
 
-=== Requirements
+===== Requirements
 
 A resource adapter must provide an
 implementation of the _ManagedConnection_ interface.
 
-=== ManagedConnectionMetaData
+==== ManagedConnectionMetaData
 
 The method _ManagedConnection.getMetaData_
 returns a _jakarta.resource.spi.ManagedConnectionMetaData_ instance. The
@@ -3700,34 +2918,29 @@ _ManagedConnection_ and the connected EIS instance. This information is
 only available to the caller of this method if a valid physical
 connection exists for an EIS instance.
 
-=== Interface
+===== Interface
 
 The _ManagedConnectionMetaData_ interface
 provides the following information about an EIS instance:
 
-Product name of the EIS instance
-
-Product version of the EIS instance
-
-Maximum number of concurrent connections from
-different processes that an EIS instance can support
-
-User name for this connection, as known to
-the EIS instance
+* Product name of the EIS instance
+* Product version of the EIS instance
+* Maximum number of concurrent connections from different processes that an EIS instance can support
+* User name for this connection, as known to the EIS instance
 
 The method _getUserName_ returns the user
 name known to the underlying EIS instance for an active connection. The
 name corresponds to the resource principal under whose security context
 the connection to the EIS instance has been established.
 
-=== Requirements
+===== Requirements
 
 A resource adapter must provide an
 implementation of the _ManagedConnectionMetaData_ interface. An instance
 of this implementation class should be returned from the
 _ManagedConnection.getMetaData_ method.
 
-=== ConnectionEventListener
+==== ConnectionEventListener
 
 The Jakarta Connector Architecture provides an event
 callback mechanism that enables an application server to receive
@@ -3742,41 +2955,29 @@ _jakarta.resource.spi.ConnectionEventListener_ interface. It uses the
 _ManagedConnection.addConnectionEventListener_ method to register a
 connection listener with a _ManagedConnection_ instance.
 
-=== Interface
+===== Interface
 
 The following code extract specifies the
 _ConnectionEventListener_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ConnectionEventListener \{
+[source,Java]
+----
+public interface jakarta.resource.spi.ConnectionEventListener {
 
- public void connectionClosed(ConnectionEvent
-event);
+ public void connectionClosed(ConnectionEvent event);
 
- public void
-connectionErrorOccurred(ConnectionEvent event);
+ public void connectionErrorOccurred(ConnectionEvent event);
 
+ // Local Transaction Management related events
 
+ public void localTransactionStarted(ConnectionEvent event);
 
- // Local Transaction Management related
-events
+ public void localTransactionCommitted(ConnectionEvent event);
 
- public void
-localTransactionStarted(ConnectionEvent event);
-
- public void
-localTransactionCommitted(ConnectionEvent event);
-
- public void
-localTransactionRolledback(ConnectionEvent event);
+ public void localTransactionRolledback(ConnectionEvent event);
 
 }
-
-|===
-
+----
 A _ManagedConnection_ instance calls the
 _ConnectionEventListener.connectionClosed_ method to notify its
 registered set of listeners when an application component closes a
@@ -3814,45 +3015,33 @@ notification method call) or it may defer event processing to a later in
 time. The resource adapter must not assume the processing of event
 notifications by its listeners to be synchronous or asynchronous.
 
-=== ConnectionEvent
+==== ConnectionEvent
 
 A _jakarta.resource.spi.ConnectionEvent_ class
 provides information about the source of a connection-related event. A
 _ConnectionEvent_ instance contains the following information:
 
-Type of the connection event
-
- _ManagedConnection_ instance that has
+* Type of the connection event
+* _ManagedConnection_ instance that has
 generated the connection event. A _ManagedConnection_ instance is
 returned from the _ConnectionEvent.getSource_ method.
-
-Connection handle associated with the
+* Connection handle associated with the
 _ManagedConnection_ instance; required for the _CONNECTION_CLOSED_ event
 and optional for the other event types.
-
-Optionally, an exception indicating a
+* Optionally, an exception indicating a
 connection related error. Refer to <<a6752, System Exceptions>>
 for details on the system exception. Note that the
 exception is used for the _CONNECTION_ERROR_OCCURRED_ notification.
 
 This class defines the following types of
 event notifications:
+* _CONNECTION_CLOSED_
+* _LOCAL_TRANSACTION_STARTED_
+* _LOCAL_TRANSACTION_COMMITTED_
+* _LOCAL_TRANSACTION_ROLLEDBACK_
+* _CONNECTION_ERROR_OCCURRED_
 
- _CONNECTION_CLOSED_
-
- _LOCAL_TRANSACTION_STARTED_
-
- _LOCAL_TRANSACTION_COMMITTED_
-
- _LOCAL_TRANSACTION_ROLLEDBACK_
-
- _CONNECTION_ERROR_OCCURRED_
-
-=== 
-
-image:conn-35.png[image]
-
-Error Logging and Tracing
+=== Error Logging and Tracing
 
 The Jakarta Connector Architecture provides basic
 support for error logging and tracing in both managed and non-managed
@@ -3860,36 +3049,27 @@ environments. This support enables an application server to detect
 errors related to a resource adapter and its EIS, and to use error
 information for debugging.
 
-=== ManagedConnectionFactory
+==== ManagedConnectionFactory
 
 The
 _jakarta.resource.spi.ManagedConnectionFactory_ interface defines the
 following methods for error logging and tracing:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ManagedConnectionFactory
+[source,Java]
+----
+public interface jakarta.resource.spi.ManagedConnectionFactory
+            extends java.io.Serializable {
 
- extends java.io.Serializable \{
+  public void setLogWriter(java.io.PrintWriter out)
+                 throws ResourceException;
 
-
-
- public void setLogWriter(java.io.PrintWriter
-out)
-
- throws ResourceException;
-
- public java.io.PrintWriter getLogWriter()
-
- throws ResourceException;
+  public java.io.PrintWriter getLogWriter()
+                 throws ResourceException;
 
  ...
 
 }
-
-|===
+----
 
 The log writer is a character output stream
 to which all logging and tracing messages for a
@@ -3914,32 +3094,24 @@ system-level in nature (for example, information related to connection
 pooling and transactions) rather than of direct interest to application
 developers.
 
-=== ManagedConnection
+==== ManagedConnection
 
 The _jakarta.resource.spi.ManagedConnection_
 interface defines the following methods to support error logging and
 tracing specific to a physical connection.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ManagedConnection \{
+[source,Java]
+----
+public interface jakarta.resource.spi.ManagedConnection {
 
- public void setLogWriter(java.io.PrintWriter
-out)
-
- throws ResourceException;
+ public void setLogWriter(java.io.PrintWriter out)
+                throws ResourceException;
 
  public java.io.PrintWriter getLogWriter()
-
- throws ResourceException;
-
+                throws ResourceException;
  ...
-
 }
-
-|===
+----
 
 A newly created _ManagedConnection_ instance
 gets the default log writer from the _ManagedConnectionFactory_ instance
@@ -3955,11 +3127,7 @@ disassociate the log writer from a _ManagedConnection_ instance when
 this connection instance is put back into the connection pool by using
 _setLogWriter_ and passing _null_ .
 
-=== 
-
-image:conn-35.png[image]
-
-Object Diagram
+=== Object Diagram
 
 The following shows the object diagram for
 the connection management architecture. It shows invocations across the
@@ -3973,19 +3141,11 @@ the transaction management contract-related interfaces ( _XAResource_
 and _LocalTransaction_ ) and invocations.
 
 
-
-
-
-[[a942]]Object Diagram: Connection
-Management Architecture
+*[[a942]]Object Diagram: Connection Management Architecture*
 
 image:conn-40.jpg[image]
 
-=== 
-
-image:conn-35.png[image]
-
-Illustrative Scenarios
+=== Illustrative Scenarios
 
 This section uses sequence diagrams to
 illustrate various interactions between the object instances involved in
@@ -4005,24 +3165,22 @@ The description of these sequence diagrams
 does not include transaction-related details. These are covered in
 <<a1079, Transaction Management>>.
 
-=== Scenario: Connection Pool Management
+==== Scenario: Connection Pool Management
 
 The following object interactions are
 involved in the scenario shown in <<a992, OID: Connection Event Notification>>:
 
-The application component calls the
+* The application component calls the
 _getConnection_ method on the _jakarta.resource.cci.ConnectionFactory_
 instance (returned from the JNDI lookup) to get a connection to the
 underlying EIS instance. Refer to <<a5258, JNDI Configuration and Lookup>>
 for details on the JNDI configuration and lookup.
-
-The _ConnectionFactory_ instance initially
+* The _ConnectionFactory_ instance initially
 handles the connection request from the application component in a
 resource adapter specific way. It then delegates the connection request
 to the associated _ConnectionManager_ instance. The _ConnectionManager_
 instance has been associated with the _ConnectionFactory_ instance when
 the _ConnectionFactory_ was instantiated.
-
 The _ConnectionFactory_ instance receives all
 connection request information passed through the _getConnection_ method
 and, in turn, passes it in a form required by the method
@@ -4032,14 +3190,12 @@ _ConnectionFactory_ implementation class to pass on client-specific
 connection request information. This information is opaque to an
 application server and is used subsequently by a resource adapter to do
 connection matching and creation.
-
-The _ConnectionManager_ instance (provided by
+* The _ConnectionManager_ instance (provided by
 the application server) handles the _allocateConnection_ request by
 interacting with the application server specific connection pool
 manager. The interaction between a _ConnectionManager_ instance and pool
 manager is internal and specific to an application server.
-
-The application server finds a candidate set
+* The application server finds a candidate set
 of _ManagedConnection_ instances from its connection pool. The candidate
 set includes all _ManagedConnection_ instances that the application
 server considers suitable for handling the current connection allocation
@@ -4047,8 +3203,7 @@ request. The application server finds the candidate set using its own
 implementation-specific structuring and lookup criteria for the
 connection pool. Refer to <<a754, ManagedConnectionFactory>>
 for guidelines of connection pool implementation by an application.
-
-If the application server finds no matching
+* If the application server finds no matching
 _ManagedConnection_ instance that can best handle this connection
 allocation request, or if the candidate set is empty, the application
 server calls the _ManagedConnectionFactory.createManagedConnection_
@@ -4060,8 +3215,7 @@ can also pass the _ConnectionRequestInfo_ information to the resource
 adapter. The connection request information has been associated with the
 connection allocation request by the resource adapter and is used during
 connection creation.
-
-The _ManagedConnectionFactory_ instance
+* The _ManagedConnectionFactory_ instance
 creates a new physical connection to the underlying EIS to handle the
 _createManagedConnection_ method. This new physical connection is
 represented by a _ManagedConnection_ instance. The
@@ -4070,56 +3224,48 @@ _Subject_ instance), _ConnectionRequestInfo_ , and its default set of
 configured properties (port number, server name) to create a new
 _ManagedConnection_ instance. Refer to <<a1713, Security Contract>>
 for more details on the _createManagedConnection_ method.
-
-The _ManagedConnectionFactory_ instance
+* The _ManagedConnectionFactory_ instance
 initializes the created _ManagedConnection_ instance and returns it to
 the application server.
-
-The application server registers a
+* The application server registers a
 _ConnectionEventListener_ instance with the _ManagedConnection_
 instance, enabling it to receive notifications for events on this
 connection. The application server uses these event notifications to
 manage connection pooling and transactions.
-
-The _ManagedConnection_ instance obtains its
+* The _ManagedConnection_ instance obtains its
 log writer (for error logging and tracing support) from the
 _ManagedConnectionFactory_ instance that created this connection.
 However, an application server can set a new log writer with a
 _ManagedConnection_ instance to do additional error logging and tracing
 at the level of a _ManagedConnection_ .
-
-The application server does the necessary
+* The application server does the necessary
 transactional setup for the _ManagedConnection_ instance.
 <<a1079, Transaction Management>> explains this
 step in more detail.
-
-Next, the application server calls
+* Next, the application server calls
 _ManagedConnection.getConnection_ method to get an application level
 connection handle of type _jakarta.resource.cci.Connection_ . A
 _ManagedConnection_ instance uses the _Subject_ and
 _ConnectionRequestInfo_ parameters to the _getConnection_ method to
 change the state of the _ManagedConnection_ .
-
 Calling the _getConnection_ method does not
 necessarily create a new physical connection to the EIS instance.
 Calling _getConnection_ produces a temporary connection handle that is
 used by an application component to access the underlying physical
 connection. The actual underlying physical connection is represented by
 a _ManagedConnection_ instance.
-
-The application server returns the connection
+* The application server returns the connection
 handle to the resource adapter. The resource adapter then passes the
 connection handle to the application component that initiated the
 connection request.
 
 
 
-OID: Connection Pool Management with New
-Connection Creation
+*OID: Connection Pool Management with New Connection Creation*
 
 image:conn-41.jpg[image]
 
-=== Scenario: Connection Matching
+==== Scenario: Connection Matching
 
 <<a976, OID: Connection Pool Management with Connection Matching>> shows the object
 interactions for a connection matching scenario—that is, a scenario in
@@ -4127,7 +3273,7 @@ which the application server finds a non-empty candidate connection set
 and calls the resource adapter to do matching on the candidate set. The
 following steps are involved in this scenario:
 
-The application server handles the connection
+. The application server handles the connection
 allocation request by creating a candidate set of _ManagedConnection_
 instances from the connection pool. The candidate set includes the
 _ManagedConnection_ instances that the application server considers
@@ -4137,33 +3283,33 @@ implementation-specific structuring and lookup criteria for the
 connection pool. Refer to <<a754, ManagedConnectionFactory>>
 for guidelines on connection pool implementation by an application.
 
-The application server calls the
+. The application server calls the
 _ManagedConnectionFactory.matchManaged-Connections_ method to enable the
 resource adapter to do the connection matching. It passes the candidate
 connection set, security information (as a _Subject_ instance associated
 with the current connection request), and any _ConnectionRequestInfo_ .
 
-The _ManagedConnectionFactory_ instance
+. The _ManagedConnectionFactory_ instance
 matches the candidate set of connections using the criteria known
 internally to the resource adapter. The _matchManagedConnections_ method
 returns a _ManagedConnection_ instance that the resource adapter
 considers to be an acceptable match for the current connection
 allocation request.
 
-The application server can set a new log
+. The application server can set a new log
 writer with the _ManagedConnection_ instance to do error logging and
 tracing at the level of the _ManagedConnection._
 
-The application server does the necessary
+. The application server does the necessary
 transactional setup for the _ManagedConnection_ instance.
 <<a1079, Transaction Management>> explains this
 step in more detail.
 
-The application server calls the
+. The application server calls the
 _ManagedConnection.getConnection_ method to get a new application level
 connection handle.
 
-The _ManagedConnection.getConnection_ method
+. The _ManagedConnection.getConnection_ method
 implementation uses the _Subject_ parameter and any
 _ConnectionRequestInfo_ to set the state of the _ManagedConnection_
 instance based on the current connection allocation request. Refer to
@@ -4171,18 +3317,17 @@ instance based on the current connection allocation request. Refer to
 resource adapter implements support for re-authentication of a
 _ManagedConnection_ instance.
 
-The application server returns the connection
+. The application server returns the connection
 handle to the resource adapter. The resource adapter then passes the
 connection handle to the application component that initiated the
 connection request.
 
-[[a976]]OID: Connection Pool
-Management with Connection Matching
+*[[a976]]OID: Connection Pool Management with Connection Matching*
 
 image:conn-42.jpg[image]
 
 [[a977]]
-=== Scenario: Connection Event Notifications and Connection Close
+==== Scenario: Connection Event Notifications and Connection Close
 
 For each _ManagedConnection_ instance in the
 pool, the application server registers a _ConnectionEventListener_
@@ -4194,7 +3339,7 @@ The scenario involves the following steps
 (see <<a992, OID: Connection Event Notification>>)
 when an application component initiates a connection close:
 
-The application component releases an
+. The application component releases an
 allocated connection handle using the _close_ method on the
 _jakarta.resource.cci.Connection_ instance. The _Connection_ instance
 delegates the close method to the associated _ManagedConnection_
@@ -4203,24 +3348,24 @@ _ManagedConnection_ instance and the corresponding connection handle
 _Connection_ instance. The mechanism by which this association is
 achieved is specific to the implementation of a resource adapter.
 
-The connection management contract places a
+. The connection management contract places a
 requirement that a _ManagedConnection_ instance must not alter the state
 of a physical connection while handling the connection close.
 
-The _ManagedConnection_ instance notifies all
+. The _ManagedConnection_ instance notifies all
 its registered listeners of the application’s connection close request
 using the _ConnectionEventListener_ . _connectionClosed_ method. It
 passes a _ConnectionEvent_ instance with the event type set to
 _CONNECTION_CLOSED_ .
 
-On receiving the connection close event
+. On receiving the connection close event
 notification, the application server performs the transaction
 management-related cleanup of the _ManagedConnection_ instance. Refer to
 <<a992, OID: Connection Event Notification>> for
 details on the cleanup of a _ManagedConnection_ instance participating
 in a Jakarta Transactions transaction.
 
-The application server also uses the
+. The application server also uses the
 connection close event notification to manage its connection pool. On
 receiving the connection close notification, the application server
 calls the _ManagedConnection.cleanup_ method (depending on whether the
@@ -4233,14 +3378,14 @@ requests. See <<a1329, Connection Sharing>> for a
 discussion of connection sharing and its implications on
 _ManagedConnection_ cleanup.
 
-After initiating the necessary cleanup for
+. After initiating the necessary cleanup for
 the _ManagedConnection_ instance, the application server puts the
 _ManagedConnection_ instance back into the connection pool. The
 application server should be able to use this available
 _ManagedConnection_ instance to handle future connection allocation
 requests from application components.
 
-=== Connection Cleanup
+===== Connection Cleanup
 
 The application server can also initiate
 cleanup of a _ManagedConnection_ instance when the container terminates
@@ -4250,7 +3395,7 @@ to initiate the connection cleanup. After the cleanup, the application
 server puts the _ManagedConnection_ instance into the pool to serve
 future allocation requests.
 
-=== Connection Destroy
+===== Connection Destroy
 
 To manage the size of the connection pool,
 the application server can call _ManagedConnection.destroy_ method to
@@ -4264,16 +3409,11 @@ notification that signals a fatal error on the physical connection.
 
 
 
-[[a992]]OID: Connection Event
-Notification
+*[[a992]]OID: Connection Event Notification*
 
 image:conn-43.jpg[image]
 
-=== 
-
-image:conn-35.png[image]
-
-Architecture: Non-Managed Environment
+=== Architecture: Non-Managed Environment
 
 The connection management contract enables a
 resource adapter to be used in a two-tier application directly from an
@@ -4304,12 +3444,11 @@ part of its _ManagedConnection_ implementation for connection
 management. However, the resource adapter is not required to use the
 connection event mechanism to drive its internal interactions.
 
-Architecture Diagram:
-Non-Managed Application Scenario
+*Architecture Diagram: Non-Managed Application Scenario*
 
 image:conn-44.jpg[image]
 
-=== Scenario: Programmatic Access to ConnectionFactory
+==== Scenario: Programmatic Access to ConnectionFactory
 
 To maintain the consistency of the
 application programming model across both managed and non-managed
@@ -4324,118 +3463,73 @@ _ManagedConnectionFactory_ and _ConnectionFactory_ interfaces in the
 application code. Refer to section <<a5258, JNDI Configuration and Lookup>>
 for details on JNDI configuration and lookup.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 // Application Client Code
-
-// Create an instance of the
-ManagedConnectionFactory
-
-// implementation class passing in
-initialization parameters
-
+// Create an instance of the ManagedConnectionFactory
+// implementation class passing in initialization parameters
 // (if any) for this instance
 
 com.myeis.ManagedConnectionFactoryImpl mcf =
+     new com.myeis.ManagedConnectionFactoryImpl(...);
 
- new
-com.myeis.ManagedConnectionFactoryImpl(...);
-
-
-
-// Set properties on the
-ManagedConnectionFactory instance
-
-// Note: Properties are defined on the
-implementation class
-
-// and not on the
-jakarta.resource.spi.ManagedConnectionFactory
-
+// Set properties on the ManagedConnectionFactory instance
+// Note: Properties are defined on the implementation class
+// and not on the jakarta.resource.spi.ManagedConnectionFactory
 // interface
-
 mcf.setServerName(...);
-
 mcf.setPortNumber(...);
 
-
-
 // set remaining properties
-
 ...
 
-
-
-// Get access to connection factory. The
-ConnectionFactory instance
-
-// gets initialized with the default
-ConnectionManager provided
-
+// Get access to connection factory. The ConnectionFactory instance
+// gets initialized with the default ConnectionManager provided
 // by the resource adapter
 
 jakarta.resource.cci.ConnectionFactory cxf =
+    (jakarta.resource.cci.ConnectionFactory) mcf.createConnectionFactory();
 
- (jakarta.resource.cci.ConnectionFactory)
-
- mcf.createConnectionFactory();
-
-
-
-// Get a connection using the
-ConnectionFactory instance
-
-jakarta.resource.cci.Connection cx =
-cxf.getConnection(...);
+// Get a connection using the ConnectionFactory instance
+jakarta.resource.cci.Connection cx = cxf.getConnection(...);
 
 
 
-// use connection to access the underlying
-EIS instance
+// use connection to access the underlying EIS instance
 
 ...
 
-
-
 // Close the connection
-
 cx.close();
+----
 
-|===
-
-=== Scenario: Connection Creation in Non-Managed Application Scenario
+==== Scenario: Connection Creation in Non-Managed Application Scenario
 
 The following object interactions are
 involved in the scenario shown in <<a1043, OID:
 Connection Creation in a Non-Managed Application Scenario>>:
 
-The application client calls a method on the
+* The application client calls a method on the
 _jakarta.resource.cci.ConnectionFactory_ instance, returned from the JNDI
 lookup, to get a connection to the underlying EIS instance.
-
-The _ConnectionFactory_ instance delegates
+* The _ConnectionFactory_ instance delegates
 the connection request from the application to the default
 _ConnectionManager_ instance. The resource adapter provides the default
 _ConnectionManager_ implementation.
-
-The _ConnectionManager_ instance creates a
+* The _ConnectionManager_ instance creates a
 new physical connection to the underlying EIS instance by calling the
 _ManagedConnectionFactory.createManagedConnection_ method.
-
-The _ManagedConnectionFactory_ instance
+* The _ManagedConnectionFactory_ instance
 handles the _createManagedConnection_ method by creating a new physical
 connection to the underlying EIS, represented by a _ManagedConnection_
 instance. The _ManagedConnectionFactory_ uses the security information,
 passed as a _Subject_ instance, any _ConnectionRequestInfo instance_ ,
 and its configured set of properties, such as port number, server name,
 to create a new _ManagedConnection_ instance.
-
-The _ManagedConnectionFactory_ initializes
+* The _ManagedConnectionFactory_ initializes
 the state of the created _Managed-Connection_ instance and returns it to
 the default _ConnectionManager_ instance.
-
-The _ConnectionManager_ instance calls the
+* The _ConnectionManager_ instance calls the
 _ManagedConnection.getConnection_ method to get an application-level
 connection handle. Calling the _getConnection_ method does not
 necessarily create a new physical connection to the EIS instance.
@@ -4443,77 +3537,56 @@ Calling _getConnection_ produces a temporary handle that is used by an
 application to access the underlying physical connection. The actual
 underlying physical connection is represented by a _ManagedConnection_
 instance.
-
-The _ConnectionManager_ instance returns the
+* The _ConnectionManager_ instance returns the
 connection handle to the _ConnectionFactory_ instance, which then
 returns the connection to the application that initiated the connection
 request.
 
-[[a1043]]OID: Connection Creation
-in a Non-Managed Application Scenario
+*[[a1043]]OID: Connection Creation in a Non-Managed Application Scenario*
 
 image:conn-45.jpg[image]
 
-=== 
-
-image:conn-35.png[image]
-
-Requirements
+=== Requirements
 
 This section outlines requirements for the
 connection management contract.
 
-=== Resource Adapter
+==== Resource Adapter
 
 The requirements for a resource adapter are
 as follows:
 
-A resource adapter must provide
+* A resource adapter must provide
 implementations of the following interfaces:
-
-
-_jakarta.resource.spi.ManagedConnectionFactory_
-
-_jakarta.resource.spi.ManagedConnection_
-
-
-_jakarta.resource.spi.ManagedConnectionMetaData_
-
-The _ManagedConnection_ implementation
+** _jakarta.resource.spi.ManagedConnectionFactory_
+** _jakarta.resource.spi.ManagedConnection_
+** _jakarta.resource.spi.ManagedConnectionMetaData_
+* The _ManagedConnection_ implementation
 provided by a resource adapter must use the following interface and
 classes to provide support to an application server for connection
 management and transaction management, as explained later:
-
-_jakarta.resource.spi.ConnectionEvent_
-
-_jakarta.resource.spi.ConnectionEventListener_
-
+** _jakarta.resource.spi.ConnectionEvent_
+** _jakarta.resource.spi.ConnectionEventListener_
 To support non-managed environments, a
 resource adapter is not required to use the above two interfaces to
 drive its internal object interactions.
-
-A resource adapter must provide support for
+* A resource adapter must provide support for
 basic error logging and tracing by implementing the following methods:
-
-_ManagedConnectionFactory.set/getLogWriter_
-
-_ManagedConnection.set/getLogWriter_
-
-A resource adapter must provide a default
+** _ManagedConnectionFactory.set/getLogWriter_
+** _ManagedConnection.set/getLogWriter_
+* A resource adapter must provide a default
 implementation of the _jakarta.resource.spi.ConnectionManager_ interface.
 The implementation class comes into play when a resource adapter is used
 in a non-managed two-tier application scenario. In an application
 server-managed environment, the resource adapter must not use the
 default _ConnectionManager_ implementation class.
-
 A default implementation of
 _ConnectionManager_ enables the resource adapter to provide services
 specific to itself. These services can include connection pooling, error
 logging and tracing, and security management. The default
 _ConnectionManager_ delegates to the _ManagedConnectionFactory_ the
 creation of physical connections to the underlying EIS.
-
-In a managed environment, with the exception
+* In a managed environment, with the exception
 of application client containers, a resource adapter must not
 asynchronously (that is, using a separate thread other than the
 application thread) call application objects other than message-driven
@@ -4522,8 +3595,7 @@ scenario, as well as application client containers. A resource adapter
 deployer may use the ResourceAdapter JavaBean to configure the resource
 adapter during its deployment to set the desired behavior, based on the
 requirements of the deployment environment.
-
-A resource adapter is not allowed to support
+* A resource adapter is not allowed to support
 its own internal connection pooling in a managed environment. In this
 case, the application server is responsible for connection pooling.
 However, a resource adapter may multiplex connections (one or more
@@ -4534,59 +3606,41 @@ In a non-managed two tier application
 scenario, a resource adapter is allowed to support connection pooling
 internal to the resource adapter.
 
-=== Application Server
+==== Application Server
 
 The requirements for an application server
 are as follows:
 
-An application server must use the interfaces
+* An application server must use the interfaces
 defined in the connection management contract to use services provided
 by a resource adapter. These interfaces are as follows:
-
-
-_jakarta.resource.spi.ManagedConnectionFactory_
-
-_jakarta.resource.spi.ManagedConnection_
-
-_jakarta.resource.spi.ManagedConnectionMetaData_
-
-An application server must provide an
+** _jakarta.resource.spi.ManagedConnectionFactory_
+** _jakarta.resource.spi.ManagedConnection_
+** _jakarta.resource.spi.ManagedConnectionMetaData_
+* An application server must provide an
 implementation of the _jakarta.resource.spi.ConnectionManager_ interface.
 This implementation should not be specific to any particular type of
 resource adapter, EIS, or connection factory interface.
-
-An application server must implement the
+* An application server must implement the
 _jakarta.resource.spi.-ConnectionEventListener_ interface and to register
 _ConnectionEventListener_ with a resource adapter to get
 connection-related event notifications. An application server uses these
 event notifications to do its pool management, transaction management,
 and connection cleanup.
-
-An application server must use the following
+* An application server must use the following
 interfaces (supported by the resource adapter) to provide basic error
 logging and tracing for its configured set of resource adapters:
-
-_ManagedConnectionFactory.set/getLogWriter_
-
-_ManagedConnection.set/getLogWriter_
-
-An application server must use the
+** _ManagedConnectionFactory.set/getLogWriter_
+** _ManagedConnection.set/getLogWriter_
+* An application server must use the
 _jakarta.resource.spi.ConnectionManager_ hook-in mechanism to provide its
 specific quality-of-services. The Jakarta Connector Architecture does not
 specify the set of services the application server provides, nor does it
 specify how the application server implements these services.
 
 
+== [[a1079]]Transaction Management
 
-=== 
-
-=== 
-
-image:conn-46.png[image]
-
-[[a1079]]Transaction Management
-
-image:conn-47.png[image]
 
 This chapter specifies the transaction
 management contract between an application server (and supported
@@ -4599,11 +3653,7 @@ example, the Jakarta Enterprise Beans specification (see <<a9723,
 Jakarta Enterprise Beans Specification, version 4.0>>) specifies the
 transaction model for Jakarta Enterprise Bean components.
 
-=== 
-
-image:conn-48.png[image]
-
-Overview
+=== Overview
 
 The following figure shows an application
 component deployed in a container provided by an application server. The
@@ -4612,19 +3662,17 @@ managers. The application server uses a transaction manager that takes
 the responsibility of managing transactions across multiple resource
 managers.
 
-Transaction Management
-Contract
+*Transaction Management Contract*
 
 image:conn-49.jpg[image]
 
 A resource manager can support two types of
 transactions:
 
-A transaction that is controlled and
+* A transaction that is controlled and
 coordinated by a transaction manager external to the resource manager.
 This document refers to such a transaction as Jakarta Transaction or XA transaction.
-
-A transaction that is managed internal to a
+* A transaction that is managed internal to a
 resource manager. The coordination of such transactions involves no
 external transaction managers. This document refers to such transactions
 as RM local transactions (or local transactions).
@@ -4640,10 +3688,9 @@ transaction management contract between an application server and a
 resource adapter and its underlying resource manager. The transaction
 management contract has two parts, depending on the type of transaction:
 
-a Jakarta Transactions _javax.transaction.xa.XAResource_ based
+* a Jakarta Transactions _javax.transaction.xa.XAResource_ based
 contract between a transaction manager and a resource manager
-
-a local transaction management contract
+* a local transaction management contract
 
 These contracts enable an application server
 to provide the infrastructure and runtime environment for transaction
@@ -4654,24 +3701,19 @@ should not be passed between application component boundaries,
 especially if the connection handles are involved in a transaction, and
 an application server is not required to support this usage.
 
-=== 
-
-image:conn-48.png[image]
-
-Transaction Management Scenarios
+=== Transaction Management Scenarios
 
 This section uses a set of scenarios to
 present an overview of the transaction management architecture.
 
-=== Transactions Across Multiple Resource Managers
+==== Transactions Across Multiple Resource Managers
 
 In the following figure, an application client
 invokes Jakarta Enterprise Beans component X. Enterprise Bean X
 accesses transaction programs managed by a TP system and calls
 Enterprise Bean Y to access an ERP system.
 
-Scenario: Transactions
-Across Multiple Resource Managers
+*Scenario: Transactions Across Multiple Resource Managers*
 
 image:conn-50.jpg[image]
 
@@ -4703,7 +3745,7 @@ ensuring that all read/write access to resources managed by both the TP
 system and ERP system is either entirely committed or entirely rolled
 back.
 
-=== Local Transaction Management
+==== Local Transaction Management
 
 The transactions are demarcated either by the
 container (called container-managed demarcation) or by a component
@@ -4728,12 +3770,12 @@ If a single resource manager instance
 participates in a transaction (either component-managed or
 container-managed), the container has two choices:
 
-Using the transaction manager to manage this
+* Using the transaction manager to manage this
 transaction. The transaction manager uses one-phase commit-optimization,
 described in <<a1172, Scenarios Supported>>, to
 coordinate the transaction for this single resource manager instance.
 
-Letting the resource manager coordinate this
+* Letting the resource manager coordinate this
 transaction internally without involving an external transaction
 manager.
 
@@ -4748,16 +3790,11 @@ transaction in a single resource manager scenario, the application
 server may optimize this scenario by using a local transaction instead
 of an XA transaction. This scenario is shown in the following figure.
 
-Scenario: Local Transaction
-on a Single Resource Manager
+*Scenario: Local Transaction on a Single Resource Manager*
 
 image:conn-51.jpg[image]
 
-=== 
-
-image:conn-48.png[image]
-
-Transaction Management Contract
+=== Transaction Management Contract
 
 This section specifies the transaction
 management contract. The transaction management contract builds on the
@@ -4769,12 +3806,11 @@ flows in the transaction management contract. It does not show the
 interfaces, classes, and flows that are the same in the connection
 management contract.
 
-Architecture Diagram:
-Transaction Management
+*Architecture Diagram: Transaction Management*
 
 image:conn-52.jpg[image]
 
-=== Interface: ManagedConnection
+==== Interface: ManagedConnection
 
 The _jakarta.resource.spi.Managed_ Connection
 instance represents a physical connection to an EIS and acts as a
@@ -4784,25 +3820,18 @@ The following code extract shows the methods
 on _the ManagedConnection_ interface that are defined specifically for
 the transaction management contract:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ManagedConnection \{
+[source,Java]
+----
+public interface jakarta.resource.spi.ManagedConnection {
 
- public XAResource getXAResource() throws
-ResourceException;
+ public XAResource getXAResource() throws ResourceException;
 
- public LocalTransaction
-getLocalTransaction()
-
- throws ResourceException;
-
+ public LocalTransaction getLocalTransaction()
+             throws ResourceException;
  ...
 
 }
-
-|===
+----
 
 A _Managed_ Connection instance provides
 access to a pair of interfaces: _jakarta.transaction.xa.XAResource_ and
@@ -4817,8 +3846,7 @@ Exceptions>> for details on the exception hierarchy.
 
 The following figure illustrates this concept:
 
-ManagedConnection Interface
-for Transaction Management
+*ManagedConnection Interface for Transaction Management*
 
 image:conn-53.jpg[image]
 
@@ -4832,7 +3860,7 @@ _XAResource_ interface in more detail.
 The application server uses the
 _LocalTransaction_ interface to manage local transactions.
 
-=== Interface: XAResource
+==== Interface: XAResource
 
 The _jakarta.transaction.xa.XAResource_
 interface is a Java mapping of the industry standard _XA_ interface
@@ -4848,38 +3876,30 @@ and API documentation, refer to the Jakarta Transaction (see
 Transaction Processing: the XA Specification, X/Open document>>)
 specifications:
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 public interface
-jakarta.transaction.xa.XAResource \{
+jakarta.transaction.xa.XAResource {
 
- public void commit(Xid xid, boolean
-onePhase) throws XAException;
+ public void commit(Xid xid, boolean onePhase) throws XAException;
 
- public void end(Xid xid, int flags) throws
-XAException;
+ public void end(Xid xid, int flags) throws XAException;
 
- public void forget(Xid xid) throws
-XAException;
+ public void forget(Xid xid) throws XAException;
 
- public int prepare(Xid xid) throws
-XAException;
+ public int prepare(Xid xid) throws XAException;
 
- public Xid[] recover(int flag) throws
-XAException;
+ public Xid[] recover(int flag) throws XAException;
 
- public void rollback(Xid xid) throws
-XAException;
+ public void rollback(Xid xid) throws XAException;
 
- public void start(Xid xid, int flags) throws
-XAException;
+ public void start(Xid xid, int flags) throws XAException;
 
 }
 
-|===
+----
 
-=== Implementation
+===== Implementation
 
 A resource adapter for an EIS resource manager
 implements the _XAResource_ interface. This interface enables the
@@ -4905,29 +3925,24 @@ initiate transaction completion. The _XAResource_ instance used during
 the transaction completion process need not be the one initially
 enlisted with the transaction manager for this transaction.
 
-=== [[a1147]]Interface: LocalTransaction
+==== [[a1147]]Interface: LocalTransaction
 
 The following code extract shows the
 _jakarta.resource.spi.LocalTransaction_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 public interface
-jakarta.resource.spi.LocalTransaction \{
+jakarta.resource.spi.LocalTransaction {
 
- public void begin() throws
-ResourceException;
+ public void begin() throws ResourceException;
 
- public void commit() throws
-ResourceException;
+ public void commit() throws ResourceException;
 
- public void rollback() throws
-ResourceException;
+ public void rollback() throws ResourceException;
 
 }
-
-|===
+----
 
 A resource adapter implements the
 _LocalTransaction_ interface to provide support for local transactions
@@ -4938,11 +3953,7 @@ transactions for a resource manager.
 <<a1285, Interface: LocalTransaction>> has more details on the local transaction management
 contract.
 
-=== 
-
-image:conn-48.png[image]
-
-Relationship to Jakarta Transaction and JTS
+=== Relationship to Jakarta Transaction and JTS
 
 The Jakarta Transaction (see
 <<a9725, Jakarta™ Transaction Specification>>)
@@ -4961,7 +3972,7 @@ infrastructure for enterprise middleware. For example, an application
 server vendor can use a JTS implementation as the underlying transaction
 manager.
 
-=== Jakarta Transaction Interfaces
+==== Jakarta Transaction Interfaces
 
 The application server uses the
 _jakarta.transaction.TransactionManager_ and
@@ -4985,11 +3996,7 @@ transactional connections with the transaction manager. This enables the
 transaction manager to coordinate transactional work performed by all
 enlisted resource managers within a transaction.
 
-=== 
-
-image:conn-48.png[image]
-
-Object Diagram
+=== Object Diagram
 
 The following figure shows the object
 instances and their interactions related to transaction management.
@@ -5000,18 +4007,11 @@ interactions that have already been discussed in
 
 
 
-Object Diagram:
-Transaction Management
+*Object Diagram: Transaction Management*
 
 image:conn-54.jpg[image]
 
-
-
-=== 
-
-image:conn-48.png[image]
-
-[[a1169]]XAResource-based Transaction Contract
+=== [[a1169]]XAResource-based Transaction Contract
 
 This section specifies detailed requirements
 for a resource manager and a transaction manager for the _XAResource_
@@ -5021,7 +4021,7 @@ abbreviations are used: RM (Resource Manager), TM (Transaction Manager),
 
 
 
-=== [[a1172]]Scenarios Supported
+==== [[a1172]]Scenarios Supported
 
 The following table specifies various
 transaction management scenarios and mentions whether these scenarios
@@ -5096,7 +4096,7 @@ Out of the scope of the Jakarta Connectors specification
 
 |===
 
-=== Resource Adapter Requirements
+==== Resource Adapter Requirements
 
 Jakarta Connectors does not require
 that all resource adapters must support Jakarta Transaction
@@ -5122,71 +4122,71 @@ in conjunction with these specifications. These detailed
 requirements are included in this document to clearly specify the
 requirements from the Jakarta Connectors perspective.
 
-=== General
+===== General
 
-If an RM supports an _XAResource_ contract,
+* If an RM supports an _XAResource_ contract,
 then it must support the one-phase commit protocol by implementing
 _XAResource.commit_ when the boolean flag _onePhase_ is set to _True_ .
 The RM is not required to implement the two-phase commit protocol
 support in its _XAResource_ implementation.
 
-However, if an RM supports the two-phase
+* However, if an RM supports the two-phase
 commit protocol, then the RM must use the _XAResource_ interface for
 supporting the two-phase commit protocol.
 
-An RM is allowed to combine the implementation
+* An RM is allowed to combine the implementation
 of 2PC protocol with 1PC optimization by implementing
 _XAResource.commit_ ( _onePhase_ = _True_ ) in addition to the
 implementation requirements for 2PC.
 
-=== One-phase Commit
+===== One-phase Commit
 
-An RM should allow _XAResource.commit_ (
+* An RM should allow _XAResource.commit_ (
 _onePhase_ = _True_ ) even if it has not received _XAResource.prepare_
 for the transaction branch.
 
-If the RM fails to commit a transaction during
+* If the RM fails to commit a transaction during
 a 1PC commit, then the RM should throw one of the _XA_RB*_ exceptions.
 In the exception case, an RM should roll back the transaction branch’s
 work and release all held RM resources.
 
-The RM is responsible for deciding the outcome
+* The RM is responsible for deciding the outcome
 of a transaction branch on an XA _Resource.commit_ method. The RM can
 discard knowledge of the transaction branch once it returns from the
 _commit_ call.
 
-The RM is not required to maintain knowledge
+* The RM is not required to maintain knowledge
 of transaction branches to support failure recovery for the TM.
 
-If an _XAResource.prepare_ method is called on
+* If an _XAResource.prepare_ method is called on
 an RM that supports only one-phase commit, then the RM should throw an
 _XAException_ with _XAER_PROTO or XA_RB* flag_ .
 
-The RM should return an empty list of XIDs for
+* The RM should return an empty list of XIDs for
 _XAResource.recover_ , because the RM is not required to maintain stable
 knowledge about transaction branches.
 
-=== Two-phase Commit
+===== Two-phase Commit
 
-If the RM supports 2PC, then its
+* If the RM supports 2PC, then its
 implementation of 2PC must be compliant with the 2PC protocol definition
 with presumed rollback as specified in the OSI TP (Transaction Protocol
 defined by ISO (ISO92)) specification.
 
-The RM must implement the _XAResource.prepare_
+* The RM must implement the _XAResource.prepare_
 method and must be able to report whether it can guarantee its ability
 to commit the transaction branch. If the RM reports that it can, the RM
 must hold and record in a stable way all the resources necessary to
 commit the branch. It must hold all these resources until the TM directs
 it to commit or rollback the branch.
 
-An RM that reports a heuristic completion to
+* An RM that reports a heuristic completion to
 the TM must not discard its knowledge of the transaction branch. The RM
 should discard its knowledge of the branch only when the TM calls
 _XAResource.forget_ . The RM must notify the TM of all heuristic
 decisions.
 
-On the TM’s _XAResource.commit_ and
+* On the TM’s _XAResource.commit_ and
 _XAResource.rollback_ calls, the RM is allowed to report through an
 _XAException_ that it has heuristically completed the transaction
 branch. This feature is optional.
@@ -5197,30 +4197,30 @@ only resource involved in the transaction. The mechanism to identify to
 the TM a particular RM that only supports 1PC is beyond the scope of
 this specification.
 
-=== Transaction Association and Calling Protocol
+===== Transaction Association and Calling Protocol
 
-The RM _XAResource_ implementation must
+* The RM _XAResource_ implementation must
 support _XAResource.start_ and _XAResource.end_ for association and
 disassociation of a transaction, as represented by, unique XID, with
 recoverable units of work being done on the RM.
 
-The RM must ensure that the TM invokes
+* The RM must ensure that the TM invokes
 _XAResource_ calls in the legal sequence, and must return _XAER_PROTO_
 or another suitable error if the caller TM violates the state tables, as
 defined in Chapter 6 of the XA specification (see
 <<a9725, Jakarta™ Transaction Specification, Version 2.0>>).
 
-=== Unilateral Roll-back
+===== Unilateral Roll-back
 
-The RM need not wait for global transaction
+* The RM need not wait for global transaction
 completion to report an error. The RM can return a rollback-only flag as
 a result of any _XAResource.start_ or _XAResource.end_ call. This can
 happen anytime except after a successful _prepare_ .
 
-The RM is allowed to unilaterally rollback and
+* The RM is allowed to unilaterally rollback and
 forget a transaction branch any time before it prepares it.
 
-=== Read-Only Optimization
+===== Read-Only Optimization
 
 Support for read-only optimization is optional
 for RM implementation. An RM can respond to the TM’s request to prepare
@@ -5229,21 +4229,21 @@ resources in this transaction branch. This response concludes the RM’s
 involvement in the transaction, and the RM can release all resources and
 discard its knowledge of the transaction.
 
-=== XID Support
+===== XID Support
 
-The RM must accept XIDs from TMs. The RM is
+* The RM must accept XIDs from TMs. The RM is
 responsible for using the XID to maintain an association between a
 transaction branch and recoverable units of work done by the application
 programs.
 
-The RM must not alter in any way the bits
+* The RM must not alter in any way the bits
 associated in the data portion of an XID. For example, if an RM remotely
 communicates an XID, it must ensure that the data bits of the XID are
 not altered by the communication process.
 
-=== Support for Failure Recovery
+===== Support for Failure Recovery
 
-A full Jakarta Transaction compliant _XAResource_
+* A full Jakarta Transaction compliant _XAResource_
 implementation that supports 2PC must maintain the status of all
 transaction branches in which it is involved. After responding
 affirmatively to the TM _prepare_ call, an RM should not erase its
@@ -5251,19 +4251,19 @@ knowledge of the branch or of the work done in support of the branch
 until it successfully receives a TM’s invocation to commit or rollback
 the branch.
 
-If an RM that supports 2PC heuristically
+* If an RM that supports 2PC heuristically
 completes a branch, it should not forget a branch until the TM
 explicitly tells it to by calling _XAResource.forget_ .
 
-On the TM’s _XAResource.recover_ call, an RM
+* On the TM’s _XAResource.recover_ call, an RM
 that supports 2PC must return a list of all transaction branches that it
 has prepared or has heuristically completed.
 
-When an RM recovers from its own failure, it
+* When an RM recovers from its own failure, it
 must recover prepared and heuristically completed branches. It should
 discard its knowledge of all other branches.
 
-=== [[a1233]]Transaction Manager Requirements
+==== [[a1233]]Transaction Manager Requirements
 
 The following section specifies requirements
 of a TM. This section assumes that the TM is compliant with Jakarta Transaction/JTS
@@ -5271,7 +4271,7 @@ and X/Open (see <<a9729, X/Open CAE Specification --
 Distributed Transaction Processing: the XA Specification, X/Open
 document>>) specifications.
 
-=== Interfaces
+===== Interfaces
 
 {empty}The TM must use the _XAResource_
 interface supported by an RM for transaction coordination and recovery.
@@ -5282,7 +4282,7 @@ specification section, for instance RMs that make heuristic decisions
 and RMs that use the read-only optimization. [Requirement derived from
 Section 7.3, XA specification]
 
-=== XID Requirements
+===== XID Requirements
 
 The TM must generate XIDs conforming to the
 structure defined in section 4.2 on page 19 of the XA specification (see
@@ -5290,31 +4290,31 @@ structure defined in section 4.2 on page 19 of the XA specification (see
 The generated XIDs must be globally unique
 and must adequately describe a transaction branch.
 
-=== One-phase Commit Optimization
+===== One-phase Commit Optimization
 
-The TM must support one-phase commit protocol
+* The TM must support one-phase commit protocol
 optimization. The TM uses the 1PC optimization when the TM knows there
 is only one RM registered in a transaction that is making changes to
 shared resources. In this optimization, the TM makes its phase 2 commit
 request to that RM without having made a phase 1 prepare request.
 
-The TM is not required to record such transactions in a stable
+* The TM is not required to record such transactions in a stable
 manner, and in some failure cases, the TM may not
 record the outcome of the transaction completion.
 
-=== Implementation Options
+===== Implementation Options
 
 The support of last-resource optimization is
 an implementation-specific option for a TM. A detailed specification of
 TM and RM requirements for this optimization is outside the scope of
 Jakarta Connectors.
 
-=== Scenario: Transactional Setup for a ManagedConnection
+==== Scenario: Transactional Setup for a ManagedConnection
 
 The following object interactions are involved
 in the scenario shown in <<a1259, OID: Transactional Setup For Newly Created ManagedConnection Instances>>.
 
-The runtime scenario begins with a client method invocation on an
+. The runtime scenario begins with a client method invocation on an
 Jakarta Enterprise Beans instance. This invocation has a transaction
 context, represented by a unique transaction _Xid_ , associated with it
 if the invocation came from a client that was already participating in
@@ -5322,40 +4322,40 @@ the transaction. Alternatively, the Jakarta Enterprise Beans container
 starts a transaction before dispatching the client request to the
 Jakarta Enterprise Beans method.
 
-The Jakarta Enterprise Beans instance calls the _getConnection_
+. The Jakarta Enterprise Beans instance calls the _getConnection_
 method on the _ConnectionFactory_ instance. The resource adapter
 delegates the connection request to the application server using the
 connection management contract. <<a976, OID: Connection Pool Management with Connection Matching>> explains this step.
 
-The application server gains control and
+. The application server gains control and
 handles the connection allocation request.
 
-To handle the connection allocation request,
+. To handle the connection allocation request,
 the application server gets a _Managed-Connection_ instance either from
 the connection pool or creates a new _Managed-Connection_ instance.
 <<a976, OID: Connection Pool Management with Connection Matching>> describes this step.
 
-The application server registers itself as a
+. The application server registers itself as a
 _ConnectionEventListener_ with the _ManagedConnection_ instance. This
 enables the application server to receive notifications for various
 events on this connection instance. The application server uses these
 event notifications to manage connection pooling and transactions.
 
-Based on the current transaction context associated with the
+. Based on the current transaction context associated with the
 connection-requesting thread and the Jakarta Enterprise Beans instance,
 the application server decides whether or not the transaction manager
 will participate in the coordination of the currently active
 transaction.
 
-If the application server decides that the
+. If the application server decides that the
 transaction manager will manage the current transaction, it conducts the
 following transactional setup on the _ManagedConnection_ instance:
 
-The application server invokes the
+. The application server invokes the
 _ManagedConnection.getXAResource_ method to get the _XAResource_
 instance associated with the _ManagedConnection_ instance.
 
-The application server enlists the
+. The application server enlists the
 _XAResource_ instance with the transaction manager for the current
 transaction context. The application server uses the _Transaction_ .
 _enlistResource_ method (specified in the Jakarta Transaction specification) to enlist
@@ -5363,31 +4363,30 @@ the _XAResource_ instance with the transaction manager. This enlistment
 informs the transaction manager about the resource manager instance
 participating in the transaction.
 
-The transaction manager invokes
+. The transaction manager invokes
 _XAResource.start_ to associate the current transaction with the
 underlying resource manager instance. This enables the transaction
 manager to inform the participating resource manager that all units of
 work performed by the application on the underlying _ManagedConnection_
 instance should now be associated with this transaction.
 
-The application server calls the
+. The application server calls the
 _ManagedConnection.getConnection_ method to get a new application-level
 connection handle. The underlying physical connection is represented by
 a _ManagedConnection_ instance.
 
-The application server returns the connection
+. The application server returns the connection
 handle to the resource adapter. The resource adapter then passes the
 connection handle to the application component that had initiated the
 connection request.
 
 
 
-[[a1259]]OID: Transactional Setup
-For Newly Created ManagedConnection Instances
+*[[a1259]]OID: Transactional Setup For Newly Created ManagedConnection Instances*
 
 image:conn-55.jpg[image]
 
-=== Scenario: Connection Close and Jakarta Transaction Transactional Cleanup
+==== Scenario: Connection Close and Jakarta Transaction Transactional Cleanup
 
 For each _ManagedConnection_ instance in the
 pool, the application server registers a _ConnectionEventListener_
@@ -5398,56 +4397,55 @@ connection pooling and transactions.
 <<a942, Object Diagram: Connection Management Architecture>> describes the following
 steps when an application component closes a connection:
 
-The application component releases a
+. The application component releases a
 _Connection_ instance by calling the _close_ method. The _Connection_
 instance delegates the connection close request to its associated
 _ManagedConnection_ instance. A _ManagedConnection_ must not alter any
 state on the physical connection while handling a delegated connection
 close request.
 
-The _ManagedConnection_ instance notifies all
+. The _ManagedConnection_ instance notifies all
 its registered listeners of the application’s connection close request
 using the _ConnectionEventListener_ . _connectionClosed_ method. It
 passes a _ConnectionEvent_ instance with the event type set to
 CONNECTION_CLOSED.
 
-On receiving the connection close
+. On receiving the connection close
 notification, the application server performs transactional cleanup for
 the _ManagedConnection_ instance. If the _ManagedConnection_ instance
 was participating in a transaction manager-enlisted Jakarta Transactions
 transaction, the application server takes the following steps:
 
-The application server dissociates the
+. The application server dissociates the
 _XAResource_ instance, corresponding to the _ManagedConnection_
 instance, from the transaction manager using the method
 _Transaction.delistResource_ .
 
-The transaction manager calls
+. The transaction manager calls
 _XAResource.end(Xid,flag)_ to inform the resource manager that any
 further operations on the _ManagedConnection_ instance are no longer
 associated with the transaction, represented by the _Xid_ passed in
 _XAResource.end_ call. This method invocation dissociates the
 transaction from the resource manager instance.
 
-After the transaction completes, the
+. After the transaction completes, the
 application server initiates a cleanup of the physical connection
 instance by calling _ManagedConnection.cleanup_ method. After calling
 the method _cleanup_ on the _ManagedConnection_ instance, the
 application server returns the _ManagedConnection_ instance to the
 connection pool.
 
-The application server can now use the
+. The application server can now use the
 _ManagedConnection_ instance to handle future connection allocation
 requests from either the same or another component instance.
 
 
 
-OID: Connection Close and
-Transactional Cleanup
+*OID: Connection Close and Transactional Cleanup*
 
 image:conn-56.jpg[image]
 
-=== OID: Transaction Completion
+==== OID: Transaction Completion
 
 The scenario in the following figure
 illustrates the steps taken by the transaction manager to commit a
@@ -5457,7 +4455,7 @@ for each enlisted resource manager instance.
 
 The following steps happen in this scenario:
 
-The transaction manager calls
+. The transaction manager calls
 _XAResource.prepare_ to begin the first phase of the transaction
 completion protocol. The transaction manager can call any _XAResource_
 instance associated with the proper underlying resource manager
@@ -5466,23 +4464,18 @@ involved with the transaction. The application server can assume that
 all _XAResource_ instances produced by a _ManagedConnectionFactory_
 instance refer to the same underlying resource manager instance.
 
-Assuming all resource manager instances
+. Assuming all resource manager instances
 involved in the transaction agree to commit, the transaction manager
 calls _XAResource.commit_ to commit the transaction. Otherwise, the
 transaction manager calls _XAResource.rollback_ .
 
 
 
-OID: Transaction
-Completion
+*OID: Transaction Completion*
 
 image:conn-57.jpg[image]
 
-=== 
-
-image:conn-48.png[image]
-
-[[a1280]]Local Transaction Management Contract
+=== [[a1280]]Local Transaction Management Contract
 
 The main motivation for defining a local
 transaction contract between an application server and a resource
@@ -5492,13 +4485,13 @@ local transactions, hereafter called local transactions.
 The local transaction management contract has
 two parts:
 
-The application server uses the
+* The application server uses the
 _jakarta.resource.spi.LocalTransaction_ interface to manage local
 transactions transparently to an application component. The scenarios in
 <<a1358, Transaction Scenarios>> illustrate this
 part of the local transaction management contract.
 
-The other part of the contract relates to
+* The other part of the contract relates to
 notifications for local transaction-related events. If the resource
 adapter supports a local transaction demarcation API, for example,
 _jakarta.resource.cci.LocalTransaction_ for the Common Client Interface,
@@ -5507,14 +4500,14 @@ events (transaction begin, commit, and rollback) related to the local
 transaction. An application server uses this part of the contract, as
 explained in <<a1309, Scenarios: Local Transaction Management>>.
 
-=== [[a1285]]Interface: LocalTransaction
+==== [[a1285]]Interface: LocalTransaction
 
 The _jakarta.resource.spi.LocalTransaction_
 interface defines the contract between an application server and
 resource adapter for local transaction management. This interface is
 defined in <<a1147, Interface: LocalTransaction>>.
 
-=== Interface: ConnectionEventListener
+==== Interface: ConnectionEventListener
 
 An application server implements the
 _jakarta.resource.spi.ConnectionEventListener_ interface. It registers
@@ -5525,31 +4518,22 @@ The following code extract specifies the
 _ConnectionEventListener_ interface related to the local transaction
 management contract:
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 public interface
-jakarta.resource.spi.ConnectionEventListener \{
+jakarta.resource.spi.ConnectionEventListener {
 
- // Local Transaction Management related
-events
+ // Local Transaction Management related events
 
- public void
-localTransactionStarted(ConnectionEvent event);
+ public void localTransactionStarted(ConnectionEvent event);
 
- public void
-localTransactionCommitted(ConnectionEvent event);
+ public void localTransactionCommitted(ConnectionEvent event);
 
- public void
-localTransactionRolledback(ConnectionEvent event);
-
-
-
+ public void localTransactionRolledback(ConnectionEvent event);
  ...
 
 }
-
-|===
+----
 
 The _ManagedConnection_ instance notifies its
 registered listeners for transaction related events by calling the
@@ -5560,16 +4544,16 @@ The _ConnectionEvent_ class defines the
 following types of event notifications related to the local transaction
 management contract:
 
- _LOCAL_TRANSACTION_STARTED_ - a local
+* _LOCAL_TRANSACTION_STARTED_ - a local
 transaction was started using the _ManagedConnection_ instance
 
- _LOCAL_TRANSACTION_COMMITTED_ - a local
+* _LOCAL_TRANSACTION_COMMITTED_ - a local
 transaction was committed using the _ManagedConnection_ instance
 
- _LOCAL_TRANSACTION_ROLLEDBACK_ - a local
+* _LOCAL_TRANSACTION_ROLLEDBACK_ - a local
 transaction was rolled back using the _ManagedConnection_ instance
 
-=== Requirements
+===== Requirements
 
 The connector specification requires an
 application server to implement the _ConnectionEventListener_ interface
@@ -5598,11 +4582,7 @@ This may be required in a future release of the specification.
 The resource adapter must not send local
 transaction events for local transactions managed by the container.
 
-=== 
-
-image:conn-48.png[image]
-
-[[a1309]]Scenarios: Local Transaction Management
+=== [[a1309]]Scenarios: Local Transaction Management
 
 This section illustrates how an application
 server uses the event notifications from the resource adapter to manage
@@ -5620,7 +4600,7 @@ rollback. The application server is notified of these local
 transaction-related events through the _ConnectionEventListener_
 mechanism.
 
-=== Local Transaction Cleanup
+==== Local Transaction Cleanup
 
 A stateless session bean with bean-managed
 transaction demarcation starts a local transaction in a method
@@ -5642,7 +4622,7 @@ On detecting an incomplete local transaction,
 the application server aborts the transaction, terminates the stateless
 session bean instance, and throws an exception to the client.
 
-=== Component Termination
+==== Component Termination
 
 The application server terminates a component
 instance, for example, because of some system exception in a method
@@ -5659,7 +4639,7 @@ a _ManagedConnection_ instance by calling _ManagedConnection.cleanup_ .
 After cleanup, the application server returns this connection to the
 pool to serve future allocation requests.
 
-=== Transaction Interleaving
+==== Transaction Interleaving
 
 The application server uses the connection
 event listener mechanism, specified through the interfaces
@@ -5670,7 +4650,7 @@ _ConnectionEventListener_ interface to support this scenario.
 The following subsection illustrates a
 scenario for component-managed transaction demarcation.
 
-=== Scenario
+==== Scenario
 
 A Jakarta Enterprise Beans component with bean managed
 transaction demarcation starts a local transaction using the
@@ -5695,11 +4675,7 @@ detects an error condition, because it has not received the matching
 LOCAL_TRANSACTION_COMMITTED or LOCAL_TRANSACTION_ROLLEDBACK event from
 the resource adapter for the currently active local transaction.
 
-=== 
-
-image:conn-48.png[image]
-
-[[a1329]]Connection Sharing
+=== [[a1329]]Connection Sharing
 
 Sharing connections typically results in
 efficient use of resources and better performance. An application can
@@ -5713,18 +4689,11 @@ acquired by an application are used within a global transaction scope
 server must provide a single shared connection behavior under the
 following conditions:
 
-x and y are collocated in a single Java
-Virtual Machine process address space
-
-x and y are using a single transactional
-resource manager
-
-x and y have identical properties
-
-x and y are marked as _shareable_
-
-x and y are used within a container-managed
-or bean-managed transaction scope
+* x and y are collocated in a single Java Virtual Machine process address space
+* x and y are using a single transactional resource manager
+* x and y have identical properties
+* x and y are marked as _shareable_
+* x and y are used within a container-managed or bean-managed transaction scope
 
 The ability to share is unspecified for
 connections marked _shareable_ that are used outside a global
@@ -5777,7 +4746,7 @@ details on connection association.
 Refer to <<a1358, Transaction Scenarios>> for a special case of connection sharing as
 applied to resource adapters that support local transactions.
 
-=== Sharing Violation Detection
+==== Sharing Violation Detection
 
 A resource adapter may detect sharing
 violations. Any operation on a shareable connection which violates
@@ -5789,10 +4758,10 @@ When such a mutable operation is performed on
 a _ManagedConnection_ , it may throw a SharingViolationException when
 both the following conditions are true:
 
-The number of connection handle objects
+* The number of connection handle objects
 associated with the _ManagedConnection_ is more than one.
 
-The _ManagedConnection_ is associated with a
+* The _ManagedConnection_ is associated with a
 transaction, either local or XA.
 
 Further, a resource adapter may reject
@@ -5801,7 +4770,7 @@ SharingViolationException, if the connection is already in a unshareable
 condition. Any mutable operation performed on a connection makes it
 unshareable.
 
-=== Scenario 1
+===== Scenario 1
 
 Application component A gets a shareable
 connection to a resource and invokes component B which also gets a
@@ -5812,7 +4781,7 @@ onwards, any attempt to change a mutable property, such as isolation
 level, by either component, results in a SharingViolationException being
 thrown by the resource adapter to the offending component.
 
-=== Scenario 2
+===== Scenario 2
 
 Application component A gets a shareable
 connection to a resource. A is involved in a transaction, either local
@@ -5834,27 +4803,20 @@ SharingViolationException to B, even if A had closed its connection
 handle before it invoked B, since the connection acquired by A had
 become unshareable.
 
-=== 
-
-image:conn-48.png[image]
-
-[[a1358]]Transaction Scenarios
+=== [[a1358]]Transaction Scenarios
 
 This section specifies requirements for
 various transaction scenarios.
 
-=== Requirements
+==== Requirements
 
 The Jakarta EE platform specification (see
 <<a9737, Jakarta™ EE Platform Specification Version 9>>) identifies the following as transactional
 resources:
 
-JDBC connections
-
-Jakarta Messaging sessions
-
-Resource adapter connections at the
-_XATransaction_ level
+* JDBC connections
+* Jakarta Messaging sessions
+* Resource adapter connections at the _XATransaction_ level
 
 The Jakarta EE platform specification requires
 that Jakarta EE product providers must transparently support transactions
@@ -5887,18 +4849,17 @@ below.
 Application server must use a single local
 transaction in a scenario where the following conditions hold:
 
-Multiple components are involved in a global
-transaction scope.
+* Multiple components are involved in a global transaction scope.
 
-All components use a single resource adapter
+* All components use a single resource adapter
 that is local transaction capable. There is no other XAResource or local
 transaction capable resource adapter involved in the global transaction
 scope.
 
-All components get connections to the same
+* All components get connections to the same
 EIS instance.
 
-Components have not specified the
+* Components have not specified the
 _res-sharing-scope_ flag as _unshareable_ . This condition accounts for
 potential sharing of connections in terms of security context,
 client-specific connection parameters, and EIS specific configuration.
@@ -5935,61 +4896,57 @@ specific optional transaction scenario is illegal. Any errors in
 optional transaction scenarios are considered application programming
 errors.
 
-=== Illustrative Scenarios
+==== Illustrative Scenarios
 
 The following are examples of optional
 transaction scenarios. The following section also describes, in a
 non-prescriptive manner, issues in support for these scenarios by an
 application server:
 
-Within a transaction, a Jakarta Enterprise Beans component
+* Within a transaction, a Jakarta Enterprise Beans component
 acquires connections to two different resource managers X and Y using
 their respective non-XA local transaction capable resource adapters.
-
 The container cannot manage a local
 transaction across two different resource managers. Since resource
 adapters and underlying resource managers are not XA capable, the
 container cannot use XA in this case. However, a Jakarta EE application
 should not depend on the container to detect this illegal scenario.
 
-Within a transaction, Jakarta Enterprise Beans component A
+* Within a transaction, Jakarta Enterprise Beans component A
 acquires a connection to a resource manager X using a non-XA local
 transaction capable resource adapter. Next, Enterprise Beans component B under the
 same transaction context acquires a connection to a different resource
 manager Y using a non-XA local transaction capable resource adapter
-
 The container cannot manage a local
 transaction across two different resource managers. Since resource
 adapters are not XA capable, the container cannot use XA in this case.
 However, a Jakarta EE application should not depend on the container to
 detect this illegal scenario.
 
-Within a transaction, Jakarta Enterprise Beans component A
+* Within a transaction, Jakarta Enterprise Beans component A
 acquires a connection to a resource manager X using a non-XA local
 transaction capable resource adapter. Next, the same
 Enterprise Bean (or Enterprise Bean B)
 under the same transaction context acquires a connection to a different
 resource manager Y using an XA capable resource adapter
-
 This scenario may be supported if the
 transaction manager supports last resource commit optimization. Since
 this optimization feature is optional and not specified in the Jakarta
 Connectors, a Jakarta EE application should not depend on support for
 this scenario.
 
-Within a transaction, Enterprise Bean A acquires a
+* Within a transaction, Enterprise Bean A acquires a
 connection to a resource manager X using an XA capable resource adapter.
 Next, the same Enterprise Beans component (or another Enterprise
 Beans component B) under the same
 transaction context acquires a connection to a different resource
 manager Y using a non-XA local transaction capable resource adapter
-
 This scenario may be supported if the
 transaction manager supports last resource commit optimization. Since
 this optimization feature is optional and not specified in Jakarta Connectors,
 a Jakarta EE application should not depend on support for this scenario.
 
-=== [[a1389]]Scenario: Local Transaction
+==== [[a1389]]Scenario: Local Transaction
 
 This scenario illustrates the use of the
 connection sharing mechanism to implement requirement for a local
@@ -6017,50 +4974,46 @@ beans A and B have container-managed transaction demarcation with the
 transaction attribute set to _Required_ . Both A and B access a single
 EIS resource manager as part of their business logic.
 
-Scenario to illustrate Local Transaction
-Management
+*Scenario to illustrate Local Transaction Management*
 
 image:conn-58.jpg[image]
 
 The following steps happen in this scenario:
 
-The client invokes a method on session bean A
+1. The client invokes a method on session bean A
 with no transaction context. In its method implementation, the
 Enterprise Bean A acquires a connection to the EIS instance.
 
-When acquiring the connection, the container
+2. When acquiring the connection, the container
 starts a local transaction by invoking the _begin_ method of the
 _jakarta.resource.spi.LocalTransaction_ instance. The local transaction is
 tied to the _ManagedConnection_ instance that is associated with the
 connection handle acquired by the component in the previous step.
 
-After the local transaction starts, any
+3. After the local transaction starts, any
 recoverable unit of work performed by A on the EIS resource manager
 using the acquired connection is automatically included under the local
 transaction context.
 
-Session bean A now invokes a method on the
+4. Session bean A now invokes a method on the
 session bean B instance. In this scenario, A does not close the
 connection handle before invoking the method on B.
 
-
-
-image:conn-59.png[image]
-
+[NOTE]
+====
 A container should ensure that the connection sharing mechanism is
 equally applicable if A were to close the connection handle before
 calling the B instance.
+====
 
-image:conn-59.png[image]
-
-In the invoked method, B makes a request to
+5. In the invoked method, B makes a request to
 acquire a connection to the same EIS resource manager.
 
-The container returns a connection handle
+6. The container returns a connection handle
 using the same _ManagedConnection_ instance that was used for handling
 the connection request from A.
 
-The container retains the association of the
+7. The container retains the association of the
 _ManagedConnection_ instance with the local transaction context across
 the method invocation from A to B. This means that any unit of work that
 B will perform on the EIS resource manager using its acquired connection
@@ -6069,7 +5022,7 @@ transaction. The connection state, for example, any open cursors, can
 also be retained across method invocations when the physical connection
 is shared.
 
-Before the method invocation on B completes,
+8. Before the method invocation on B completes,
 B calls the close method on the connection handle. The container should
 not initiate any cleanup of the physical connection at this time since
 there is still an uncompleted local transaction associated with the
@@ -6082,71 +5035,62 @@ handle. See <<a645, Guidelines>> for a suggested
 scheme of obtaining and closing connection handles. A component caching
 a connection handle in this scenario is not portably supported.
 
-When A regains control, A can use the same
+9. When A regains control, A can use the same
 connection handle, provided A had not called the close method on the
 connection handle, to access EIS resources. All recoverable units of
 work on the EIS resource manager will be included in the existing local
 transaction context.
 
 
-
-image:conn-59.png[image]
-
+[NOTE]
+====
 If A closes the connection handle before calling B, and then reacquires
 the connection handle when regaining control, the container should
 ensure that the local transaction context stays associated with the
 shared connection.
+====
 
-image:conn-59.png[image]
-
-A eventually calls the close method on its
+10. A eventually calls the close method on its
 connection handle. The container gets a connection close event
 notification based on the scenario described in
 <<a977, Scenario: Connection Event Notifications and Connection Close>>.
 
-Since there is an incomplete local
+11. Since there is an incomplete local
 transaction associated with the underlying physical connection, the
 container does not initiate a cleanup of the _ManagedConnection_ on
 receiving the connection close event notification. The container must
 still go through the completion process for the local transaction.
 
-When the business method invocation on A
+12. When the business method invocation on A
 completes successfully without any application error, the container
 starts the completion protocol for the local transaction. The container
 calls the _LocalTransaction.commit_ method to commit the transaction.
 
-After the local transaction completes, the
+13. After the local transaction completes, the
 container initiates a cleanup of the physical connection instance by
 calling the _ManagedConnection.cleanup_ method.
 
-
-
-image:conn-59.png[image]
-
+[NOTE]
+====
 The container should initiate cleanup of the
 _ManagedConnection_ instance in the case where A does not call the close
 method on the connection handle before returning. The container
 identifies the need for cleaning up the _ManagedConnection_ instance
 based on the scope of connection sharing.
+====
 
-image:conn-59.png[image]
-
-On the _cleanup_ method invocation, the
+14. On the _cleanup_ method invocation, the
 _ManagedConnection_ instance does a cleanup of its local transaction
 related state and resets itself to a default state.
 
-The container returns the physical connection
+15. The container returns the physical connection
 to the pool for handling subsequent connection requests.
 
-Connection Sharing Across Component Instances
+*Connection Sharing Across Component Instances*
 
 image:conn-60.jpg[image]
 
-=== 
-
-image:conn-48.png[image]
-
-[[a1419]]Connection Association
+=== [[a1419]]Connection Association
 
 According to the connection management
 contract, a connection handle is created from a _ManagedConnection_
@@ -6154,7 +5098,7 @@ instance using the _ManagedConnection_ . _getConnection_ method. A
 connection handle maintains an association with the underlying
 _ManagedConnection_ instance.
 
-=== Scenario
+==== Scenario
 
 In the scenario shown in the following
 figure, session bean A acts as a client of entity bean C and makes
@@ -6172,8 +5116,7 @@ that spans methods on A and C. Similarly, B and C define another
 connection sharing scope. B and C also share the same physical
 connection across a transaction that spans two components.
 
-Connection Sharing
-Scenario
+*Connection Sharing Scenario*
 
 image:conn-61.jpg[image]
 
@@ -6192,32 +5135,26 @@ _ManagedConnection_ instance, in which C is called, the container
 supports a mechanism to associate the connection handle held by C as
 part of its state with the current _ManagedConnection_ instance.
 
-State Diagram of Application-Level Connection
-Handle
+*State Diagram of Application-Level Connection Handle*
 
 image:conn-62.jpg[image]
 
-=== [[a1430]]Connection Association
+==== [[a1430]]Connection Association
 
 The interface _ManagedConnection_ defines
 method _associateConnection_ as follows:
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 public interface
-jakarta.resource.spi.ManagedConnection \{
+jakarta.resource.spi.ManagedConnection {
 
- public void associateConnection(Object
-connection)
-
- throws ResourceException;
+ public void associateConnection(Object connection) throws ResourceException;
 
  ...
 
 }
-
-|===
+----
 
 The container typically uses the
 _associateConnection_ method to change the association of an
@@ -6245,7 +5182,7 @@ restriction in an implementation-specific manner. If a container cannot
 enforce the restriction, the container should not use the connection
 association mechanism.
 
-=== Requirements
+==== Requirements
 
 The container must provide a mechanism to
 change the association of a connection handle to different
@@ -6266,11 +5203,7 @@ support for this method is required independent of the transaction
 support level of the resource adapter. Note that the container makes the
 decision to invoke the _associateConnection_ method.
 
-=== 
-
-image:conn-48.png[image]
-
-Local Transaction Optimization
+=== Local Transaction Optimization
 
 If all the work done as a part of a
 transaction uses a single resource manager, the application server can
@@ -6303,16 +5236,12 @@ the connector specification. Refer to the Jakarta EE platform specification
 for more details on the local
 transaction optimization.
 
-=== Requirements
+==== Requirements
 
 The container is not required to support the
 local transaction optimization.
 
-=== 
-
-image:conn-48.png[image]
-
-[[a1452]]Runtime Transaction Support Level Specification
+=== [[a1452]]Runtime Transaction Support Level Specification
 
 A resource adapter may determine and classify
 the level of transaction support it can provide at runtime. The resource
@@ -6322,26 +5251,23 @@ underlying EIS and then specify the level of transaction support at
 runtime.
 
 
-
+[source,java]
+----
  package jakarta.resource.spi;
 
 
 
- public interface TransactionSupport extends
-java.io.Serializable \{
+ public interface TransactionSupport extends Serializable {
 
  public enum TransactionSupportLevel
-
- \{NoTransaction, LocalTransaction,
-XATransaction}
+ {NoTransaction, LocalTransaction, XATransaction}
 
 
 
- public TransactionSupportLevel
-getTransactionSupport();
+ public TransactionSupportLevel getTransactionSupport();
 
  }
-
+----
 
 
 To specify the level of transaction support
@@ -6381,11 +5307,7 @@ of transaction support whose ordinal value in the
 TransactionSupport.TransactionSupportLevel enum is equal to or lesser
 than the resource adapter’s transaction support classification.
 
-=== 
-
-image:conn-48.png[image]
-
-Interface: TransactionSynchronizationRegistry
+=== Interface: TransactionSynchronizationRegistry
 
 The _TransactionSynchronizationRegistry_
 interface is defined in the Jakarta Transaction specification (see
@@ -6408,46 +5330,38 @@ _BootstrapContext_ implementation. The same
 _TransactionSynchronizationRegistry_ object can be used by any number of
 artifacts in the resource adapter module with thread safety.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 public interface
-jakarta.resource.spi.BootstrapContext \{
+jakarta.resource.spi.BootstrapContext {
 
- TransactionSynchronizationRegistry
-
-getTransactionSynchronizationRegistry();
+ TransactionSynchronizationRegistry getTransactionSynchronizationRegistry();
 
  ...
 
 }
+----
 
-|===
-
-=== 
-
-image:conn-48.png[image]
-
-Requirements
+=== Requirements
 
 This section outlines the requirements for
 the transaction management contract.
 
-=== [[a1478]]Resource Adapter
+==== [[a1478]]Resource Adapter
 
 A resource adapter can be classified based on
 the level of transaction support, as follows:
 
- _NoTransaction_ . The resource adapter
+* _NoTransaction_ . The resource adapter
 supports neither resource manager local nor Jakarta Transactions transactions. It
 implements neither the _XAResource_ nor _LocalTransaction_ interfaces.
 
- _LocalTransaction_ - The resource adapter
+* _LocalTransaction_ - The resource adapter
 supports resource manager local transactions by implementing the
 _LocalTransaction_ interface. The local transaction management contract
 is specified in <<a1280, Local Transaction Management Contract>>.
 
- _XATransaction_ - The resource adapter
+* _XATransaction_ - The resource adapter
 supports both resource manager local and Jakarta Transactions transactions by
 implementing the _LocalTransaction_ and _XAResource_ interfaces. The
 requirements for supporting the _XAResource_ -based contract are
@@ -6455,13 +5369,12 @@ specified in <<a1169, XAResource-based Transaction Contract>>.
 
 
 
-image:conn-59.png[image]
-
+[NOTE]
+====
 Other levels of support (includes any transaction optimizations
 supported by an underlying resource manager) are outside the scope of
 Jakarta Connectors.
-
-image:conn-59.png[image]
+====
 
 The above levels reflect the major steps of
 transaction support that a resource adapter is required to allow
@@ -6470,7 +5383,7 @@ capabilities and the requirements of its underlying EIS, a resource
 adapter can choose to support any one of the above transaction support
 levels.
 
-=== Auto Commit
+===== Auto Commit
 
 When a connection is in an auto-commit mode,
 an operation on the connection automatically commits after it has been
@@ -6491,7 +5404,7 @@ A transactional resource adapter must set the
 auto-commit mode to true, on connections that are used outside a
 transaction.
 
-=== Application Server
+==== Application Server
 
 An application server must support resource
 adapters with all three levels of transaction support— _NoTransaction_ ,
@@ -6500,17 +5413,17 @@ _LocalTransaction_ , and _XATransaction_ .
 The following are the requirements for an
 application server for the transaction management contract:
 
-The application server must support a
+* The application server must support a
 transaction manager that manages transactions using the Jakarta Transaction _XAResource_
 -based contract. The requirements for a transaction manager to support
 an _XAResource_ -based contract are specified in
 <<a1233, Transaction Manager Requirements>>.
 
-The application server must use the
+* The application server must use the
 _LocalTransaction_ interface-based contract to manage local transactions
 for a resource manager.
 
-The application server must use the
+* The application server must use the
 deployment descriptor mechanism and the values in the Connector metadata
 annotation to ascertain the transactional capabilities of a resource
 adapter. Refer to <<a5161, Deployment>> for
@@ -6518,30 +5431,26 @@ details on the deployment descriptor specification and
 <<a4581, @Connector>> for details on the
 Connector annotation.
 
-If a _ManagedConnectionFactory_ chooses to
+* If a _ManagedConnectionFactory_ chooses to
 specify its transactional capability in a dynamic fashion at runtime
 (see <<a1452, Runtime Transaction Support Level Specification>>),
 the application server must ascertain the transactional
 capability provided by the _ManagedConnectionFactory_ instance.
 
-The application server must implement the
+* The application server must implement the
 _ConnectionEventListener_ interface to get transaction-related event
 notifications.
 
-=== 
-
-image:conn-48.png[image]
-
-Connection Optimizations
+=== Connection Optimizations
 
 This section describes two optional
 connection optimizations:
 
-Lazy connection association optimization
+* Lazy connection association optimization
 
-Lazy transaction enlistment optimization
+* Lazy transaction enlistment optimization
 
-=== [[a1502]]Lazy Connection Association Optimization
+==== [[a1502]]Lazy Connection Association Optimization
 
 Application components may acquire
 connections through a ConnectionFactory object (resource-ref) obtained
@@ -6613,66 +5522,49 @@ connection handle in its connection pool.
 
 
 
-[[a1513]]Connection Acquisition
-Processing
+*[[a1513]]Connection Acquisition Processing*
 
 image:conn-63.jpg[image]
 
 
 
-[[a1515]]Connection Re-association
-Processing
+*[[a1515]]Connection Re-association Processing*
 
 image:conn-64.jpg[image]
 
-[[a1516]]State Diagram of a
-Dissociatable Application-level Connection Handle
+*[[a1516]]State Diagram of a Dissociatable Application-level Connection Handle*
 
 image:conn-65.jpg[image]
 
-=== API Additions
+===== API Additions
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 package jakarta.resource.spi;
-
-
 
 import jakarta.resource.ResourceException;
 
 
 
-interface LazyAssociatableConnectionManager
-\{ // application server
+interface LazyAssociatableConnectionManager { 
+   // application server
 
- void associateConnection(
+  void associateConnection( Object connection, 
+                            ManagedConnectionFactory mcf,
+                            ConnectionRequestInfo info) 
+                            throws ResourceException;
 
- Object connection, ManagedConnectionFactory
-mcf,
-
- ConnectionRequestInfo info)
-
- throws ResourceException;
-
-
-
- void inactiveConnectionClosed(Object
-connection, ManagedConnectionFactory mcf);
+ void inactiveConnectionClosed(Object connection, ManagedConnectionFactory mcf);
 
 }
 
-
-
-interface DissociatableManagedConnection \{
+interface DissociatableManagedConnection {
 // resource adapter
 
- void dissociateConnections() throws
-ResourceException;
+ void dissociateConnections() throws ResourceException;
 
 }
-
-|===
+----
 
 Neither the application server nor the
 resource adapter must support this optimization.
@@ -6696,7 +5588,7 @@ There are no changes to the resource adapter
 deployment descriptor since the application server can programmatically
 detect whether a resource adapter supports this optimization or not.
 
-=== Lazy Transaction Enlistment Optimization
+==== Lazy Transaction Enlistment Optimization
 
 Transactions may be started by an application
 server before a method call on an application component or it may be
@@ -6732,37 +5624,27 @@ the ManagedConnection instances from the transaction at a later point.
 This optimization can be used only on
 connections that are lazily enlist-able.
 
-=== API Additions
+==== API Additions
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 package jakarta.resource.spi;
 
-
-
 import jakarta.resource.ResourceException;
-
 import javax.transaction.xa.Xid;
 
 
-
-interface LazyEnlistableConnectionManager \{
+interface LazyEnlistableConnectionManager {
 // application server
 
- void lazyEnlist(ManagedConnection) throws
-ResourceException;
+ void lazyEnlist(ManagedConnection) throws ResourceException;
 
 }
 
-
-
-interface LazyEnlistableManagedConnection \{
+interface LazyEnlistableManagedConnection {
 // resource adapter
-
 }
-
-|===
+----
 
 Neither the application server nor the
 resource adapter must support this optimization.
