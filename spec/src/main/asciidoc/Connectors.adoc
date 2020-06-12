@@ -7005,11 +7005,7 @@ efficiently pool threads, and have more control over its runtime
 environment. The resource adapter can control the security context and
 transaction context with which _Work_ instances are executed.
 
-=== 
-
-image:conn-77.png[image]
-
-Overview
+=== Overview
 
 Some resource adapters merely function as a
 passive library that executes in the context of an application thread.
@@ -7036,51 +7032,43 @@ application server more control over its runtime environment.
 There are several advantages in allowing an
 application server to manage threads instead of a resource adapter:
 
-An application server is optimally designed to
+* An application server is optimally designed to
 manage system resources such as threads. It may pool threads and reuse
 them efficiently across different resource adapters deployed in its
 runtime environment.
 
-A resource adapter may create non-daemon
+* A resource adapter may create non-daemon
 threads that interfere with the orderly shutdown of an application
 server. It is desirable for an application server to own all the threads
 to exercise more control over its runtime environment.
 
-Since an application server knows the overall
+* Since an application server knows the overall
 state of its runtime environment, it may make better decisions on
 granting threads to a resource adapter, and this leads to better
 manageability of its runtime environment.
 
-An application server may need to enforce
+* An application server may need to enforce
 control over the runtime behavior of its system components, including
 resource adapters. For example, an application server may choose to
 intercept operations on a thread object, perform checks, and enforce
 correct behavior.
 
-An application server may disallow resource
+* An application server may disallow resource
 adapters from creating their own threads based on its security policy
 setting, enforced by a security manager.
 
-=== 
+=== Goals
 
-image:conn-77.png[image]
-
-Goals
-
-Provide a flexible work execution model to
+* Provide a flexible work execution model to
 handle the thread requirements of a resource adapter.
 
-Provide a mechanism for an application server
+* Provide a mechanism for an application server
 to pool and reuse threads.
 
-Exercise more control over thread behavior in
+* Exercise more control over thread behavior in
 a managed environment.
 
-=== 
-
-image:conn-77.png[image]
-
-[[a1908]]Work Management Model
+=== [[a1908]]Work Management Model
 
 A resource adapter obtains a _WorkManager_
 instance from the BootstrapContext instance provided by the application
@@ -7117,107 +7105,57 @@ adapter have equal claim over CPU resources. This assumption helps the
 resource adapter build its own internal priority-based task queue
 without having to worry about thread priority levels.
 
-=== Requirements
+==== Requirements
 
 The application server must use threads of
 the same thread priority level to process _Work_ instances submitted by
 a specific resource adapter.
 
-Work Management Contract (Object Diagram)
+*Work Management Contract (Object Diagram)*
 
 image:conn-78.jpg[image]
 
-Work Management Contract (Interfaces)
+*Work Management Contract (Interfaces)*
 
 image:conn-79.jpg[image]
 
-===  _jakarta.resource.spi.work_
-
+.*Code Example  _jakarta.resource.spi.work_*
+[source,Java]
+----
 package jakarta.resource.spi.work;
 
-
-
-import java.lang.Object;
-
-import java.lang.Runnable;
-
-import java.lang.Exception;
-
-import java.lang.Throwable;
-
 import java.util.EventObject;
-
 import java.util.EventListener;
-
-
-
 import javax.transaction.xa.Xid;
-
 import jakarta.resource.ResourceException;
-
 import jakarta.resource.NotSupportedException;
 
-
-
-public interface Work extends Runnable \{
-
+public interface Work extends Runnable {
  void release();
-
 }
 
-public interface WorkManager \{
-
-
+public interface WorkManager {
 
  long IMMEDIATE = 0L; // immediate action
+ long INDEFINITE = Long.MAX_VALUE; // no time constraint
+ long UNKNOWN = -1; // indicates an unknown value.
 
- long INDEFINITE = Long.MAX_VALUE; // no time
-constraint
-
- long UNKNOWN = -1; // indicates an unknown
-value.
+ void doWork(Work work) throws WorkException; // startTimeout = INDEFINITE
 
 
+ void doWork(Work work, long startTimeout, ExecutionContext ctx, WorkListener lsnr) throws WorkException;
 
- void doWork(Work work) // startTimeout =
-INDEFINITE
+ long startWork(Work work) throws WorkException; // startTimeout = INDEFINITE
 
- throws WorkException;
+ long startWork(Work work, long startTimeout, ExecutionContext ctx, WorkListener lsnr) throws WorkException;
 
- void doWork(Work work, long startTimeout,
-ExecutionContext ctx,
+ void scheduleWork(Work work) throws WorkException; // startTimeout = INDEFINITE
 
- WorkListener lsnr) throws WorkException;
-
- long startWork(Work work) // startTimeout =
-INDEFINITE
-
- throws WorkException;
-
- long startWork(Work work, long startTimeout,
-
- ExecutionContext ctx, WorkListener lsnr)
-
- throws WorkException;
-
- void scheduleWork(Work work) // startTimeout
-= INDEFINITE
-
- throws WorkException;
-
- void scheduleWork(Work work, long
-startTimeout,
-
- ExecutionContext ctx, WorkListener lsnr)
-
- throws WorkException;
+ void scheduleWork(Work work, long startTimeout, ExecutionContext ctx, WorkListener lsnr) throws WorkException;
 
 }
 
-
-
-public interface WorkListener extends
-EventListener \{
+public interface WorkListener extends EventListener {
 
  void workAccepted(WorkEvent e);
 
@@ -7229,216 +7167,148 @@ EventListener \{
 
 }
 
+public class WorkAdapter implements WorkListener {
 
+ public void workAccepted(WorkEvent e) {}
 
-public class WorkAdapter implements
-WorkListener \{
+ public void workRejected(WorkEvent e) {}
 
- public void workAccepted(WorkEvent e) \{}
+ public void workStarted(WorkEvent e) {}
 
- public void workRejected(WorkEvent e) \{}
-
- public void workStarted(WorkEvent e) \{}
-
- public void workCompleted(WorkEvent e) \{}
+ public void workCompleted(WorkEvent e) {}
 
 }
 
-
-
-public class WorkEvent extends EventObject \{
-
-
+public class WorkEvent extends EventObject {
 
  public static final int WORK_ACCEPTED = 1;
  public static final int WORK_REJECTED = 2;
-
  public static final int WORK_STARTED = 3;
-
  public static final int WORK_COMPLETED = 4;
 
 
-
- public WorkEvent(Object source, int type,
-Work work,
-
- WorkException exc) \{ ... }
+ public WorkEvent(Object source, int type, Work work, WorkException exc) { ... }
 
 
 
- public WorkEvent(Object source, int type,
-Work work,
-
- WorkException exc, long startDuration) \{
+ public WorkEvent(Object source, int type, Work work, WorkException exc, long startDuration) {
 ... }
 
+ public int getType() { ... }
 
+ public Work getWork() { ... }
 
- public int getType() \{ ... }
+ public long getStartDuration() { ... }
 
- public Work getWork() \{ ... }
-
- public long getStartDuration() \{ ... }
-
- public WorkException getException() \{ ... }
+ public WorkException getException() { ... }
 
 }
 
 
 
-public class ExecutionContext \{
+public class ExecutionContext {
 
+ public void setXid(xid) { ... }
 
+ public Xid getXid() { ... }
 
- public void setXid(xid) \{ ... }
+ public long getTransactionTimeout() { ... }
 
- public Xid getXid() \{ ... }
+ public void setTransactionTimeout(long seconds)
 
- public long getTransactionTimeout() \{ ... }
-
- public void setTransactionTimeout(long
-seconds)
-
- throws NotSupportedException \{ ... }
+ throws NotSupportedException { ... }
 
 }
 
 
 
-public class WorkException extends
-ResourceException \{
-
-
+public class WorkException extends ResourceException {
 
  // Indicates an internal error condition.
-
  public static final String INTERNAL = "-1";
 
-
-
  // Undefined error code.
-
  public static final String UNDEFINED = "0";
 
-
-
  // Indicates start timeout expiration.
+ public static final String START_TIMED_OUT = "1";
 
- public static final String START_TIMED_OUT =
-"1";
-
-
-
- // Indicates that concurrent work within a
-transaction is
-
+ // Indicates that concurrent work within a transaction is
  // disallowed.
+ public static final String TX_CONCURRENT_WORK_DISALLOWED = "2";
 
- public static final String
-TX_CONCURRENT_WORK_DISALLOWED = "2";
+ // Indicates a failure in recreating the specified transaction.
+ public static final String TX_RECREATE_FAILED = "3";
 
- // Indicates a failure in recreating the
-specified transaction.
+ public WorkException() { ... }
 
- public static final String
-TX_RECREATE_FAILED = "3";
+ public WorkException(String message) { ...
+ }
 
+ public WorkException(Throwable cause) { ...
+ }
 
+ public WorkException(String message, Throwable cause) { ... }
 
- public WorkException() \{ ... }
-
- public WorkException(String message) \{ ...
-}
-
- public WorkException(Throwable cause) \{ ...
-}
-
- public WorkException(String message,
-Throwable cause) \{ ... }
-
- public String getMessage() \{ ... }
+ public String getMessage() { ... }
 
 }
 
 
+public class WorkRejectedException extends WorkException {
 
-public class WorkRejectedException extends
-WorkException \{
-
-
-
- public WorkRejectedException() \{ ... }
+ public WorkRejectedException() { ... }
 
  public WorkRejectedException(String message)
-\{ ... }
+{ ... }
 
- public WorkRejectedException(Throwable
-cause) \{ ... }
+ public WorkRejectedException(Throwable cause) { ... }
 
- public WorkRejectedException(String message,
-Throwable cause)
-
- \{ ... }
+ public WorkRejectedException(String message, Throwable cause)
+ { ... }
 
 }
 
+public class WorkCompletedException extends WorkException {
 
+ public WorkCompletedException() { ... }
 
-public class WorkCompletedException extends
-WorkException \{
+ public WorkCompletedException(String message) { ... }
 
+ public WorkCompletedException(Throwable cause) { ... }
 
-
- public WorkCompletedException() \{ ... }
-
- public WorkCompletedException(String
-message) \{ ... }
-
- public WorkCompletedException(Throwable
-cause) \{ ... }
-
- public WorkCompletedException(String
-message, Throwable cause)
-
- \{ ... }
+ public WorkCompletedException(String message, Throwable cause)
+ { ... }
 
 }
 
-
-
-public class RetryableUnavailableException
-
- extends UnavailableException
-
- implements
-jakarta.resource.spi.RetryableException \{
+public class RetryableUnavailableException extends UnavailableException
+             implements jakarta.resource.spi.RetryableException {
 
 }
 
+----
 
 
 
 
 
-
-=== Work Interface
+==== Work Interface
 
 The _Work_ interface models a _Work_ instance
 which is executed by a _WorkManager_ upon submission. This is
 implemented by a resource adapter.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface Work extends Runnable \{
+[source,Java]
+----
+public interface Work extends Runnable {
 
  void release();
 
 }
+----
 
-|===
-
-run method: The _WorkManager_ dispatches a
+* `run` method: The _WorkManager_ dispatches a
 thread that calls the run method to begin execution of a _Work_
 instance. The execution completes when the run method returns, with or
 without an exception. The _Work_ instance can treat the calling thread
@@ -7449,7 +7319,7 @@ execution context setup, and wrap it with a WorkCompletedException set
 to an appropriate error code, which indicates the nature of the error
 condition.
 
-release method: The _WorkManager_ may call the
+* `release` method: The _WorkManager_ may call the
 release method to request the active _Work_ instance to complete
 execution as soon as possible. This would be called on a separate thread
 than the one currently executing the _Work_ instance. Since this method
@@ -7467,8 +7337,8 @@ methods, may or may not have access to a JNDI context.
 
 
 
-image:conn-80.png[image]
-
+[NOTE]
+====
 The JNDI context of an accessing application is available to a resource
 adapter by way of the thread that uses its connection object. Refer to
 the note in <<a619, Managed Application
@@ -7476,14 +7346,13 @@ Scenario>>. The thread that accesses the connection object could be an
 application thread, or, could be a Work object accessing an application
 component. In the latter case, the worker thread gains access to the
 application’s JNDI context during the method call on the component.
-
-image:conn-80.png[image]
+====
 
 Both the run and release methods in the Work
 implementation may contain synchronization blocks but they must not be
 declared as synchronized methods.
 
-=== [[a2057]]WorkManager Interface
+==== [[a2057]]WorkManager Interface
 
 The _WorkManager_ interface provides a
 mechanism to submit _Work_ instances for execution. This is implemented
@@ -7498,60 +7367,33 @@ adapter from having to create Java threads directly to do its work.
 Further, this allows efficient pooling of thread resources by the
 application server and more control over thread usage.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface WorkManager \{
+[source,Java]
+----
+public interface WorkManager {
 
+ long IMMEDIATE = 0L; // immediate action (as soon as possible)
+ long INDEFINITE = Long.MAX_VALUE; // no time constraint
+ long UNKNOWN = -1; // unknown start delay duration
 
+ // startTimeout = INDEFINITE
+ void doWork(Work work) throws WorkException;
 
- long IMMEDIATE = 0L; // immediate action (as
-soon as possible)
+ void doWork(Work work, long startTimeout, ExecutionContext, WorkListener) throws WorkException;
+ 
+ // startTimeout = INDEFINITE
+ long startWork(Work work) throws WorkException;
 
- long INDEFINITE = Long.MAX_VALUE; // no time
-constraint
+ long startWork(Work work, long startTimeout, ExecutionContext, WorkListener) throws WorkException;
 
- long UNKNOWN = -1; // unknown start delay
-duration
-
-
-
- void doWork(Work work) // startTimeout =
-INDEFINITE
-
- throws WorkException;
-
- void doWork(Work work, long startTimeout,
-ExecutionContext,
-
- WorkListener) throws WorkException;
-
- long startWork(Work work) // startTimeout =
-INDEFINITE
-
- throws WorkException;
-
- long startWork(Work work, long startTimeout,
-ExecutionContext,
-
- WorkListener) throws WorkException;
-
- void scheduleWork(Work work) // startTimeout
-= INDEFINITE
-
- throws WorkException;
-
- void scheduleWork(Work work, long
-startTimeout,
-
- ExecutionContext, WorkListener) throws
-WorkException;
+ // startTimeout = INDEFINITE
+ void scheduleWork(Work work) throws WorkException;
+ 
+ void scheduleWork(Work work, long startTimeout, ExecutionContext, WorkListener) throws WorkException;
 
 }
+----
 
-|===
-
-doWork method: This call blocks until the
+* `doWork` method: This call blocks until the
 _Work_ instance completes execution. The application server may execute
 a _Work_ instance submitted by way of the doWork method using the same
 calling thread. This method is useful to do work synchronously. For
@@ -7559,7 +7401,7 @@ nested Work submissions, this provides a first in, first out (FIFO)
 execution start ordering and last in, first out (LIFO) execution
 completion ordering guarantee.
 
-startWork method: This call blocks until the
+* `startWork` method: This call blocks until the
 _Work_ instance starts execution but not until its completion. This
 returns the time elapsed in milliseconds from Work acceptance until the
 start of execution. Note, this does not offer real-time guarantees. A
@@ -7569,7 +7411,7 @@ java.lang.Thread.start method. For nested Work submissions, this
 provides a FIFO execution start ordering guarantee, but no execution
 completion ordering guarantee.
 
-scheduleWork method: This call does not block
+* `scheduleWork` method: This call does not block
 and returns immediately once a _Work_ instance has been accepted for
 processing. This is useful for doing work asynchronously. This does not
 provide any execution start or execution completion ordering guarantee
@@ -7602,7 +7444,7 @@ Interface and WorkEvent Class>>.
 
 The various stages in Work processing are:
 
-=== Work Submit
+===== Work Submit
 
 A _Work_ instance is being submitted for
 execution. The _Work_ instance may either be accepted or rejected with a
@@ -7613,11 +7455,11 @@ the submitter’s execution context. It executes with an unspecified
 execution context if none is specified, or it executes with the
 specified context.
 
-Work Processing Stages and their Outcomes
+*Work Processing Stages and their Outcomes*
 
 image:conn-81.jpg[image]
 
-=== Work Accepted
+===== Work Accepted
 
 The submitted _Work_ instance has been
 accepted for further processing. The accepted _Work_ instance may either
@@ -7632,7 +7474,7 @@ error code WorkException.TIMED_OUT is thrown. This is not a real-time
 guarantee. The start delay duration is measured from the moment a _Work_
 instance is accepted for processing.
 
-=== Work Rejected
+===== Work Rejected
 
 The _Work_ instance has been rejected. The
 _Work_ instance may be rejected during Work submittal or after the
@@ -7648,7 +7490,7 @@ instance starts, a callback event listener may be used to receive the
 _WorkRejectedException_ . See <<a2111,
 WorkListener Interface and WorkEvent Class>> for details.
 
-=== [[a2095]]Work Started
+===== [[a2095]]Work Started
 
 The execution of the _Work_ instance has
 started. This means a thread has been allocated for Work execution. But
@@ -7659,7 +7501,7 @@ _Work_ instance. Note, any exception thrown during execution context
 setup or while executing the run method on the _Work_ instance leads to
 processing completion.
 
-=== Work Completed
+===== Work Completed
 
 The execution of the _Work_ instance has been
 completed. The execution may complete with or without an exception. The
@@ -7674,53 +7516,52 @@ listener may be used to receive the WorkCompletedException. See
 <<a2111, WorkListener Interface and WorkEvent
 Class>> for details).
 
-=== Requirements
+===== Requirements
 
-The application server must implement the
+* The application server must implement the
 _WorkManager_ interface.
 
-The application server must allow nested Work
+* The application server must allow nested Work
 submissions.
 
-Both the run and release methods must be
+* Both the run and release methods must be
 declared as non-synchronized methods.
 
-When the application server is unable to
+* When the application server is unable to
 recreate an execution context if it is specified for the submitted
 _Work_ instance, it must throw a WorkCompletedException set to an
 appropriate error code.
 
-The _WorkManager_ must catch any exception
+* The _WorkManager_ must catch any exception
 thrown during Work processing, which includes execution context setup
 and wrap it with a WorkCompletedException set to an appropriate error
 code.
 
-The application server must execute a
+* The application server must execute a
 submitted _Work_ instance with an unspecified context if no execution
 context has been specified, or must execute it with the specified
 execution context. That is, a submitted _Work_ instance must never
 inherit the submitter’s execution context when no execution context is
 specified.
 
-If the application server is unable to start
+* If the application server is unable to start
 Work execution when a start timeout is specified for the submitted
 _Work_ instance, it must reject the _Work_ instance with a
 _WorkRejectedException_ set to WorkException.START_TIMED_OUT.
 
-The application server must use a value of -1
+* The application server must use a value of -1
 ( _WorkManager_ .UNKNOWN) to indicate an unknown Work start delay
 duration.
 
-Blocking Durations of Various Work Submissions
+*Blocking Durations of Various Work Submissions*
 
 image:conn-82.jpg[image]
 
-Work Submission - Blocking Behavior (Sequence
-Diagram)
+*Work Submission - Blocking Behavior (Sequence Diagram)*
 
 image:conn-83.jpg[image]
 
-=== [[a2111]]WorkListener Interface and WorkEvent Class
+==== [[a2111]]WorkListener Interface and WorkEvent Class
 
 The WorkListener interface is optionally
 implemented by the resource adapter. The WorkEvent and WorkAdapter
@@ -7733,11 +7574,9 @@ is provided by the resource adapter, the application server must send
 event notifications to the WorkListener. These notifications may occur
 from any thread with an unspecified context.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface WorkListener extends
-EventListener \{
+[source,Java]
+----
+public interface WorkListener extends EventListener {
 
  void workAccepted(workEvent);
 
@@ -7748,89 +7587,65 @@ EventListener \{
  void workCompleted(WorkEvent);
 
 }
-
-|===
+----
 
 
 
 The WorkEvent class and WorkAdapter abstract
 class:
 
-[width="100%",cols="100%",]
-|===
-a|
-public class WorkEvent extends EventObject \{
-
-
+[source,Java]
+----
+public class WorkEvent extends EventObject {
 
  public static final int WORK_ACCEPTED = 1;
-
  public static final int WORK_REJECTED = 2;
-
  public static final int WORK_STARTED = 3;
-
  public static final int WORK_COMPLETED = 4;
 
+ public WorkEvent(Object source, int type, Work work, WorkException exc){ ... }
 
+ public WorkEvent(Object source, int type, Work work, WorkException exc, long startDuration) {
+ ...
+ }
 
- public WorkEvent(Object source, int type,
-Work work,
+ public int getType() { ... }
 
- WorkException exc) \{ ... }
+ public Work getWork() { ... }
 
+ public long getStartDuration() { ... }
 
-
- public WorkEvent(Object source, int type,
-Work work,
-
- WorkException exc, long startDuration) \{
-... }
-
-
-
- public int getType() \{ ... }
-
- public Work getWork() \{ ... }
-
- public long getStartDuration() \{ ... }
-
- public WorkException getException() \{ ... }
+ public WorkException getException() { ... }
 
 }
 
 
+public abstract class WorkAdapter implements WorkListener {
 
-public abstract class WorkAdapter implements
-WorkListener \{
+ public void workAccepted(WorkEvent e) {}
 
- public void workAccepted(WorkEvent e) \{}
+ public void workRejected(WorkEvent e) {}
 
- public void workRejected(WorkEvent e) \{}
+ public void workStarted(WorkEvent e) {}
 
- public void workStarted(WorkEvent e) \{}
-
- public void workCompleted(WorkEvent e) \{}
-
+ public void workCompleted(WorkEvent e) {}
 }
-
-
-
-|===
+----
 
 The WorkEvent instance provides the following
 information:
 
-The event type.
+* The event type.
 
-The source object, that is, the _Work_
+* The source object, that is, the _Work_
 instance, on which the event initially occurred.
 
-A handle to the associated _Work_ instance.
+* A handle to the associated _Work_ instance.
 
-An optional start delay duration in
+* An optional start delay duration in
 millisecond.
 
-Any exceptions that were thrown during Work
+* Any exceptions that were thrown during Work
 processing. Possible exceptions are _WorkRejectedException_ , and
 WorkCompletedException.
 
@@ -7842,45 +7657,38 @@ convenience for easily creating WorkListener instances by extending this
 class and overriding only those methods of interest. This is a standard
 event listener pattern used in Java APIs.
 
-=== Requirements
+===== Requirements
 
-The WorkListener instance must not make any
+* The WorkListener instance must not make any
 thread assumptions and must be thread-safe. That is, a notification can
 occur from any arbitrary thread with an unspecified context.
 
-The application server must send Work events
+* The application server must send Work events
 to the WorkListener instance, if any, provided by the resource adapter.
 
-The WorkListener implementation must not make
+* The WorkListener implementation must not make
 any assumptions on the ordering of notifications.
 
-The application server must use a value of -1
+* The application server must use a value of -1
 ( _WorkManager_ .UNKNOWN) to indicate an unknown Work start delay
 duration.
 
-=== [[a2160]]ExecutionContext Class
+==== [[a2160]]ExecutionContext Class
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 public class ExecutionContext \{
 
+ public void setXid(xid) { ... }
 
+ public Xid getXid() { ... }
 
- public void setXid(xid) \{ ... }
+ public long getTransactionTimeout() { ... }
 
- public Xid getXid() \{ ... }
-
- public long getTransactionTimeout() \{ ... }
-
- public void setTransactionTimeout(long
-seconds)
-
- throws NotSupportedException \{ ... }
+ public void setTransactionTimeout(long seconds) throws NotSupportedException { ... }
 
 }
-
-|===
+----
 
 The ExecutionContext class allows a resource
 adapter to specify an execution context, such as a transaction context,
@@ -7892,35 +7700,34 @@ null context.
 It is better for ExecutionContext to be a
 class rather than an interface because:
 
-There is no need for a resource adapter to
+* There is no need for a resource adapter to
 implement this class. It is only required to implement the context
 information, like transaction context.
 
-The resource adapter code does not have to
+* The resource adapter code does not have to
 change when the ExecutionContext class evolves. For example, more
 context types could be added to the ExecutionContext class in the future
 without forcing resource adapter implementations to change.
 
 
 
-Work Submission - Callback Mechanism
-(Sequence Diagram)
+*Work Submission - Callback Mechanism (Sequence Diagram)*
 
 image:conn-84.jpg[image]
 
-=== Resource Adapter Thread Usage Recommendations
+==== Resource Adapter Thread Usage Recommendations
 
-Resource adapters are strongly recommended to
+* Resource adapters are strongly recommended to
 use the work management contract to do work and interact with the
 application server only from within a _Work_ instance, instead of using
 Java threads directly. This allows the resource adapter to be maximally
 portable across multiple deployment environments with different security
 settings.
 
-Resource adapters are allowed to create Java
+* Resource adapters are allowed to create Java
 threads directly as permitted by the server security settings.
 
-If a resource adapter chooses to use Java
+* If a resource adapter chooses to use Java
 threads directly, it is recommended they use the threads as daemon
 threads, as it does not interfere with an orderly shutdown of the
 server.
@@ -7939,32 +7746,22 @@ a background thread. In such a case, the resource adapter can instead
 use the BootstrapContext instance to obtain a Timer instance from the
 application server.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 package jakarta.resource.spi;
 
-
-
 import java.util.Timer;
+import jakarta.resource.spi.UnavailableException;
 
-import
-jakarta.resource.spi.UnavailableException;
-
-
-
-public interface BootstrapContext \{
+public interface BootstrapContext {
 
  ... // other methods
-
- Timer createTimer() // returns a new or an
-unshared instance
-
- throws UnavailableException;
+ 
+ // returns a new or an unshared instance
+ Timer createTimer() throws UnavailableException;
 
 }
-
-|===
+----
 
 When the createTimer method of the
 BootstrapContext instance is invoked, the application server provides a
@@ -7978,78 +7775,52 @@ Timer service.
 Sample code to illustrate periodic Work
 executions using a Timer instance:
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 package com.xyz.adapter;
 
-
-
 import java.util.*;
-
 import jakarta.resource.spi.*;
-
 import jakarta.resource.spi.work.WorkManager;
 
-
-
 // ResourceAdapter JavaBean
-
-public class MyResourceAdapterImpl implements
-ResourceAdapter \{
+public class MyResourceAdapterImpl implements ResourceAdapter {
 
  BootstrapContext bootstrapCtx = null;
 
- public void start(BootstrapContext ctx) \{
-
+ public void start(BootstrapContext ctx) {
  bootstrapCtx = ctx;
-
  ... // other operations
-
  }
-
+ 
  ... // other methods
-
 }
 
 
 
-\{ // sample resource adapter code snippet to
-show Timer usage
+ { // sample resource adapter code snippet toshow Timer usage
 
- MyResourceAdapterImpl myRA = ... // get
-ResourceAdapter JavaBean
+ MyResourceAdapterImpl myRA = ... // getResourceAdapter JavaBean
 
- Timer timer =
-myRA.bootstrapCtx.createTimer(); // get a Timer instance
+ Timer timer = myRA.bootstrapCtx.createTimer(); // get a Timer instance
 
- WorkManager workManager =
-myRA.bootstrapCtx.getWorkManager();
-
-
+ WorkManager workManager = myRA.bootstrapCtx.getWorkManager();
 
  timer.schedule(
-
- new TimerTask () \{
-
- public void run() \{
-
- try \{
-
- workManager.scheduleWork(new MyWork());
-
- } catch (WorkException we) \{
-we.printStackTrace(); }
-
- }
-
- }, 0, 1000); // one second interval
+   new TimerTask () {
+     public void run() {
+        try {
+            workManager.scheduleWork(new MyWork());
+        } catch (WorkException we) {
+            we.printStackTrace();
+        }
+     }
+   }, 0, 1000); // one second interval
 
 }
+----
 
-|===
-
-=== Illustration: Using a Work Instance to Listen on Multiple Network Endpoints
+==== Illustration: Using a Work Instance to Listen on Multiple Network Endpoints
 
 J2SE Version 1.4 provides the java.nio
 package that includes a multiplexed, non-blocking I/O facility. Using
@@ -8058,7 +7829,7 @@ _Work_ instance, to listen on multiple network endpoints or ports. Prior
 to the java.nio facility each network endpoint needed a separate thread
 to listen to incoming data.
 
-=== Work Management in a Non-Managed Environment
+==== Work Management in a Non-Managed Environment
 
 Although the work management contract is
 primarily intended for a managed environment, it may still be used in a
@@ -8069,7 +7840,7 @@ A resource adapter is free to create Java
 threads as permitted by the security policy settings of the non-managed
 environment.
 
-=== [[a2229]]Resource Adapter association
+==== [[a2229]]Resource Adapter association
 
 A _Work_ or _DistributableWork_ instance (see
 <<a2233, Distributed Work processing>>) may
@@ -8091,7 +7862,7 @@ distributed to. This allows the _Work_ instance to use application
 server facilities like _WorkManager, MessageEndpointFactory_ etc that
 are specific to the instance that the _Work_ has been distributed to.
 
-=== [[a2233]]Distributed Work processing
+==== [[a2233]]Distributed Work processing
 
 An application server instance’s
 _WorkManager_ may choose to distribute a _Work_ instance submitted by a
@@ -8105,33 +7876,21 @@ running on the same host or different hosts.
 Neither the application server nor the
 resource adapter must support distributed Work processing.
 
-=== DistributableWork Interface
+===== DistributableWork Interface
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 package jakarta.resource.spi.work;
-
-
 
 import java.io.Serializable;
 
+//Marker interface to indicate to the WorkManager that the
+//Work may be distributed to a different WorkManager for execution
 
-
-//Marker interface to indicate to the
-WorkManager that the
-
-//Work may be distributed to a different
-WorkManager for execution
-
-public interface DistributableWork extends
-Work, Serializable \{
-
-
+public interface DistributableWork extends Work, Serializable {
 
 }
-
-|===
+----
 
  _Work_ instances that may be distributed by
 a _WorkManager_ must implement the _DistributableWork_ interface. A
@@ -8146,28 +7905,19 @@ application server instance where the _Work_ is executed in, must be
 obtained through the _ResourceAdapterAssociation_ mechanism discussed in
 <<a2229, Resource Adapter association>>.
 
-=== DistributableWorkManager Interface
+===== DistributableWorkManager Interface
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 package jakarta.resource.spi.work;
 
-
-
-//Marker interface to indicate that the
-WorkManager supports the
-
+//Marker interface to indicate that the WorkManager supports the
 //distributed processing of Work instances
 
-public interface DistributableWorkManager
-extends WorkManager \{
+public interface DistributableWorkManager extends WorkManager {
 
 }
-
-
-
-|===
+----
 
 A _WorkManager_ implementation that supports
 the submission of _DistributableWork_ instances must implement the
@@ -8189,7 +7939,7 @@ deployer _,_ must ensure that the environment made available to the
 _DistributableWork_ instance is consistent irrespective of whether the
 _DistributableWork_ instance is executed in a local or remote manner.
 
-=== DistributableWork Submission and Processing
+===== DistributableWork Submission and Processing
 
 A resource adapter submits the
 _DistributableWork_ instance to the _DistributableWorkManager_ through
@@ -8224,24 +7974,12 @@ _DistributableWorkManager_ must support the requirements in
 
 
 
-Distributed Work
-submission and processing (Sequence Diagram)
-
-
+*Distributed Work submission and processing (Sequence Diagram)*
 
 image:conn-85.jpg[image]
 
-=== 
+== [[a2270]]Generic Work Context
 
-=== 
-
-=== 
-
-image:conn-86.png[image]
-
-[[a2270]]Generic Work Context
-
-image:conn-87.png[image]
 
 This chapter specifies a contract between an
 application server and a resource adapter that enables a resource
