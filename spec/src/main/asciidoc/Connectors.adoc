@@ -235,8 +235,7 @@ The connector architecture defines a standard
 SPI (Service Provider Interface) for integrating the transaction,
 security, and connection management facilities of an application server
 with those of a transactional resource manager. The JDBC 3.0
-specification (see link:conn.html#a9727[See JDBC API
-Specification, version 4.1]) specifies the relationship of JDBC to the
+specification <<a9727, JDBC API Specification, version 4.1>> specifies the relationship of JDBC to the
 SPI specified in the connector architecture.
 
 === 
@@ -317,8 +316,7 @@ to specify a prescriptive way of implementing a particular contract.
 
 This document uses the Jakarta Enterprise Beans component model to
 describe some scenarios. The Jakarta Enterprise Beans specification (see
-link:conn.html#a9723[See Jakarta Enterprise Beans
-Specification, version 3.2]) provides the latest details of the
+<<a9723, Jakarta Enterprise Beans Specification, version 3.2>> provides the latest details of the
 component model.
 
 === 
@@ -824,7 +822,7 @@ that provides deployment and runtime support for application components.
 It provides a federated view of the services provided by the underlying
 application server for the application components. For more details on
 different types of standard containers, refer to the Jakarta Enterprise Beans (see
-link:conn.html#a9723[Jakarta™ Enterprise Beans Specification, Version 3.2]),
+<<a9723, Jakarta™ Enterprise Beans Specification, Version 3.2>>,
 Jakarta Server Pages, and servlet specifications.
 
 === 
@@ -1024,8 +1022,7 @@ space of the application server. Examples of resource adapters are:
 
 {empty}A JDBC driver to connect to a
 relational database, as specified in the JDBC specification. For more
-information on JDBC, see link:conn.html#a9727[See JDBC API
-Specification, version 4.1]
+information on JDBC, see <<a9727, JDBC API Specification, version 4.1>>
 
 A resource adapter to connect to an ERP system
 
@@ -1128,16 +1125,14 @@ pluggability contract that allows a wide range of message providers
 be plugged into any Jakarta EE compatible application server by way of a
 resource adapter.
 
-link:conn.html#a265[See Overview of
-Jakarta Connectors Architecture] does not illustrate any contracts that are
+<<a265, Overview of Jakarta Connectors Architecture>> does not illustrate any contracts that are
 internal to an application server implementation. The specific
 mechanisms and contracts within an application server are outside the
 scope of the connector architecture specification. This specification
 focuses on the system-level contracts between the application server and
 the EIS.
 
-In link:conn.html#a265[See Overview
-of the Connector Architecture], the application server, application
+<<a265, Overview of Jakarta Connectors Architecture>>, the application server, application
 component and resource adapter are shown as separate entities. This is
 done to illustrate that there is a logical separation of the respective
 roles and responsibilities defined for the support of the system level
@@ -1155,7 +1150,7 @@ The client API used by application components
 for EIS access may be defined as:
 
 The standard Common Client Interface (CCI) as
-specified in link:conn.html#a3927[See Common Client Interface].
+specified in <<a3927, Common Client Interface>>.
 
 A client API specific to the type of a
 resource adapter and its underlying EIS. An example of such an EIS
@@ -1222,7 +1217,7 @@ implementation of the Jakarta EE Full Profile. The minimum set, listed
 below, must be supported for a compliant Jakarta EE Connectors
 container within an implementation of any subset of the Jakarta EE Full
 Profile. Overall profile requirements are described within the
-link:conn.html#a9737[Jakarta™ EE Platform Specification Version 9].
+<<a9737, Jakarta™ EE Platform Specification Version 9>>.
 
 Non-”Full Profile” implementations may only
 support a subset of the component specifications that were mandated to
@@ -1236,13 +1231,11 @@ be satisfied by a standalone connector container.
 
 If a _MessageEndpointFactory_ implementation
 (such as support for message-driven beans) is available, the Message
-Inflow requirements specified in link:conn.html#a2576[See
-Message Inflow] must be satisfied by it.
+Inflow requirements specified in <<a2576, Message Inflow>> must be satisfied by it.
 
 If an implementation of the Bean Validation
 specification is provided, the requirements in
-link:conn.html#a516[Jakarta™ Bean Validation
-Specification, Version 2.0] must be supported.
+<<a516, Jakarta™ Bean Validation Specification, Version 2.0>> must be supported.
 
 An existing resource adapter archive RAR may
 not be fully functional in a standalone implementation, though. For
@@ -1269,8 +1262,8 @@ The standalone connector container must
 support the baseline compatibility requirements as defined by the
 Jakarta™ Authentication
 specification and support the Security Inflow requirements specified in
-link:conn.html#a3707[See Security Inflow]. See
-link:conn.html#a9751[Jakarta™ Authentication Specification, Version 1.1]
+<<a3707, Security Inflow>>. See
+<<a9751, Jakarta™ Authentication Specification, Version 1.1>>
 for more information on the Jakarta™ Authentication specification.
 
 This specification does not define new
@@ -1742,7 +1735,7 @@ implements the _ResourceAdapter_ interface.
 The implementation class name of the
 ResourceAdapter interface is specified in the resource adapter
 deployment descriptor or through the _Connector_ annotation described in
-<<a4581, See @Connector>>. The ResourceAdapter class
+<<a4581, @Connector>>. The ResourceAdapter class
 must be a JavaBean. Refer to <<a5071, JavaBean Requirements>>.
 During resource adapter deployment, the resource adapter
 deployer creates a ResourceAdapter JavaBean and configures it with the
@@ -4737,7 +4730,7 @@ container-managed), the container has two choices:
 
 Using the transaction manager to manage this
 transaction. The transaction manager uses one-phase commit-optimization,
-described in link:conn.html#a1172[See Scenarios Supported], to
+described in <<a1172, Scenarios Supported>>, to
 coordinate the transaction for this single resource manager instance.
 
 Letting the resource manager coordinate this
@@ -4769,7 +4762,7 @@ Transaction Management Contract
 This section specifies the transaction
 management contract. The transaction management contract builds on the
 connection management contract specified in
-link:conn.html#a588[See Connection Management].
+<<a588, Connection Management>>.
 
 The following figure shows the interfaces and
 flows in the transaction management contract. It does not show the
@@ -4819,8 +4812,8 @@ Depending on the transaction support level of
 a resource adapter, these methods should raise appropriate exceptions.
 For example, if the transaction support level for a resource adapter is
 _NoTransaction_ , an invocation of _getXAResource_ method should throw a
-_ResourceException_ . Refer to link:conn.html#a6738[See
-Exceptions] for details on the exception hierarchy.
+_ResourceException_ . Refer to <<a6738,
+Exceptions>> for details on the exception hierarchy.
 
 The following figure illustrates this concept:
 
@@ -4844,15 +4837,15 @@ _LocalTransaction_ interface to manage local transactions.
 The _jakarta.transaction.xa.XAResource_
 interface is a Java mapping of the industry standard _XA_ interface
 based on _X/Open CAE specification_ (see
-link:conn.html#a9729[See X/Open CAE Specification -- Distributed
-Transaction Processing: the XA Specification, X/Open document]).
+<<a9729, X/Open CAE Specification -- Distributed
+Transaction Processing: the XA Specification, X/Open document>>).
 
 The following code extract shows the
 interface specification for the _XAResource_ interface. For more details
 and API documentation, refer to the Jakarta Transaction (see
-link:conn.html#a9725[See Jakarta™ Transaction Specification]) and XA (see
-link:conn.html#a9729[See X/Open CAE Specification -- Distributed
-Transaction Processing: the XA Specification, X/Open document])
+<<a9725, Jakarta™ Transaction Specification]) and XA (see
+<<a9729, X/Open CAE Specification -- Distributed
+Transaction Processing: the XA Specification, X/Open document>>)
 specifications:
 
 [width="100%",cols="100%",]
@@ -4942,8 +4935,7 @@ that are performed on the underlying resource manager. An application
 server uses the _LocalTransaction_ interface to manage local
 transactions for a resource manager.
 
-link:conn.html#a1285[See Interface:
-LocalTransaction] has more details on the local transaction management
+<<a1285, Interface: LocalTransaction>> has more details on the local transaction management
 contract.
 
 === 
@@ -4953,7 +4945,7 @@ image:conn-48.png[image]
 Relationship to Jakarta Transaction and JTS
 
 The Jakarta Transaction (see
-link:conn.html#a9725[See Jakarta™ Transaction Specification])
+<<a9725, Jakarta™ Transaction Specification>>)
 is a specification of interfaces between a
 transaction manager and the other parties involved in a distributed
 transaction processing system: application programs, resource managers,
@@ -5004,7 +4996,7 @@ instances and their interactions related to transaction management.
 Since the transaction management contract builds upon the connection
 management contract, the following diagram does not show object
 interactions that have already been discussed in
-link:conn.html#a588[See Connection Management].
+<<a588, Connection Management>>.
 
 
 
@@ -5216,7 +5208,7 @@ The RM must ensure that the TM invokes
 _XAResource_ calls in the legal sequence, and must return _XAER_PROTO_
 or another suitable error if the caller TM violates the state tables, as
 defined in Chapter 6 of the XA specification (see
-link:conn.html#a9725[See Jakarta™ Transaction Specification, Version 2.0]).
+<<a9725, Jakarta™ Transaction Specification, Version 2.0>>).
 
 === Unilateral Roll-back
 
@@ -5275,9 +5267,9 @@ discard its knowledge of all other branches.
 
 The following section specifies requirements
 of a TM. This section assumes that the TM is compliant with Jakarta Transaction/JTS
-and X/Open (see link:conn.html#a9729[See X/Open CAE Specification --
+and X/Open (see <<a9729, X/Open CAE Specification --
 Distributed Transaction Processing: the XA Specification, X/Open
-document]) specifications.
+document>>) specifications.
 
 === Interfaces
 
@@ -5294,7 +5286,7 @@ Section 7.3, XA specification]
 
 The TM must generate XIDs conforming to the
 structure defined in section 4.2 on page 19 of the XA specification (see
-link:conn.html#a9725[See Jakarta™ Transaction Specification, Version 2.0]).
+<<a9725, Jakarta™ Transaction Specification, Version 2.0>>).
 The generated XIDs must be globally unique
 and must adequately describe a transaction branch.
 
@@ -5320,8 +5312,7 @@ Jakarta Connectors.
 === Scenario: Transactional Setup for a ManagedConnection
 
 The following object interactions are involved
-in the scenario shown in link:conn.html#a1259[See OID:
-Transactional Setup For Newly Created ManagedConnection Instances].
+in the scenario shown in <<a1259, OID: Transactional Setup For Newly Created ManagedConnection Instances>>.
 
 The runtime scenario begins with a client method invocation on an
 Jakarta Enterprise Beans instance. This invocation has a transaction
@@ -5334,8 +5325,7 @@ Jakarta Enterprise Beans method.
 The Jakarta Enterprise Beans instance calls the _getConnection_
 method on the _ConnectionFactory_ instance. The resource adapter
 delegates the connection request to the application server using the
-connection management contract. link:conn.html#a976[See OID:
-Connection Pool Management with Connection Matching] explains this step.
+connection management contract. <<a976, OID: Connection Pool Management with Connection Matching>> explains this step.
 
 The application server gains control and
 handles the connection allocation request.
@@ -5343,8 +5333,7 @@ handles the connection allocation request.
 To handle the connection allocation request,
 the application server gets a _Managed-Connection_ instance either from
 the connection pool or creates a new _Managed-Connection_ instance.
-link:conn.html#a976[See OID: Connection Pool Management with
-Connection Matching] describes this step.
+<<a976, OID: Connection Pool Management with Connection Matching>> describes this step.
 
 The application server registers itself as a
 _ConnectionEventListener_ with the _ManagedConnection_ instance. This
@@ -5406,8 +5395,7 @@ instance to receive specific events on the connection. The connection
 event callback mechanism enables the application server to manage
 connection pooling and transactions.
 
-link:conn.html#a942[See Object
-Diagram: Connection Management Architecture] describes the following
+<<a942, Object Diagram: Connection Management Architecture>> describes the following
 steps when an application component closes a connection:
 
 The application component releases a
@@ -5507,7 +5495,7 @@ two parts:
 The application server uses the
 _jakarta.resource.spi.LocalTransaction_ interface to manage local
 transactions transparently to an application component. The scenarios in
-link:conn.html#a1358[See Transaction Scenarios] illustrate this
+<<a1358, Transaction Scenarios>> illustrate this
 part of the local transaction management contract.
 
 The other part of the contract relates to
@@ -5517,16 +5505,14 @@ _jakarta.resource.cci.LocalTransaction_ for the Common Client Interface,
 the resource adapter is required to notify the application server of the
 events (transaction begin, commit, and rollback) related to the local
 transaction. An application server uses this part of the contract, as
-explained in link:conn.html#a1309[See Scenarios: Local
-Transaction Management].
+explained in <<a1309, Scenarios: Local Transaction Management>>.
 
 === [[a1285]]Interface: LocalTransaction
 
 The _jakarta.resource.spi.LocalTransaction_
 interface defines the contract between an application server and
 resource adapter for local transaction management. This interface is
-defined in link:conn.html#a1147[See Interface:
-LocalTransaction].
+defined in <<a1147, Interface: LocalTransaction>>.
 
 === Interface: ConnectionEventListener
 
@@ -5589,8 +5575,8 @@ The connector specification requires an
 application server to implement the _ConnectionEventListener_ interface
 and handle local transaction related events. This enables the
 application server to achieve local transaction cleanup and transaction
-serial interleaving, as illustrated in link:conn.html#a1309[See
-Scenarios: Local Transaction Management]. The connector specification
+serial interleaving, as illustrated in <<a1309, Scenarios: Local Transaction Management>>.
+The connector specification
 provides the necessary mechanisms for transaction management. Whether
 these mechanisms are used in an application server depends on the
 application server’s implementation of the transaction requirements of
@@ -5772,14 +5758,12 @@ connections that are marked _unshareable_ .
 Jakarta EE application components may use the
 optional deployment descriptor element _res-sharing-scope_ or the
 _shareable_ annotation element of _Resource_ annotation defined in the
-Common Annotations specification (see link:conn.html#a9757[See
-Jakarta™ Annotations 2.0]),
+Common Annotations specification (see <<a9757, Jakarta™ Annotations 2.0>>),
 to indicate whether a connection to a resource manager is shareable or
 unshareable. Containers must assume connections to be shareable if no
 deployment hint is provided. Refer to the Enterprise Beans specification
-(see link:conn.html#a9723[See Jakarta™ Enterprise Beans Specification,
- Version 3.2]) and the servlet specification (see
-link:conn.html#a9741[See Jakarta™ Servlet Specification, Version 4.0])
+(see <<a9723, Jakarta™ Enterprise Beans Specification, Version 3.2>>) and the servlet specification (see
+<<a9741, Jakarta™ Servlet Specification, Version 4.0>>)
 for a description of the deployment descriptor element.
 
 Jakarta EE application components may cache
@@ -5787,11 +5771,10 @@ connection objects and reuse them across multiple transactions.
 Containers that provide connection sharing should transparently switch
 such cached connection objects, at dispatch time, to point to an
 appropriate shared connection with the correct transaction scope. Refer
-to link:conn.html#a1419[See Connection Association] for more
+to <<a1419, Connection Association>> for more
 details on connection association.
 
-Refer to link:conn.html#a1358[See
-Transaction Scenarios] for a special case of connection sharing as
+Refer to <<a1358, Transaction Scenarios>> for a special case of connection sharing as
 applied to resource adapters that support local transactions.
 
 === Sharing Violation Detection
@@ -5863,8 +5846,7 @@ various transaction scenarios.
 === Requirements
 
 The Jakarta EE platform specification (see
-link:conn.html#a9737[See Jakarta™ EE Platform Specification
-Version 9]) identifies the following as transactional
+<<a9737, Jakarta™ EE Platform Specification Version 9>>) identifies the following as transactional
 resources:
 
 JDBC connections
@@ -5931,7 +5913,7 @@ in an implementation-specific manner.
 
 Application server may use connection sharing
 mechanisms to implement this local transaction requirement. Please refer
-to link:conn.html#a1389[See Scenario: Local Transaction] for an
+to <<a1389, Scenario: Local Transaction>> for an
 illustration.
 
 Application servers must support transaction
@@ -6094,10 +6076,9 @@ there is still an uncompleted local transaction associated with the
 shared physical connection. In this scenario, the cleanup of a physical
 connection refers to the dissociation of the local transaction context
 from the _ManagedConnection_ instance. In the absence of support for
-Lazy Connection Association (see link:conn.html#a1502[See Lazy
-Connection Association Optimization] ) from the resource adapter and the
+Lazy Connection Association (see <<a1502, Lazy Connection Association Optimization>> ) from the resource adapter and the
 application server, the component B should not cache the connection
-handle. See link:conn.html#a645[See Guidelines] for a suggested
+handle. See <<a645, Guidelines>> for a suggested
 scheme of obtaining and closing connection handles. A component caching
 a connection handle in this scenario is not portably supported.
 
@@ -6121,8 +6102,7 @@ image:conn-59.png[image]
 A eventually calls the close method on its
 connection handle. The container gets a connection close event
 notification based on the scenario described in
-link:conn.html#a977[See Scenario: Connection Event
-Notifications and Connection Close].
+<<a977, Scenario: Connection Event Notifications and Connection Close>>.
 
 Since there is an incomplete local
 transaction associated with the underlying physical connection, the
@@ -6248,8 +6228,7 @@ method. To achieve this, the container is required to keep track of
 connection handles acquired by component instances and
 _ManagedConnection_ instances using an implementation-specific
 mechanism. In order to set a Connection Handle as the active connection
-handle (see link:conn.html#a847[See Connection Sharing and
-Multiple Connection Handles] ), the container may also use the
+handle (see <<a847, Connection Sharing and Multiple Connection Handles>> ), the container may also use the
 _associateConnection_ method to set the same _ManagedConnection_
 associated with the Connection handle.
 
@@ -6320,7 +6299,7 @@ in an existing transaction. The mechanism through which the application
 server and its transaction manager coordinates the initial local
 transaction and lazily started Jakarta Transaction transactions is outside the scope of
 the connector specification. Refer to the Jakarta EE platform specification
-(see link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9])
+(see <<a9737, Jakarta™ EE Platform Specification Version 9>>)
 for more details on the local
 transaction optimization.
 
@@ -6375,13 +6354,12 @@ implement this interface, the container must use the resource adapter’s
 level of transaction support classification. The container must use the
 transaction support specified in the merged result of the resource
 adapter’s deployment descriptor and Connector annotations. Refer to
-link:conn.html#a5165[See Resource Adapter Provider] for more
+<<a5165, Resource Adapter Provider>> for more
 information on the resource adapter deployment descriptor and
-link:conn.html#a4581[See @Connector] for more information on the
+<<a4581, @Connector>> for more information on the
 Connector annotation. If the resource adapter deployer has overridden
 the transaction support value, the overriden value must be used. Refer
-to link:conn.html#a496[See ResourceAdapter JavaBean Instance
-Configuration] for details on resource adapter configuration.
+to <<a496, ResourceAdapter JavaBean Instance Configuration>> for details on resource adapter configuration.
 
 For _ManagedConnectionFactory_ JavaBeans that
 implement the _TransactionSupport_ interface, the application server
@@ -6389,16 +6367,14 @@ must perform the following prior to using the JavaBean. The application
 server must call the _getTransactionSupport_ method to determine its
 level of transaction support. The application server must complete the
 configuration of the _ManagedConnectionFactory_ instance (see
-link:conn.html#a428[See ManagedConnectionFactory JavaBean and
-Outbound Communication]) before invoking the _getTransactionSupport_
+<<a428, ManagedConnectionFactory JavaBean and Outbound Communication>>) before invoking the _getTransactionSupport_
 method. The application server must use the value returned by the
 _getTransactionSupport_ method and ignore the value specified by the
 resource adapter deployment descriptor/Connector annotation or the
 deployer configuration. The application server must provide the
 transaction levels listed in
 _TransactionSupport.TransactionSupportLevel_ enum, the same semantics as
-the levels detailed in link:conn.html#a1478[See Resource
-Adapter].
+the levels detailed in <<a1478, Resource Adapter>>.
 
 A resource adapter must always return a level
 of transaction support whose ordinal value in the
@@ -6413,7 +6389,7 @@ Interface: TransactionSynchronizationRegistry
 
 The _TransactionSynchronizationRegistry_
 interface is defined in the Jakarta Transaction specification (see
-link:conn.html#a9725[See Jakarta™ Transaction Specification, Version 2.0])
+<<a9725, Jakarta™ Transaction Specification, Version 2.0>>)
 and could be used by system level
 components to interact with the transaction manager. This interface
 provides the ability to register synchronization objects, associate
@@ -6425,8 +6401,7 @@ This interface is implemented by the
 application server by a stateless service object. A resource adapter may
 obtain the _TransactionSynchronizationRegistry_ through the
 _getTransactionSynchronizationRegistry_ method (shown below) of
-_BootstrapContext_ (see link:conn.html#a415[See ResourceAdapter
-JavaBean and Bootstrapping a Resource Adapter Instance]). The
+_BootstrapContext_ (see <<a415, ResourceAdapter JavaBean and Bootstrapping a Resource Adapter Instance>>). The
 application server is required to make a
 _TransactionSynchronizationRegistry_ object available through its
 _BootstrapContext_ implementation. The same
@@ -6470,15 +6445,13 @@ implements neither the _XAResource_ nor _LocalTransaction_ interfaces.
  _LocalTransaction_ - The resource adapter
 supports resource manager local transactions by implementing the
 _LocalTransaction_ interface. The local transaction management contract
-is specified in link:conn.html#a1280[See Local Transaction
-Management Contract].
+is specified in <<a1280, Local Transaction Management Contract>>.
 
  _XATransaction_ - The resource adapter
 supports both resource manager local and Jakarta Transactions transactions by
 implementing the _LocalTransaction_ and _XAResource_ interfaces. The
 requirements for supporting the _XAResource_ -based contract are
-specified in link:conn.html#a1169[See XAResource-based
-Transaction Contract].
+specified in <<a1169, XAResource-based Transaction Contract>>.
 
 
 
@@ -6531,7 +6504,7 @@ The application server must support a
 transaction manager that manages transactions using the Jakarta Transaction _XAResource_
 -based contract. The requirements for a transaction manager to support
 an _XAResource_ -based contract are specified in
-link:conn.html#a1233[See Transaction Manager Requirements].
+<<a1233, Transaction Manager Requirements>>.
 
 The application server must use the
 _LocalTransaction_ interface-based contract to manage local transactions
@@ -6540,15 +6513,15 @@ for a resource manager.
 The application server must use the
 deployment descriptor mechanism and the values in the Connector metadata
 annotation to ascertain the transactional capabilities of a resource
-adapter. Refer to link:conn.html#a5161[See Deployment] for
+adapter. Refer to <<a5161, Deployment>> for
 details on the deployment descriptor specification and
-link:conn.html#a4581[See @Connector] for details on the
+<<a4581, @Connector>> for details on the
 Connector annotation.
 
 If a _ManagedConnectionFactory_ chooses to
 specify its transactional capability in a dynamic fashion at runtime
-(see link:conn.html#a1452[See Runtime Transaction Support Level
-Specification]), the application server must ascertain the transactional
+(see <<a1452, Runtime Transaction Support Level Specification>>),
+the application server must ascertain the transactional
 capability provided by the _ManagedConnectionFactory_ instance.
 
 The application server must implement the
@@ -6599,8 +6572,7 @@ application server when a dissociated connection handle is used by the
 application, so that it can be associated with an appropriate
 ManagedConnection instance.
 
-link:conn.html#a1513[See Connection
-Acquisition Processing] describes the processing of a getConnection
+<<a1513, Connection Acquisition Processing>> describes the processing of a getConnection
 method call initiated by an application component (that is, when the
 application component first acquires a connection). At a later point in
 time, the connection may be dissociated by the application server by
@@ -6611,7 +6583,7 @@ instance from all its connection handle objects.
 When such a dissociated connection is used by
 the application (upon method re-entry), it is required to be
 re-associated with an appropriate ManagedConnection instance.
-link:conn.html#a1515[See Connection Re-association Processing]
+<<a1515, Connection Re-association Processing>>
 describes connection re-association processing. The connection
 re-association processing depends on the connection notifying the
 application server upon re-use (lazy re-association trigger). The
@@ -6621,8 +6593,7 @@ an appropriate ManagedConnection instance.
 
 Thus, a connection handle that can be
 dissociated can exist in one of three states: Active, Inactive or
-Closed. link:conn.html#a1516[See State Diagram of a
-Dissociatable Application-level Connection Handle] describes the state
+Closed. <<a1516, State Diagram of a Dissociatable Application-level Connection Handle>> describes the state
 transitions of a dissociatable connection handle. Note that the state
 Inactive applies only to dissociatable connection handles.
 
@@ -6928,9 +6899,9 @@ be used. The latter is termed principal delegation.
 End user. An end user is an entity, human or
 service, that acts as a source of a request to an application. An end
 user is represented as a security principal within a _Subject_ as
-specified in the JAAS framework (see link:conn.html#a9735[See
+specified in the JAAS framework (see <<a9735,
 Java Authentication and Authorization Service Specification, version
-1.0]).
+1.0>>).
 
 Initiating Principal. The security principal
 representing the end-user that interacts directly with the application.
@@ -6951,7 +6922,7 @@ common security mechanisms and policies are established. This
 specification does not specify the scope of a security domain. An
 enterprise can contain more than one security domain. Thus an
 application server and an EIS may either be in the same or different
-security domains. link:conn.html#a9530[See Security Scenarios]
+security domains. <<a9530, Security Scenarios>>
 provides illustrative examples of how security domains can be setup and
 managed.
 
@@ -6970,8 +6941,7 @@ its security attributes, for example, credentials and access privileges,
 to an initiating or caller principal depends on how the resource
 principal has been setup by the system administrator or deployer.
 
-Refer to link:conn.html#a1724[See
-Interfaces and Classes] for details on interfaces and classes that are
+Refer to <<a1724, Interfaces and Classes>> for details on interfaces and classes that are
 used to represent a resource principal and its credentials.
 
 === 
@@ -7159,13 +7129,12 @@ authentication mechanism
 The _authentication-mechanism-type_ element is
 used in the deployment descriptor to specify whether or not a resource
 adapter supports a specific authentication mechanism. Refer to
-link:conn.html#a5427[See Requirements] for more details on the
+<<a5427, Requirements>> for more details on the
 specification of the deployment descriptor for a resource adapter. The
 authentication mechanism supported by the resource adapter may also
 specified through the AuthenticationMechanism annotation (see
-link:conn.html#a4636[See @AuthenticationMechanism] ) as part of
-the Connector metadata annotation (see link:conn.html#a4581[See
-@Connector]).
+<<a4636, @AuthenticationMechanism>> ) as part of
+the Connector metadata annotation (see <<a4581, @Connector>>).
 
 Jakarta Connectors does not require
 that a specific authentication mechanism be supported by an application
@@ -7186,7 +7155,7 @@ independent of the identity of the initiating or caller principal. The
 identity of the resource principal can be configured either at
 deployment time or specified dynamically by a component at the
 connection creation. The scenario described in
-link:conn.html#a9539[See eStore Application] illustrates an
+<<a9539, eStore Application>> illustrates an
 example where connections to an EIS are always established under the
 security context of a valid EIS user account. This happens independent
 of the initiating or caller principal. For example, if a caller
@@ -7209,7 +7178,7 @@ a caller principal requires that the caller’s identity and credentials
 be delegated to the EIS. The mechanism by which this is accomplished is
 specific to a security mechanism and an application server
 implementation. An example of the impersonation is described in
-link:conn.html#a9572[See Employee Self-Service Application].
+<<a9572, Employee Self-Service Application>>.
 
 In some scenarios, a caller principal can be a
 delegate of an initiating principal. In this case, a resource principal
@@ -8242,8 +8211,8 @@ _ManagedConnectionFactory_ .- _createManagedConnection_ to pass the
 security context to the resource adapter during EIS sign-on.
 
 The application server must be capable of
-using options A and C as specified in link:conn.html#a1807[See
-ManagedConnectionFactory] for the security contract.
+using options A and C as specified in <<a1807,
+ManagedConnectionFactory>> for the security contract.
 
 The application server provides an
 implementation of the _GSSCredential_ interface if the following
@@ -8257,8 +8226,8 @@ interface to support the _kerbv5_ authentication mechanism type.
 
 The application server supports the deployment
 of resource adapters that are capable of handling _GSSCredential_ , and
-thereby option B as specified in link:conn.html#a1807[See
-ManagedConnectionFactory], as part of the security contract.
+thereby option B as specified in <<a1807,
+ManagedConnectionFactory>>, as part of the security contract.
 
 The application server must implement the
 method _allocateConnection_ in its _ConnectionManager_ implementation.
@@ -8760,8 +8729,8 @@ image:conn-80.png[image]
 
 The JNDI context of an accessing application is available to a resource
 adapter by way of the thread that uses its connection object. Refer to
-the note in link:conn.html#a619[See Managed Application
-Scenario]. The thread that accesses the connection object could be an
+the note in <<a619, Managed Application
+Scenario>>. The thread that accesses the connection object could be an
 application thread, or, could be a Work object accessing an application
 component. In the latter case, the worker thread gains access to the
 application’s JNDI context during the method call on the component.
@@ -8886,8 +8855,8 @@ _Work_ instance with null context executes with an unspecified context.
 The optional WorkListener parameter provides a
 callback event listener object which is notified when the various Work
 processing events (work accepted, work rejected, work started, work
-completed) occur. Refer to link:conn.html#a2111[See WorkListener
-Interface and WorkEvent Class].
+completed) occur. Refer to <<a2111, WorkListener
+Interface and WorkEvent Class>>.
 
 The various stages in Work processing are:
 
@@ -8934,8 +8903,8 @@ cases.
 Since the scheduleWork method returns after a
 _Work_ instance has been accepted and does not block until a _Work_
 instance starts, a callback event listener may be used to receive the
-_WorkRejectedException_ . See link:conn.html#a2111[See
-WorkListener Interface and WorkEvent Class] for details.
+_WorkRejectedException_ . See <<a2111,
+WorkListener Interface and WorkEvent Class>> for details.
 
 === [[a2095]]Work Started
 
@@ -8960,8 +8929,8 @@ the nature of the error condition.
 Since the scheduleWork method and startWork
 method do not block until execution completion, a callback event
 listener may be used to receive the WorkCompletedException. See
-link:conn.html#a2111[See WorkListener Interface and WorkEvent
-Class] for details).
+<<a2111, WorkListener Interface and WorkEvent
+Class>> for details).
 
 === Requirements
 
@@ -9361,7 +9330,7 @@ environment.
 === [[a2229]]Resource Adapter association
 
 A _Work_ or _DistributableWork_ instance (see
-link:conn.html#a2233[See Distributed Work processing]) may
+<<a2233, Distributed Work processing>>) may
 implement the _ResourceAdapterAssociation_ interface. The
 _ResourceAdapterAssociation_ interface specifies the methods to
 associate the _Work_ instance with a _ResourceAdapter_ JavaBean.
@@ -9369,11 +9338,11 @@ associate the _Work_ instance with a _ResourceAdapter_ JavaBean.
 The application server must establish an
 association between the resource adapter instance and the _Work_
 instance before the exection of the _Work_ instance has been started
-(Refer link:conn.html#a2095[See Work Started]).
+(Refer <<a2095, Work Started>>).
 
 When a _Work_ instance has been distributed
 to a new _WorkManager_ instance (for example, as in
-link:conn.html#a2233[See Distributed Work processing]), the
+<<a2233, Distributed Work processing>>), the
 resource adapter instance that is associated with the _Work_ instance
 must be available in the _WorkManager_ instance that the _Work_ has been
 distributed to. This allows the _Work_ instance to use application
@@ -9433,7 +9402,7 @@ virtual machine.
 All artifacts that may be coupled to the
 application server instance where the _Work_ is executed in, must be
 obtained through the _ResourceAdapterAssociation_ mechanism discussed in
-link:conn.html#a2229[See Resource Adapter association].
+<<a2229, Resource Adapter association>>.
 
 === DistributableWorkManager Interface
 
@@ -9483,7 +9452,7 @@ _DistributableWork_ instance is executed in a local or remote manner.
 A resource adapter submits the
 _DistributableWork_ instance to the _DistributableWorkManager_ through
 the _WorkManager_ submission methods specified in
-link:conn.html#a2057[See WorkManager Interface]. A
+<<a2057, WorkManager Interface>>. A
 _DistributableWorkManager_ may then distribute the submitted
 _DistributableWork_ instance to another _WorkManager_ instance for
 processing as shown in the following figure.
@@ -9499,17 +9468,17 @@ distributed fashion, the _DistributableWorkManager_ may execute a _Work_
 submitted through _doWork()_ locally. When a _WorkListener_ is provided
 by the resource adapter during _Work_ submission, the application server
 must send event notifications to the _WorkListener_ . (see
-link:conn.html#a2111[See WorkListener Interface and WorkEvent
-Class]).
+<<a2111, WorkListener Interface and WorkEvent
+Class>>).
 
 A _DistributableWork_ instance may also use
 the mechanisms described in Generic Work Context and Security Inflow
-(see link:conn.html#a2270[See Generic Work Context] and
-link:conn.html#a3707[See Security Inflow]) chapters to control
+(see <<a2270, Generic Work Context>> and
+<<a3707, Security Inflow>>) chapters to control
 the execution context of the _Work_ instance. A
 _DistributableWorkManager_ must support the requirements in
-link:conn.html#a2270[See Generic Work Context] and
-link:conn.html#a3707[See Security Inflow].
+<<a2270, Generic Work Context>> and
+<<a3707, Security Inflow>>.
 
 
 
@@ -9544,7 +9513,7 @@ _WorkContext_ model is designed to be generic so that a resource adapter
 can flow in different types of contextual information apart from the
 standard transaction and security _WorkContexts_ defined in this
 chapter. For more information about _Work_ management, see
-link:conn.html#a1891[See Work Management].
+<<a1891, Work Management>>.
 
 === 
 
@@ -9578,7 +9547,7 @@ concurrent behavior in a managed environment.
 
 Note that the application server is required
 to support the standard context types listed in
-link:conn.html#a2292[See Standard and Custom Work Contexts].
+<<a2292, Standard and Custom Work Contexts>>.
 
 === 
 
@@ -9604,11 +9573,11 @@ Chapter 10, “Work Management“.
 
 To standardize the most commonly used work
 contexts, such as Transaction Work Context and Security Work Context.
-See link:conn.html#a3707[See Security Inflow].
+See <<a3707, Security Inflow>>.
 
 To be backward compatible with the existing
 _Work_ submission and context assignment model described in
-link:conn.html#a1891[See Work Management].
+<<a1891, Work Management>>.
 
 To enable an application server to support new
 message inflow and delivery schemes and provide a richer contextual
@@ -9623,14 +9592,14 @@ image:conn-88.png[image]
 
 In this chapter all references to
 _WorkManager_ should be read as references applicable to the Connector
-_WorkManager_ . See link:conn.html#a2057[See WorkManager
-Interface].
+_WorkManager_ . See <<a2057, WorkManager
+Interface>>.
 
 When a _Work_ is submitted by a resource
 adapter to a _WorkManager_ to be executed asynchronously, one of the
 free threads picks up the _Work_ instance, sets up an appropriate
 execution context and then calls the run method on the _Work_ instance.
-See link:conn.html#a1908[See Work Management Model] for more
+See <<a1908, Work Management Model>> for more
 information on how a _Work_ instance is handled by a _WorkManager_ .
 
 A resource adapter submits a _Work_ instance
@@ -9688,8 +9657,8 @@ An application server or a resource adapter
 may define and use custom _WorkContext_ s. However a resource adapter
 using these custom _WorkContext_ s is non-portable and might not
 function as expected in other application servers that do not implement
-the custom _WorkContext_ . See link:conn.html#a2394[See Checking
-Support for a WorkContext Type] for a discussion about how resource
+the custom _WorkContext_ . See <<a2394, Checking
+Support for a WorkContext Type>> for a discussion about how resource
 adapters can check with the _WorkContext_ s supported by the application
 server.
 
@@ -9856,8 +9825,8 @@ standardizes two _WorkContext_ types: the _TransactionContext_ class and
 _SecurityContext_ class, to represent the transaction and security
 context with which the _Work_ instance must be executed respectively.
 For more information on these classes, see
-link:conn.html#a2435[See TransactionContext Class] and
-link:conn.html#a3776[See SecurityContext Class].
+<<a2435, TransactionContext Class>> and
+<<a3776, SecurityContext Class>>.
 
 The _getName()_ and _getDescription()_
 methods may be used by the resource adapter developer and the
@@ -9937,7 +9906,7 @@ _WorkManager_ .
 Because nested _Work_ submissions are allowed
 in the Connector _WorkManager_ , the Connector _WorkManager_ must
 support nested contexts unless the _WorkContext_ type prohibits them.
-See link:conn.html#a2057[See WorkManager Interface] for more
+See <<a2057, WorkManager Interface>> for more
 information on nested _Work_ submission related requirements.
 
 
@@ -9953,9 +9922,9 @@ A resource adapter provider can declare that
 it requires a list of _WorkContext_ types to be supported by the
 application server through the _required-work-context_ element in the
 deployment descriptor of the resource adapter (see
-link:conn.html#a5165[See Resource Adapter Provider]) or by way
-of the Connector annotation (see link:conn.html#a4581[See
-@Connector] ).
+<<a5165, Resource Adapter Provider>>) or by way
+of the Connector annotation (see <<a4581,
+@Connector>> ).
 
 The application server must check whether all
 of the _WorkContext_ types declared by the resource adapter are
@@ -9976,8 +9945,8 @@ _isContextSupported()_ method in the _BootstrapContext_ implementation
 provided by the application server. This mechanism enables a resource
 adapter developer to dynamically change the _WorkContext_ s based on the
 support provided by the application server. For more information, see
-link:conn.html#a415[See ResourceAdapter JavaBean and
-Bootstrapping a Resource Adapter Instance].
+<<a415, ResourceAdapter JavaBean and
+Bootstrapping a Resource Adapter Instance>>.
 
 
 
@@ -10018,7 +9987,7 @@ defined as abstract classes, such as _SecurityContext_ , the resource
 adapter must use the abstract class while invoking the
 _isContextSupported_ method and not its implementation class. For more
 information on _SecurityContext_ class, see
-link:conn.html#a3776[See SecurityContext Class]
+<<a3776, SecurityContext Class>>
 
 For custom extensions of the standard
 _WorkContext_ s, the resource adapter must always check support for the
@@ -10029,11 +9998,11 @@ supported by the application server.
 === Handling Errors During Context Assignment
 
 As specified in
-link:conn.html#a2111[See WorkListener Interface and WorkEvent
-Class], the _WorkManager_ must catch any exception thrown during Work
+<<a2111, WorkListener Interface and WorkEvent
+Class>>, the _WorkManager_ must catch any exception thrown during Work
 processing, which includes execution context setup (including
-link:conn.html#a2394[See Checking Support for a WorkContext
-Type]), and wrap it with a _WorkCompletedException_ set to an
+<<a2394, Checking Support for a WorkContext
+Type>>), and wrap it with a _WorkCompletedException_ set to an
 appropriate error code defined in _WorkContextErrorCodes_ , which
 indicates the nature of the error condition.
 
@@ -10099,9 +10068,9 @@ _DUPLICATE_CONTEXTS_ error code.
 
 The check for support and duplicates during
 context assignment listed above, must be less strict than the checks
-described in link:conn.html#a2390[See Indicating Support for a
-WorkContext Type] and link:conn.html#a2394[See Checking Support
-for a WorkContext Type]. The application server must employ a
+described in <<a2390, Indicating Support for a
+WorkContext Type>> and <<a2394, Checking Support
+for a WorkContext Type>>. The application server must employ a
 _java.lang.Class.isAssignable(java.lang.Class)_ style check.
 Specifically, this method must check whether a WorkContext class that is
 supported by the application server can be converted to the type
@@ -10138,7 +10107,7 @@ image:conn-88.png[image]
 
 The _TransactionContext_ class extends the
 _ExecutionContext_ class, as described in
-link:conn.html#a2160[See ExecutionContext Class]. It represents
+<<a2160, ExecutionContext Class>>. It represents
 the standard interface a resource adapter can use to propagate
 transaction context information from the EIS to the application server.
 The _Work_ instance and any message deliveries to _MessageEndpoint_ s in
@@ -10291,7 +10260,7 @@ while calling the _setHint_ method.
 
 This specification defines only a limited set
 of standard quality-of-service attributes (that is, hint names) in
-link:conn.html#a2494[See Standard Hints]. The application server
+<<a2494, Standard Hints>>. The application server
 is not required to support the standard hint names.
 
 The specification reserves the right to use
@@ -10409,10 +10378,10 @@ image:conn-88.png[image]
 
 Illustrative Example
 
-link:conn.html#a3627[See Use Case
-Scenario], provides details on use case scenarios where the Transaction
-Inflow contracts defined in link:conn.html#a3613[See Transaction
-Inflow] are employed. As an example implementing one of the use cases
+<<a3627, Use Case
+Scenario>>, provides details on use case scenarios where the Transaction
+Inflow contracts defined in <<a3613, Transaction
+Inflow>> are employed. As an example implementing one of the use cases
 listed there, let’s consider Wombat Systems, a finance company that has
 a variety of software systems as part of its enterprise infrastructure.
 The software systems include databases, messaging middleware, and
@@ -10443,8 +10412,8 @@ the EIS to the application server.
 The resource adapter constructs a _Work_
 instance that is expected to do work as part of the transactional
 message. It also creates an _ExecutionContext_ instance containing the
-constructed _Xid_ , as detailed in link:conn.html#a3656[See
-Processing of Transactional Calls]. However, because the resource
+constructed _Xid_ , as detailed in <<a3656,
+Processing of Transactional Calls>>. However, because the resource
 adapter has to execute the _Work_ instance with other Work contexts as
 well, it uses a _Work_ implementation that implements the
 _WorkContextProvider_ interface, as shown below.
@@ -10551,9 +10520,9 @@ of the inbound communication model; that is, the communication from an
 EIS to an application residing in an application server’s Jakarta Enterprise Beans container
 through a resource adapter. This also introduces concepts used in
 subsequent chapters related to inbound communication: Message Inflow
-(link:conn.html#a2576[See Message Inflow]), Jakarta Enterprise Beans Invocation
-(link:conn.html#a3530[See Jakarta Enterprise Beans Invocation]), and Transaction
-Inflow (link:conn.html#a3613[See Transaction Inflow]).
+<<a2576, Message Inflow>>, Jakarta Enterprise Beans Invocation
+<<a3530, Jakarta Enterprise Beans Invocation>>, and Transaction
+Inflow <<a3613,Transaction Inflow>>).
 
 === 
 
@@ -10576,9 +10545,8 @@ a resource adapter is necessary. Further, a mechanism is needed to
 propagate transaction information from an EIS to an application residing
 in a Jakarta Enterprise Beans container.
 
-link:conn.html#a2576[See Message
-Inflow] describes a mechanism to invoke message-driven beans from a
-resource adapter. link:conn.html#a3613[See Transaction Inflow]
+<<a2576, Message Inflow>> describes a mechanism to invoke message-driven beans from a
+resource adapter. <<a3613, Transaction Inflow>>
 provides a mechanism to import transaction information from an EIS into
 a Jakarta Enterprise Beans container.
 
@@ -10692,15 +10660,15 @@ patterns to interact with a message provider:
 It may directly use specific messaging APIs,
 such as Jakarta Messaging, to send and synchronously receive
 messages. This is achieved using the standard connector contracts for
-connection management. See link:conn.html#a588[See Connection
-Management]. Any message provider may provide a connector resource
+connection management. See <<a588, Connection
+Management>>. Any message provider may provide a connector resource
 adapter that supplies connection objects for use by applications to send
 and synchronously receive messages using the specific messaging API.
 
 It may use message-driven beans to
 asynchronously receive messages through a message provider. The Jakarta Enterprise Beans
-specification (see link:conn.html#a9723[See Jakarta™ Enterprise Beans
-Specification, Version 4.0]) describes the message-driven bean
+specification (see <<a9723, Jakarta™ Enterprise Beans
+Specification, Version 4.0>>) describes the message-driven bean
 component contract in detail.
 
 While the above patterns allow a Jakarta EE
@@ -10984,8 +10952,8 @@ annotations, interfaces implemented, etc. and modify the message
 delivery behavior of the resource adapter accordingly. In the case of
 message driven beans, the _Class_ object returned is the bean class
 provided by the application component developer. Refer to the Jakarta Enterprise
-Beans specification (see link:conn.html#a9723[See Jakarta™ Enterprise Beans
- Specification, Version 4.0]) for more details on the
+Beans specification (see <<a9723, Jakarta™ Enterprise Beans
+ Specification, Version 4.0>>) for more details on the
 requirements for message driven beans with no-methods listener
 interface. The _MessageEndpointFactory_ must return _null_ if the
 _MessageEndpoint_ does not implement the business methods of the message
@@ -11078,8 +11046,8 @@ possibly message provider-specific details as well, which is used by the
 message-driven bean deployer to setup the activation.
 
 The Jakarta Enterprise Beans specification (see
-link:conn.html#a9723[See Jakarta™ Enterprise Beans Specification,
- Version 4.0]) has more details on the message-driven bean
+<<a9723, Jakarta™ Enterprise Beans Specification,
+ Version 4.0>>) has more details on the message-driven bean
 deployment descriptor element activation-config used to hold the
 activation configuration information. For example, the deployment
 descriptor of a message-driven bean which consumes from a Jakarta Messaging resource
@@ -11170,7 +11138,7 @@ with an endpoint application.
 The resource adapter provides the following
 information by way of the resource adapter deployment descriptor or
 through metadata annotations described in
-link:conn.html#a4758[See @Activation], that is used by the
+<<a4758, @Activation>>, that is used by the
 endpoint deployer to setup endpoint activation:
 
 === List of Supported Message Listener Types
@@ -11185,8 +11153,8 @@ The resource adapter provides the Java class
 name of an ActivationSpec JavaBean, one for each supported message
 listener type, containing a set of configurable properties that is used
 to specify endpoint activation configuration information during endpoint
-deployment. Refer to link:conn.html#a5071[See JavaBean
-Requirements]. An ActivationSpec JavaBean instance is created during
+deployment. Refer to <<a5071, JavaBean
+Requirements>>. An ActivationSpec JavaBean instance is created during
 endpoint deployment, and the instance is configured by the endpoint
 deployer.
 
@@ -11202,11 +11170,11 @@ optional.
 
 The _ActivationSpec_ JavaBean implementation
 is recommended to use the JavaBean validation mechanisms described in
-link:conn.html#a516[See JavaBean Validation] instead of the
+<<a516, JavaBean Validation>> instead of the
 _validate_ method to request validation by the container. If the
 application server provides an implementation of the Bean Validation
-specification (see link:conn.html#a9753[See Jakarta™ Bean Validation
-Specification, Version 3.0]), the application server must check the
+specification (see <<a9753, Jakarta™ Bean Validation
+Specification, Version 3.0>>), the application server must check the
 validity of the configuration settings provided by the deployer for a
 JavaBean, using the capabilities provided by the Bean Validation
 specification before calling the _validate_ method.
@@ -11227,7 +11195,7 @@ The usage of the _required-config-property_
 element to require the specification of a configuration property during
 deployment is deprecated. Instead, the _ActivationSpec_ JavaBean is
 recommended to use the JavaBean Validation facilities described in
-link:conn.html#a516[See JavaBean Validation]. The
+<<a516, JavaBean Validation>>. The
 _ActivationSpec_ JavaBean may annotate the field or the
 JavaBeans-compliant accessor method corresponding to the configuration
 property with the _@NotNull_ constraint (or the corresponding XML
@@ -11244,7 +11212,7 @@ link:activation.html#UNKNOWN[See Activation Configuration for
 Message Inflow to Jakarta Messaging Endpoints]) may also be an object that implements
 the jakarta.jms.Destination interface. In such a case, the resource
 adapter should provide an administered object (refer to
-link:conn.html#a2747[See Administered Objects]) that implements
+<<a2747, Administered Objects>>) that implements
 the jakarta.jms.Destination interface. The specific type of the Jakarta Messaging
 destination is specified by the destinationType property value. The Jakarta Messaging
 ActivationSpec JavaBean properties should be standardized by the Jakarta Messaging
@@ -11255,7 +11223,7 @@ community.
 The resource adapter may provide the Java
 class name and the interface type of an optional set of JavaBean classes
 representing various administered objects. Refer to
-link:conn.html#a5071[See JavaBean Requirements]. Administered
+<<a5071, JavaBean Requirements>>. Administered
 objects are specific to a messaging style or message provider.
 
 For example, some messaging styles may need
@@ -11289,7 +11257,7 @@ Java class and the interface type implements
 _jakarta.resource.Referenceable_ and _java.io.Serializable_ interfaces.
 This enables an application server to store the administered object
 instance in the JNDI naming environment. Refer to
-link:conn.html#a5327[See Scenario: Referenceable] for details on
+<<a5327, Scenario: Referenceable>> for details on
 the JNDI reference mechanism.
 
 During deserialization of the administered
@@ -11310,8 +11278,8 @@ of the default values specified by way of the JavaBean mechanism.
 
 The application server is required to merge
 values specified by way of annotations and deployment descriptors as
-specified in link:conn.html#a4531[See Deployment Descriptors and
-Annotations], before applying the administered object class configuration
+specified in <<a4531, Deployment Descriptors and
+Annotations>>, before applying the administered object class configuration
 properties.
 
 The deployer may further override the values
@@ -11331,7 +11299,7 @@ endpoint message listener type, QoS capabilities, and so on. The
 deployer configures an ActivationSpec JavaBean instance based on the
 information provided by the application developer or assembler, which is
 contained in the endpoint deployment descriptor or by way of metadata
-annotations described in link:conn.html#a4758[See @Activation].
+annotations described in <<a4758, @Activation>>.
 The deployer may also use additional provider-specific message
 information to configure the ActivationSpec JavaBean instance.
 
@@ -11561,8 +11529,8 @@ if there are multiple endpoints with similar activation configuration.
 The application server must supply a unique
 MessageEndpointFactory instance for each activation.
 
-Refer to link:conn.html#a5078[See
-Equality Constraints] for equality constraints on MessageEndpointFactory
+Refer to <<a5078,
+Equality Constraints>> for equality constraints on MessageEndpointFactory
 and ActivationSpec implementations.
 
 The resource adapter must treat multiple
@@ -11592,8 +11560,8 @@ MessageEndpointFactory to create an endpoint instance. The resource
 adapter narrows the endpoint instance to the actual message listener
 type (it knows the endpoint type from the ActivationSpec), and delivers
 the message to the endpoint instance. The Jakarta Enterprise Beans
-specification (see link:conn.html#a9723[See Jakarta™ Enterprise Beans
-Specification,Version 4.0]) prescribes the rules for the message
+specification (see <<a9723, Jakarta™ Enterprise Beans
+Specification,Version 4.0>>) prescribes the rules for the message
 listener interface structure. The same endpoint instance may be used
 again to deliver subsequent messages serially, but it must not use the
 same endpoint instance concurrently.
@@ -12070,8 +12038,8 @@ endpoint will be transacted or not through the isDeliveryTransacted
 method in the MessageEndPointFactory instance, and decide whether to
 provide an XAResource instance through the createEndpoint method. Note,
 this does not require the resource adapter to support the transaction
-inflow contract (see link:conn.html#a3613[See Transaction
-Inflow]).
+inflow contract (see <<a3613, Transaction
+Inflow>>).
 
 There are two delivery options available to
 the resource adapter for transacted deliveries:
@@ -12082,8 +12050,8 @@ createEndpoint method in order to receive XA transaction notifications
 for transacted message deliveries. In this case, the application server
 fully controls the transaction boundaries and the resource adapter is
 merely a participant (the XAResource Resource Manager (RM)). See
-link:conn.html#a2995[See Transacted Message Delivery: Option
-A(Sequence Diagram)].
+<<a2995, Transacted Message Delivery: Option
+A(Sequence Diagram)>>.
 
 Option B, beforeDelivery/afterDelivery. The
 resource adapter still optionally provides an XAResource instance
@@ -12155,8 +12123,8 @@ For each message delivery to an endpoint
 instance, the application server must match an afterDelivery call with a
 corresponding beforeDelivery call; that is, for each message delivery to
 an endpoint instance, beforeDelivery and afterDelivery calls are treated
-as a pair. See link:conn.html#a2996[See Transacted Message
-Delivery: Option B (Sequence Diagram)].
+as a pair. See <<a2996, Transacted Message
+Delivery: Option B (Sequence Diagram)>>.
 
 Thus, in the case of transacted deliveries:
 
@@ -12229,8 +12197,8 @@ imports the transaction and attempts message delivery on an endpoint
 instance from within the source managed transaction.
 
 The resource adapter must use the transaction
-inflow contract (see link:conn.html#a3613[See Transaction
-Inflow]) to import transactions initiated by a message source.
+inflow contract (see <<a3613, Transaction
+Inflow>>) to import transactions initiated by a message source.
 
 It must be possible to serially deliver one
 or more messages to one or more endpoint instances belonging to one or
@@ -12252,8 +12220,8 @@ An application server must implement the
 following behavior for transacted and non-transacted message delivery to
 an endpoint instance. Before invoking the actual endpoint instance the
 application server must do the checks prescribed in
-link:conn.html#a2978[See Application Server Behavior for
-Transacted and Non-transacted Message Delivery] shown below, depending
+<<a2978, Application Server Behavior for
+Transacted and Non-transacted Message Delivery>> shown below, depending
 on the endpoint transaction preferences and the presence of a source
 managed transaction:
 
@@ -13155,8 +13123,8 @@ ConnectionFactory supplied by the Jakarta Messaging resource adapter.
 Based on the Jakarta Enterprise Beans deployment descriptor
 information (resource-ref’s and resource-env-ref’s) or resource
 reference injection annotations (Resource annotation defined in
-link:conn.html#a9757[See Jakarta™ Annotations Specification,
- Version 2.0]), the Jakarta Enterprise Beans deployer configures the
+<<a9757, Jakarta™ Annotations Specification,
+ Version 2.0>>), the Jakarta Enterprise Beans deployer configures the
 appropriate ConnectionFactory objects (resource-ref’s) in the component
 name space (java:comp/env). The application deployer also configures the
 necessary Queue or Topic administered objects (resource-env-ref’s) in
@@ -13686,8 +13654,8 @@ image:conn-114.jpg[image]
 For session or entity bean invocations, the
 resource adapter’s bean dispatch logic can use the bean client view
 model by way of a message-driven bean. The Jakarta Enterprise Beans specification (see
-link:conn.html#a9723[See Jakarta™ Enterprise Beans
-Specification, Version 4.0]) defines the Jakarta Enterprise Beans client view, and describes
+<<a9723, Jakarta™ Enterprise Beans
+Specification, Version 4.0>>) defines the Jakarta Enterprise Beans client view, and describes
 how the client view is used to access session or entity beans. The Jakarta Enterprise Beans
 client view is available to a message-driven bean.
 
@@ -13712,7 +13680,7 @@ multiple endpoint instances (message-driven beans) at runtime, and hence
 it is possible to do concurrent bean dispatches.
 
 Further, the transaction inflow mechanism
-(described in link:conn.html#a3613[See Transaction Inflow])
+(described in <<a3613, Transaction Inflow>>)
 allows the resource adapter to use the transaction information obtained
 from the EIS for bean invocations. Note, however, the application server
 may suspend the imported transaction depending on the transaction
@@ -14083,7 +14051,7 @@ execution. Version 1.6 of the Connector Architecture defines a standard
 class, _TransactionContext_ , for the propagation of transaction context
 information from the EIS to the application server. Resource adapters
 may use this instead of _ExecutionContext_ . See
-link:conn.html#a2435[See TransactionContext Class] for more
+<<a2435, TransactionContext Class>> for more
 information on the _TransactionContext_ class.
 
 The application server’s _WorkManager_ accepts
@@ -14317,7 +14285,7 @@ that all interactions between an application server and resource adapter
 are secure and unauthorized access to application components deployed in
 an application server be prevented. The security architecture for
 integration of EISs into the application server is detailed in
-link:conn.html#a1563[See Security Architecture] and the security
+<<a1563, Security Architecture>> and the security
 contract related to connection establishment with the EIS is
 discussed in this chapter
 
@@ -14332,14 +14300,14 @@ This chapter references the following chapters
 and documents:
 
 {empty}Security Architecture specified in
-link:conn.html#a1563[See Security Architecture]
+<<a1563, Security Architecture>>
 
 Security scenarios based on the connector
-architecture (Refer to Appendix D link:conn.html#a9530[See
-Security Scenarios])
+architecture (Refer to Appendix D <<a9530,
+Security Scenarios>>)
 
-link:conn.html#a9751[See Jakarta™ Authentication
-Specification, Version 2.0] (JSR-196)
+<<a9751, Jakarta™ Authentication
+Specification, Version 2.0>> (JSR-196)
 
 
 
@@ -14390,8 +14358,8 @@ into corresponding identities in the receiving container or context
 
 Ensure backward compatibility with the
 existing "Security Management contract", defined in Chapter-17 of
-link:conn.html#a9723[See Jakarta™ Enterprise Beans Specification,
- Version 4.0] Core Contracts and Requirements
+<<a9723, Jakarta™ Enterprise Beans Specification,
+ Version 4.0>> Core Contracts and Requirements
 specification, for security context inflow to _MessageEndpoint_ s
 realized as message-driven beans
 
@@ -14402,20 +14370,20 @@ image:conn-125.png[image]
 [[a3732]]Security Inflow Model
 
 This chapter uses the terminology described
-in link:conn.html#a1583[See Terminology] and does not dictate
+in <<a1583, Terminology>> and does not dictate
 any specific security policy or technology. The resource adapter
 performs EIS sign-on and secure association with the EIS in an EIS
 specific manner. No specific scheme or configuration to perform sign-on
 and establish such secure associations is mandated by this security
 inflow model. For more details on EIS sign-on, see
-link:conn.html#a1644[See Authentication Mechanism] and for
+<<a1644, Authentication Mechanism>> and for
 details on secure association with the EIS, see
-link:conn.html#a1665[See Secure Association].
+<<a1665, Secure Association>>.
 
 The security inflow contract between the
 resource adapter and the application server leverages the Generic Work
-Context mechanism (described in link:conn.html#a2270[See Generic
-Work Context]) by describing a standard _WorkContext_ ,
+Context mechanism (described in <<a2270, Generic
+Work Context>>) by describing a standard _WorkContext_ ,
 _SecurityContext_ that may be provided by the resource adapter while
 submitting a _Work_ for execution.
 
@@ -14464,7 +14432,7 @@ context of the _Work_ instance.
 When one of the free threads from the
 application server’s thread pool picks up the _Work_ instance for
 execution, as described in the Generic Work Context Model (see
-link:conn.html#a2286[See Generic Work Context Model]), the
+<<a2286, Generic Work Context Model>>), the
 application server establishes the security context information
 described in the _SecurityContext_ , before executing the _Work_
 instance.
@@ -14474,7 +14442,7 @@ _MessageEndpoint_ instance by the resource adapter in the context of a
 _Work_ instance, the security context that is set up for that message
 delivery is inherited from the security context set in the _Work_
 instance. In other words, as in Transaction Inflow (see
-link:conn.html#a3613[See Transaction Inflow]), all message
+<<a3613, Transaction Inflow>>), all message
 deliveries that are delivered to endpoints within a single _Work_
 instance are processed under the same security identity.
 
@@ -14556,16 +14524,16 @@ domain. A translation from one domain to the other is required to be
 performed.
 
 For more information on these two cases, see
-link:conn.html#a3811[See Case 1: Identity in the Container
-Security Domain] and link:conn.html#a3815[See Case 2: Identity
-Translated Between Security Domains].
+<<a3811, Case 1: Identity in the Container
+Security Domain>> and <<a3815, Case 2: Identity
+Translated Between Security Domains>>.
 
 The _WorkManager_ may enforce any security
 policies, as per its configuration, while establishing the security
 context for the _Work_ instance. The application server may also enforce
 additional security policies, based on the configuration of the
 _MessageEndpoint_ s, during message delivery. See
-link:conn.html#a2812[See Message Delivery].
+<<a2812, Message Delivery>>.
 
 === 
 
@@ -14612,7 +14580,7 @@ server provider while calling the _setupSecurityContext_ method:
 The _handler_ argument must not be null, and
 the _CallbackHandler_ implementation passed as the argument _handler_ to
 _setupSecurityContext_ must support the following _Callback_ s defined
-in link:conn.html#a9751[See Jakarta™ Authentication Specification, Version 2.0]:
+in <<a9751, Jakarta™ Authentication Specification, Version 2.0>>:
 
  _CallerPrincipalCallback_
 
@@ -14660,8 +14628,8 @@ _Principal_ and Credentials that should serve as the security context
 for the _Work_ instance to be executed in.
 
 Add instances of the necessary _Callback_ s
-(link:conn.html#a3806[See Callbacks for Information from the
-Application Server] describes when a particular _Callback_ is required
+(<<a3806, Callbacks for Information from the
+Application Server>> describes when a particular _Callback_ is required
 to be employed by the resource adapter), usually a subset of the ones
 listed above, to an array and invokes the _handle()_ method in the
 container’s _CallbackHandler_ implementation by passing the array of
@@ -14687,8 +14655,8 @@ and _MessageDrivenContext.isCallerInRole()_ must return the result of
 testing the established security identity for role membership.
 
 As detailed in
-link:conn.html#a2364[See WorkContextProvider and WorkContext
-Interface], a Connector _WorkManager_ must support nested _Work_
+<<a2364, WorkContextProvider and WorkContext
+Interface>>, a Connector _WorkManager_ must support nested _Work_
 submissions. One or more _Work_ instances in such a nested _Work_
 submission may include a _SecurityContext_ . The Connector _WorkManager_
 must restrict the security context, established by way of the
@@ -14713,9 +14681,9 @@ image:conn-129.jpg[image]
 As part of step 3 described in the section
 above, the following _Callback_ s may be employed by a resource adapter.
 The descriptions of the _Callback_ s below have been taken from the
-link:conn.html#a9751[See Jakarta™ Authentication Specification, Version 2.0]. For
-detailed information, refer to the link:conn.html#a9751[See Jakarta™ Authentication
-Specification, Version 2.0] and the Java API documentation of the _Callback_ s defined
+<<a9751, Jakarta™ Authentication Specification, Version 2.0>>. For
+detailed information, refer to the <<a9751, Jakarta™ Authentication
+Specification, Version 2.0>> and the Java API documentation of the _Callback_ s defined
 in the _jakarta.security.auth.message.callback_ package of that
 specification:
 
@@ -14745,19 +14713,19 @@ the _PasswordValidationCallback_ makes an assumption of access to the
 password validation facilities (and thereby access to the security
 domain), it can be deployed in Case #1 scenarios only +
 (For more information on Case #1 scenario, see
-link:conn.html#a3811[See Case 1: Identity in the Container
-Security Domain]). The resource adapter must pass this information to th
+<<a3811, Case 1: Identity in the Container
+Security Domain>>). The resource adapter must pass this information to th
 e deployer through an out-of-band mechanism.
 
 === [[a3811]]Case 1: Identity in the Container Security Domain
 
 As explained in
-link:conn.html#a3732[See Security Inflow Model], the EIS
+<<a3732, Security Inflow Model>>, the EIS
 integration scenario may result in the resource adapter reusing the
 application server security policy domain. In such cases, when the
 resource adapter flows-in an identity through the security context
-inflow model described in link:conn.html#a3781[See Establishing
-the Security Context], the identity belongs to the application server’s
+inflow model described in <<a3781, Establishing
+the Security Context>>, the identity belongs to the application server’s
 security domain already. Therefore, the application server may use the
 _Principal_ s used in _CallerPrincipalCallback_ and
 _GroupPrincipalCallback_ without any translation to the application
@@ -14785,7 +14753,7 @@ mapping of one or more principals on the path may be required before
 delivering to the _MessageEndpoint_ /message-driven bean. These
 translations from the identity of initiating/caller resource principal
 to an application server principal could be one of the following types
-(see link:conn.html#a1650[See Resource Principal])
+(see <<a1650, Resource Principal>>)
 
 Configured Identity
 
@@ -14848,16 +14816,16 @@ of the _executionSubject_ is empty.
 
 The resource adapter, in the two cases above,
 is not required to use the _Callback_ s listed in
-link:conn.html#a3806[See Callbacks for Information from the
-Application Server].
+<<a3806, Callbacks for Information from the
+Application Server>>.
 
 === Case A: Establishing a Single Principal as the Caller Identity
 
  The resource adapter can add the one
 _Principal_ it requires to be set as the Caller identity in the
 _Principal_ _Set_ of the _executionSubject_ . See
-link:conn.html#a3840[See Case A: Establishing a Single Principal
-as the Caller Identity (Seq. Diagram)] for a sequence diagram depicting
+<<a3840, Case A: Establishing a Single Principal
+as the Caller Identity (Seq. Diagram)>> for a sequence diagram depicting
 this case. Note that the resource adapter must be configured to have the
 necessary security permissions to add a Principal to the
 executionSubject.
@@ -14870,8 +14838,8 @@ _executionSubject_ and of any related authentication state to be
 equivalent to that which would have resulted had it handled the
 _Callback_ on behalf of the resource adapter. This transformation also
 includes all security identity translation requirements detailed in
-link:conn.html#a3815[See Case 2: Identity Translated Between
-Security Domains].
+<<a3815, Case 2: Identity Translated Between
+Security Domains>>.
 
 === Case B: Establishing an Unauthenticated Security Context
 
@@ -14885,8 +14853,8 @@ It may use the _CallbackHandler_ to handle a
 _CallerPrincipalCallback_ with a null _Principal_ or name
 
 Or, if it uses the simplification described in
-link:conn.html#a3827[See Establising a Principal as the Caller
-Identity], it may return an empty _executionSubject_ .
+<<a3827, Establishing a Principal as the Caller
+Identity>>, it may return an empty _executionSubject_ .
 
 The _WorkManager_ must detect that the handler
 was not called and establish the container’s representation of the
@@ -14906,8 +14874,8 @@ realm assignment.
 
 When _MessageEndpoint_ s are realized as
 message-driven beans, the Jakarta Enterprise Beans Core Contracts
-and Requirements of link:conn.html#a9723[See Jakarta™ Enterprise
-Beans Specification, Version 4.0], states the following responsibilities:
+and Requirements of <<a9723, Jakarta™ Enterprise
+Beans Specification, Version 4.0>>, states the following responsibilities:
 
 Deployer: (section 17.4.2) : The Deployer
 assigns principals and/or groups of principals (such as individual users
@@ -14941,28 +14909,27 @@ the scope of the Jakarta Enterprise Beans architecture.
 
 {empty}The application server must support the
 _SecurityContext_ interface. It must also satisfy all the requirements
-stated in link:conn.html#a3781[See Establishing the Security
-Context]
+stated in <<a3781, Establishing the Security Context>>
 
 The application server must support resource
 adapters that employ Case 1 or 2 style integration mode. Cases 1 and 2
-are detailed in link:conn.html#a3811[See Case 1: Identity in the
-Container Security Domain] and link:conn.html#a3815[See Case 2:
-Identity Translated Between Security Domains] respectively.
+are detailed in <<a3811, Case 1: Identity in the
+Container Security Domain>> and <<a3815, Case 2:
+Identity Translated Between Security Domains>> respectively.
 
 The application server must provide
 configuration tools to establish Caller Identity information for a
 _MessageEndpoint_ or _Work_ instance as stated in Section
-link:conn.html#a3815[See Case 2: Identity Translated Between
-Security Domains]. In other words, the container must provide support
+<<a3815, Case 2: Identity Translated Between
+Security Domains>>. In other words, the container must provide support
 for configuring principal mapping. The application server must also
-support the simplifications detailed in link:conn.html#a3827[See
-Establising a Principal as the Caller Identity].
+support the simplifications detailed in <<a3827,
+Establishing a Principal as the Caller Identity>>.
 
 {empty}The application server must support
 the security role assignments relevant to the MessageEndpoint
-implementation as stated in link:conn.html#a3841[See Security
-Configuration Responsibilities]
+implementation as stated in <<a3841, Security
+Configuration Responsibilities>>
 
 === 
 
@@ -15179,8 +15146,8 @@ maps the _JoeUser_EISPrincipal_ to _JoeUser_ASPrincipal_ and establishes
 _JoeUser_ASPrincipal_ as the Caller Principal.
 
 The resource adapter implementation source
-code remains the same as in link:conn.html#a3853[See Case 1:
-Identity in the Container Security Domain].
+code remains the same as in <<a3853, Case 1:
+Identity in the Container Security Domain>>.
 
 
 
@@ -15284,9 +15251,9 @@ image:conn-137.jpg[image]
 
 An EAI or application development tool uses a
 metadata repository to drive CCI-based interactions with heterogeneous
-EISs. See link:conn.html#a3946[See Scenario: EAI Framework] and
-link:conn.html#a3954[See Scenario: Enterprise Application
-Development Tool] for illustrative examples. A repository may maintain
+EISs. See <<a3946, Scenario: EAI Framework>> and
+<<a3954, Scenario: Enterprise Application
+Development Tool>> for illustrative examples. A repository may maintain
 meta information about functions, with type mapping information and data
 structures for the invocation parameters, existing on an EIS system.
 
@@ -15386,8 +15353,8 @@ Additional classes:
 
  _jakarta.resource.cci.ResourceWarning_
 
-See link:conn.html#a3988[See Class
-Diagram: Common Client Interface] for the class diagram for CCI.
+See <<a3988, Class
+Diagram: Common Client Interface>> for the class diagram for CCI.
 
 === Requirements
 
@@ -15508,7 +15475,7 @@ complete set of properties required for the creation of a connection to
 an EIS instance. Configured properties on a _ManagedConnectionFactory_
 can be overridden by client-specific properties passed by an application
 component through the _getConnection_ method. Refer to
-link:conn.html#a5228[See ManagedConnectionFactory] for
+<<a5228, ManagedConnectionFactory>> for
 configuration of a _ManagedConnectionFactory_ .
 
 Note that in a managed environment, the
@@ -15530,7 +15497,7 @@ to support JNDI registration. A _ConnectionFactory_ implementation class
 is also required to implement _jakarta.resource.Referenceable_ . Note that
 the _jakarta.resource.Referenceable_ interface extends the
 _jakarta.naming.Referenceable_ interface. Refer to
-link:conn.html#a5258[See JNDI Configuration and Lookup] for more
+<<a5258, JNDI Configuration and Lookup>> for more
 details on JNDI based requirements for the _ConnectionFactory_
 implementation.
 
@@ -15547,7 +15514,7 @@ method.
 The _ConnectionSpec_ interface has been
 introduced to increase the toolability of the CCI. The _ConnectionSpec_
 interface must be implemented as a JavaBean. Refer to
-link:conn.html#a5071[See JavaBean Requirements].
+<<a5071, JavaBean Requirements>>.
 
 The following code extract shows the
 _ConnectionSpec_ interface.
@@ -15671,8 +15638,8 @@ functionality, then the method _getResultSetInfo_ must throw a
 _NotSupportedException_ .
 
 The _close_ method initiates a close of the
-connection. The OID in link:conn.html#a976[See OID: Connection
-Pool Management with Connection Matching] describes the resulting
+connection. The OID in <<a976, OID: Connection
+Pool Management with Connection Matching>> describes the resulting
 behavior of such an application level connection close.
 
 The _getLocalTransaction_ method returns a
@@ -15746,8 +15713,8 @@ If an _Interaction_ implementation does not
 support a variant of the _execute_ method, the method must throw a
 _jakarta.resource.NotSupportedException_ .
 
-Refer to link:conn.html#a4292[See
-Interaction and Record] for details on how input and output records are
+Refer to <<a4292,
+Interaction and Record>> for details on how input and output records are
 created and used in the above variants of the _execute_ method.
 
 An _Interaction_ instance is created from a
@@ -15921,7 +15888,7 @@ Note that if a CCI implementation cannot
 support the specified requirements for a result set, it should choose an
 appropriate alternative and raise a _SQLWarning_ from the _ResultSet_
 methods to indicate this condition. Refer to
-link:conn.html#a4320[See ResultSet] for more details.
+<<a4320, ResultSet>> for more details.
 
 A component can determine the actual scrolling
 ability and concurrency type of a result set by invoking the _getType_
@@ -15968,8 +15935,8 @@ environment reference to an _InteractionSpec_ administered object in the
 operational environment.
 
 The Jakarta Enterprise Beans specification (see
-link:conn.html#a9723[See Jakarta™ Enterprise Beans
- Specification, Version 4.0]) specifies resource environment references
+<<a9723, Jakarta™ Enterprise Beans
+ Specification, Version 4.0>>) specifies resource environment references
 in more detail.
 
 === Illustrative Scenario
@@ -15990,7 +15957,7 @@ The _jakarta.resource.cci.LocalTransaction_
 defines a transaction demarcation interface for resource manager local
 transactions. An application component uses the _LocalTransaction_
 interface to demarcate local transactions. Refer to
-link:conn.html#a1079[See Transaction Management] for more
+<<a1079, Transaction Management>> for more
 details on local transactions.
 
 Note that this interface is used for local
@@ -16037,7 +16004,7 @@ _jakarta.resource.spi.LocalTransaction_ interface without implementing the
 application-level _jakarta.resource.cci.LocalTransaction_ interface. In
 this case, a container uses the system contract-level _LocalTransaction_
 interface for managing local transactions. Refer to
-link:conn.html#a1280[See Local Transaction Management Contract]
+<<a1280, Local Transaction Management Contract>>
 for more details on local transaction management.
 
 === 
@@ -16203,7 +16170,7 @@ Service Endpoint Message Listener Interface
 
 The MessageListener interface serves as a
 request-response message listener type that message endpoints (refer to
-link:conn.html#a2576[See Message Inflow]) may implement. This
+<<a2576, Message Inflow>>) may implement. This
 allows an EIS to communicate with an endpoint using a request-response
 style.
 
@@ -16427,15 +16394,14 @@ based on _java.util.List._
  _jakarta.resource.cci.ResultSet_ : This
 interface extends both _java.sql.ResultSet_ and
 _jakarta.resource.cci.Record_ . A result set represents tabular data.
-link:conn.html#a4320[See ResultSet] specifies the requirements
+<<a4320, ResultSet>> specifies the requirements
 for the _ResultSet_ interface in detail.
 
 A JavaBean based representation of an EIS
 data structure: An example is a custom record generated to represent a
 purchase order in an ERP system or an invoice in a mainframe TP system.
 
-Refer to link:conn.html#a4425[See
-Code Samples] for code samples that illustrate the use of record.
+Refer to <<a4425, Code Samples>> for code samples that illustrate the use of record.
 
  _MappedRecord_ or _IndexedRecord_ may
 contain another _Record_ . This means that _MappedRecord_ and
@@ -16736,7 +16702,7 @@ The following section specifies the
 requirements for a CCI _ResultSet_ implementation.
 
 Refer to the JDBC (see
-link:conn.html#a9727[See JDBC API Specification, version 4.1])
+<<a9727, JDBC API Specification, version 4.1>>)
 specification and Java docs for more details on the _java.sql.ResultSet_
 interface. The following section specifies only a brief outline of the
 _ResultSet_ interface. It focuses on the differences between the
@@ -16832,8 +16798,7 @@ determine whether a result set can “see” its own changes while the
 result set is open. For example, a result set’s own changes are visible
 if the updated column values can be retrieved by calling the _get_ XXX
 method after the corresponding _update_ XXX method. Refer to the JDBC
-(see link:conn.html#a9727[See JDBC API Specification, version
-4.1]) specification for more details on this feature.
+(see <<a9727, JDBC API Specification, version 4.1>>) specification for more details on this feature.
 
 === Scrolling
 
@@ -16870,7 +16835,7 @@ allows updates to its contents. An updatable result set may hold a write
 lock on the underlying data item and thus reduce concurrency.
 
 Refer to the JDBC specification (see
-link:conn.html#a9727[See JDBC API Specification, version 4.1])
+<<a9727, JDBC API Specification, version 4.1>>)
 for detailed information and examples.
 
 === Updatability
@@ -16889,7 +16854,7 @@ component moves the cursor from the current row before calling the
 method _updateRow_ .
 
 Refer to the JDBC specification (see
-link:conn.html#a9727[See JDBC API Specification, version 4.1])
+<<a9727, JDBC API Specification, version 4.1>>)
 for more information.
 
 === Persistence of Java Objects
@@ -17409,8 +17374,8 @@ Overview
 
 The simplified API makes extensive use of Java
 language annotations, that was introduced in Java SE 5.0 (see
-link:conn.html#a9755[See A Metadata Facility for the Java
-Programming Language]). The purpose of the API is to improve the
+<<a9755, A Metadata Facility for the Java Programming Language>>).
+The purpose of the API is to improve the
 existing Jakarta Connectors by reducing its complexity from a
 resource adapter developer’s point of view.
 
@@ -17465,7 +17430,7 @@ stage of the development or application assembly etc).
 For additional requirements on annotations
 discovery and processing by the application server, see the Deployment
 Section of the “Application Assembly and Deployment” chapter of
-link:conn.html#a9737[See Jakarta™ EE Platform Specification, Version 9].
+<<a9737, Jakarta™ EE Platform Specification, Version 9>>.
 
 Deployment descriptors may be “sparse”,
 unlike the full deployment descriptors required as part of the J2EE
@@ -17542,7 +17507,7 @@ An application assembler or deployer may use
 the deployment descriptor to override the metadata annotations specified
 by the resource adapter developer. See the chapter titled “Resources,
 Naming, and Injection” in the Jakarta EE Platform specification (see
-link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9])
+<<a9737, Jakarta™ EE Platform Specification Version 9>>)
 for general rules on annotations and
 injection and override behavior. The rules below complement the rules
 specified in that section.
@@ -17568,14 +17533,14 @@ the resource adapter for annotations. The deployment tool must follow
 the annotation discovery and processing requirements specified in the
 “Deployment Section” of the “Application Assembly and Deployment”
 chapter of the Jakarta EE Platform Specification (see
-link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9]).
+<<a9737, Jakarta™ EE Platform Specification Version 9>>).
 
 The information provided by the annotations
 must be merged with the deployment descriptor packaged along with the
 resource adapter module. The general rule is that uniqueness constraints
 specified in the deployment descriptor schema (see
-link:conn.html#a5430[See Resource Adapter XML Schema
-Definition]) specify what combinations of annotations and their
+<<a5430, Resource Adapter XML Schema Definition>>)
+specify what combinations of annotations and their
 corresponding deployment descriptor elements are allowed.
 
 While merging the information present in the
@@ -17628,8 +17593,8 @@ Administered Object
 
 For instance, a _ResourceAdapter_ JavaBean is
 permitted to have a superclass that is itself a _ResourceAdapter_
-JavaBean. See link:conn.html#a415[See ResourceAdapter JavaBean
-and Bootstrapping a Resource Adapter Instance] for more information on
+JavaBean. See <<a415, ResourceAdapter JavaBean
+and Bootstrapping a Resource Adapter Instance>> for more information on
 _ResourceAdapter_ JavaBean.
 
 However there are no rules for processing of
@@ -17674,8 +17639,8 @@ The _Connector_ annotation is applied to the JavaBean class and the
 JavaBean class must implement the _ResourceAdapter_ interface. It is
 recommended that the resource adapter developer annotate at most one
 JavaBean with the _Connector_ annotation within the valid annotation
-discovery scope as defined in link:conn.html#a4531[See
-Deployment Descriptors and Annotations].
+discovery scope as defined in <<a4531,
+Deployment Descriptors and Annotations>>.
 
 If more than one JavaBean is annotated with
 the _Connector_ annotation, the application server must use the JavaBean
@@ -17776,7 +17741,7 @@ description of the licensing terms.
 
 The _authMechanisms_ element specifies the
 authentication mechanisms supported by the resource adapter. See
-link:conn.html#a4636[See @AuthenticationMechanism] for more
+<<a4636, @AuthenticationMechanism>> for more
 information on the _AuthenticationMechanism_ annotation. The annotation
 element _reauthenticationSupport_ specifies whether the resource adapter
 implementation supports re-authentication of existing ManagedConnection
@@ -17786,7 +17751,7 @@ implementation and not for theunderlying EIS instance.
 The _securityPermissions_ annotation element
 specifies the extended security permissions required to be provided for
 the operation of the resource adapter module. See
-link:conn.html#a4658[See @SecurityPermission] for more
+<<a4658, @SecurityPermission>> for more
 information on the _SecurityPermission_ annotation.
 
  The _transactionSupport_ annotation element
@@ -17803,8 +17768,8 @@ server to support.
 It is optional for a resource adapter
 implementation to bundle a JavaBean class implementing the
 _jakarta.resource.spi.ResourceAdapter_ interface (see
-link:conn.html#a415[See ResourceAdapter JavaBean and
-Bootstrapping a Resource Adapter Instance]). In particular, a resource
+<<a415, ResourceAdapter JavaBean and
+Bootstrapping a Resource Adapter Instance>>). In particular, a resource
 adapter implementation that only performs outbound communication to the
 EIS might not provide a JavaBean that implements the _ResourceAdapter_
 interface or a JavaBean annotated with the _Connector_ annotation.
@@ -17817,12 +17782,12 @@ perform inbound message delivery), the resource adapter implementation
 must provide a JavaBean that implements the _ResourceAdapter_ interface.
 The resource adapter developer may, in this case, use the _Connector_
 annotation or the deployment descriptor (see
-link:conn.html#a5165[See Resource Adapter Provider]) to specify
+<<a5165, Resource Adapter Provider>>) to specify
 the resource adapter JavaBean. A JavaBean that is annotated with the
 _Connector_ annotation must implement the _ResourceAdapter_ interface
 and must satisfy the requirements listed in
-link:conn.html#a415[See ResourceAdapter JavaBean and
-Bootstrapping a Resource Adapter Instance].
+<<a415, ResourceAdapter JavaBean and
+Bootstrapping a Resource Adapter Instance>>.
 
 === Example
 
@@ -17852,7 +17817,7 @@ ResourceAdapter\{
 The _AuthenticationMechanism_ annotation can
 be used by the developer, as part of the _Connector_ annotation, to
 specify the authentication mechanism supported by the resource adapter
-(see link:conn.html#a1644[See Authentication Mechanism]).
+(see <<a1644, Authentication Mechanism>>).
 
 
 
@@ -17909,7 +17874,7 @@ specify the credential interface supported by the resource adapter.
 The _SecurityPermission_ annotation can be
 used by the developer, as part of the _Connector_ annotation, to specify
 the extended security permissions required by the resource adapter (see
-link:conn.html#a5165[See Resource Adapter Provider]).
+<<a5165, Resource Adapter Provider>>).
 
 
 
@@ -17942,8 +17907,7 @@ requires a given security permission.
 The _permissionSpec_ element specifies a
 security permission based on the Security policy file syntax. These
 security permissions are different from those required by the default
-permission set as specified in link:conn.html#a6602[See Security
-Permissions].
+permission set as specified in <<a6602, Security Permissions>>.
 
 === 
 
@@ -18025,19 +17989,19 @@ parameter are not equal.
 The valid values of the _type_ element,
 whether inferred or explicitly specified, must be limited to the values
 detailed in the documentation of the config-property-typeType element in
-the resource adapter XML Schema (see link:conn.html#a5430[See
-Resource Adapter XML Schema Definition]).
+the resource adapter XML Schema (see <<a5430,
+Resource Adapter XML Schema Definition>>).
 
 The _ignore_ annotation element is used to
 indicate that the configuration tools must ignore considering the
 configuration property during auto-discovery of Configuration
-properties. (see link:conn.html#a4707[See Discovery of
-Configuration Properties]).
+properties. (see <<a4707, Discovery of
+Configuration Properties>>).
 
 The _supportsDynamicUpdates_ and the
 _confidential_ annotation elements provide additional metadata about the
 configuration property to the application server. See
-link:conn.html#a529[See Configuration Property Attributes] for
+<<a529, Configuration Property Attributes>> for
 more information on these configuration property attributes.
 
 The application server is required to process
@@ -18062,8 +18026,8 @@ the _ActivationSpec_ interface or a JavaBean annotated with the
 _Activation_ annotation.
 
 These JavaBeans are still required to satisfy
-the JavaBean requirements listed in link:conn.html#a5071[See
-JavaBean Requirements]. The application server is required to process
+the JavaBean requirements listed in <<a5071,
+JavaBean Requirements>>. The application server is required to process
 ConfigProperty annotations in the JavaBeans listed above irrespective of
 whether the JavaBeans are specified by way of deployment descriptor
 elements or metadata annotations.
@@ -18071,8 +18035,8 @@ elements or metadata annotations.
 === [[a4707]]Discovery of Configuration Properties
 
 Configuration tools provided by the container
-must introspect the JavaBeans listed in link:conn.html#a4675[See
-@ConfigProperty] above for Connector 1.6 resource adapters to
+must introspect the JavaBeans listed in <<a4675,
+@ConfigProperty>> above for Connector 1.6 resource adapters to
 automatically discover the configuration properties of a JavaBean
 through JavaBeans introspection.
 
@@ -18096,8 +18060,8 @@ The _ConnectionDefinition_ and
 _ConnectionDefinitions_ annotations are applied to the JavaBean class
 and are restricted to be applied only on JavaBean classes that implement
 the _ManagedConnectionFactory_ interface (see
-link:conn.html#a428[See ManagedConnectionFactory JavaBean and
-Outbound Communication]).
+<<a428, ManagedConnectionFactory JavaBean and
+Outbound Communication>>).
 
 The _ConnectionDefinition_ annotation defines
 a set of connection interfaces and classes pertaining to a particular
@@ -18109,8 +18073,8 @@ without the _ConnectionDefinitions_ annotation described below.
 The _ConnectionDefinitions_ annotation can be
 used by the developer to specify a set of connection definitions that a
 _ManagedConnectionFactory_ JavaBean is a part of. (see
-link:conn.html#a5165[See Resource Adapter Provider] and
-link:conn.html#a5430[See Resource Adapter XML Schema Definition]
+<<a5165, Resource Adapter Provider>> and
+<<a5430, Resource Adapter XML Schema Definition>>
 for a discussion on connection-definition). 
 
 If a _ManagedConnectionFactory_ JavaBean is
@@ -18226,14 +18190,14 @@ configuration information pertaining to inbound connectivity from an EIS
 instance. A resource adapter capable of message delivery to message
 endpoints must provide a JavaBean class that implements the
 _jakarta.resource.spi.ActivationSpec_ interface (see
-link:conn.html#a446[See ActivationSpec JavaBean and Inbound
-Communication]) or annotate a JavaBean with the _Activation_ annotation
+<<a446, ActivationSpec JavaBean and Inbound
+Communication>>) or annotate a JavaBean with the _Activation_ annotation
 for each supported endpoint message listener type.
 
 The _Activation_ annotation can be used by a
 resource adapter provider to designate a JavaBean as an _ActivationSpec_
-JavaBean (see link:conn.html#a446[See ActivationSpec JavaBean
-and Inbound Communication]). The _Activation_ annotation is applied to
+JavaBean (see <<a446, ActivationSpec JavaBean
+and Inbound Communication>>). The _Activation_ annotation is applied to
 the JavaBean class. The resource adapter provider may annotate one or
 more JavaBeans with the _Activation_ annotation. The JavaBean is
 required to implement the _jakarta.resource.spi.ActivationSpec_ interface
@@ -18316,9 +18280,8 @@ image:conn-147.png[image]
 
 The _AdministeredObject_ annotation can be
 used by the resource adapter provider to designate a JavaBean as an
-administered object (see link:conn.html#a2747[See Administered
-Objects]). Administered objects are specific to a messaging style or
-message provider.
+administered object (see <<a2747, Administered Objects>>). Administered objects
+are specific to a messaging style or message provider.
 
 The _AdministeredObject_ annotation is
 applied to the JavaBean class. A resource adapter implementation that
@@ -18389,7 +18352,7 @@ application to be deployed into a Jakarta EE environment with less
 administrative configuration. Refer to the section titled “Resource
 Definition and Configuration” in the “Resources, Naming and Injection”
 chapter of the Jakarta EE Platform Specification (see
-link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9])
+<<a9737, Jakarta™ EE Platform Specification Version 9>>)
 for an overview of resource definition annotations.
 
 The _ConnectionFactoryDefinition_ and
@@ -18414,7 +18377,7 @@ adapter foo.rar in the EAR, by using the name “#foo”.
 
 These resource definition annotations must
 only be defined in modules that have access to the resource adapter as
-per the rules defined in link:conn.html#a5147[See Requirements].
+per the rules defined in <<a5147, Requirements>>.
 
 These resource definition annotations must be
 supported in all products that support the deployment process as defined
@@ -18577,7 +18540,7 @@ TransactionSupport.TransactionSupportLevel.XATransaction)
 Once defined, a connector connection factory
 resource may be referenced by a component, that has the standalone
 _MyEISRA_ resource adapter visible to it as per the rules defined in
-link:conn.html#a5147[See Requirements], using the _resource-ref_
+<<a5147, Requirements>>, using the _resource-ref_
 deployment descriptor element or the _Resource_ annotation. For example,
 the above connection factory could be referenced as follows in a
 Stateless Session Bean in the same enterprise application archive.
@@ -18677,7 +18640,7 @@ interfaceName="com.eis.BarConnectionFactory",
 Once defined, the connector connection
 factory resources may be referenced by a component, that has the
 standalone _MyEISRA1_ and _MyEISRA2_ resource adapters visible to it as
-per the rules defined in link:conn.html#a5147[See Requirements],
+per the rules defined in <<a5147, Requirements>>,
 using the _resource-ref_ deployment descriptor element or the _Resource_
 annotation. For example, the above connection factories could be
 referenced as follows in a Stateless Session Bean in the same enterprise
@@ -18788,7 +18751,7 @@ must be indicated by the _interfaceName_ element, only if the class
 indicated in the _className_ element implements more than one interface
 and the application server cannot determine the unique Java interface of
 the administered object according the rules defined in
-link:conn.html#a4791[See @AdministeredObject].
+<<a4791, @AdministeredObject>>.
 
 Additional properties required to be
 configured in the administered object are specified through the
@@ -18818,7 +18781,7 @@ className="com.wombat.connector.jms.QueueImpl",
 Once defined, the Queue resource may be
 referenced by a component, that has the embedded _MyJMSRA_ resource
 adapter visible to it as per the rules defined in
-link:conn.html#a5147[See Requirements], using the _resource-ref_
+<<a5147, Requirements>>, using the _resource-ref_
 deployment descriptor element or the _Resource_ annotation. For example,
 the above administered object definition could be referenced as follows
 in a Stateless Session Bean in the same enterprise application _EAR_
@@ -18922,7 +18885,7 @@ className="com.wombat.connector.jms.TopicImpl",
 Once defined, the Queue and Topic
 administered resources may be referenced by a component, that has the
 standalone _MyJMSRA_ resource adapter visible to it as per the rules
-defined in link:conn.html#a5147[See Requirements], using the
+defined in <<a5147, Requirements>>, using the
 _resource-ref_ deployment descriptor element or the _Resource_
 annotation. For example, the above administered objects could be
 referenced as follows in a Stateless Session Bean in the same enterprise
@@ -19108,13 +19071,11 @@ the java.io.Serializable interface is not necessary. The XML long-term
 persistence mechanism introduced in J2SE 1.4 can save the state of a
 JavaBean in an XML format that is resilient to version changes in the
 implementation of that JavaBean. Refer to Java SE (see
-link:conn.html#a9745[See Java Platform, Standard Edition 7API
-Specification]) classes _java.beans.XMLEncoder_ ,
+<<a9745, Java Platform, Standard Edition 7API Specification>>) classes _java.beans.XMLEncoder_ ,
 _java.beans.XMLEncoder_ , and _java.beans.PersistenceDelegate_ .
 
 For details, refer to JavaBeans specification
-(see link:conn.html#a9749[See JavaBeans Specification 1.01 Final
-Release]).
+(see <<a9749, JavaBeans Specification 1.01 Final Release>>).
 
 === 
 
@@ -19186,7 +19147,7 @@ adapter module. A deployment descriptor defines the contract between a
 resource adapter provider and a deployer for the deployment of a
 resource adapter. With the introduction of a simplified API through the
 use of Java language annotations described in
-link:conn.html#a4517[See Metadata Annotations], it is optional
+<<a4517, Metadata Annotations>>, it is optional
 for a resource adapter provider and a deployer to provide a deployment
 descriptor along with a resource adapter module.
 
@@ -19199,8 +19160,8 @@ image:conn-154.jpg[image]
 
 A resource adapter module corresponds to a
 Jakarta EE module in terms of the Jakarta EE composition hierarchy. Refer to
-the Jakarta EE Platform specification (see link:conn.html#a9737[See
-Jakarta™ EE Platform Specification Version 9])
+the Jakarta EE Platform specification (see <<a9737,
+Jakarta™ EE Platform Specification Version 9>>)
 for more details on the deployment of Jakarta EE modules and applications.
 A Jakarta EE module represents the basic unit of composition of a Jakarta EE
 application. Examples of Jakarta EE modules include Jakarta Enterprise Beans modules,
@@ -19272,7 +19233,7 @@ archive with a filename _eisA.rar_ .
 
 The _RAR_ file may contain a deployment
 descriptor based on the format specified in
-link:conn.html#a5427[See Requirements]. If a resource adapter
+<<a5427, Requirements>>. If a resource adapter
 module chooses to bundle a deployment descriptor, the deployment
 descriptor must be stored with the name _META-INF/ra.xml_ in the RAR
 file.
@@ -19284,8 +19245,8 @@ must use the _.jar_ file extension.
 
 The resource adapter may also use the library
 support mechanisms described in the Jakarta EE Platform Specification to
-specify library dependencies. See the link:conn.html#a9737[See
-Jakarta™ EE Platform Specification Version 9]
+specify library dependencies. See the <<a9737,
+Jakarta™ EE Platform Specification Version 9>>
 for more information on the Jakarta EE Platform’s support for libraries.
 
 The platform-specific libraries required by
@@ -19364,8 +19325,7 @@ When a standalone resource adapter _RAR_ is
 deployed, the resource adapter may be made available to all Jakarta EE
 applications in the application server. The application server, however,
 must make the standalone resource adapter RAR available to applications
-that meet the requirements listed in link:conn.html#a5151[See
-Class Loading Requirements].
+that meet the requirements listed in <<a5151, Class Loading Requirements>>.
 
 When a resource adapter _RAR_ packaged within
 a Jakarta EE application _EAR_ (also referred to as an “embedded RAR”) is
@@ -19390,8 +19350,8 @@ terms of what applications must have visibility to a resource adapter
 RAR.
 
 A resource adapter RAR packaged within a Jakarta
-EE application EAR, as specified in link:conn.html#a5147[See
-Requirements] above, must be made available only to the Jakarta EE
+EE application EAR, as specified in <<a5147,
+Requirements>> above, must be made available only to the Jakarta EE
 application with which it is packaged.
 
 The requirements below specify the
@@ -19406,8 +19366,7 @@ resource adapter must be made available to the application.
 If an application references an extension
 using the Extension Mechanism Architecture (see the section titled
 “Library Support” in the “Application Assembly and Deployment” chapter
-of the link:conn.html#a9737[See Jakarta™ EE Platform
-Specification Version 9)] and a jar file within a
+of the <<a9737, Jakarta™ EE Platform Specification Version 9>> and a jar file within a
 standalone resource adapter supplies that extension, the standalone
 resource adapter must be made available to the application.
 
@@ -19436,22 +19395,21 @@ between a resource adapter provider and a deployer. It captures the
 declarative information that is intended for the deployer to enable
 deployment of a resource adapter in a target operational environment.
 Deployment information may also provided by the metadata annotations
-described in link:conn.html#a4517[See Metadata Annotations]. The
+described in <<a4517, Metadata Annotations>>. The
 container is required to follow the rules defined in
-link:conn.html#a4531[See Deployment Descriptors and Annotations]
+<<a4531, Deployment Descriptors and Annotations>>
 to derive the final deployment information.
 
 A resource adapter module must be deployed
 based on the deployment requirements specified by the resource adapter
 provider in the deployment descriptor and through metadata annotations.
-link:conn.html#a5430[See Resource Adapter XML Schema Definition]
+<<a5430, Resource Adapter XML Schema Definition>>
 specifies the XML Schema for the deployment descriptor for a resource
-adapter module. See link:conn.html#a4517[See Metadata
-Annotations] for more information on the metadata annotations that can
+adapter module. See <<a4517, Metadata Annotations>> for more information on the metadata annotations that can
 be employed.
 
-The J2EE Deployment API Specification (see
-link:conn.html#a9747[See J2EE Deployment API Specification])
+The J2EE Deployment API Specification (
+<<a9747, J2EE Deployment API Specification>>)
 describes the general deployment procedure in detail.
 
 === [[a5165]]Resource Adapter Provider
@@ -19550,13 +19508,12 @@ _XAResource_ or _LocalTransaction_ interfaces. +
 _LocalTransaction_ : The resource adapter supports resource manager
 local transactions by implementing the _LocalTransaction_ interface. The
 local transaction management contract is specified in
-link:conn.html#a1280[See Local Transaction Management
-Contract]. +
+<<a1280, Local Transaction Management Contract>>. +
 _XATransaction_ : The resource adapter supports both resource manager
 local and Jakarta Transaction's transactions by implementing the _LocalTransaction_ and
 _XAResource_ interfaces respectively. The requirements for supporting
 the _XAResource_ based contract are specified in
-link:conn.html#a1169[See XAResource-based Transaction Contract].
+<<a1169, XAResource-based Transaction Contract>>.
 
 Configurable properties per
 _ManagedConnectionFactory_ instance: The resource adapter provider
@@ -19595,7 +19552,7 @@ re-authentication of an existing physical connection.
 Extended security permissions: The security
 permissions listed in the deployment descriptor are different from those
 required by the default permission set. Refer to
-link:conn.html#a6592[See Runtime Environment] for more details
+<<a6592, Runtime Environment>> for more details
 on security permissions.
 
 Inbound resource adapter information
@@ -19634,9 +19591,9 @@ adapter.
 
 The deployment descriptor specified by the
 resource adapter provider for its resource adapter must be consistent
-with the XML Schema specified in link:conn.html#a5430[See
-Resource Adapter XML Schema Definition]. Metadata annotations are
-detailed in link:conn.html#a4517[See Metadata Annotations].
+with the XML Schema specified in <<a5430,
+Resource Adapter XML Schema Definition>>. Metadata annotations are
+detailed in <<a4517, Metadata Annotations>>.
 
 
 
@@ -19657,8 +19614,7 @@ During resource adapter deployment, the
 deployer is responsible for configuring a resource adapter. The
 configuration of a resource adapter is based on the properties defined
 in the deployment descriptor and metadata annotations (see
-link:conn.html#a4531[See Deployment Descriptors and
-Annotations]) as part of the resource adapter module.
+<<a4531, Deployment Descriptors and Annotations>>) as part of the resource adapter module.
 
 === Standalone Resource Adapter Module
 
@@ -19670,7 +19626,7 @@ deployment descriptor.
 === Resource Adapter Module with Jakarta EE Application
 
 Refer to the Jakarta EE platform specification
-(see link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9])
+(see <<a9737, Jakarta™ EE Platform Specification Version 9>>)
 for the requirements specified for
 the deployment of a Jakarta EE application.
 
@@ -19687,8 +19643,7 @@ connections to various underlying EIS instances. The deployer creates a
 property set to set valid values for various configurable fields. The
 configuration of each field is based on the name, type and description
 of the field specified in the deployment descriptor or metadata
-annotations described in link:conn.html#a4517[See Metadata
-Annotations].
+annotations described in <<a4517, Metadata Annotations>>.
 
 Each property set represents a specific
 configuration to be set on a _Managed-ConnectionFactory_ instance for
@@ -19704,7 +19659,7 @@ specified by the resource adapter.
 Configure security in the target operational
 environment based on the security requirements specified by the resource
 adapter in its deployment descriptor or annotations discussed in
-link:conn.html#a4658[See @SecurityPermission].
+<<a4658, @SecurityPermission>>.
 
 === Security Configuration
 
@@ -19750,7 +19705,7 @@ operational environment.
 The Java class which implements the interface
 _jakarta.resource.spi.ResourceAdapter_ must be a JavaBean. The
 _ResourceAdapter_ JavaBean may also be specified through the _Connector_
-annotation (see link:conn.html#a4581[See @Connector]).
+annotation (<<a4581, @Connector>>).
 
 A _ResourceAdapter_ JavaBean represents
 exactly one functional resource adapter unit or instance. The
@@ -19799,8 +19754,8 @@ _ManagedConnectionFactory_ instances.
 The _ManagedConnectionFactory_ implementation
 must be a JavaBean. The _ManagedConnectionFactory_ implementation may
 also be annotated with the _ConnectionDefinition_ annotation (see
-link:conn.html#a4711[See @ConnectionDefinition and
-@ConnectionDefinitions]). Any specified _ManagedConnectionFactory_
+<<a4711, @ConnectionDefinition and
+@ConnectionDefinitions>>). Any specified _ManagedConnectionFactory_
 property in the deployment descriptor which does not have a matching
 property in the _ManagedConnectionFactory_ JavaBean should be treated as
 an error.
@@ -19815,10 +19770,9 @@ descriptor. With the introduction of metadata annotations for specifying
 configuration properties, the resource adapter provider is not required
 to specify the configuration properties through the deployment
 descriptor and may use the _ConfigProperty_ annotation (see
-link:conn.html#a4675[See @ConfigProperty]) instead. The
+<<a4675, @ConfigProperty>>) instead. The
 container is also required to discover configuration properties of a
-JavaBean. See link:conn.html#a4707[See Discovery of
-Configuration Properties] for more information.
+JavaBean. See <<a4707, Discovery of Configuration Properties>> for more information.
 
 The getter and setter methods convention must
 be based on the JavaBeans design pattern. These methods are defined in
@@ -19882,8 +19836,8 @@ _http://www.oracle.com/technetwork/java/javase/documentation/spec-136004.html_
 
 In the XML deployment descriptor, any bounds
 or well-defined values of properties should be described in the
-_description_ element. With the support for Bean Validation (see
-link:conn.html#a516[See JavaBean Validation]), the resource
+_description_ element. With the support for Bean Validation (
+<<a516, JavaBean Validation>>), the resource
 adapter provider is not required to describe the bounds and constraints
 of properties and may use the Bean Validation annotations to describe
 bounds and constraints.
@@ -19902,7 +19856,7 @@ scenarios, an application component or application client must look up a
 connection factory instance in the component’s environment using the
 JNDI interface. The application component then uses the connection
 factory instance to get a connection to the underlying EIS.
-link:conn.html#a617[See Application Programming Model]
+<<a617, Application Programming Model>>
 specifies the application programming model in more detail.
 
 The following code extract shows the JNDI
@@ -19964,9 +19918,8 @@ the roles involved in the JNDI configuration of a resource adapter.
 The deployer is responsible for configuring
 connection factory instances in the JNDI environment. The deployer
 should manage the JNDI namespace such that the same programming model,
-as shown in link:conn.html#a5258[See JNDI Configuration and
-Lookup], for the JNDI-based connection factory lookup is supported in
-both managed and non-managed environments.
+as shown in <<a5258, JNDI Configuration and Lookup>>, for the JNDI-based
+connection factory lookup is supported in both managed and non-managed environments.
 
 === Resource Adapter
 
@@ -20009,8 +19962,7 @@ implementation class for the _javax.naming.spi.ObjectFactory_ interface
 to support JNDI _Reference_ mechanism-based connection factory lookup.
 The implementation of this interface is application server-specific.
 
-link:conn.html#a5327[See Scenario:
-Referenceable] specifies more details on _Reference_ mechanism-based
+<<a5327, Scenario:Referenceable>> specifies more details on _Reference_ mechanism-based
 JNDI configuration in a managed environment.
 
 === Scenario: Serializable
@@ -20022,8 +19974,7 @@ _java.io.Serializable_ interface.
 
 The deployment code retrieves the
 configuration properties from the XML deployment descriptor or the
-metadata annotations (see link:conn.html#a4675[See
-@ConfigProperty]) for the resource adapter. The deployment code then
+metadata annotations (see <<a4675, @ConfigProperty>>) for the resource adapter. The deployment code then
 creates an instance of the _ManagedConnectionFactory_ implementation
 class and configures the properties of the instance.
 
@@ -20381,9 +20332,8 @@ application server is called.
 The application server creates a new instance
 of the _ManagedConnectionFactory_ implementation class provided by the
 resource adapter. The application server must follow the requirements in
-link:conn.html#a428[See ManagedConnectionFactory JavaBean and
-Outbound Communication] and link:conn.html#a502[See
-ManagedConnectionFactory JavaBean Instance Configuration] while
+<<a428, ManagedConnectionFactory JavaBean and Outbound Communication>>
+and <<a502, ManagedConnectionFactory JavaBean Instance Configuration>> while
 configuring a _ManagedConnectionFactory_ JavaBean instance. The
 application server may use an existing instance of the
 _ManagedConnectionFactory_ implementation class, if available.
@@ -20439,8 +20389,8 @@ image:conn-153.png[image]
 This section specifies the XML Schema
 Definition (XSD) for the deployment descriptor for a resource adapter.
 Some of the types used in this XSD are defined in the Jakarta EE platform
-specification (link:conn.html#a9737[See Jakarta™ EE Platform
-Specification Version 9]). The comments in
+specification (<<a9737, Jakarta™ EE Platform
+Specification Version 9>>). The comments in
 the XSD specify additional requirements for syntax and semantics that
 cannot be specified by using the XML Schema language. Note, the
 description-group element defined in javaee_7.xsd allows multiple
@@ -23112,13 +23062,11 @@ EE compliant application server to provide the following APIs:
 Java SDK, Standard Edition, version 6.0 that
 includes the following as part of either the core platform or standard
 extensions: Java IDL, JNDI Standard Extension, and RMI-IIOP. (see
-link:conn.html#a9745[See Java Platform, Standard Edition 7API
-Specification])
+<<a9745, Java Platform, Standard Edition 7APISpecification>>)
 
 Required APIs for Java _TM_ Platform,
 Enterprise Edition, Version 6 as specified in the Jakarta EE platform
-specification (see link:conn.html#a9737[See Jakarta™ EE
-Platform Specification Version 9]).
+specification (see <<a9737, Jakarta™ EE Platform Specification Version 9>>).
 
 Java Authentication and Authorization Service
 (JAAS) 1.0 that requires at least Java 2 SDK, Standard Edition, version
@@ -23307,8 +23255,7 @@ If a resource adapter requires security
 permissions other than those specified in the default set, it must
 describe such requirements in the XML deployment descriptor using the
 _security-permission_ element or through the _SecurityPermission_
-annotation described in link:conn.html#a4658[See
-@SecurityPermission].
+annotation described in <<a4658, @SecurityPermission>>.
 
 A deployment descriptor-based specification of
 an extended permission set for a resource adapter allows the deployer to
@@ -23357,7 +23304,7 @@ resolve _"_
 
 
 The default _SocketPermission_ , as specified
-in link:conn.html#a6606[See Default Security Permission Set], is
+in <<a6606, Default Security Permission Set>>, is
 _grant connect_ and _deny rest_ . This means that if resource adapter
 uses the default permission set, the first method _Socket(...)_ will be
 allowed while the second method _InetAddress_ . _getHostName_ is
@@ -23367,7 +23314,7 @@ The resource adapter is required to explicitly
 request security permission for the _InetAddress_ . _getHostName_ method
 in the _security-permission-spec_ element of its XML deployment
 descriptor or through the _SecurityPermission_ annotation described in
-link:conn.html#a4658[See @SecurityPermission]. The following is
+<<a4658, @SecurityPermission>>. The following is
 an example of allowing additional security permissions:
 
 [width="100%",cols="100%",]
@@ -23515,17 +23462,17 @@ image:conn-160.png[image]
 [[a6725]]Dependency Injection
 
 A resource adapter archive can be a bean
-archive (see Chapter 12 of link:conn.html#a9759[See Jakarta™ Contexts and Dependency
-Injection Specification, Version 3.0]). The section titled
+archive (see Chapter 12 of <<a9759, Jakarta™ Contexts and Dependency
+Injection Specification, Version 3.0>>). The section titled
 “Support for Dependency Injection” in the “Resources, Naming and
 Injection” chapter of the Jakarta EE Platform Specification (see
-link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9])
+<<a9737, Jakarta™ EE Platform Specification Version 9>>)
 provides more details on the dependency
 injection requirements of an application server.
 
 The following JavaBeans of a resource adapter
 archive have their lifecycle managed by the application server (see
-link:conn.html#a387[See Lifecycle Management]):
+<<a387, Lifecycle Management>>):
 
  _ResourceAdapter_
 
@@ -23807,8 +23754,7 @@ image:conn-163.png[image]
 Additional Exceptions
 
 The Jakarta Transaction specification (see
-link:conn.html#a9725[See Jakarta™ Transaction Specification,
-Version 1.3]) specifies the
+<<a9725, Jakarta™ Transaction Specification, Version 1.3>>) specifies the
 javax.transaction.xa.XAException class for exceptions related to the
 XAResource-based transaction management contract.
 
@@ -23829,7 +23775,7 @@ migration issues for the Jakarta EE Connectors specification. For a
 detailed description on Compatibility and Migration and how they relate
 to the Jakarta EE Platform in general, refer the chapter on “Compatibility
 and Migration” in the Jakarta EE platform specification (see
-link:conn.html#a9737[See Jakarta™ EE Platform Specification Version 9]).
+<<a9737, Jakarta™ EE Platform Specification Version 9>>).
 
 === 
 
@@ -23864,35 +23810,35 @@ Architecture 1.5).
 
 The Java EE Connector Architecture 1.6
 specification defines the classloading requirements for an application
-server in link:conn.html#a5151[See Class Loading Requirements].
+server in <<a5151, Class Loading Requirements>>.
 
 In the earlier version of this specification,
 the specification required all deployed standalone resource adapters to
 be made available to all the applications. The new requirements allow an
 application server to make a standalone resource adapter available to an
 application, only when there is an explicit reference to the resource
-adapter. See link:conn.html#a5151[See Class Loading
-Requirements], for more information on when an application may portably
+adapter. See <<a5151, Class Loading Requirements>>,
+for more information on when an application may portably
 assume the visibility of a deployed standalone resource adapter
 
 === Deprecation of required-config-property
 
 With the availability of validation
 capabilities of the Bean Validation specification (see
-link:conn.html#a9753[See Bean Validation Specification, version
-1.1]) to a resource adapter JavaBean, as detailed in
-link:conn.html#a516[See JavaBean Validation], the existing
+<<a9753, Bean Validation Specification, version 1.1>>)
+to a resource adapter JavaBean, as detailed in
+<<a516, JavaBean Validation>>, the existing
 mechanism provided to an _ActivationSpec_ JavaBean to specify
 _required-config-property_ has been deprecated.
 
 {empty}The use of _required-config-property_
-element, described in link:conn.html#a2738[See ActivationSpec
-JavaBean], is deprecated since the Java EE Connector Architecture 1.6
+element, described in <<a2738, ActivationSpec JavaBean>>,
+is deprecated since the Java EE Connector Architecture 1.6
 Specification. The resource adapter implementation is recommended to use
 the _NotNull_ Bean Validation annotation or its XML validation
 descriptor equivalent to indicate that a configuration property is
 required to be specified by the deployer, as described in
-link:conn.html#a2738[See ActivationSpec JavaBean]
+<<a2738, ActivationSpec JavaBean>>
 
 === 
 
@@ -23913,8 +23859,7 @@ specification.
 === Annotations
 
 Through the availability of the metadata
-annotations (see link:conn.html#a4517[See Metadata
-Annotations]), it is simpler to develop a resource adapter module. By
+annotations (see <<a4517, Metadata Annotations>>), it is simpler to develop a resource adapter module. By
 using annotations, many resource adapters can avoid the need for
 deployment descriptors and sometimes avoid the need to implement
 interfaces, greatly simplifying application development. Developers
@@ -30257,8 +30202,8 @@ connector architecture.
 
 Note that these scenarios establish the
 requirements to be addressed by the connector architecture.
-link:conn.html#a1563[See Security Architecture] and
-link:conn.html#a1713[See Security Contract] specify the
+<<a1563, Security Architecture>> and
+<<a1713, Security Contract>> specify the
 requirements that are supported in this version of the specification.
 
 A Jakarta EE application is a multi-tier,
@@ -30458,8 +30403,7 @@ Only legal employees of the organization are permitted access to the HR
 application. Access is based on the employee’s roles and access
 privileges. In addition, access to the application can only be from
 within the organization-wide intranet. See
-link:conn.html#a9582[See Illustrative Architecture of an
-Employee Self-service Application].
+<<a9582, Illustrative Architecture of an Employee Self-service Application>>.
 
 === Security Environment
 
@@ -30662,8 +30606,7 @@ image:conn-187.png[image]
 image:conn-188.png[image]
 
 This chapter extends the security
-architecture specified in link:conn.html#a1563[See Security
-Architecture] and link:conn.html#a1713[See Security Contract] to
+architecture specified in <<a1563, Security Architecture>> and <<a1713, Security Contract>> to
 include support for JAAS-based pluggable authentication. The chapter
 refers to the following documents:
 
@@ -30713,7 +30656,7 @@ architecture uses the JAAS _Subject_ class as part of the security
 contract between an application server and a resource adapter. Use of
 JAAS interfaces enables the security contract to remain independent of
 specific security technologies or mechanisms. The security contract has
-been specified in link:conn.html#a1871[See Requirements].
+been specified in <<a1871, Requirements>>.
 
 JAAS Pluggable Authentication framework. This
 framework lets an application server and its underlying authentication
@@ -30768,8 +30711,8 @@ together with a resource adapter and can be pluggable into an
 application server using the JAAS architecture.
 
 The JAAS specification
-(link:conn.html#a9735[See Java Authentication and Authorization
-Service Specification, version 1.0]) specifies requirements for
+(<<a9735, Java Authentication and Authorization Service Specification, version 1.0>>)
+specifies requirements for
 developing and configuring JAAS modules.
 
 === Illustrative Examples: JAAS Module
@@ -30866,9 +30809,8 @@ insecure links.
 
 The GSS-API has been implemented over a range
 of security mechanisms, including Kerberos V5. See
-link:conn.html#a9733[See Java Specification Request: Generic
-Security Service API (GSS-API), Java bindings] for a Java binding of
-GSS-API.
+<<a9733, Java Specification Request: Generic Security Service API (GSS-API), Java bindings>>
+for a Java binding of GSS-API.
 
 
 
@@ -30890,8 +30832,8 @@ deployer is responsible for configuring JAAS modules in the operational
 environment. The configuration of JAAS modules is based on the security
 requirements specified by a resource adapter in its deployment
 descriptor or through metadata annotations discussed in
-link:conn.html#a4517[See Metadata Annotations]. Refer to
-link:conn.html#a5427[See Requirements].
+<<a4517, Metadata Annotations>>. Refer to
+<<a5427, Requirements>>.
 
 The element _authentication-mechanism_ in the
 deployment descriptor specifies an authentication mechanism supported by
@@ -31059,7 +31001,7 @@ _createManagedConnection_ method.
 If an EIS supports the GSS mechanism, a
 resource adapter may (but is not required to) use GSS-API to set up a
 secure association with the EIS instance. The section
-link:conn.html#a9652[See Generic Security Service API: GSS-API]
+<<a9652, Generic Security Service API: GSS-API>>
 gives a brief overview of GSS-API.
 
 === GSS-API use by Resource Adapter
@@ -31110,8 +31052,7 @@ _Subject_ instance with the resource principal and its Kerberos
 credentials.
 
 {empty}The remaining steps are the same as in
-the previous scenario, link:conn.html#a9679[See Scenario:
-Kerberos and Principal Delegation]
+the previous scenario, <<a9679, Scenario:Kerberos and Principal Delegation>>
 
 === Scenario: EIS-Specific Authentication
 
@@ -32164,42 +32105,37 @@ EE 7 Platform
 
 {empty}Added application component environment
 namespace availability requirements during _endpointActivation_ and
-_endpointDeactivation_ in link:conn.html#a2765[See Application
-Server]
+_endpointDeactivation_ in <<a2765, Application Server>>
 
 Added requirements in
-link:conn.html#a2598[See Message Inflow Model] for the
+<<a2598, Message Inflow Model>> for the
 _MessageEndpointFactory_ to provide a name for the message endpoint
 deployment it represents, and to provide the message endpoint class to a
 resource adapter.
 
 Added a new section,
-link:conn.html#a4814[See Resource Definition Annotations], to
+<<a4814, Resource Definition Annotations>>, to
 discuss requirements around connection factory and administered object
 resource definition annotations
 
 Errata: Removed the paragraph that made it
 optional for an @Activation annotated JavaBean to implement the
-_ActivationSpec_ interface (See link:conn.html#a4758[See
-@Activation])
+_ActivationSpec_ interface (See <<a4758, @Activation>>)
 
 Removed Appendix B “Activation Configuration
 for Message Inflow to JMS Endpoints”. Chapter 12 of the
-link:conn.html#a9743[See Java Message Service Specification,
-version 2.0] defines the standard configuration elements for JMS
-resource adapters
+<<a9743, Java Message Service Specification, version 2.0>>
+defines the standard configuration elements for JMS resource adapters
 
 {empty}Clarified the dependency injection
 behavior when JavaBeans that are managed by the application server are
-used as CDI Managed Beans in link:conn.html#a6725[See Dependency
+used as CDI Managed Beans in <<a6725, Dependency
 Injection]
 
-Updated link:conn.html#a5430[See
-Resource Adapter XML Schema Definition] to reflect the new 1.7 resource
+Updated <<a5430, Resource Adapter XML Schema Definition>> to reflect the new 1.7 resource
 adapter deployment descriptor and added a new
-link:conn.html#a8321[See Java EE Connector Architecture 1.6
-Resource Adapter XML XSD] to house the 1.6 resource adapter deployment
-descriptor.
+<<a8321, Java EE Connector Architecture 1.6 Resource Adapter XML XSD>>
+to house the 1.6 resource adapter deployment descriptor.
 
 '''''
 
