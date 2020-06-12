@@ -6295,11 +6295,7 @@ Security architecture specified in
 Security scenarios based on the Jakarta Connector
 Architecture (Refer to <<a9530, Security Scenarios>>).
 
-=== 
-
-image:conn-71.png[image]
-
-Security Contract
+=== Security Contract
 
 The security contract between the application
 server and the resource adapter extends the connection management
@@ -6308,21 +6304,21 @@ by adding security-specific details.
 
 This security contract supports EIS sign-on by:
 
-Passing the connection request from the
+* Passing the connection request from the
 resource adapter to the application server, enabling the application
 server to hook-in security services.
 
-Propagation of the security context, that is,
+* Propagation of the security context, that is,
 JAAS _Subject_ with principal and credentials, from the application
 server to the resource adapter.
 
 [[a1724]]
-=== Interfaces and Classes
+==== Interfaces and Classes
 
 The security contract includes the following
 classes and interfaces:
 
-=== Subject
+==== Subject
 
 The following text has been taken from the
 JAAS specification. For detailed information, refer to the JAAS
@@ -6354,16 +6350,15 @@ all the public or private credentials belonging to a _Subject_ . The
 methods defined in the _Set_ class modify the returned set of principals
 and credentials.
 
-=== Resource Principal
+==== Resource Principal
 
 The interface _java.security.Principal_
 represents a resource principal. The following code extract shows the
 _Principal_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface java.security.Principal \{
+[source,Java]
+----
+public interface java.security.Principal {
 
  public boolean equals(Object another);
 
@@ -6374,8 +6369,7 @@ public interface java.security.Principal \{
  public int hashCode();
 
 }
-
-|===
+----
 
 The method _getName_ returns the name of a
 resource principal.
@@ -6384,18 +6378,16 @@ An application server should use the
 _Principal_ interface, or any derived interface, to pass a resource
 principal as part of a _Subject_ to a resource adapter.
 
-=== GenericCredential
+==== GenericCredential
 
 
-
-image:conn-72.png[image]
-
+[NOTE]
+====
 This interface, introduced in Version 1.0 of this specification, has
 been deprecated. The preferred way to represent generic credential
 information is by way of the org.ietf.jgss.GSSCredential interface in
 J2SE Version 1.4, which provides similar functionality.
-
-image:conn-72.png[image]
+====
 
 The interface
 _jakarta.resource.spi.security.GenericCredential_ defines a security
@@ -6415,8 +6407,8 @@ operating system.
 
 
 
-image:conn-72.png[image]
-
+[NOTE]
+====
 A contract for the representation of mechanism-specific credentials must
 be established between an application server and a resource adapter and
 is outside the scope of the Jakarta Connector Architecture. This includes
@@ -6424,53 +6416,43 @@ requirements for the exchange of mechanism-specific credentials between
 a JAAS module and GSS provider. Refer to
 <<a9615, JAAS Based Security Architecture>> for
 details on JAAS-based security architecture.
-
-image:conn-72.png[image]
+====
 
 The _GenericCredential_ interface enables a
 resource adapter to extract information about a security credential. The
 resource adapter can then manage an EIS sign-on for a resource principal
 by any of the following:
 
-Using the credentials in an EIS specific
+* Using the credentials in an EIS specific
 manner if the underlying EIS supports the security mechanism type
 represented by the _GenericCredential_ instance
 
-Using GSS-AP I (see
+* Using GSS-AP I (see
 <<a9730, RFC: Generic Security Service API
 (GSS-API) Specification, version 2>>) if the resource adapter and
 underlying EIS instance support GSS-API.
 
-=== Interface
+===== Interface
 
 The following code extract shows the
 _GenericCredential_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.security.GenericCredential \{
+[source,Java]
+----
+public interface jakarta.resource.spi.security.GenericCredential {
 
  public String getName();
 
  public String getMechType();
 
- public byte[] getCredentialData()
-
- throws jakarta.resource.spi.SecurityException;
-
-
+ public byte[] getCredentialData() throws jakarta.resource.spi.SecurityException;
 
  public boolean equals(Object another);
 
  public int hashCode();
 
-
-
 }
-
-|===
+----
 
 The _GenericCredential_ interface supports a
 set of getter methods to obtain information about a security credential.
@@ -6495,7 +6477,7 @@ _getCredentialData_ method returns the credential representation as an
 array of bytes. Note that the Jakarta Connector Architecture does not define a
 standard format for the returned credential data.
 
-=== Implementation
+===== Implementation
 
 If an application server supports the
 deployment of a resource adapter which supports _GenericCredential_ as
@@ -6508,14 +6490,14 @@ support for _GenericCredential_ . Refer to
 on how a resource adapter may use the AuthenticationMechanism annotation
 to specify its support for GenericCredential.
 
-=== GSSCredential
+==== GSSCredential
 
 This interface org.ietf.jgss.GSSCredential is
 in J2SE Version 1.4. This provides a mechanism to represent generic
 credential information. The functionality provided by this interface is
 similar to the deprecated _GenericCredential_ interface.
 
-=== Implementation
+===== Implementation
 
 If an application server supports the
 deployment of a resource adapter which supports GSSCredential as part of
@@ -6528,7 +6510,7 @@ support for GSSCredential. Refer to Section 18.4.3
 use the AuthenticationMechanism annotation to specify its support for
 GSSCredential.
 
-=== PasswordCredential
+==== PasswordCredential
 
 The class
 _jakarta.resource.spi.security.PasswordCredential_ acts as a holder of
@@ -6543,41 +6525,27 @@ resource principal.
 The _PasswordCredential_ class must implement
 the _equals_ and _hashCode_ methods.
 
-[width="100%",cols="100%",]
-|===
-a|
-public final class
-jakarta.resource.spi.security.PasswordCredential
+[source,Java]
+----
+public final class jakarta.resource.spi.security.PasswordCredential
+  implements java.io.Serializable {
 
- implements java.io.Serializable \{
+ public PasswordCredential(String userName, char[] password)  { ... }
 
- public PasswordCredential(String userName,
-char[] password) \{ ... }
+ public String getUserName() { ... }
 
- public String getUserName() \{ ... }
+ public char[] getPassword() { ... }
 
- public char[] getPassword() \{ ... }
+ public ManagedConnectionFactory getManagedConnectionFactory() { ... }
 
+ public void setManagedConnectionFactory( ManagedConnectionFactory mcf) { ... }
 
+ public boolean equals(Object other) { ... }
 
- public ManagedConnectionFactory
-getManagedConnectionFactory()
-
- \{ ... }
-
- public void setManagedConnectionFactory(
-
- ManagedConnectionFactory mcf) \{ ... }
-
-
-
- public boolean equals(Object other) \{ ... }
-
- public int hashCode() \{ ... }
+ public int hashCode() { ... }
 
 }
-
-|===
+----
 
 The _getManagedConnectionFactory_ method
 returns the _ManagedConnectionFactory_ instance for which the user name
@@ -6585,36 +6553,26 @@ and password has been set by the application server. Refer to
 <<a1807, ManagedConnectionFactory>> to see how a
 resource adapter uses this method.
 
-=== ConnectionManager
+==== ConnectionManager
 
 The method _allocateConnection_ is called by
 the resource adapter’s connection factory instance. This method lets the
 resource adapter pass a connection request to the application server, so
 the application server can hook-in security and other services.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ConnectionManager
+[source,Java]
+----
+public interface jakarta.resource.spi.ConnectionManager
+           extends java.io.Serializable {
 
- extends java.io.Serializable \{
-
-
-
- public Object allocateConnection(
-
- ManagedConnectionFactory mcf,
-
- ConnectionRequestInfo cxRequestInfo)
-
- throws ResourceException;
+ public Object allocateConnection( ManagedConnectionFactory mcf,
+                                   ConnectionRequestInfo cxRequestInfo)
+                                   throws ResourceException;
 
 }
+----
 
-|===
-
-Security Contract
+*Security Contract*
 
 image:conn-73.jpg[image]
 
@@ -6624,7 +6582,7 @@ sign-on (refer to <<a1678, Application Component
 Provider>>), the resource adapter calls the _ConnectionManager_ .
 _allocateConnection_ method in one of the following ways:
 
-Container-managed Sign-on. The application
+* *Container-managed Sign-on.* The application
 component passes no security information in the _getConnection_ method
 and the application server is configured to manage EIS sign-on.
 
@@ -6636,7 +6594,7 @@ to the EIS either itself or passes authentication responsibility to the
 resource adapter. This aspect is explained later in the specification of
 the _ManagedConnectionFactory_ interface.
 
-Component-managed Sign-on. In this case, the
+* *Component-managed Sign-on.* In this case, the
 application component provides explicit security information in the
 _getConnection_ method. The resource adapter invokes the
 _allocateConnection_ method by passing security information in the
@@ -6647,36 +6605,25 @@ sign-on, as explained in the _ManagedConnectionFactory_ interface
 specification under option C.
 
 [[a1807]]
-=== ManagedConnectionFactory
+==== ManagedConnectionFactory
 
 The following code extract shows the methods
 of the _ManagedConnectionFactory_ interface that are relevant to the
 security contract:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ManagedConnectionFactory
-
- extends java.io.Serializable \{
+[source,Java]
+----
+public interface jakarta.resource.spi.ManagedConnectionFactory
+                 extends java.io.Serializable {
 
 
 
- public ManagedConnection
-createManagedConnection(
-
- javax.security.auth.Subject subject,
-
- ConnectionRequestInfo cxRequestInfo)
-
- throws ResourceException;
-
+ public ManagedConnection createManagedConnection(
+                          javax.security.auth.Subject subject,
+                          ConnectionRequestInfo cxRequestInfo)
  ...
-
 }
-
-|===
+----
 
 During the JNDI lookup, the
 _ManagedConnectionFactory_ instance is configured by the application
@@ -6694,7 +6641,7 @@ The _createManagedConnection_ method is used
 by the application server when it requests the resource adapter to
 create a new physical connection to the underlying EIS.
 
-=== Contract for the Application Server
+===== Contract for the Application Server
 
 The application server may provide specific
 security services, such as principal mapping and delegation, and single
@@ -6719,8 +6666,7 @@ created _Subject_ instance. For example, the application server uses the
 _Subject.getPrivateCredentials().add(credential)_ method to add a
 credential to the private credential set.
 
-Security Contract: Subject
-Interface and its Containment Hierarchy
+*Security Contract: Subject Interface and its Containment Hierarchy*
 
 image:conn-74.jpg[image]
 
@@ -6734,7 +6680,7 @@ _java.security.Principal_ , and multiple credentials.
 The application server has the following
 options for invoking the _createManagedConnection method_ :
 
-Option A. The application server invokes the
+* *Option A.* The application server invokes the
 _createManagedConnection_ method by passing in a non-null _Subject_
 instance that carries a single resource principal and its corresponding
 password-based credentials, represented by the class
@@ -6748,7 +6694,7 @@ password from this _Subject_ instance by looking for the
 _PasswordCredential_ instance in the _Subject_ , and uses this security
 information to sign-on to the EIS instance during connection creation.
 
-Option B. The application server invokes the
+* *Option B.* The application server invokes the
 _createManagedConnection_ method by passing in a non-null _Subject_
 instance that carries a single resource principal and its security
 credentials. In this option, credentials are represented through the
@@ -6779,7 +6725,7 @@ The resource adapter uses the resource
 principal and its credentials from the _Subject_ instance to go through
 the EIS sign-on process before creating a new connection to the EIS.
 
-Option C. The application server invokes the
+* *Option C.* The application server invokes the
 _createManagedConnection_ method by passing a _null_ _Subject_ instance.
 The application server must use this option for the component-managed
 sign-on case. In this option, security information is carried in the
@@ -6792,7 +6738,7 @@ the application server must be configured to use one of the above
 specified invocation options. Refer to <<a5089,
 Packaging Requirements>> for more details.
 
-=== Contract for Resource Adapter
+===== Contract for Resource Adapter
 
 A resource adapter can do EIS sign-on and
 connection creation in an implementation-specific way, or it can use the
@@ -6802,7 +6748,7 @@ resource adapter has the following options, corresponding to the options
 for an application server, for handling the invocation of the
 _createManagedConnection_ method:
 
-Option A. The resource adapter explicitly
+* *Option A.* The resource adapter explicitly
 checks whether the passed _Subject_ instance carries a
 _PasswordCredential_ instance using the _Subject.getPrivateCredentials_
 method.
@@ -6831,7 +6777,7 @@ to the target EIS instance. The _ManagedConnectionFactory_
 implementation uses the _equals_ method to compare itself with the
 passed instance.
 
-Option B. The resource adapter explicitly
+* *Option B.* The resource adapter explicitly
 checks whether the passed _Subject_ instance carries a _GSSCredential_
 instance using the _getPrivateCredentials_ and _getPublicCredentials_
 methods defined in the _Subject_ interface.
@@ -6855,11 +6801,11 @@ mechanism-specific credential representation. However, a resource
 adapter may need to interpret credential representation if the resource
 adapter initiates authentication in an implementation-specific manner.
 
-Option C. If the application server invokes
+* *Option C.* If the application server invokes
 the _ManagedConnectionFactory.createManagedConnection_ method with a
 _null_ _Subject_ instance, a resource adapter has the following options:
 
-The resource adapter should extract security
+** The resource adapter should extract security
 information passed through the _ConnectionRequestInfo_ instance. The
 resource adapter should authenticate the resource principal by combining
 the configured security information on the _ManagedConnectionFactory_
@@ -6869,12 +6815,12 @@ resource adapter is to allow the security information in the
 _ConnectionRequestInfo_ parameter to override the configured security
 information in the _ManagedConnectionFactory_ instance.
 
-If the resource adapter does not find any
+** If the resource adapter does not find any
 security configuration in the _ConnectionRequestInfo_ instance, the
 resource adapter uses the default security configuration in the
 _ManagedConnectionFactory_ instance.
 
-If the EIS does not require authentication,
+** If the EIS does not require authentication,
 the resource adapter does not need any security information from the
 _ConnectionRequestInfo_ instance, and hence may ignore such security
 information. This may happen due to a disconnect between the application
@@ -6900,7 +6846,7 @@ instance. This may happen due to a disconnect between the application
 and the resource adapter.
 
 [[a1854]]
-=== ManagedConnection
+==== ManagedConnection
 
 A resource adapter can re-authenticate a
 physical connection (that is, one that already exists in the connection
@@ -6927,25 +6873,17 @@ _jakarta.resource.spi.SecurityException_ if the passed _Subject_ in the
 _getConnection_ method is different from the security context associated
 with the _ManagedConnection_ instance.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.spi.ManagedConnection \{
+[source,Java]
+----
+public interface jakarta.resource.spi.ManagedConnection {
 
  public Object getConnection(
-
- javax.security.auth.Subject subject,
-
- ConnectionRequestInfo cxRequestInfo)
-
- throws ResourceException;
-
+                  javax.security.auth.Subject subject,
+                  ConnectionRequestInfo cxRequestInfo)
+                  throws ResourceException;
  ...
-
 }
-
-|===
+----
 
 The _getConnection_ method returns a new
 connection handle. If re-authentication is successful, the resource
@@ -6957,21 +6895,21 @@ A resource adapter has the following options
 for handling _ManagedConnection.getConnection_ invocation if it supports
 re-authentication:
 
-Option A. The resource adapter extracts the
+* *Option A.* The resource adapter extracts the
 _PasswordCredential_ instance from the _Subject_ and performs an
 EIS-specific authentication. This option is similar to option A defined
 in the specification of the method _createManagedConnection_ on the
 interface _ManagedConnectionFactory_ (refer to
 <<a1807, ManagedConnectionFactory>>).
 
-Option B. The resource adapter extracts
+* *Option B.* The resource adapter extracts
 _GSSCredential_ instance from the _Subject_ and manages authentication
 either through the GSS mechanism or an implementation-specific
 mechanism. This option is similar to option B defined in the
 specification of the method _createManagedConnection_ on the interface
 _ManagedConnectionFactory_ (refer to <<a1807, ManagedConnectionFactory>>).
 
-Option C. In this case, the _Subject_
+* *Option C.* In this case, the _Subject_
 parameter is _null_ . The resource adapter extracts security information
 from the _ConnectionRequestInfo_ (if there is any) and performs
 authentication in an implementation-specific manner. This option is
@@ -6979,34 +6917,30 @@ similar to option C defined in the specification of the method
 _createManagedConnection_ on the interface _ManagedConnectionFactory_
 (refer to <<a1807, ManagedConnectionFactory>>).
 
-=== 
-
-image:conn-71.png[image]
-
-[[a1871]]Requirements
+=== Requirements
 
 The following are the requirements defined by
 the security contract:
 
-=== Resource Adapter
+==== Resource Adapter
 
 The following are the requirements defined for
 a resource adapter:
 
-The resource adapter must support the security
+* The resource adapter must support the security
 contract by implementing the method
 _ManagedConnectionFactory.createManagedConnection_ .
 
-The resource adapter is not required to
+* The resource adapter is not required to
 support re-authentication as part of its
 _ManagedConnection.getConnection_ method implementation.
 
-If the security information provided by the
+* If the security information provided by the
 component or the container is not adequate to authenticate the caller,
 or if the security information is erroneous, the resource adapter must
 throw a _SecurityException_ to indicate the error condition.
 
-The resource adapter must specify its support
+* The resource adapter must specify its support
 for the security contract as part of its deployment descriptor or
 through metadata annotations. The relevant deployment descriptor
 elements are: _authentication-mechanism_ ,
@@ -7016,38 +6950,38 @@ The AuthenticationMechanism annotation
 described in <<a4636, @AuthenticationMechanism>>
 may also be used for this purpose.
 
-=== Application Server
+==== Application Server
 
 The following are the requirements defined for
 an application server:
 
-The application server must use the method
+* The application server must use the method
 _ManagedConnectionFactory_ .- _createManagedConnection_ to pass the
 security context to the resource adapter during EIS sign-on.
 
-The application server must be capable of
+* The application server must be capable of
 using options A and C as specified in <<a1807,
 ManagedConnectionFactory>> for the security contract.
 
-The application server provides an
+* The application server provides an
 implementation of the _GSSCredential_ interface if the following
 conditions are both true:
 
-The application server supports authentication
+** The application server supports authentication
 mechanisms, specified as _authentication-mechanism-type_ in the
 deployment descriptor, other than _BasicPassword_ mechanism. For
 example, the application server should implement the _GSSCredential_
 interface to support the _kerbv5_ authentication mechanism type.
 
-The application server supports the deployment
+** The application server supports the deployment
 of resource adapters that are capable of handling _GSSCredential_ , and
 thereby option B as specified in <<a1807,
 ManagedConnectionFactory>>, as part of the security contract.
 
-The application server must implement the
+* The application server must implement the
 method _allocateConnection_ in its _ConnectionManager_ implementation.
 
-The application server must configure its use
+* The application server must configure its use
 of the security contract based on the security requirements specified by
 the resource adapter in its deployment descriptor. For example, if a
 resource adapter specifies that it supports only _BasicPassword_
@@ -7056,15 +6990,8 @@ to pass a _PasswordCredential_ instance to the resource adapter.
 
 
 
-=== 
+== [[a1891]]Work Management
 
-=== 
-
-image:conn-75.png[image]
-
-[[a1891]]Work Management
-
-image:conn-76.png[image]
 
 This chapter specifies a contract between an
 application server and a resource adapter that allows a resource adapter
