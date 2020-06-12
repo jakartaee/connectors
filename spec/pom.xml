@@ -149,6 +149,15 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <sourceDocumentName>jakarta-connectors-spec.adoc</sourceDocumentName>
+                    <sourceHighlighter>coderay</sourceHighlighter>
+                    <attributes>
+                        <revnumber>${project.version}</revnumber>
+                        <revremark>${status}</revremark>
+                        <revdate>${revisiondate}</revdate>
+                    </attributes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
