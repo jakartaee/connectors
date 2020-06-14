@@ -7995,11 +7995,7 @@ standard transaction and security _WorkContexts_ defined in this
 chapter. For more information about _Work_ management, see
 <<a1891, Work Management>>.
 
-=== 
-
-image:conn-88.png[image]
-
-Overview
+=== Overview
 
 The Work Management contract between the
 application server and a resource adapter enables a resource adapter to
@@ -8029,46 +8025,38 @@ Note that the application server is required
 to support the standard context types listed in
 <<a2292, Standard and Custom Work Contexts>>.
 
-=== 
-
-image:conn-88.png[image]
-
-Goals
+=== Goals
 
 The goals of the Generic Work Context Contract
 are:
 
-To provide a standard mechanism for a resource
+* To provide a standard mechanism for a resource
 adapter to propagate an imported context to an application server.
 
-To make the existing execution context
+* To make the existing execution context
 mechanisms extensible and to provide better metadata to both the
 application server and the resource adapter of new work context types.
 
-To design the work context contracts to be
+* To design the work context contracts to be
 independent of the Connectors Work Management Contract so as to enable
 the resource adapter to use such contexts in other asynchronous task
 execution approaches. For more information on _Work_ Management, see
 Chapter 10, “Work Management“.
 
-To standardize the most commonly used work
+* To standardize the most commonly used work
 contexts, such as Transaction Work Context and Security Work Context.
 See <<a3707, Security Inflow>>.
 
-To be backward compatible with the existing
+* To be backward compatible with the existing
 _Work_ submission and context assignment model described in
 <<a1891, Work Management>>.
 
-To enable an application server to support new
+* To enable an application server to support new
 message inflow and delivery schemes and provide a richer contextual
 _Work_ execution environment to the resource adapter while still
 maintaining control over concurrent behavior in a managed environment.
 
-=== 
-
-image:conn-88.png[image]
-
-[[a2286]]Generic Work Context Model
+=== [[a2286]]Generic Work Context Model
 
 In this chapter all references to
 _WorkManager_ should be read as references applicable to the Connector
@@ -8100,7 +8088,7 @@ The application server is free to use the
 _WorkContext_ during context assignment in any order. The resource
 adapter must not assume an order in the handling of the _WorkContext_ s.
 
-=== [[a2292]]Standard and Custom Work Contexts
+==== [[a2292]]Standard and Custom Work Contexts
 
 Certain EIS integration use cases require the
 propagation of other contextual information, apart from Transactions,
@@ -8111,14 +8099,14 @@ resource adapter might also require the execution of _Work_ instances in
 the context of the "flown-in" Security information. Other use cases that
 require the flowing in of contextual information are:
 
-Scenarios where an EIS requires a
+* Scenarios where an EIS requires a
 “conversational” programming model with a _MessageEndpoint_ and the
 resource adapter is required to propagate "correlation" information to
 the _MessageEndpoint_ container to enable the application server to set
 up or re-create the necessary state in the _MessageEndpoint_ to maintain
 conversational session state.
 
-Propagating Availability or Quality-of-Service
+* Propagating Availability or Quality-of-Service
 (QoS) related hints or metadata from the EIS so that the application
 server _WorkManager_ can execute the _Work_ instance by leveraging those
 hints.
@@ -8142,13 +8130,13 @@ Support for a WorkContext Type>> for a discussion about how resource
 adapters can check with the _WorkContext_ s supported by the application
 server.
 
-=== Requirements
+==== Requirements
 
-The application server must support the
+* The application server must support the
 establishment of _TransactionContext_ , _SecurityContext_ , and
 _HintsContext_ contexts.
 
-The application server must support the
+* The application server must support the
 _WorkContext_ interface. If a resource adapter submits a _Work_ instance
 implementing the _WorkContextProvider_ interface, the application server
 must use the _WorkContext_ s provided by the resource adapter to assign
@@ -8156,11 +8144,11 @@ the execution context for that _Work_ instance.
 
 
 
-Generic Work Context (Object Diagram)
+*Generic Work Context (Object Diagram)*
 
 image:conn-89.jpg[image]
 
-Generic Work Context (Interfaces)
+*Generic Work Context (Interfaces)*
 
 image:conn-90.jpg[image]
 
@@ -8170,14 +8158,13 @@ image:conn-90.jpg[image]
 
 
 
-===  _jakarta.resource.spi.work_
+._jakarta.resource.spi.work_
+[source,Java]
+----
 
  package jakarta.resource.spi.work;
 
-
-
- public interface WorkContextProvider extends
-Serializable \{
+ public interface WorkContextProvider extends Serializable {
 
  List<WorkContext> getWorkContexts();
 
@@ -8185,8 +8172,7 @@ Serializable \{
 
 
 
- public interface WorkContext extends
-Serializable\{
+ public interface WorkContext extends Serializable{
 
  String getName();
 
@@ -8194,110 +8180,62 @@ Serializable\{
 
  }
 
+ public class TransactionContext extends ExecutionContext implements WorkContext {
 
+ public TransactionContext(Xid xid) { ... }
 
- public class TransactionContext extends
-ExecutionContext
+ public TransactionContext( Xid xid, long timeout){ ... }
 
- implements WorkContext \{
+ public String getName(){
+    return "TransactionContext";
+ }
 
- public TransactionContext(Xid xid) \{ ... }
-
- public TransactionContext( Xid xid,
-
- long timeout)\{ ... }
-
- public String getName()\{
-
- return "TransactionContext";
+ // ... other methods
 
  }
 
- ... other methods
+ public abstract class SecurityContext implements WorkContext {
+
+ public String getName(){
+     return "SecurityContext";
+ }
+
+ // .... other SecurityContext related methods
 
  }
 
-
-
- public abstract class SecurityContext
-implements WorkContext \{
-
- public String getName()\{
-
- return "SecurityContext";
-
- }
-
- .... other SecurityContext related methods
-
- }
-
-
-
- public class WorkContextErrorCodes \{
+ public class WorkContextErrorCodes {
 
  // Indicates an unsuppored context type
-
- public static final String
-
- UNSUPPORTED_CONTEXT_TYPE = "1";
-
-
+ public static final String UNSUPPORTED_CONTEXT_TYPE = "1";
 
  // Indicates more than one contexts
-
  // of the same type passed in for Work
+ public static final String DUPLICATE_CONTEXTS = "2";
 
- public static final String DUPLICATE_CONTEXTS
-= "2";
+ // Indicates failure in recreating the WorkContext
+ public static final String CONTEXT_SETUP_FAILED = "3";
 
-
-
- // Indicates failure in recreating the
-WorkContext
-
- public static final String
-CONTEXT_SETUP_FAILED = "3";
-
-
-
- // Indicates that the container cannot
-support
-
+ // Indicates that the container cannot support
  // recreating the context
-
- public static final String
-
- CONTEXT_SETUP_UNSUPPORTED = "4";
+ public static final String CONTEXT_SETUP_UNSUPPORTED = "4";
 
  }
 
 
+ public interface WorkContextLifecycleListener {
 
-
-
- public interface
-WorkContextLifecycleListener \{
-
- // indicates that the WorkContext was set
-successfully
-
+ // indicates that the WorkContext was set successfully
  void contextSetupComplete();
 
-
-
- // Indicates that the WorkContext setup
-failed
-
+ // Indicates that the WorkContext setup failed
  void contextSetupFailed(String errorCode);
 
  }
 
-=== 
+----
 
-image:conn-88.png[image]
-
-[[a2364]]WorkContextProvider and WorkContext Interface
+=== [[a2364]]WorkContextProvider and WorkContext Interface
 
 The _WorkContext_ interface illustrates
 execution context information of a particular type. This specification
@@ -8313,18 +8251,19 @@ methods may be used by the resource adapter developer and the
 application server for debugging purposes.
 
 
-
+[source,Java]
+----
  package jakarta.resource.spi.work;
 
  public interface WorkContext extends
-Serializable\{
+Serializable{
 
  String getName();
 
  String getDescription();
 
  }
-
+----
 Additional work contexts, based on specific
 EIS integration scenarios could be supported by an application server
 and the resource adapter may use them.
@@ -8335,22 +8274,21 @@ _WorkManager_ , or its equivalent in other thread pooling
 implementations, that the task encapsulated as the _Work_ instance
 requires to be run with a specialized execution context.
 
-
-
+[source,Java]
+----
  package jakarta.resource.spi.work;
 
  public interface WorkContextProvider extends
-Serializable \{
+Serializable {
 
  List<WorkContext> getWorkContexts();
 
  }
+ 
+----
 
 
-
-
-
- When a resource adapter is required to
+When a resource adapter is required to
 control the execution context in which a _Work_ instance is executed, it
 creates a _Work_ instance that implements _WorkContextProvider_ . The
 _Work_ instance provides an implementation of the _getWorkContexts_
@@ -8391,12 +8329,11 @@ information on nested _Work_ submission related requirements.
 
 
 
-WorkContext establishment during Work
-submission(Sequence Diagram)
+*WorkContext establishment during Work submission(Sequence Diagram)*
 
 image:conn-91.jpg[image]
 
-=== [[a2390]]Indicating Support for a WorkContext Type
+==== [[a2390]]Indicating Support for a WorkContext Type
 
 A resource adapter provider can declare that
 it requires a list of _WorkContext_ types to be supported by the
@@ -8417,7 +8354,7 @@ If the application server cannot support one
 or more of the _WorkContext_ types declared in _required-work-context_
 elements, it must fail deployment of the resource adapter.
 
-=== [[a2394]]Checking Support for a WorkContext Type
+==== [[a2394]]Checking Support for a WorkContext Type
 
 A resource adapter can check an application
 server’s support for a particular _WorkContext_ type through the
@@ -8425,24 +8362,17 @@ _isContextSupported()_ method in the _BootstrapContext_ implementation
 provided by the application server. This mechanism enables a resource
 adapter developer to dynamically change the _WorkContext_ s based on the
 support provided by the application server. For more information, see
-<<a415, ResourceAdapter JavaBean and
-Bootstrapping a Resource Adapter Instance>>.
+<<a415, ResourceAdapter JavaBean and Bootstrapping a Resource Adapter Instance>>.
 
-
-
-
-
- public interface BootstrapContext \{
+[source,Java]
+----
+ public interface BootstrapContext {
 
  // ... other operations
 
- boolean isContextSupported(
-
- Class<? extends WorkContext>
-workContextClass);
-
+ boolean isContextSupported( Class<? extends WorkContext> workContextClass);
  }
-
+----
 
 
 The application server must employ an exact
@@ -8475,7 +8405,7 @@ most specific _WorkContext_ first. It may then go up the inheritance
 hierarchy in order to find the most specific _WorkContext_ type
 supported by the application server.
 
-=== Handling Errors During Context Assignment
+==== Handling Errors During Context Assignment
 
 As specified in
 <<a2111, WorkListener Interface and WorkEvent
@@ -8487,56 +8417,37 @@ appropriate error code defined in _WorkContextErrorCodes_ , which
 indicates the nature of the error condition.
 
 
-
+[source,Java]
+----
  public class WorkContextErrorCodes \{
 
  // Indicates an unsupported context type
+ public static final String UNSUPPORTED_CONTEXT_TYPE = "1";
 
- public static final String
-UNSUPPORTED_CONTEXT_TYPE = "1";
-
-
-
- // Indicates more than one contexts of the
-same type passed
-
+ // Indicates more than one contexts of the same type passed
  // in for Work
+ public static final String DUPLICATE_CONTEXTS = "2";
 
- public static final String DUPLICATE_CONTEXTS
-= "2";
+ // Indicates failure in recreating the WorkContext
+ public static final String CONTEXT_SETUP_FAILED = "3";
 
-
-
- // Indicates failure in recreating the
-WorkContext
-
- public static final String
-CONTEXT_SETUP_FAILED = "3";
-
-
-
- // Indicates that the container cannot
-support recreating
-
+ // Indicates that the container cannot support recreating
  // the context
-
- public static final String
-CONTEXT_SETUP_UNSUPPORTED = "4";
+ public static final String CONTEXT_SETUP_UNSUPPORTED = "4";
 
  }
-
-
+----
 
 The application server must make the following
 checks during context assignment
 
-Because not all _WorkContext_ instances
+* Because not all _WorkContext_ instances
 provided by the resource adapter might be supported by the application
 server, the application server must ensure that the _WorkContext_ s
 provided by the resource adapter are supported by the application
 server.
 
-The application server must also ensure that
+* The application server must also ensure that
 the _WorkContext_ s provided by the resource adapter do not have
 duplicates. For instance, a resource adapter must not be able to submit
 two instances of the _TransactionContext_ class. The application server
@@ -8579,11 +8490,7 @@ why a context assignment of a particular _WorkContext_ instance failed.
 For more information, see Section 11.7 “WorkContextLifecycleListener
 Interface”
 
-=== 
-
-image:conn-88.png[image]
-
-[[a2435]]TransactionContext Class
+=== [[a2435]]TransactionContext Class
 
 The _TransactionContext_ class extends the
 _ExecutionContext_ class, as described in
@@ -8595,35 +8502,24 @@ that _Work_ instance must all be carried out in the transaction context
 provided by the _TransactionContext_ class.
 
 
+[source,Java]
+----
+ public class TransactionContext extends ExecutionContext implements WorkContext {
 
- public class TransactionContext
+ public TransactionContext(Xid xid) {..}
 
- extends ExecutionContext
+ public TransactionContext(Xid xid, long timeout) {..}
 
- implements WorkContext \{
-
- public TransactionContext(Xid xid) \{..}
-
- public TransactionContext(Xid xid, long
-timeout) \{..}
-
-
-
- public String getDescription() \{
-
- return "Transaction Context";
-
+ public String getDescription() {
+     return "Transaction Context";
  }
 
-
-
- public String getName() \{
-
- return "TransactionContext";
-
+ public String getName() {
+    return "TransactionContext";
  }
 
  }
+----
 
 For a resource adapter, using the
 _WorkContextProvider_ interface to effect transaction inflow is optional
@@ -8641,11 +8537,7 @@ adapter however, could choose to use a _null_ value for the
 _ExecutionContext_ parameter in Connector _WorkManager_ methods that
 takes an _ExecutionContext_ as an argument.
 
-=== 
-
-image:conn-88.png[image]
-
-HintsContext Interface
+=== HintsContext Interface
 
 An application server’s _WorkManager_
 implementation may allow a _Work_ instance to provide, during _Work_
@@ -8662,73 +8554,43 @@ application server may then use the specified hints to control the
 execution of the _Work_ instance.
 
 
-
- public class HintsContext implements
-WorkContext \{
-
- protected String description = "Hints
-Context";
-
+[source,Java]
+----
+ public class HintsContext implements WorkContext {
+ 
+ protected String description = "Hints Context";
  protected String name = "HintsContext";
 
+ public String getDescription() {
+     return description;
+ }
 
-
- public String getDescription() \{
-
- return description;
-
+ public String getName() {
+     return name;
  }
 
 
 
- public String getName() \{
-
- return name;
-
+ public void setDescription(String description){
+     this.description = description;
  }
 
-
-
- public void setDescription(String
-description)\{
-
- this.description = description;
-
+ public void setName(String name){
+     this.name = name;
  }
 
+ Map<String, Serializable> hints = new HashMap<String, Serializable>();
 
-
- public void setName(String name)\{
-
- this.name = name;
-
+ public void setHint(String hintName, Serializable value) {
+     hints.put(hintName, value);
  }
 
-
-
- Map<String, Serializable> hints
-
- = new HashMap<String, Serializable>();
-
-
-
- public void setHint(String hintName,
-Serializable value) \{
-
- hints.put(hintName, value);
-
- }
-
-
-
- public Map<String, Serializable> getHints()
-\{
-
- return hints;
-
+ public Map<String, Serializable> getHints() {
+     return hints;
  }
 
  }
+----
 
 The resource adapter may use an instance of
 the standard _HintsContext_ class to specify to the _WorkManager_ the
@@ -8758,9 +8620,9 @@ by the application server implementation may be used by the resource
 adapter deployer to override or map the hint name-value pairs provided
 by the resource adapter developer.
 
-=== [[a2494]]Standard Hints
+==== [[a2494]]Standard Hints
 
-=== Work Name Hint
+===== Work Name Hint
 
 The resource adapter may use the string
 _jakarta.resource.Name_ , defined as a constant in
@@ -8769,7 +8631,7 @@ _Work_ instance. This _hintName_ may be used by the resource adapter and
 the application server for enhanced logging and debugging purposes. The
 value for the hint must be a valid _java.lang.String_ .
 
-=== Long-running Work instance Hint
+===== Long-running Work instance Hint
 
 The resource adapter may use the String
 _jakarta.resource.LongRunning_ , defined as a constant in
@@ -8791,35 +8653,25 @@ running tasks. This type of _WorkManager_ must provide the same _Work_
 submission and processing semantics to _Work_ instances submitted with
 or without this hint.
 
-=== 
-
-image:conn-88.png[image]
-
-WorkContextLifecycleListener Interface
+=== WorkContextLifecycleListener Interface
 
 A _WorkContext_ implementation may implement
 the _WorkContextLifecycleListener_ interface to get fine-grained
 notifications (along with error codes, if any) while the _WorkManager_
 sets up the execution context for a _Work_ instance.
 
+[source,Java]
+----
+ public interface WorkContextLifecycleListener {
 
-
- public interface
-WorkContextLifecycleListener \{
-
- // Indicates that the WorkContext was set
-successfully
-
+ // Indicates that the WorkContext was set successfully
  void contextSetupComplete();
 
-
-
- // Indicates that the WorkContext setup
-failed
-
+ // Indicates that the WorkContext setup failed
  void contextSetupFailed(String errorCode);
 
  }
+----
 
 When a _WorkManager_ sets up the execution
 context of a _Work_ instance that implements _WorkContextProvider_ , the
@@ -8847,16 +8699,11 @@ _WorkContext_ setup related notifications.
 
 
 
-Generic Work Context Lifecycle listener
-callback (Sequence Diagram)
+*Generic Work Context Lifecycle listener callback (Sequence Diagram)*
 
 image:conn-92.jpg[image]
 
-=== 
-
-image:conn-88.png[image]
-
-Illustrative Example
+=== Illustrative Example
 
 <<a3627, Use Case
 Scenario>>, provides details on use case scenarios where the Transaction
@@ -8873,10 +8720,10 @@ In order to integrate the various disparate
 software systems, and to allow them to communicate with each other,
 Wombat Systems did the following:
 
-Used the application servers to hold the
+* Used the application servers to hold the
 integration as well as business logic, developed as Jakarta Enterprise Beans
 
-Purchased or built resource adapters and
+* Purchased or built resource adapters and
 deployed them on the application servers in order to provide
 bidirectional connectivity between the applications residing on the
 application servers and the various software systems
@@ -8899,25 +8746,21 @@ well, it uses a _Work_ implementation that implements the
 _WorkContextProvider_ interface, as shown below.
 
 
-
- public class MyResourceAdapterImpl
-implements ResourceAdapter \{
+[source,Java]
+----
+ public class MyResourceAdapterImpl implements ResourceAdapter {
 
  ...
 
- public void start(BootstrapContext ctx) \{
-
- bootstrapCtx = ctx;
-
+ public void start(BootstrapContext ctx) {
+   bootstrapCtx = ctx;
  }
 
  ...
 
- \{
+ {
 
- WorkManager workManager =
-myRA.bootstrapCtx.getWorkManager();
-
+ WorkManager workManager = myRA.bootstrapCtx.getWorkManager();
  workManager.scheduleWork(new MyWork());
 
  ...
@@ -8928,42 +8771,29 @@ myRA.bootstrapCtx.getWorkManager();
 
 
 
- public class MyWork implements Work,
-WorkContextProvider \{
+ public class MyWork implements Work, WorkContextProvider {
 
+ void release(){ ..}
 
+ List<WorkContext> getWorkContexts() {
 
- void release()\{ ..}
-
-
-
- List<WorkContext> getWorkContexts() \{
-
- TransactionContext txIn
-
- = new TransactionContext(xid);
-
- List<WorkContext> icList = new
-ArrayList<WorkContext>();
-
+ TransactionContext txIn = new TransactionContext(xid);
+ List<WorkContext> icList = new ArrayList<WorkContext>();
  icList.add(txIn);
 
  // Add additional WorkContexts
-
  return icList;
 
  }
 
 
 
- void run()\{
-
+ void run(){
  // Deliver message to MessageEndpoint;
-
  }
 
  }
-
+----
 
 
 When this instance of _MyWork_ that
@@ -8985,15 +8815,7 @@ _run_ method is called, all deliveries to the _MessageEndpoint_ runs
 under the transaction context of the _Work_ instance, depending on the
 transaction preference of the bean method that is being invoked.
 
-=== 
-
-=== 
-
-image:conn-93.png[image]
-
-Inbound Communicaton
-
-image:conn-94.png[image]
+== Inbound Communicaton
 
 This chapter provides a high level description
 of the inbound communication model; that is, the communication from an
