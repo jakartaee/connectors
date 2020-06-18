@@ -8826,18 +8826,14 @@ subsequent chapters related to inbound communication: Message Inflow
 <<a3530, Jakarta Enterprise Beans Invocation>>, and Transaction
 Inflow <<a3613,Transaction Inflow>>).
 
-=== 
-
-image:conn-95.png[image]
-
-Overview
+=== Overview
 
 In the inbound communication model, the EIS
 initiates all communication to an application. In this case, the
 application may be composed of Jakarta Enterprise Beans (session, entity and message-driven
 beans) and resides in a Jakarta Enterprise Beans container.
 
-Inbound Communication Model
+*Inbound Communication Model*
 
 image:conn-96.jpg[image]
 
@@ -8852,11 +8848,7 @@ resource adapter. <<a3613, Transaction Inflow>>
 provides a mechanism to import transaction information from an EIS into
 a Jakarta Enterprise Beans container.
 
-=== 
-
-image:conn-95.png[image]
-
-An Illustrative Use Case
+=== An Illustrative Use Case
 
 Wombat Systems is a finance company which has
 a variety of software systems as part of its enterprise infrastructure.
@@ -8867,8 +8859,7 @@ servers which host business logic written as Jakarta Enterprise Beans (session, 
 message-driven beans). Further, there are web service interactions that
 occur as part of the overall corporate workflow.
 
-Inbound Communication Model (an Illustrative
-Use Case)
+*Inbound Communication Model (an Illustrative Use Case)*
 
 image:conn-97.jpg[image]
 
@@ -8876,10 +8867,10 @@ In order to integrate the various disparate
 software systems, and to allow them to communicate with each other,
 Wombat Systems did the following:
 
-Used the application servers to hold the
+* Used the application servers to hold the
 integration as well as business logic, developed as Jakarta Enterprise Beans.
 
-Purchased resource adapters and deployed them
+* Purchased resource adapters and deployed them
 on the application servers, in order to provide bi-directional
 connectivity between the applications residing on the application
 servers and the various software systems.
@@ -8890,15 +8881,8 @@ software systems in its enterprise infrastructure.
 
 
 
-=== 
+== [[a2576]]Message Inflow
 
-=== 
-
-image:conn-98.png[image]
-
-[[a2576]]Message Inflow
-
-image:conn-99.png[image]
 
 This chapter specifies a standard, generic
 contract between an application server and a resource adapter that
