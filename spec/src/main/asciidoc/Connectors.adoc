@@ -11176,11 +11176,7 @@ initiated by an EIS, and ensures that the atomicity, consistency,
 isolation and durability (ACID) properties of the imported transaction
 are preserved.
 
-=== 
-
-image:conn-117.png[image]
-
-Overview
+=== Overview
 
 A resource adapter may need to import an
 incoming external transaction context obtained from a remote protocol
@@ -11196,42 +11192,34 @@ application server and also flow-in transaction completion and crash
 recovery calls initiated by the EIS. In order for the resource adapter
 to accomplish this, it requires the following:
 
-A standard form to represent the transaction
+* A standard form to represent the transaction
 context imported by the resource adapter.
 
-A mechanism to associate the work done by the
+* A mechanism to associate the work done by the
 resource adapter as part of the imported transaction.
 
-A mechanism to treat the application server
+* A mechanism to treat the application server
 like a resource manager in order to make it participate in the two-phase
 commit and crash recovery flows initiated by the external transaction
 originator, the EIS.
 
-Transaction Inflow Contract
+*Transaction Inflow Contract*
 
 image:conn-118.jpg[image]
 
-=== 
+=== Goals
 
-image:conn-117.png[image]
-
-Goals
-
-Provide a standard mechanism for a resource
+* Provide a standard mechanism for a resource
 adapter to propagate an imported transaction to an application server.
 
-Provide a standard mechanism for a resource
+* Provide a standard mechanism for a resource
 adapter to flow-in transaction completion and crash recovery calls from
 an EIS.
 
-Ensure that the ACID properties of the
+* Ensure that the ACID properties of the
 transaction imported by a resource adapter are preserved.
 
-=== 
-
-image:conn-117.png[image]
-
-[[a3627]]Use Case Scenario
+=== [[a3627]]Use Case Scenario
 
 An EIS initiates a transaction and calls
 application components residing in an application server through a
@@ -11247,11 +11235,11 @@ transaction is completed.
 The transaction inflow contract may be used in
 various situations. For example:
 
-A message provider may use the contract to
+* A message provider may use the contract to
 push messages to a resource adapter for delivery to application
 components.
 
-The contract may be leveraged to make the
+* The contract may be leveraged to make the
 application components do work as part of a transaction initiated by a
 legacy EIS.
 
@@ -11261,65 +11249,38 @@ when the declarative transaction attribute of an enterprise bean’s
 method is _RequiresNew_ , _Never_ , _NotSupported_ , or if bean-managed
 transaction demarcation is used.
 
-
-
-Transaction Inflow Contract (Object Diagram)
+*Transaction Inflow Contract (Object Diagram)*
 
 image:conn-119.jpg[image]
 
-=== 
+=== Transaction Inflow Model
 
-image:conn-117.png[image]
-
-Transaction Inflow Model
-
-[width="100%",cols="100%",]
-|===
-a|
+[source,Java]
+----
 package jakarta.resource.spi;
 
-
-
 import javax.transaction.xa.Xid;
-
 import javax.transaction.xa.XAException;
-
 import jakarta.resource.spi.work.WorkManager;
 
-
-
-public interface BootstrapContext \{
+public interface BootstrapContext {
 
  WorkManager getWorkManager();
-
  XATerminator getXATerminator();
-
  ... // other methods
 
 }
 
+public interface XATerminator {
 
-
-public interface XATerminator \{
-
- public void commit(Xid xid, boolean
-onePhase) throws XAException;
-
- public void forget(Xid xid) throws
-XAException;
-
- public int prepare(Xid xid) throws
-XAException;
-
- public Xid[] recover(int flag) throws
-XAException;
-
- public void rollback(Xid xid) throws
-XAException;
-
+ public void commit(Xid xid, boolean onePhase) throws XAException;
+ public void forget(Xid xid) throws XAException;
+ public int prepare(Xid xid) throws XAException;
+ public Xid[] recover(int flag) throws XAException;
+ public void rollback(Xid xid) throws XAException;
 }
 
-|===
+----
 
 The BootstrapContext interface allows the
 resource adapter to obtain a _WorkManager_ instance and an XATerminator
@@ -11328,23 +11289,23 @@ adapter uses the _WorkManager_ instance to submit _Work_ instances for
 execution, and uses the XATerminator instance for transaction completion
 and crash recovery flows.
 
-=== [[a3656]]Processing of Transactional Calls
+==== [[a3656]]Processing of Transactional Calls
 
 The steps involved in propagating an imported
 transaction from a resource adapter to the application server in order
 to do transactional work is as follows:
 
-The EIS makes a transactional call to the
+1. The EIS makes a transactional call to the
 resource adapter. The resource adapter is expected to process the
 EIS-specific transaction context structure and the wire protocol. The
 resource adapter imports the transaction context that arrived along with
 the incoming message.
 
-The resource adapter represents the imported
+2. The resource adapter represents the imported
 transaction context in a standard form using the
 javax.transaction.xa.Xid instance.
 
-The resource adapter constructs a _Work_
+3. The resource adapter constructs a _Work_
 instance, which is expected to do work as part of the transactional
 message, and also creates an ExecutionContext instance containing the
 constructed Xid. It then submits the _Work_ instance along with the
@@ -11356,7 +11317,7 @@ may use this instead of _ExecutionContext_ . See
 <<a2435, TransactionContext Class>> for more
 information on the _TransactionContext_ class.
 
-The application server’s _WorkManager_ accepts
+4. The application server’s _WorkManager_ accepts
 the submitted _Work_ instance and recreates the execution context for
 the _Work_ instance. That is, the work to be done is enlisted as part of
 the imported transaction. It then calls the run method on the Work
@@ -11373,36 +11334,36 @@ a WorkCompletedException set to an appropriate error code, irrespective
 of which resource adapter it comes from, under the following
 circumstances:
 
-If a _Work_ instance associated with the
+* If a _Work_ instance associated with the
 transaction is already present. That is, concurrent work within an
 imported transaction is disallowed. The error code to indicate this is
 WorkException.TX_CONCURRENT_WORK_DISALLOWED.
 
-The application server is unable to recreate
+* The application server is unable to recreate
 the transaction. That is, it fails in its attempt to enlist the _Work_
 instance with the transaction. The error code to indicate this is
 WorkException.TX_RECREATE_FAILED.
 
-=== Transaction Completion Processing
+==== Transaction Completion Processing
 
 The steps involved in completing of the
 imported transaction initiated by the external EIS are as follows:
 
-The EIS sends a prepare message for a
+1. The EIS sends a prepare message for a
 particular transaction.
 
-The resource adapter obtains an XATerminator
+2. The resource adapter obtains an XATerminator
 instance from the application server through the getXATerminator method
 of the BootstrapContext instance. Note, this step may be done at any
 time, and the obtained XATerminator instance may be used for transaction
 completion flows across multiple imported transactions. The XATerminator
 implementation should be thread-safe and re-entrant.
 
-The resource adapter calls the prepare method
+3. The resource adapter calls the prepare method
 of the XATerminator instance with an appropriate Xid instance, and
 returns the outcome of the prepare operation to the EIS.
 
-When the EIS sends a commit message for the
+4. When the EIS sends a commit message for the
 transaction, the resource adapter calls the commit method of the
 XATerminator instance with an appropriate Xid instance. Note, it is
 possible for the commit method to be called without a prior prepare
@@ -11410,20 +11371,19 @@ method call in the case of one-phase commit.
 
 
 
-Transactional Calls and Transaction
-Completion Flow (Sequence Diagram)
+*Transactional Calls and Transaction Completion Flow (Sequence Diagram)*
 
 image:conn-120.jpg[image]
 
-=== Crash Recovery Processing
+==== Crash Recovery Processing
 
-If the EIS detects the failure of the
+* If the EIS detects the failure of the
 application server while the transaction is active (that is, transaction
 completion has not begun), it does not wait for the application server
 to recover or do any recovery processing. The transactional work done by
 the application server site is presumed aborted.
 
-If the EIS detects the failure of the
+* If the EIS detects the failure of the
 application server while the transaction is in-doubt (that is, the
 transaction has already been prepared), the EIS retries completion by
 attempting to re-establish network communication until it succeeds. When
@@ -11432,58 +11392,52 @@ state of all transactions that were successfully prepared before the
 crash, and complete them upon receiving a commit method or rollback
 method call from the EIS through the resource adapter.
 
-If the resource adapter detects the failure of
+* If the resource adapter detects the failure of
 the EIS while the transaction is active (that is, transaction completion
 has not begun), it aborts all active transactions that originated from
 the EIS. The resource adapter should keep a list of active transactions
 and abort them upon EIS failure.
 
-If the resource adapter detects the failure of
+* If the resource adapter detects the failure of
 the EIS while the transaction is in-doubt (that is, the transaction has
 already been prepared), it waits for the EIS to recover. When the EIS
 recovers, it re-establishes network communication with the resource
 adapter, and queries it for a list of in-doubt transactions. It then
 completes the in-doubt transactions.
 
-
-
-Crash Recovery Flows When Application Server
-Crashes (Sequence Diagram)
+*Crash Recovery Flows When Application Server Crashes (Sequence Diagram)*
 
 image:conn-121.jpg[image]
 
-
-
-Crash Recovery Flows When EIS Crashes
-(Sequence Diagram)
+*Crash Recovery Flows When EIS Crashes (Sequence Diagram)*
 
 image:conn-122.jpg[image]
 
-=== Requirements
+==== Requirements
 
-An application server must implement the
+* An application server must implement the
 transaction inflow contract. That is, it must allow Work submissions
 with a transaction context, an Xid, and provide a valid XATerminator
 instance when called through the getXATerminator method of the
 BootstrapContext instance.
 
-A resource adapter may optionally choose to
+* A resource adapter may optionally choose to
 use the transaction inflow contract. But, a resource adapter that uses
 the transaction inflow contract to import an EIS transaction and do
 transactional work must implement the prescribed transaction inflow
 contract.
 
-The XATerminator instance provided by the
+* The XATerminator instance provided by the
 application server must be thread-safe and re-entrant. The resource
 adapter may use an XATerminator instance across different transactions
 concurrently.
 
-When the application server is unable to
+* When the application server is unable to
 recreate the transaction context, if any, specified for a _Work_
 instance, it must throw a WorkCompletedException set to the error code
 WorkException.TX_RECREATE_FAILED.
 
-For a particular imported transaction, at any
+* For a particular imported transaction, at any
 given time, there must be at most one _Work_ instance associated with
 the transaction. The associated _Work_ instance may be in any state,
 that is, waiting for execution to begin or already executing. However,
@@ -11491,7 +11445,6 @@ it must be possible for several _Work_ instances to do work on a
 transaction as long as there is at most one _Work_ instance associated
 with the transaction at any time. It must also be possible for different
 resource adapters to participate in the same transaction.
-
 The application server must disallow Work
 submissions with a WorkCompletedException set to the error code
 WorkException.TX_CONCURRENT_WORK_DISALLOWED, if there is already a
@@ -11500,46 +11453,45 @@ resource adapter is involved in the Work submission. This must be done
 using the getGlobalTransactionId method of the Xid object present in the
 execution context of the submitted _Work_ instance. The Xid’s branch
 identifier must be ignored.
-
 The application server must not try to
 serialize Work processing based on transaction information.
 
-The application server must reject Work
+* The application server must reject Work
 submissions for a transaction whose completion is in-progress, with a
 WorkCompletedException set to the error code
 WorkException.TX_CONCURRENT_WORK_DISALLOWED.
 
-The application server must reject transaction
+* The application server must reject transaction
 completion or crash recovery calls for a specific transaction with a
 javax.transaction.xa.XAException, when a _Work_ instance associated with
 the transaction is present. The application server must not block or
 serialize transaction completion or crash recovery calls waiting for a
 _Work_ instance associated with the transaction to complete.
 
-The application server must reject multiple
+* The application server must reject multiple
 transaction completion or crash recovery calls for the same transaction
 with a javax.transaction.xa.XAException.
 
-The application server must reject transaction
+* The application server must reject transaction
 completion or crash recovery calls with a
 javax.transaction.xa.XAException upon any errors.
 
-The application server should recover the
+* The application server should recover the
 state of all in-doubt transactions upon failure recovery.
 
-=== Non-Requirements
+==== Non-Requirements
 
-The application server is not responsible for
+* The application server is not responsible for
 ensuring transaction IDs of the imported transactions from different
 EISs are unique. Each EIS is expected to use unique transaction IDs.
 
-It is possible that a rogue resource adapter
+* It is possible that a rogue resource adapter
 or EIS may provide non-unique Xids, or attempt to complete transactions
 that it does not own. The application server is not required to detect
 the above cases. It is also not required to detect transactional,
 transaction completion, or crash recovery calls from a rogue EIS.
 
-=== Recommendations
+==== Recommendations
 
 The resource adapter should keep a list of
 active transactions and abort them upon detecting EIS failure.
@@ -11557,17 +11509,7 @@ transaction inflow contract is not required. That is, the
 getXATerminator method of the BootstrapContext instance may return a
 null instance.
 
-=== 
-
-
-
-=== 
-
-image:conn-123.png[image]
-
-[[a3707]]Security Inflow
-
-image:conn-124.png[image]
+== [[a3707]]Security Inflow
 
 This chapter specifies a standard, generic
 security contract between the EIS/resource adapter and the application
@@ -11576,11 +11518,7 @@ while submiting a _Work_ instance for execution to a _WorkManager_ and
 while delivering messages to message endpoints residing in the
 application server.
 
-=== 
-
-image:conn-125.png[image]
-
-Overview
+=== Overview
 
 It is critical, in EIS integration scenarios,
 that all interactions between an application server and resource adapter
@@ -11601,75 +11539,61 @@ established identity.
 This chapter references the following chapters
 and documents:
 
-{empty}Security Architecture specified in
+* {empty}Security Architecture specified in
 <<a1563, Security Architecture>>
 
-Security scenarios based on the connector
+* Security scenarios based on the connector
 architecture (Refer to Appendix D <<a9530,
 Security Scenarios>>)
 
-<<a9751, Jakarta™ Authentication
+* <<a9751, Jakarta™ Authentication
 Specification, Version 2.0>> (JSR-196)
 
-
-
-
-
-
-
-Security Inflow Contract
+*Security Inflow Contract*
 
 image:conn-126.jpg[image]
 
-=== 
-
-image:conn-125.png[image]
-
-Goals
+=== Goals
 
 The Security Inflow contract is designed to
 meet the following goals:
 
-Enable an end-to-end security model for Jakarta
+* Enable an end-to-end security model for Jakarta
 EE applications, to support integration with EIS based on the Connector
 architecture
 
-Support the execution of a _Work_ instance in
+* Support the execution of a _Work_ instance in
 the context of an established identity
 
-Support the propagation of user information/
+* Support the propagation of user information/
 _Principal_ information from an EIS to a _MessageEndpoint_ during
 Message Inflow
 
-Ensure that the security inflow contract is
+* Ensure that the security inflow contract is
 transparent to an application component provider
 
-Enable a _WorkManager_ to make authorization
+* Enable a _WorkManager_ to make authorization
 checks based on the security context information that is provided with
 the submitted _Work_ instance
 
-Enable an application component container to
+* Enable an application component container to
 authorize and control access during Message Inflow to message endpoints
 residing in the application component container
 
-Allow _MessageEndpoint_ s to be portable
+* Allow _MessageEndpoint_ s to be portable
 across multiple EISs that use different security mechanisms
 
-Map security identities in foreign domains
+* Map security identities in foreign domains
 into corresponding identities in the receiving container or context
 
-Ensure backward compatibility with the
+* Ensure backward compatibility with the
 existing "Security Management contract", defined in Chapter-17 of
 <<a9723, Jakarta™ Enterprise Beans Specification,
  Version 4.0>> Core Contracts and Requirements
 specification, for security context inflow to _MessageEndpoint_ s
 realized as message-driven beans
 
-=== 
-
-image:conn-125.png[image]
-
-[[a3732]]Security Inflow Model
+=== [[a3732]]Security Inflow Model
 
 This chapter uses the terminology described
 in <<a1583, Terminology>> and does not dictate
@@ -11694,20 +11618,18 @@ specifying the security contextual information, in which the Work has to
 be executed in, has the following drawbacks related to application
 security:
 
-When a _Work_ instance is submitted by a
+* When a _Work_ instance is submitted by a
 resource adapter to a _WorkManager_ for execution:
-
-The _Work_ instance is always executed in an
+** The _Work_ instance is always executed in an
 unknown security context, or a default security context set by the
 application server’s _WorkManager_
 
-In the absence of inflow of security
+** In the absence of inflow of security
 identities during _Work_ submission, the container cannot ensure the
 task has been granted fine-grained permissions/access-control based on
 authenticated user identities but is limited to making access decisions
 based on code-based identity information.
-
-When a message is delivered asynchronously to
+* When a message is delivered asynchronously to
 _MessageEndpoint_ s residing in the application server, the resource
 adapter cannot establish the security identity of the caller of the
 _MessageEndpoint_ , that is, the value returned when
@@ -11748,60 +11670,33 @@ instance. In other words, as in Transaction Inflow (see
 deliveries that are delivered to endpoints within a single _Work_
 instance are processed under the same security identity.
 
-
-
-Security Inflow Conmtext (Object Diagram)
+*Security Inflow Context (Object Diagram)*
 
 image:conn-127.jpg[image]
 
-=== SecurityContext
-
-
-
+.SecurityContext
+[source,Java]
+----
  package jakarta.resource.spi.work;
 
-
-
  import jakarta.security.auth.Subject;
+ import jakarta.security.auth.callback.CallbackHandler;
 
- import
-jakarta.security.auth.callback.CallbackHandler;
+ public abstract class SecurityContext implements WorkContext {
 
-
-
- public abstract class SecurityContext
-
- implements WorkContext \{
-
-
-
- public String getDescription() \{
-
- return "Security Context";
-
+ public String getDescription() {
+   return "Security Context";
  }
 
-
-
- public String getName() \{
-
- return "SecurityContext";
-
+ public String getName() {
+   return "SecurityContext";
  }
 
-
-
- public abstract void setupSecurityContext(
-
- CallbackHandler handler,
-
- Subject executionSubject,
-
- Subject serviceSubject);
-
- }
-
-
+ public abstract void setupSecurityContext( CallbackHandler handler,
+                                            Subject executionSubject,
+                                            Subject serviceSubject);
+}
+----
 
 When a resource adapter flows-in an identity
 to be used by the application server, the identity may or may not belong
@@ -11811,14 +11706,14 @@ identity of the application server’s security domain. Therefore the EIS
 integration scenario has two choices related to establishing the Caller
 identity:
 
- _Case 1: Resource adapter flows-in an
-identity in the application server’s security policy domain._ In this
+* *_Case 1: Resource adapter flows-in an
+identity in the application server’s security policy domain._* In this
 case, the application server may just use the initiating principal,
 flown-in from the resource adapter, as the caller principal in the
 security context the _Work_ instance executes as.
 
- _Case 2: Resource adapter flows-in an
-identity belonging to the EIS’ security domain_ . The resource adapter
+* *_Case 2: Resource adapter flows-in an
+identity belonging to the EIS’ security domain_.* The resource adapter
 establishes a connection to the EIS and requires to execute a _Work_
 instance in the context of an EIS identity. In this case, the initiating
 or caller principal does not exist in the application server’s security
@@ -11837,11 +11732,7 @@ additional security policies, based on the configuration of the
 _MessageEndpoint_ s, during message delivery. See
 <<a2812, Message Delivery>>.
 
-=== 
-
-image:conn-125.png[image]
-
-[[a3776]]SecurityContext Class
+=== [[a3776]]SecurityContext Class
 
 The _SecurityContext_ is one of the standard
 _WorkContext_ s defined in this specification. It enables a _Work_
@@ -11861,12 +11752,11 @@ _Work_ instance contains an instance of _SecurityContext._
 
 
 
-Security Context Establishment During Work
-Submission(Sequence Diagram)
+*Security Context Establishment During Work Submission(Sequence Diagram)*
 
 image:conn-128.jpg[image]
 
-=== [[a3781]]Establishing the Security Context
+==== [[a3781]]Establishing the Security Context
 
 While setting the execution context of a
 _Work_ instance, the _WorkManager_ establishes the security context for
@@ -11879,35 +11769,25 @@ of the _SecurityContext_ implementation provided by the resource
 adapter. The following conditions are applicable to the application
 server provider while calling the _setupSecurityContext_ method:
 
-The _handler_ argument must not be null, and
+* The _handler_ argument must not be null, and
 the _CallbackHandler_ implementation passed as the argument _handler_ to
 _setupSecurityContext_ must support the following _Callback_ s defined
 in <<a9751, Jakarta™ Authentication Specification, Version 2.0>>:
-
- _CallerPrincipalCallback_
-
- _GroupPrincipalCallback_
-
- _PasswordValidationCallback_
-
+** _CallerPrincipalCallback_
+** _GroupPrincipalCallback_
+** _PasswordValidationCallback_
 The following _Callback_ s are recommended to
 be supported by the _CallbackHandler_ implementation:
-
- _CertStoreCallback_
-
- _PrivateKeyCallback_
-
- _SecretKeyCallback_
-
- _TrustStoreCallback_
-
-The _executionSubject_ argument must be
+** _CertStoreCallback_
+** _PrivateKeyCallback_
+** _SecretKeyCallback_
+** _TrustStoreCallback_
+* The _executionSubject_ argument must be
 non-null and it must not be read-only. It is expected that the resource
 adapter _Work_ implementation will populate this _executionSubject_ with
 _Principal_ and credentials that would be flown into the application
 server.
-
-The _serviceSubject_ argument may be null. If
+* The _serviceSubject_ argument may be null. If
 it is not null, it must not be read-only. It represents the application
 server’s credentials and it may be used by the _Work_ implementation to
 retrieve Principals and credentials necessary to establish a connection
@@ -11921,23 +11801,20 @@ called by the application server container, the resource adapter may
 perform the following steps to establish caller identity information for
 a _Work_ instance:
 
-Identify the security context that is
+1. Identify the security context that is
 required to be flown-in to the application server to serve as the
 execution context of the _Work_ instance.
-
-Populate the _executionSubject_ with the EIS
+2. Populate the _executionSubject_ with the EIS
 _Principal_ and Credentials that should serve as the security context
 for the _Work_ instance to be executed in.
-
-Add instances of the necessary _Callback_ s
+3. Add instances of the necessary _Callback_ s
 (<<a3806, Callbacks for Information from the
 Application Server>> describes when a particular _Callback_ is required
 to be employed by the resource adapter), usually a subset of the ones
 listed above, to an array and invokes the _handle()_ method in the
 container’s _CallbackHandler_ implementation by passing the array of
 _Callback_ instances.
-
-On sucessful return from the
+4. On sucessful return from the
 _CallbackHandler.handle()_ method the _setupSecurityContext()_ returns.
 
 On successful return of _setupSecurityContext_
@@ -11969,16 +11846,11 @@ information of the parent _Work_ instance. It must establish the
 equivalent of an unauthenticated caller principal for the nested _Work_
 instance.
 
-
-
-Establish the Security Context (Sequence
-Diagram)
+*Establish the Security Context (Sequence Diagram)*
 
 image:conn-129.jpg[image]
 
-
-
-=== [[a3806]]Callbacks for Information from the Application Server
+==== [[a3806]]Callbacks for Information from the Application Server
 
 As part of step 3 described in the section
 above, the following _Callback_ s may be employed by a resource adapter.
@@ -11989,15 +11861,14 @@ Specification, Version 2.0>> and the Java API documentation of the _Callback_ s 
 in the _jakarta.security.auth.message.callback_ package of that
 specification:
 
-A resource adapter may use the
+* A resource adapter may use the
 _CallerPrincipalCallback_ to set the container’s representation of the
 caller principal. The _CallbackHandler_ must establish the caller
 principal associated with the invocation being processed by the
 container. When the argument _Principal_ is null, the handler will
 establish the container’s representation of the unauthenticated caller
 principal.
-
-A resource adapter might use the
+* A resource adapter might use the
 _GroupPrincipalCallback_ to establish the container’s representation of
 the corresponding group principals within the Subject. When a null value
 is passed to the groups argument, the handler will establish the
@@ -12007,8 +11878,7 @@ yielding the union (without duplicates) of the principals existing
 within the _Subject_ , and those created with the names occuring within
 the argument array. The _CallbackHandler_ will define the type of the
 created principals.
-
-A resource adapter might use the
+* A resource adapter might use the
 _PasswordValidationCallback_ to employ the password validation
 facilities of its containing runtime. Since a resource adapter employing
 the _PasswordValidationCallback_ makes an assumption of access to the
@@ -12019,7 +11889,7 @@ domain), it can be deployed in Case #1 scenarios only +
 Security Domain>>). The resource adapter must pass this information to th
 e deployer through an out-of-band mechanism.
 
-=== [[a3811]]Case 1: Identity in the Container Security Domain
+==== [[a3811]]Case 1: Identity in the Container Security Domain
 
 As explained in
 <<a3732, Security Inflow Model>>, the EIS
@@ -12033,14 +11903,11 @@ _Principal_ s used in _CallerPrincipalCallback_ and
 _GroupPrincipalCallback_ without any translation to the application
 server security policy domain.
 
-
-
-Case 1: Identity in Container’s Security
-Domain (Sequence Diagram)
+*Case 1: Identity in Container’s Security Domain (Sequence Diagram)*
 
 image:conn-130.jpg[image]
 
-=== [[a3815]]Case 2: Identity Translated Between Security Domains
+==== [[a3815]]Case 2: Identity Translated Between Security Domains
 
 When the resource adapter, on the other hand,
 connects to an EIS that uses a different security policy domain, it
@@ -12057,13 +11924,10 @@ translations from the identity of initiating/caller resource principal
 to an application server principal could be one of the following types
 (see <<a1650, Resource Principal>>)
 
-Configured Identity
-
-Principal Mapping
-
-Caller Impersonation
-
-Credentials Mapping
+* Configured Identity
+* Principal Mapping
+* Caller Impersonation
+* Credentials Mapping
 
 For example, in the case of Principal Mapping,
 an employee may be identified by a userid and password (basic
@@ -12095,24 +11959,23 @@ specification does not define interfaces for Principal Mapping service
 and _CallbackHandler_ configuration. The deployer must use application
 server specific tools and techniques to enable this mapping.
 
-Case 2: Identity Translated Between Security
-Domains (Sequence Diagram)
+*Case 2: Identity Translated Between Security Domains (Sequence Diagram)*
 
 image:conn-131.jpg[image]
 
-=== [[a3827]]Establising a Principal as the Caller Identity
+==== [[a3827]]Establising a Principal as the Caller Identity
 
 Prior to returning to the container,
 _setupSecurityContext_ must use the container provided _CallbackHandler_
 to handle a _CallerPrincipalCallback_ , unless either of the following
 conditions are met at the time the method returns to the container:
 
- _Case A._ The resource adapter intends to
+* *_Case A._* The resource adapter intends to
 establish an authenticated caller identity, and the principal _Set_ of
 the _executionSubject_ contains exactly the one _Principal_ that would
 otherwise have been used to construct the _CallerPrincipalCallback_
 
- _Case B._ The resource adapter intends to
+* *_Case B._* The resource adapter intends to
 establish the unauthenticated caller identity, and the principal _Set_
 of the _executionSubject_ is empty.
 
@@ -12121,9 +11984,9 @@ is not required to use the _Callback_ s listed in
 <<a3806, Callbacks for Information from the
 Application Server>>.
 
-=== Case A: Establishing a Single Principal as the Caller Identity
+===== Case A: Establishing a Single Principal as the Caller Identity
 
- The resource adapter can add the one
+The resource adapter can add the one
 _Principal_ it requires to be set as the Caller identity in the
 _Principal_ _Set_ of the _executionSubject_ . See
 <<a3840, Case A: Establishing a Single Principal
@@ -12143,7 +12006,7 @@ includes all security identity translation requirements detailed in
 <<a3815, Case 2: Identity Translated Between
 Security Domains>>.
 
-=== Case B: Establishing an Unauthenticated Security Context
+===== Case B: Establishing an Unauthenticated Security Context
 
 If a resource adapter requires to establish an
 unauthenticated security context (which may or may not have an
@@ -12151,10 +12014,9 @@ associated _Principal_ ) for the _Work_ instance, the resource adapter
 may perform either of the following operations when
 _setupSecurityContext_ is called:
 
-It may use the _CallbackHandler_ to handle a
+* It may use the _CallbackHandler_ to handle a
 _CallerPrincipalCallback_ with a null _Principal_ or name
-
-Or, if it uses the simplification described in
+* Or, if it uses the simplification described in
 <<a3827, Establishing a Principal as the Caller
 Identity>>, it may return an empty _executionSubject_ .
 
@@ -12162,12 +12024,11 @@ The _WorkManager_ must detect that the handler
 was not called and establish the container’s representation of the
 unauthenticated identity for that _Work_ instance.
 
-[[a3840]]Case A: Establishing a
-Single Principal as the Caller Identity (Seq. Diagram)
+*[[a3840]]Case A: Establishing a Single Principal as the Caller Identity (Seq. Diagram)*
 
 image:conn-132.jpg[image]
 
-=== [[a3841]]Security Configuration Responsibilities
+==== [[a3841]]Security Configuration Responsibilities
 
 The system administrator, deployer and
 application component ( _MessageEndpoint_ provider) have particular
@@ -12179,7 +12040,7 @@ message-driven beans, the Jakarta Enterprise Beans Core Contracts
 and Requirements of <<a9723, Jakarta™ Enterprise
 Beans Specification, Version 4.0>>, states the following responsibilities:
 
-Deployer: (section 17.4.2) : The Deployer
+* Deployer: (section 17.4.2) : The Deployer
 assigns principals and/or groups of principals (such as individual users
 or user groups) used for managing security in the operational
 environment to the security roles defined by means of the _DeclareRoles_
@@ -12190,16 +12051,14 @@ operational environment’s security concepts is specific to that
 operational environment. Typically, the deployment process consists of
 assigning to each security role one or more user groups (or individual
 users) defined in the operational environment.
-
-Jakarta Enterprise Beans container provider (Section 17.6.7):
+* Jakarta Enterprise Beans container provider (Section 17.6.7):
 Principal Mapping If the application requires that its clients are
 deployed in a different security domain, or if multiple applications
 deployed across multiple security domains need to interoperate, the Jakarta Enterprise Beans
 Container Provider is responsible for the mechanism and tools that allow
 mapping of principals. The tools are used by the System Administrator to
 configure the security for the application?s environment.
-
-System Administrator (Section 17.7.2):
+* System Administrator (Section 17.7.2):
 Principal Mapping : If the client is in a different security domain than
 the target enterprise bean, the System Administrator is responsible for
 mapping the principals used by the client to the principals defined for
@@ -12209,17 +12068,17 @@ the scope of the Jakarta Enterprise Beans architecture.
 
 === Requirements
 
-{empty}The application server must support the
+* {empty}The application server must support the
 _SecurityContext_ interface. It must also satisfy all the requirements
 stated in <<a3781, Establishing the Security Context>>
 
-The application server must support resource
+* The application server must support resource
 adapters that employ Case 1 or 2 style integration mode. Cases 1 and 2
 are detailed in <<a3811, Case 1: Identity in the
 Container Security Domain>> and <<a3815, Case 2:
 Identity Translated Between Security Domains>> respectively.
 
-The application server must provide
+* The application server must provide
 configuration tools to establish Caller Identity information for a
 _MessageEndpoint_ or _Work_ instance as stated in Section
 <<a3815, Case 2: Identity Translated Between
@@ -12228,18 +12087,14 @@ for configuring principal mapping. The application server must also
 support the simplifications detailed in <<a3827,
 Establishing a Principal as the Caller Identity>>.
 
-{empty}The application server must support
+* {empty}The application server must support
 the security role assignments relevant to the MessageEndpoint
 implementation as stated in <<a3841, Security
 Configuration Responsibilities>>
 
-=== 
+=== Illustrative Example
 
-image:conn-125.png[image]
-
-Illustrative Example
-
-=== [[a3853]]Case 1: Identity in the Container Security Domain
+==== [[a3853]]Case 1: Identity in the Container Security Domain
 
 The Case #1 scenario enables resource adapters
 that work closely with the application server and could authenticate the
@@ -12282,137 +12137,67 @@ _MessageDrivenContext.isCallerInRole()_ must return the result of
 testing the established security identity for role membership.
 
 
-
- public class XMPPResourceAdapterImpl
-implements ResourceAdapter \{
-
- ...
-
- public void start(BootstrapContext ctx) \{
-
- bootstrapCtx = ctx;
-
- }
-
-
+[source,Java]
+----
+public class XMPPResourceAdapterImpl implements ResourceAdapter {
 
  ...
 
- \{
-
- WorkManager workManager =
-
- myRA.bootstrapCtx.getWorkManager();
-
- workManager.scheduleWork(new
-XMPPMessageDeliveryWork());
-
+ public void start(BootstrapContext ctx) {
+   bootstrapCtx = ctx;
+ }
  ...
 
+ {
+
+   WorkManager workManager = myRA.bootstrapCtx.getWorkManager();
+   workManager.scheduleWork(new XMPPMessageDeliveryWork());
+   ...
  }
 
+}
+
+public class XMPPMessageDeliveryWork implements Work, WorkContextProvider {
+
+  void release()\{ ..}
+  
+  List<WorkContext> getWorkContexts() {
+    List<WorkContext> l = new ArrayList<WorkContext>();
+    SecurityContext scIn = new XMPPSecurityContext();
+    l.add(scIn);
+    return l;
+  }
+  
+ void run(){
+   // deliver "exchange message" from the user
+     // to MessageEndpoint;
  }
+}
 
-
-
-
-
- public class XMPPMessageDeliveryWork
-
- implements Work, WorkContextProvider \{
-
-
-
- void release()\{ ..}
-
-
-
- List<WorkContext> getWorkContexts() \{
-
- List<WorkContext> l = new
-ArrayList<WorkContext>();
-
- SecurityContext scIn = new
-XMPPSecurityContext();
-
- l.add(scIn);
-
- return l;
-
- }
-
-
-
- void run()\{
-
- // deliver "exchange message" from the user
-
- // to MessageEndpoint;
-
- }
-
- }
-
-
-
-
-
- public class XMPPSecurityContext extends
-SecurityContext \{
-
-
+public class XMPPSecurityContext extends SecurityContext {
 
  @Override
-
- public void
-setupSecurityContext(CallbackHandler handler,
-
- Subject executionSubject, Subject
-serviceSubject) \{
-
- // Get username, password from client’s
-response
-
- // to XMPP register message
-
- // Note: PasswordValidationCallback usage is
-required
-
- // only if the RA requires authentication.
-
- PasswordValidationCallback pwdCallback =
-
- new PasswordValidationCallback(
-
- executionSubject, username, pwd);
-
- CallerPrincipalCallback cpCallback =
-
- new CallerPrincipalCallback(
-
- executionSubject, username);
-
- handler.handle(new Callback[] \{ pwdCallback,
-cpCallback });
-
-
-
- if (pwdCallback.getResult()) \{
-
- return; // login success.
-
- } else \{
-
- // login failure. Failure while setting
-Security Context
-
+ public void setupSecurityContext(CallbackHandler handler,
+                                  Subject executionSubject,
+                                  Subject serviceSubject) {
+                                  
+   // Get username, password from client’s response
+   // to XMPP register message
+   // Note: PasswordValidationCallback usage is required
+   // only if the RA requires authentication.
+   PasswordValidationCallback pwdCallback = new PasswordValidationCallback( executionSubject, username, pwd);
+   CallerPrincipalCallback cpCallback = new CallerPrincipalCallback(executionSubject, username);
+   handler.handle(new Callback[] { pwdCallback, cpCallback });
+   
+   if (pwdCallback.getResult()) {
+     return; // login success.
+   } else {
+     // login failure. Failure while setting Security Context
+   }
  }
-
- }
-
- }
-
-=== Case 2: Identity Translated Between Security Domains
+}
+----
+==== Case 2: Identity Translated Between Security Domains
 
 The Case #2 scenario enables resource adapters
 that are aware of only the EIS Principal to execute _Work_ instances
@@ -12451,15 +12236,7 @@ The resource adapter implementation source
 code remains the same as in <<a3853, Case 1:
 Identity in the Container Security Domain>>.
 
-
-
-=== 
-
-=== 
-
-image:conn-133.png[image]
-
-[[a3927]]Common Client Interface
+== [[a3927]]Common Client Interface
 
 image:conn-134.png[image]
 
