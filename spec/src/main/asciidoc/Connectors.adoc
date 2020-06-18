@@ -8898,39 +8898,35 @@ Note that the usage of the term “Endpoint” in
 this chapter refers to a message endpoint (for example, a message-driven
 application).
 
-=== 
-
-image:conn-100.png[image]
-
-Overview
+=== Overview
 
 Asynchronous message delivery or event
 notification is a widely used application communication paradigm. Some
 of the characteristics of the asynchronous message-based communication
 paradigm are:
 
-The message producer may not be directly
+* The message producer may not be directly
 aware of message consumers. There may be one or more consumers
 interested in the message.
 
-Message delivery is solicited; that is, a
+* Message delivery is solicited; that is, a
 message consumer has to express interest in receiving messages.
 
-The messaging infrastructure is type-agnostic;
+* The messaging infrastructure is type-agnostic;
 that is, it treats messages as a Binary Large Object (BLOB). It stores
 and routes messages reliably, to interested messsage consumers,
 depending on Quality-of-Service (QoS) capabilities.
 
-The interaction is inherently loosely coupled.
+* The interaction is inherently loosely coupled.
 The message producer and the consumer do not share any execution
 context.
 
-The message producer generally is not
+* The message producer generally is not
 interested in the outcome of message processing by consumers. However,
 it is possible that the provider may care to detect if the message has
 been consumed or not.
 
-The message delivery always involves a message
+* The message delivery always involves a message
 routing infrastructure, which offers varying QoS capabilities for
 storing (persistence) and routing messages reliably.
 
@@ -8943,7 +8939,7 @@ endpoint.
 Jakarta EE applications may use two different
 patterns to interact with a message provider:
 
-It may directly use specific messaging APIs,
+* It may directly use specific messaging APIs,
 such as Jakarta Messaging, to send and synchronously receive
 messages. This is achieved using the standard connector contracts for
 connection management. See <<a588, Connection
@@ -8951,7 +8947,7 @@ Management>>. Any message provider may provide a connector resource
 adapter that supplies connection objects for use by applications to send
 and synchronously receive messages using the specific messaging API.
 
-It may use message-driven beans to
+* It may use message-driven beans to
 asynchronously receive messages through a message provider. The Jakarta Enterprise Beans
 specification (see <<a9723, Jakarta™ Enterprise Beans
 Specification, Version 4.0>>) describes the message-driven bean
@@ -8967,7 +8963,7 @@ contracts to interact with various message providers, and a message
 provider has to do the same to interact with different application
 servers, which is an m x n problem.
 
-Message Inflow Contract
+*Message Inflow Contract*
 
 image:conn-101.jpg[image]
 
@@ -8981,13 +8977,9 @@ the standard message provider pluggability contract which allows a wide
 range of message providers to be plugged into any Jakarta EE compatible
 application server by way of a resource adapter.
 
-=== 
+=== Goals
 
-image:conn-100.png[image]
-
-Goals
-
-Provide a standard, generic mechanism to plug
+* Provide a standard, generic mechanism to plug
 in a wide range of message providers, including Jakarta Messaging, into a Jakarta EE
 compatible application server through a resource adapter and dispatch
 messages to message endpoints. This will allow Jakarta EE components to act
@@ -8996,183 +8988,120 @@ programming models. Further, the Jakarta EE components will be able to
 access messages with no awareness that a resource adapter is delivering
 the message.
 
-This generic contract must be capable of
+* This generic contract must be capable of
 supporting various messaging delivery guarantees provided by different
 messaging styles, as well as allow concurrent delivery of messages.
 
-=== 
+=== [[a2598]]Message Inflow Model
 
-image:conn-100.png[image]
-
-[[a2598]]Message Inflow Model
-
-Message Inflow Contract (Object Diagram)
+*Message Inflow Contract (Object Diagram)*
 
 image:conn-102.jpg[image]
 
-Message Inflow Contract (Interfaces)
+*Message Inflow Contract (Interfaces)*
 
 image:conn-103.jpg[image]
 
-===  _jakarta.resource.spi_
-
+._jakarta.resource.spi_
+[source,Java]
+----
 package jakarta.resource.spi;
 
-
-
 import java.beans.PropertyDescriptor;
-
 import jakarta.resource.NotSupportedException;
-
 import jakarta.resource.spi.endpoint.MessageEndpointFactory;
 
-
-
-public interface ResourceAdapter \{
+public interface ResourceAdapter {
 
  ... // other methods
 
- void
-endpointActivation(MessageEndpointFactory,
+ void endpointActivation(MessageEndpointFactory, ActivationSpec) throws ResourceException;
 
- ActivationSpec) throws ResourceException;
+ void endpointDeactivation(MessageEndpointFactory, ActivationSpec);
 
- void
-endpointDeactivation(MessageEndpointFactory,
-
- ActivationSpec);
-
- XAResource[] getXAResources(ActivationSpec[]
-specs)
-
- throws ResourceException;
-
+ XAResource[] getXAResources(ActivationSpec[] specs) throws ResourceException;
 }
 
 
+public interface ActivationSpec { // JavaBean
 
-public interface ActivationSpec \{ //
-JavaBean
-
- void validate() throws
-InvalidPropertyException;
+ void validate() throws InvalidPropertyException;
 
 }
 
+public class InvalidPropertyException extends ResourceException {
 
+ public InvalidPropertyException() { ... }
 
-public class InvalidPropertyException extends
-ResourceException \{
+ public InvalidPropertyException(String message) { ... }
 
- public InvalidPropertyException() \{ ... }
+ public InvalidPropertyException(String message, String errorCode) { ... }
 
- public InvalidPropertyException(String
-message) \{ ... }
+ public void setInvalidPropertyDescriptors( PropertyDescriptor[] invalidProperties) {
+    ...
+ }
 
- public InvalidPropertyException(String
-message,
-
- String errorCode) \{ ... }
-
- public void setInvalidPropertyDescriptors(
-
- PropertyDescriptor[] invalidProperties) \{
-... }
-
- public PropertyDescriptor[]
-getInvalidPropertyDescriptors() \{
-
- ... }
-
+ public PropertyDescriptor[] getInvalidPropertyDescriptors() {
+    ... 
+ }
 }
 
+public class UnavailableException extends ResourceException {
 
-
-public class UnavailableException extends
-ResourceException \{
-
- public UnavailableException() \{ ... }
+ public UnavailableException() { ... }
 
  public UnavailableException(String message)
-\{ ... }
+ { ... }
 
  public UnavailableException(Throwable cause)
-\{ ... }
+ { ... }
 
- public UnavailableException(String message,
-Throwable cause) \{
-
- ... }
+ public UnavailableException(String message, Throwable cause) {
+   ... 
+ }
 
 }
 
+public class RetryableUnavailableException extends UnavailableException
+                implements jakarta.resource.spi.RetryableException {}
+----
 
-
-public class RetryableUnavailableException
-
- extends UnavailableException
-
- implements
-jakarta.resource.spi.RetryableException \{}
-
-===  _jakarta.resource.spi.endpoint_
-
+._jakarta.resource.spi.endpoint_
+[source,Java]
+----
 package jakarta.resource.spi.endpoint;
 
-
-
 import java.lang.Exception;
-
 import java.lang.Throwable;
-
 import java.lang.NoSuchMethodException;
-
 import javax.transaction.xa.XAResource;
-
 import jakarta.resource.ResourceException;
-
 import jakarta.resource.spi.UnavailableException;
 
+public interface MessageEndpointFactory {
 
+ MessageEndpoint createEndpoint(XAResource) throws UnavailableException;
 
-public interface MessageEndpointFactory \{
-
- MessageEndpoint createEndpoint(XAResource)
-
- throws UnavailableException;
-
- MessageEndpoint createEndpoint(XAResource,
-long)
-
- throws UnavailableException;
+ MessageEndpoint createEndpoint(XAResource, long) throws UnavailableException;
 
  String getActivationName();
 
  Class<?> getEndpointClass();
 
- boolean
-isDeliveryTransacted(java.lang.reflect.Method)
-
- throws NoSuchMethodException;
-
+ boolean isDeliveryTransacted(java.lang.reflect.Method)
+              throws NoSuchMethodException;
 }
 
+public interface MessageEndpoint {
 
+ void beforeDelivery(java.lang.reflect.Method)
+       throws NoSuchMethodException, ResourceException;
 
-public interface MessageEndpoint \{
-
- void
-beforeDelivery(java.lang.reflect.Method)
-
- throws NoSuchMethodException,
-ResourceException;
-
- void afterDelivery() throws
-ResourceException;
-
+ void afterDelivery() throws ResourceException;
+ 
  void release();
-
 }
+----
 
 The ResourceAdapter interface supports methods
 used for endpoint activations and deactivations. The endpointActivation
@@ -9191,15 +9120,12 @@ MessageEndpointFactory may be used for obtaining any number of message
 endpoint instances. The createEndpoint method call may throw an
 UnavailableException for several reasons:
 
-The application server has not completed
+* The application server has not completed
 endpoint activation.
-
-The application server may decide to limit
+* The application server may decide to limit
 concurrent message deliveries.
-
-The application server is about to shutdown.
-
-The application server may have encountered an
+* The application server is about to shutdown.
+* The application server may have encountered an
 internal error condition.
 
 In some cases where the offending condition is
@@ -9267,45 +9193,37 @@ The following steps in sequential order
 represent the various stages in the message endpoint lifecycle, during
 which message inflow contracts are used:
 
-Endpoint deployment
+1. Endpoint deployment
+2. Message delivery (transacted and non-transacted)
+3. Endpoint undeployment
 
-Message delivery (transacted and
-non-transacted)
+=== Endpoint Deployment
 
-Endpoint undeployment
-
-=== 
-
-image:conn-100.png[image]
-
-Endpoint Deployment
-
-Endpoint (Message-Driven Bean) Deployment
-(Actors)
+*Endpoint (Message-Driven Bean) Deployment (Actors)*
 
 image:conn-104.jpg[image]
 
 There are several actors involved in the
 deployment of a message endpoint:
 
-A message endpoint that is to be deployed on
+* A message endpoint that is to be deployed on
 an application server.
 
-A resource adapter capable of message
+* A resource adapter capable of message
 delivery. The resource adapter is typically provided by a message
 provider or a third-party, and is used to plug an external message
 provider into an application server. The resource adapter may be
 standalone that may be shared by different applications or it may be
 packaged along with an endpoint application.
 
-An application server that provides the
+* An application server that provides the
 runtime environment for the application.
 
-A deployer of the application, a human, who
+* A deployer of the application, a human, who
 understands the application’s needs, and is also aware of the details of
 the runtime environment in which the application will be deployed.
 
-A message provider, or messaging
+* A message provider, or messaging
 infrastructure, that is the source for messages. A message provider may
 provide special tools that can be used by the deployer to setup the
 message provider for message delivery.
@@ -9313,7 +9231,7 @@ message provider for message delivery.
 The roles and responsibilities of the various
 actors are as follows:
 
-=== Message Endpoint
+==== Message Endpoint
 
 The message endpoint is typically a
 message-driven bean application which is to be deployed on the
@@ -9339,68 +9257,40 @@ activation configuration information. For example, the deployment
 descriptor of a message-driven bean which consumes from a Jakarta Messaging resource
 adapter may contain:
 
-=== Message-Driven Bean Deployment Descriptor
-
-<!-- message-driven bean deployment
-descriptor -->
-
+.Message-Driven Bean Deployment Descriptor
+[source,xml]
+----
+<!-- message-driven bean deployment descriptor -->
  ...
-
  <activation-config>
-
- <activation-config-property>
-
- <activation-config-property-name>
-
- destinationType
-
- </activation-config-property-name>
-
- <activation-config-property-value>
-
- jakarta.jms.Topic
-
- </activation-config-property-value>
-
+   <activation-config-property>
+     <activation-config-property-name>
+     destinationType
+   </activation-config-property-name>
+   <activation-config-property-value>
+     jakarta.jms.Topic
+   </activation-config-property-value>
  </activation-config-property>
-
  <activation-config-property>
-
- <activation-config-property-name>
-
- SubscriptionDurability
-
- </activation-config-property-name>
-
- <activation-config-property-value>
-
- Durable
-
- </activation-config-property-value>
-
+   <activation-config-property-name>
+     SubscriptionDurability
+   </activation-config-property-name>
+   <activation-config-property-value>
+     Durable
+   </activation-config-property-value>
  </activation-config-property>
-
  <activation-config-property>
-
- <activation-config-property-name>
-
- MessageSelector
-
- </activation-config-property-name>
-
- <activation-config-property-value>
-
- JMSType = 'car' AND color = 'blue'
-
- </activation-config-property-value>
-
+   <activation-config-property-name>
+     MessageSelector
+   </activation-config-property-name>
+   <activation-config-property-value>
+     JMSType = 'car' AND color = 'blue'
+   </activation-config-property-value>
  </activation-config-property>
-
  ...
-
  </activation-config>
-
 ...
+----
 
 The Jakarta Enterprise Beans specification does not specify
 messaging style-specific descriptor elements contained within the
@@ -9409,7 +9299,7 @@ messaging specification or product to specify the standard descriptor
 elements specific to the messaging style for representing the activation
 configuration information.
 
-=== Resource Adapter
+==== Resource Adapter
 
 The resource adapter is a system component
 located in the application server’s address space (that is, it has
@@ -9427,13 +9317,13 @@ through metadata annotations described in
 <<a4758, @Activation>>, that is used by the
 endpoint deployer to setup endpoint activation:
 
-=== List of Supported Message Listener Types
+===== List of Supported Message Listener Types
 
 The resource adapter provides a list of
 endpoint message listener types it supports. Each type is represented as
 a name of the Java type of the message listener interface.
 
-=== [[a2738]]ActivationSpec JavaBean
+===== [[a2738]]ActivationSpec JavaBean
 
 The resource adapter provides the Java class
 name of an ActivationSpec JavaBean, one for each supported message
@@ -9504,7 +9394,7 @@ destination is specified by the destinationType property value. The Jakarta Mess
 ActivationSpec JavaBean properties should be standardized by the Jakarta Messaging
 community.
 
-=== [[a2747]]Administered Objects
+===== [[a2747]]Administered Objects
 
 The resource adapter may provide the Java
 class name and the interface type of an optional set of JavaBean classes
@@ -9551,27 +9441,27 @@ object, the application server must establish the association between
 the administered object and the resource adapter instance by calling
 setResourceAdapter.
 
-=== Configuring Administered Objects
+===== Configuring Administered Objects
 
-Create an administered object JavaBean
+* Create an administered object JavaBean
 instance. This will initialize the instance with the defaults specified
 through the JavaBean mechanism.
 
-Apply the administered object class
+* Apply the administered object class
 configuration properties specified in the resource adapter deployment
 descriptor, on the administered object instance. This may override some
 of the default values specified by way of the JavaBean mechanism.
 
-The application server is required to merge
+* The application server is required to merge
 values specified by way of annotations and deployment descriptors as
 specified in <<a4531, Deployment Descriptors and
 Annotations>>, before applying the administered object class configuration
 properties.
 
-The deployer may further override the values
+* The deployer may further override the values
 of the administered object before deployment.
 
-=== Endpoint Deployer
+==== Endpoint Deployer
 
 The endpoint deployer is a human who has the
 responsibility to deploy the message endpoint, or application, on an
@@ -9601,7 +9491,7 @@ deployer provides all the configured JavaBean instances to the
 application server, and also specifies the chosen resource adapter
 instance to be used for message delivery.
 
-=== [[a2765]]Application Server
+==== [[a2765]]Application Server
 
 The application server provides the runtime
 environment for the message endpoint. It activates message endpoints
@@ -9664,7 +9554,7 @@ endpointDeactivation method call. The application server must pass the
 same MessageEndpointFactory instance and the ActivationSpec JavaBean
 instance that was used during endpoint activation.
 
-=== Message Provider
+==== Message Provider
 
 A message provider, or messaging
 infrastructure, is typically an external system that is the source for
@@ -9673,19 +9563,16 @@ message provider may provide special tools that can be directly used by
 the endpoint deployer to setup the message provider for message
 delivery.
 
-
-
-Endpoint (Message-Driven Bean) Deployment
-Steps
+*Endpoint (Message-Driven Bean) Deployment Steps*
 
 image:conn-105.jpg[image]
 
-=== Endpoint Deployment Steps
+==== Endpoint Deployment Steps
 
 The sequence of steps involved in endpoint
 deployment involving the various actors is as follows:
 
-The endpoint deployer obtains a list of
+1. The endpoint deployer obtains a list of
 resource adapters capable of delivering messages to the message
 endpoint, and chooses a suitable one. The decision is based on the
 message listener type supported by the resource adapter and its QoS
@@ -9695,33 +9582,33 @@ case, the resource adapter is deployed along with the endpoint
 application and is used to deliver messages to the specific endpoint
 application.
 
-The deployer obtains the activation
+2. The deployer obtains the activation
 configuration information provided by the endpoint developer available
 by way of metadata annotations or in the endpoint deployment descriptor.
 
-The deployer may need to setup the message
+3. The deployer may need to setup the message
 provider for message delivery to the endpoint. This may be done using a
 message provider specific tool.
 
-The deployer obtains an ActivationSpec
+4. The deployer obtains an ActivationSpec
 JavaBean from the selected resource adapter and configures it. The
 configuration information is messaging style-specific and may include
 message provider specific details.
 
-The deployer configures the JavaBean instances
+5. The deployer configures the JavaBean instances
 of administered objects, if any are necessary.
 
-The deployer provides the configured JavaBean
+6. The deployer provides the configured JavaBean
 instances to the application server, and also specifies the resource
 adapter chosen for message delivery. Note, the contract between a
 deployment tool and an application server is out of scope for this
 specification.
 
-The application server places the administered
+7. The application server places the administered
 objects, if any, in the java:comp/env component namespace for use by the
 message endpoint.
 
-The application server activates the message
+8. The application server activates the message
 endpoint by calling the chosen resource adapter through the
 endpointActivation method and passes a MessageEndpointFactory instance
 and the configured ActivationSpec JavaBean instance provided by the
@@ -9729,23 +9616,23 @@ deployer. The resource adapter may reject the endpoint activation by
 throwing a NotSupportedException, which is due to incorrect activation
 information.
 
-=== Requirements
+==== Requirements
 
-A resource adapter that is capable of
+* A resource adapter that is capable of
 delivering messages to message endpoints must provide a list of endpoint
 message listener types it supports, and also must provide an
 ActivationSpec JavaBean class for each message listener type it
 supports. This information must be part of the resource adapter
 deployment descriptor.
 
-ActivationSpec and all administered objects
+* `ActivationSpec` and all administered objects
 must be JavaBeans.
 
-A resource adapter must allow an application
+* A resource adapter must allow an application
 server to make concurrent endpointActivation method or
 endpointDeactivation method calls.
 
-The endpoint application’s activation-config
+* The endpoint application’s activation-config
 properties, specified in the endpoint deployment descriptor or through
 the message endpoint’s annotation, should be a subset of the
 ActivationSpec JavaBean’s properties. There must be a one-to-one
@@ -9756,24 +9643,24 @@ instance during endpoint deployment. Any specified activation-config
 property which does not have a matching property in the ActivationSpec
 JavaBean should be treated as an error.
 
-When an application server notifies a resource
+* When an application server notifies a resource
 adapter during endpoint deactivation, it must pass the same
 MessageEndpointFactory instance and the ActivationSpec JavaBean instance
 that was used during endpoint activation.
 
-Any exception thrown by the
+* Any exception thrown by the
 endpointDeactivation method call must be ignored. After this method call
 the endpoint is deemed inactive.
 
-All deployed endpoints must be automatically
+* All deployed endpoints must be automatically
 reactivated by the application server when it restarts after a normal
 shutdown or system crash.
 
-Before a resource adapter is undeployed, the
+* Before a resource adapter is undeployed, the
 application server must deactivate all active endpoints consuming
 messages from that specific resource adapter.
 
-=== Structure of a Message Listener Interface
+==== Structure of a Message Listener Interface
 
 A message listener interface implemented by a
 message endpoint, a message-driven bean, is allowed to have multiple
@@ -9798,7 +9685,7 @@ The Jakarta Enterprise Beans specification describes in detail the
 structural requirements of a message listener interface implemented by a
 message-driven bean.
 
-=== Multiple Endpoint Activations With Similar Activation Configuration
+==== Multiple Endpoint Activations With Similar Activation Configuration
 
 Since multiple endpoints, that is, different
 applications, with similar activation configuration may be deployed in a
@@ -9810,35 +9697,28 @@ separately. When messages start arriving, the resource adapter must, for
 each active endpoint, deliver a separate copy of incoming messages, even
 if there are multiple endpoints with similar activation configuration.
 
-=== Requirements
+===== Requirements
 
-The application server must supply a unique
+* The application server must supply a unique
 MessageEndpointFactory instance for each activation.
 
-Refer to <<a5078,
-Equality Constraints>> for equality constraints on MessageEndpointFactory
+* Refer to <<a5078,Equality Constraints>> for equality constraints on MessageEndpointFactory
 and ActivationSpec implementations.
 
-The resource adapter must treat multiple
+* The resource adapter must treat multiple
 endpoints with similar activation configuration separately and guarantee
 message delivery semantics.
 
-The resource adapter must treat each
+* The resource adapter must treat each
 ActivationSpec JavaBean uniquely irrespective of its contents. That is,
 the resource adapter must not treat two separate ActivationSpec
 JavaBeans as equals.
 
-
-
-Endpoint Deployment (Sequence Diagram)
+*Endpoint Deployment (Sequence Diagram)*
 
 image:conn-106.jpg[image]
 
-=== 
-
-image:conn-100.png[image]
-
-[[a2812]]Message Delivery
+=== [[a2812]]Message Delivery
 
 Once endpoints are activated, they are ready
 to receive messages. When messages arrive, the resource adapter uses the
@@ -9897,243 +9777,123 @@ optionally pass an XAResource instance through the createEndpoint method
 in order to receive transaction notifications for those transactions
 started by an application server before message delivery.
 
-=== Sample Resource Adapter Code To Illustrate Message Delivery
+==== Sample Resource Adapter Code To Illustrate Message Delivery
 
-=== Message Delivery in a Resource Adapter
-
+.Message Delivery in a Resource Adapter
+[source,Java]
+----
 // Reader Thread(s)
-
-\{
-
- // 1. Strip off msg header and parse message
-description
-
- // 2. Choose a set of endpoints which match
-message description
-
- // 3. Place message in appropriate buffer /
-queue
-
+{
+ // 1. Strip off msg header and parse message description
+ // 2. Choose a set of endpoints which match message description
+ // 3. Place message in appropriate buffer queue
  // 4. Notify worker threads
-
 }
 
 
 
 // Worker Thread(s)
-
-\{
-
- // 1. Wake up on notification (message
-arrival)
-
- // 2. Pick up the message and locate the
-MessageEndpointFactory
-
+{
+ // 1. Wake up on notification (message arrival)
+ // 2. Pick up the message and locate the MessageEndpointFactory
  // associated with the subscription
-
  Message msg = ...;
+ MessageEndpointFactory endpointFactory = ...;
+ MyXAResource xaResource = ...; // for transacted delivery
 
- MessageEndpointFactory endpointFactory =
-...;
-
- MyXAResource xaResource = ...; // for
-transacted delivery
-
-
-
- // 4. Obtain a message endpoint and narrow
-it to the
-
+ // 4. Obtain a message endpoint and narrow it to the
  // correct type.
-
-
-
- // ActivationSpec has endpoint message
-listener type
-
+ // ActivationSpec has endpoint message listener type
  // information.
+ Object obj = endpointFactory.createEndpoint(xaResource);
+ jakarta.jms.MessageListener endpoint = (jakarta.jms.MessageListener) obj;
 
- Object obj =
-endpointFactory.createEndpoint(xaResource);
-
- jakarta.jms.MessageListener endpoint =
-
- (jakarta.jms.MessageListener) obj;
-
-
-
- // 5. Link the XAResource with the endpoint.
-This allows the
-
- // XAResource object to know which
-endpoint/message delivery
-
- // is transacted when it receives
-transaction notifications.
-
- // This may be unnecessary depending on the
-implementation.
-
+ // 5. Link the XAResource with the endpoint. This allows the
+ // XAResource object to know which endpoint/message delivery
+ // is transacted when it receive transaction notifications.
+ // This may be unnecessary depending on the implementation.
  xaResource.setEndpoint(endpoint);
 
-
-
- // Note: It may be possible to make the
-XAResource object
-
- // thread-safe/reentrant and reuse the same
-object for receiving
-
- // transaction notifications for different
-endpoints.
-
- // The XAResource object may use
-thread-local storage to
-
- // remember state, and thus avoid creating
-multiple
-
+ // Note: It may be possible to make the XAResource object
+ // thread-safe/reentrant and reuse the same object for receiving
+ // transaction notifications for different endpoints.
+ // The XAResource object may use thread-local storage to
+ // remember state, and thus avoid creating multiple
  // XAResource objects.
 
-
-
  // 6. Deliver the message.
-
  endpoint.onMessage(msg);
 
-
-
- // 7. Wait for notification of incoming
-messages
-
- // and repeat the above steps on message
-arrival.
-
+ // 7. Wait for notification of incoming messages
+ // and repeat the above steps on message arrival.
 }
-
-
 
 package com.wombat.ra;
 
-
-
 import javax.transaction.xa.*;
 
+class MyXAResource implements javax.transaction.xa.XAResource {
 
-
-class MyXAResource implements
-javax.transaction.xa.XAResource \{
-
-
-
- public void start(Xid xid) throws
-XAException \{
-
- // Associate the message delivery with the
-transaction id.
-
- // That is, create the tuple (msg id,
-transaction id) in
-
+ public void start(Xid xid) throws XAException {
+ // Associate the message delivery with the transaction id.
+ // That is, create the tuple (msg id, transaction id) in
  // memory.
 
  }
 
-
-
- public int prepare(Xid xid) throws
-XAException \{
-
- // Forward the tuple (message id,
-transaction id) to the
-
- // message provider. The provider must
-persist this
-
- // information, which is used during crash
-recovery by the
-
- // application server. During crash
-recovery,
-
- // the application calls the message
-provider, via the
-
- // recover method on an XAResource object,
-queries for
-
- // a list of in-doubt transactions and
-completes them.
-
- // Upon successful completion, return
-"ready_to_commit"
-
+ public int prepare(Xid xid) throws XAException {
+ // Forward the tuple (message id, transaction id) to the
+ // message provider. The provider must persist this
+ // information, which is used during crash recovery by the
+ // application server. During crash recovery,
+ // the application calls the message provider, via the
+ // recover method on an XAResource object, queries for
+ // a list of in-doubt transactions and completes them.
+ // Upon successful completion, return "ready_to_commit"
  // vote, else return "rollback_only" vote.
 
  }
 
-
-
- public void commit(Xid xid, boolean
-onePhase)
-
- throws XAException \{
-
- // forward the transaction ID to the message
-provider. This
-
- // serves as the acknowledgement that a
-message was
-
+ public void commit(Xid xid, boolean onePhase)
+      throws XAException {
+ // forward the transaction ID to the message provider. This
+ // serves as the acknowledgement that a message was
  // delivered.
 
  }
 
-
-
- public void rollback(Xid xid) throws
-XAException \{
-
- // forward the transaction ID to the message
-provider. This
-
- // indicates to the provider that the
-message was not
-
+ public void rollback(Xid xid) throws XAException {
+ // forward the transaction ID to the message provider. This
+ // indicates to the provider that the message was not
  // delivered.
-
  }
-
-
-
+ 
  ...; // other methods
-
 }
+----
+===== Requirements
 
-=== Requirements
-
-The application server’s proxy endpoint
+* The application server’s proxy endpoint
 instance must implement the endpoint message listener type and the
 MessageEndpoint interface.
 
-The application server must pass by reference
+* The application server must pass by reference
 all the method parameter objects passed by the resource adapter during a
 message delivery method call on a proxy endpoint. The application server
 must not copy or clone the passed method parameter objects during
 message delivery to the actual endpoint instance.
 
-If the application server starts a new
+* If the application server starts a new
 transaction, depending on endpoint preferences, before delivering a
 message to an endpoint instance, it must send all transaction
 notifications to the XAResource instance optionally supplied by the
 resource adapter as part of the createEndpoint method call.
 
-A resource adapter must not attempt to
+* A resource adapter must not attempt to
 deliver messages concurrently to a single endpoint instance. The
 application server must reject concurrent usage of an endpoint instance.
 
-=== Message Redelivery Upon Crash Recovery
+==== Message Redelivery Upon Crash Recovery
 
 An application server may crash during
 message delivery. In the case of message deliveries transacted by the
@@ -10142,43 +9902,41 @@ decision to the message provider during crash recovery.
 
 During crash recovery:
 
-The application server must first restart
+1. The application server must first restart
 resource adapter instances by calling the start method on each persisted
 ResourceAdapter JavaBean, each corresponding to a resource adapter
 instance that was active prior to the crash.
 
-The application server must call the
+2. The application server must call the
 getXAResources method on each ResourceAdapter JavaBean, and pass in an
 array of ActivationSpec JavaBeans, each of which corresponds to a
 deployed endpoint application that was active prior to the system crash.
 This method need not be called if there were no endpoint applications
 that were active prior to the crash.
 
-Upon being called by the application server
+3. Upon being called by the application server
 during crash recovery through the getXAResources method, the resource
 adapter must return an array of XAResource objects, each of which
 represents a unique resource manager.
-
 The resource adapter may return null if it
 does not implement the XAResource interface. Otherwise, it must return
 an array of XAResource objects, each of which represents a unique
 resource manager that was used by the endpoint applications. The
 resource adapter may throw a ResourceException if it encounters an error
 condition.
-
 Since each returned XAResource object
 represents a unique resource manager, the number of returned XAResource
 objects must be less than or equal to the number of ActivationSpec
 instances specified.
 
-Since it is possible that multiple resource
+4. Since it is possible that multiple resource
 adapters may use the same resource manager, there may be more than one
 XAResource object in the collection representing a resource manager. The
 application server may still need to narrow the collection of XAResource
 objects to a unique set of resource managers by using the isSameRM
 method on the XAResource object.
 
-The application server must use the
+5. The application server must use the
 XAResource objects to query each resource manager for a list of in-doubt
 in an already prepared state awaiting a commit decision transactions.
 Then, it must complete each pending transaction by sending the commit
@@ -10192,7 +9950,7 @@ crash. Upon such notification, the message provider, depending on the
 delivery outcome, may decide to redeliver the undelivered messages to
 the various endpoints when they are reactivated.
 
-=== Durable Message Delivery Setup
+==== Durable Message Delivery Setup
 
 Once message endpoints are activated, they
 are ready to receive messages from a message provider. Message delivery
@@ -10226,7 +9984,7 @@ specified by an endpoint deployer by way of the ActivationSpec JavaBean.
 Note, some message providers may not support durable message deliveries
 and hence it is a QoS capability offered by the message provider.
 
-=== Concurrent Delivery of Messages
+==== Concurrent Delivery of Messages
 
 During message endpoint activation, the
 application server supplies a MessageEndpointFactory to the resource
@@ -10250,13 +10008,13 @@ The application server may also attempt to
 block a message delivery method call in order to limit concurrency and
 perform flow control.
 
-=== Requirements
+===== Requirements
 
 The application server must return a new or
 an unused endpoint instance for every createEndpoint method call on a
 MessageEndpointFactory.
 
-=== Delivery Semantics and Acknowledgement
+==== Delivery Semantics and Acknowledgement
 
 When the resource adapter delivers a message
 to an endpoint instance, which is really a proxy endpoint instance, the
@@ -10276,16 +10034,16 @@ is, the application server does not start a transaction, the resource
 adapter has to rely on the successful completion of the message delivery
 call in order to send back an acknowledgement to its provider.
 
-=== Transacted Delivery (Using Container-Managed Transaction)
+==== Transacted Delivery (Using Container-Managed Transaction)
 
 Depending on the endpoint preferences, the
 application server brackets the message delivery to an endpoint instance
 with a Jakarta Transaction's transaction.
 
-This ensures that all the work done by the
+* This ensures that all the work done by the
 endpoint instance is enlisted as part of the transaction.
 
-This provides atomic message delivery/message
+* This provides atomic message delivery/message
 consumption; that is, if the transaction were to be aborted by the
 application server due to an exceptional condition, all the work done by
 the endpoint instance is aborted, and the delivery is undone. If this
@@ -10297,16 +10055,16 @@ adapter while beginning and completing transactions by using the
 XAResource instance optionally supplied through the createEndpoint
 method call.
 
-This allows the adapter to detect the outcome
+* This allows the adapter to detect the outcome
 of a transacted delivery, and also influence the outcome of the
 transaction via through prepare method call on the XAResource instance.
 
-This allows the adapter to send back an
+* This allows the adapter to send back an
 acknowledgement to its message provider contingent on successful
 delivery; that is, when notified through the commit method call on the
 XAResource instance.
 
-This also allows the adapter to be notified
+* This also allows the adapter to be notified
 of the correct delivery outcome upon failure recovery processing; that
 is, if the system crashes when the transaction is in-doubt, that is,
 when the transaction has already been prepared, the application server
@@ -10330,7 +10088,7 @@ Inflow>>).
 There are two delivery options available to
 the resource adapter for transacted deliveries:
 
-Option A, traditional XA style. The resource
+* *Option A, traditional XA style.* The resource
 adapter optionally provides an _XAResource_ instance through the
 createEndpoint method in order to receive XA transaction notifications
 for transacted message deliveries. In this case, the application server
@@ -10339,7 +10097,7 @@ merely a participant (the XAResource Resource Manager (RM)). See
 <<a2995, Transacted Message Delivery: Option
 A(Sequence Diagram)>>.
 
-Option B, beforeDelivery/afterDelivery. The
+* *Option B, beforeDelivery/afterDelivery.* The
 resource adapter still optionally provides an XAResource instance
 through the createEndpoint method in order to receive XA transaction
 notifications for transacted message deliveries. But the resource
@@ -10414,13 +10172,13 @@ Delivery: Option B (Sequence Diagram)>>.
 
 Thus, in the case of transacted deliveries:
 
-If a resource adapter does not provide an
+* If a resource adapter does not provide an
 XAResource instance, it does not get XA transaction notifications.
 
-If a resource adapter provides an XAResource
+* If a resource adapter provides an XAResource
 instance, it gets XA transaction notifications.
 
-If a resource adapter calls beforeDelivery
+* If a resource adapter calls beforeDelivery
 and afterDelivery methods in addition to providing an XAResource
 instance, it not only receives XA transaction notifications but also
 gains control over when the transaction is started and completed. The
@@ -10444,22 +10202,22 @@ method is called in-between beforeDelivery and afterDelivery method
 calls, any transaction started during the corresponding beforeDelivery
 method call must be aborted by the application server.
 
-=== Non-Transacted Delivery
+==== Non-Transacted Delivery
 
-The application server does not bracket the
+1. The application server does not bracket the
 message delivery to an endpoint instance within a Jakarta Transaction's transaction.
 
-The resource adapter relies on the successful
+2. The resource adapter relies on the successful
 return of the message delivery call on the endpoint instance for
 delivery confirmation and may send out an acknowledgement to its message
 provider if appropriate.
 
-Any exception thrown by an endpoint instance
+3. Any exception thrown by an endpoint instance
 during message delivery is taken as a failed delivery. The application
 server must propagate any exception thrown during message delivery to
 the resource adapter.
 
-The application server does not notify the
+4. The application server does not notify the
 resource adapter about the delivery outcome upon crash recovery. Note,
 system failures may happen before the application server calls the
 actual endpoint instance, or while the actual endpoint instance is doing
@@ -10472,7 +10230,7 @@ what state the actual endpoint instance was in when the failure
 happened. Consequently, it is hard to model exactly once delivery
 semantics for non-transacted dispatches.
 
-=== Transacted Delivery Using an Imported Transaction
+==== Transacted Delivery Using an Imported Transaction
 
 It is possible that a resource adapter may
 attempt message delivery to an endpoint instance with a transaction
@@ -10500,7 +10258,7 @@ have been successfully delivered. If the enclosing transaction aborts,
 the messages that were delivered as part of the transaction are
 canceled.
 
-=== Requirements
+==== Requirements
 
 An application server must implement the
 following behavior for transacted and non-transacted message delivery to
@@ -10511,32 +10269,23 @@ Transacted and Non-transacted Message Delivery>> shown below, depending
 on the endpoint transaction preferences and the presence of a source
 managed transaction:
 
-=== [[a2978]]Application Server Behavior for Transacted and Non-transacted Message Delivery
-
-
-
-Source managed transaction
-
-No source managed transaction
-
-Endpoint instance requires transacted message
+.[[a2978]]Application Server Behavior for Transacted and Non-transacted Message Delivery
+|===
+||*Source managed transaction*|*No source managed transaction*
+|Endpoint instance requires transacted message
 delivery
-
-Use the source managed transaction. Ignore
+|Use the source managed transaction. Ignore
 the _XAResource_ instance supplied by the resource adapter, if any.
-
-Start a new transaction. Notify the
+|Start a new transaction. Notify the
 _XAResource_ instance supplied by the resource adapter, if any.
-
-Endpoint does not need transacted message
+|Endpoint does not need transacted message
 delivery
-
-Suspend the source managed transaction.
+|Suspend the source managed transaction.
 Ignore the _XAResource_ instance supplied by the resource adapter, if
 any.
-
-No action. Ignore the _XAResource_ instance
+|No action. Ignore the _XAResource_ instance
 supplied by the resource adapter, if any.
+|===
 
 The application server must propagate any
 exception thrown during a message delivery to the resource adapter
@@ -10547,59 +10296,46 @@ server must support both delivery options, option A and option B.
 
 
 
-=== 
+=== Endpoint Undeployment
 
-image:conn-100.png[image]
-
-Endpoint Undeployment
-
-When a message endpoint is undeployed, the
+* When a message endpoint is undeployed, the
 application server notifies the resource adapter through the
 endpointDeactivation method. The application server must pass the same
 MessageEndpointFactory instance and the ActivationSpec JavaBean instance
 that was used during the endpoint activation.
 
-The resource adapter removes the endpoint
+* The resource adapter removes the endpoint
 information from its internal state and in turn may notify the message
 provider.
 
-
-
-[[a2995]]Transacted Message
-Delivery: Option A(Sequence Diagram)
+*[[a2995]]Transacted Message Delivery: Option A(Sequence Diagram)*
 
 image:conn-107.jpg[image]
 
-Transacted[[a2996]] Message
-Delivery: Option B (Sequence Diagram)
+*Transacted[[a2996]] Message Delivery: Option B (Sequence Diagram)*
 
 image:conn-108.jpg[image]
 
-Non-transacted Message Delivery (Sequence
-Diagram)
+*Non-transacted Message Delivery (Sequence Diagram)*
 
 image:conn-109.jpg[image]
 
-Endpoint Undeployment (Sequence Diagram)
+*Endpoint Undeployment (Sequence Diagram)*
 
 image:conn-110.jpg[image]
 
-=== 
-
-image:conn-100.png[image]
-
-Jakarta Messaging Use Case
+=== Jakarta Messaging Use Case
 
 For illustration purposes, a Jakarta Messaging use case
 involving a Jakarta Messaging resource adapter is discussed. The intent of this use
 case is to show the following:
 
-The Jakarta Messaging resource adapter uses the generic
+* The Jakarta Messaging resource adapter uses the generic
 message inflow contract and asynchronously delivers messages to
 message-driven beans through the onMessage method on the
 jakarta.jms.MessageListener interface.
 
-The Jakarta Messaging resource adapter is used by an Jakarta Enterprise Beans
+* The Jakarta Messaging resource adapter is used by an Jakarta Enterprise Beans
 application to send and synchronously receive messages through a
 jakarta.jms.Connection object.
 
@@ -10612,265 +10348,117 @@ This illustrates how a Jakarta Messaging provider is
 plugged into a Jakarta EE application server using the standard connector
 contracts.
 
-=== Sample Jakarta Messaging Resource Adapter Deployment Descriptor
-
+.Sample Jakarta Messaging Resource Adapter Deployment Descriptor
+[source,xml]
+----
 <?xml version="1.0" encoding="UTF-8"?>
+<connector xmlns="http://java.sun.com/xml/ns/j2ee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.5">
 
-
-
-<connector
-xmlns="http://java.sun.com/xml/ns/j2ee"
-
-
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.5">
-
-
-<display-name>Wombat-JMSAdapter</display-name>
-
- <vendor-name>Wombat Software
-Systems</vendor-name>
-
+ <display-name>Wombat-JMSAdapter</display-name>
+ <vendor-name>Wombat Software Systems</vendor-name>
  <eis-type>JMS Provider</eis-type>
-
-
-<resourceadapter-version>1.0</resourceadapter-version>
-
-
+ <resourceadapter-version>1.0</resourceadapter-version>
 
  <resourceadapter>
-
- <resourceadapter-class>
-
- com.wombat.connector.jms.JMSAdapterImpl
-
- </resourceadapter-class>
-
-
-
- <!-- ResourceAdapter default configuration
-properties -->
-
- <config-property>
-
-
-<config-property-name>ServerName</config-property-name>
-
-
-<config-property-type>java.lang.String</config-property-type>
-
-
-<config-property-value>WombatServer</config-property-value>
-
- </config-property>
-
- <config-property>
-
-
-<config-property-name>PortNumber</config-property-name>
-
-
-<config-property-type>java.lang.String</config-property-type>
-
-
-<config-property-value>1050</config-property-value>
-
- </config-property>
-
- <config-property>
-
-
-<config-property-name>OperationalMode</config-property-name>
-
-
-<config-property-type>java.lang.String</config-property-type>
-
-
-<config-property-value>Managed</config-property-value>
-
- </config-property>
-
- <config-property>
-
-
-<config-property-name>ContainerType</config-property-name>
-
-
-<config-property-type>java.lang.String</config-property-type>
-
-
-<config-property-value>EJB-WEB</config-property-value>
-
- </config-property>
-
-
-
- <outbound-resourceadapter>
-
-
-
- <connection-definition>
-
- <managedconnectionfactory-class>
-
-
-com.wombat.connector.jms.QueueManagedConnectionFactoryImpl
-
- </managedconnectionfactory-class>
-
-
-
- <!-- ManagedConnectionFactory default
-configuration properties -->
-
- <config-property>
-
-
-<config-property-name>ServerName</config-property-name>
-
-
-<config-property-type>java.lang.String</config-property-type>
-
- <config-property-value>
-
- WombatQueueServer
-
- </config-property-value>
-
-
-
- <config-property>
-
-
-<config-property-name>PortNumber</config-property-name>
-
-
-<config-property-type>java.lang.String</config-property-type>
-
-
-<config-property-value>1051</config-property-value>
-
- </config-property>
-
-
-
- <connectionfactory-interface>
-
- jakarta.jms.QueueConnectionFactory
-
- </connectionfactory-interface>
-
- <connectionfactory-impl-class>
-
-
-com.wombat.connector.jms.QueueConnectionFactoryImpl
-
- </connectionfactory-impl-class>
-
-
-
- <connection-interface>
-
- jakarta.jms.QueueConnection
-
- </connection-interface>
-
- <connection-impl-class>
-
- com.wombat.connector.jms.QueueConnectionImpl
-
- </connection-impl-class>
-
- </connection-definition>
-
-
-
- <connection-definition>
-
- <managedconnectionfactory-class>
-
-
-com.wombat.connector.jms.TopicManagedConnectionFactoryImpl
-
- </managedconnectionfactory-class>
-
-
-
- <!-- ManagedConnectionFactory default
-configuration properties -->
-
- <config-property>
-
-
-<config-property-name>ServerName</config-property-name>
-
-
-<config-property-type>java.lang.String</config-property-type>
-
- <config-property-value>
-
- WombatTopicServer
-
- </config-property-value>
-
- </config-property>
-
- <config-property>
-
-
-<config-property-name>PortNumber</config-property-name>
-
-
-<config-property-type>java.lang.String</config-property-type>
-
-
-<config-property-value>1052</config-property-value>
-
- </config-property>
-
-
-
- <connectionfactory-interface>
-
- jakarta.jms.TopicConnectionFactory
-
- </connectionfactory-interface>
-
- <connectionfactory-impl-class>
-
-
-com.wombat.connector.jms.TopicConnectionFactoryImpl
-
- </connectionfactory-impl-class>
-
-
-
- <connection-interface>
-
- jakarta.jms.TopicConnection
-
- </connection-interface>
-
- <connection-impl-class>
-
- com.wombat.connector.jms.TopicConnectionImpl
-
- </connection-impl-class>
-
- </connection-definition>
-
-
-
- <connection-definition>
-
- <managedconnectionfactory-class>
-
-
-com.wombat.connector.jms.ManagedConnectionFactoryImpl
-
- </managedconnectionfactory-class>
-
-
-
+   <resourceadapter-class>
+     com.wombat.connector.jms.JMSAdapterImpl
+   </resourceadapter-class>
+
+   <!-- ResourceAdapter default configuration properties -->
+   <config-property>
+     <config-property-name>ServerName</config-property-name>
+     <config-property-type>java.lang.String</config-property-type>
+     <config-property-value>WombatServer</config-property-value>
+   </config-property>
+   <config-property>
+     config-property-name>PortNumber</config-property-name>
+     <config-property-type>java.lang.String</config-property-type>
+     <config-property-value>1050</config-property-value>
+   </config-property>
+   <config-property>
+     <config-property-name>OperationalMode</config-property-name>
+     <config-property-type>java.lang.String</config-property-type>
+     <config-property-value>Managed</config-property-value>
+   </config-property>
+   <config-property>
+     <config-property-name>ContainerType</config-property-name>
+     <config-property-type>java.lang.String</config-property-type>
+     <config-property-value>EJB-WEB</config-property-value>
+   </config-property>
+   
+   <outbound-resourceadapter>
+    <connection-definition>
+      <managedconnectionfactory-class>
+         com.wombat.connector.jms.QueueManagedConnectionFactoryImpl
+      </managedconnectionfactory-class>
+      
+      <!-- ManagedConnectionFactory default configuration properties -->
+      <config-property>
+        <config-property-name>ServerName</config-property-name>
+        <config-property-type>java.lang.String</config-property-type>
+        <config-property-value>
+           WombatQueueServer
+        </config-property-value>
+      <config-property>
+        <config-property-name>PortNumber</config-property-name>
+        <config-property-type>java.lang.String</config-property-type>
+        <config-property-value>1051</config-property-value>
+      </config-property>
+      
+      <connectionfactory-interface>
+        jakarta.jms.QueueConnectionFactory
+      </connectionfactory-interface>
+      <connectionfactory-impl-class>
+        com.wombat.connector.jms.QueueConnectionFactoryImpl
+      </connectionfactory-impl-class>
+      
+      <connection-interface>
+        jakarta.jms.QueueConnection
+      </connection-interface>
+      <connection-impl-class>
+        com.wombat.connector.jms.QueueConnectionImpl
+      </connection-impl-class>
+   </connection-definition>
+
+   <connection-definition>
+     <managedconnectionfactory-class>
+       com.wombat.connector.jms.TopicManagedConnectionFactoryImpl
+     </managedconnectionfactory-class>
+
+     <!-- ManagedConnectionFactory default configuration properties -->
+     <config-property>
+       <config-property-name>ServerName</config-property-name>
+       <config-property-type>java.lang.String</config-property-type>
+       <config-property-value>
+         WombatTopicServer
+       </config-property-value>
+     </config-property>
+     <config-property>
+       <config-property-name>PortNumber</config-property-name>
+       <config-property-type>java.lang.String</config-property-type>
+       <config-property-value>1052</config-property-value>
+     </config-property>
+
+     <connectionfactory-interface>
+        jakarta.jms.TopicConnectionFactory
+     </connectionfactory-interface>
+     <connectionfactory-impl-class>
+       com.wombat.connector.jms.TopicConnectionFactoryImpl
+     </connectionfactory-impl-class>
+
+     <connection-interface>
+        jakarta.jms.TopicConnection
+     </connection-interface>
+     <connection-impl-class>
+       com.wombat.connector.jms.TopicConnectionImpl
+     </connection-impl-class>
+  </connection-definition>
+
+  <connection-definition>
+    <managedconnectionfactory-class>
+      com.wombat.connector.jms.ManagedConnectionFactoryImpl
+    </managedconnectionfactory-class>
  <!--
 
  This ManagedConnectionFactory JavaBean
@@ -10880,462 +10468,135 @@ inherits the ResourceAdapter
 not override any
 
  of the global defaults.
-
  -->
+    <connectionfactory-interface>
+      jakarta.jms.ConnectionFactory
+    </connectionfactory-interface>
+    <connectionfactory-impl-class>
+      com.wombat.connector.jms.ConnectionFactoryImpl
+    </connectionfactory-impl-class>
 
+    <connection-interface>
+      jakarta.jms.Connection
+    </connection-interface>
+    <connection-impl-class>
+      com.wombat.connector.jms.ConnectionImpl
+    </connection-impl-class>
+  </connection-definition>
 
-
- <connectionfactory-interface>
-
- jakarta.jms.ConnectionFactory
-
- </connectionfactory-interface>
-
- <connectionfactory-impl-class>
-
-
-com.wombat.connector.jms.ConnectionFactoryImpl
-
- </connectionfactory-impl-class>
-
-
-
- <connection-interface>
-
- jakarta.jms.Connection
-
- </connection-interface>
-
- <connection-impl-class>
-
- com.wombat.connector.jms.ConnectionImpl
-
- </connection-impl-class>
-
- </connection-definition>
-
-
-
-
-<transaction-support>XATransaction</transaction-support>
-
-
-<reauthentication-support>false</reauthentication-support>
-
-
-
+  <transaction-support>XATransaction</transaction-support>
+  <reauthentication-support>false</reauthentication-support>
  </outbound-resourceadapter>
-
-
-
+ 
  <inbound-resourceadapter>
-
- <messageadapter>
-
- <messagelistener>
-
- <messagelistener-type>
-
- jakarta.jms.MessageListener
-
- </messagelistener-type>
-
-
-
- <activationspec>
-
- <activationspec-class>
-
- com.wombat.connector.jms.ActivationSpecImpl
-
- </activationspec-class>
-
-
-
+    <messageadapter>
+      <messagelistener>
+        <messagelistener-type>
+          jakarta.jms.MessageListener
+        </messagelistener-type>
+        <activationspec>
+           <activationspec-class>
+             com.wombat.connector.jms.ActivationSpecImpl
+           </activationspec-class>
  <!--
-
  The endpoint deployer configures the
 ActivationSpec JavaBean
-
  and may override some of the global defaults
 inherited from
-
  the ResourceAdapter JavaBean. For example,
 the ServerName
-
  and the PortNumber properties.
-
  -->
 
+ <!-- required config property names for ActivationSpec -->
+           <required-config-property>
+            <config-property-name>Destination</config-property-name>
+           </required-config-property>
+        </activationspec>
+      </messagelistener>
+    </messageadapter>
+  </inbound-resourceadapter>
 
-
- <!-- required config property names for
-ActivationSpec -->
-
- <required-config-property>
-
-
-<config-property-name>Destination</config-property-name>
-
- </required-config-property>
-
-
-
- </activationspec>
-
-
-
- </messagelistener>
-
- </messageadapter>
-
- </inbound-resourceadapter>
-
-
-
- <adminobject>
-
-
-<adminobject-interface>jakarta.jms.Queue</adminobject-interface>
-
- <adminobject-class>
-
- com.wombat.connector.jms.QueueImpl
-
- </adminobject-class>
-
- </adminobject>
-
- <adminobject>
-
-
-<adminobject-interface>jakarta.jms.Topic</adminobject-interface>
-
- <adminobject-class>
-
- com.wombat.connector.jms.TopicImpl
-
- </adminobject-class>
-
- </adminobject>
-
- <adminobject>
-
- <adminobject-interface>
-
- jakarta.jms.Destination
-
- </adminobject-interface>
-
- <adminobject-class>
-
- com.wombat.connector.jms.DestinationImpl
-
- </adminobject-class>
-
- </adminobject>
-
-
-
- </resourceadapter>
-
+  <adminobject>
+    <adminobject-interface>jakarta.jms.Queue</adminobject-interface>
+    <adminobject-class>
+      com.wombat.connector.jms.QueueImp
+    </adminobject-class>
+  </adminobject>
+  <adminobject>
+    <adminobject-interface>jakarta.jms.Topic</adminobject-interface>
+    <adminobject-class>
+      com.wombat.connector.jms.TopicImpl
+    </adminobject-class>
+  </adminobject>
+  <adminobject>
+    <adminobject-interface>
+      jakarta.jms.Destination
+    </adminobject-interface>
+    <adminobject-class>
+      com.wombat.connector.jms.DestinationImpl
+    </adminobject-class>
+  </adminobject>
+</resourceadapter>
 </connector>
+----
 
-=== A Sample Jakarta Messaging ActivationSpec Implementation
-
-[width="100%",cols="100%",]
-|===
-a|
+.A Sample Jakarta Messaging ActivationSpec Implementation
+[source,Java]
+----
 package com.wombat.connector.jms;
 
-
-
 import java.io.Serializable;
-
 import jakarta.resource.spi.ActivationSpec;
-
-import
-jakarta.resource.spi.InvalidPropertyException;
-
-
+import jakarta.resource.spi.InvalidPropertyException;
 
 public class ActivationSpecImpl implements
-ActivationSpec, Serializable \{
+  ActivationSpec, Serializable {
+
+  public setAcknowledgeMode(String mode) {
+    ... 
+  }
+
+  public String getAcknowledgeMode() { ... }
+
+ public setSubscriptionDurability(String durability) { ... }
+
+ public String getSubscriptionDurability() {
+   ... }
 
 
 
- public setAcknowledgeMode(String mode) \{
-... }
+ public setMessageSelector(String selector) { ... }
 
- public String getAcknowledgeMode() \{ ... }
+ public String getMessageSelector() { ... }
 
+ public setDestinationType(String destType) { ... }
 
+ public String getDestinationType() { ... }
 
- public setSubscriptionDurability(String
-durability) \{ ... }
+ public setDestination(String dest) { ... }
 
- public String getSubscriptionDurability() \{
-... }
+ public String getDestination() { ... }
 
+ public setSubscriptionName(String name) { ... }
 
+ public String getSubscriptionName() { ... }
 
- public setMessageSelector(String selector)
-\{ ... }
+ public setClientId(String id) { ... }
 
- public String getMessageSelector() \{ ... }
+ public String getClientId() { ... }
 
-
-
- public setDestinationType(String destType)
-\{ ... }
-
- public String getDestinationType() \{ ... }
-
-
-
- public setDestination(String dest) \{ ... }
-
- public String getDestination() \{ ... }
-
-
-
- public setSubscriptionName(String name) \{
-... }
-
- public String getSubscriptionName() \{ ... }
-
-
-
- public setClientId(String id) \{ ... }
-
- public String getClientId() \{ ... }
-
-
-
- public void validate() throws
-InvalidPropertyException \{ ... }
+ public void validate() throws InvalidPropertyException { ... }
 
 }
+----
 
-|===
 
-=== A Sample EJB 2.0 Message-Driven Bean Deployment Descriptor
+==== Message-Driven Bean Asynchronously Receiving Messages
 
-[width="100%",cols="100%",]
-|===
-a|
-<?xml version="1.0" encoding="US-ASCII"?>
+===== Message-Driven Bean Deployment
 
-
-
-<!DOCTYPE ejb-jar PUBLIC ’-//Sun
-Microsystems, Inc.//DTD Enterprise
-
-JavaBeans 2.0//EN’
-’http://java.sun.com/dtd/ejb-jar_2_0.dtd’>
-
-
-
-<ejb-jar>
-
- <display-name>MDB1</display-name>
-
- <enterprise-beans>
-
- <message-driven>
-
- <display-name>MDB_DURABLE_CMT</display-name>
-
- <ejb-name>MDB_DURABLE_CMT</ejb-name>
-
- <ejb-class>msgbean.MsgBean</ejb-class>
-
-
-<transaction-type>Container</transaction-type>
-
- <message-driven-destination>
-
-
-<destination-type>javax.jms.Topic</destination-type>
-
-
-<subscription-durability>Durable</subscription-durability>
-
- </message-driven-destination>
-
- <message-selector>JMSType = ’car’ AND color
-= ’blue’
-
- </message-selector>
-
- </message-driven>
-
- </enterprise-beans>
-
-</ejb-jar>
-
-|===
-
-=== A Sample EJB 2.1 Message-Driven Bean Deployment Descriptor
-
-<?xml version="1.0" encoding="UTF-8"?>
-
-<ejb-jar
-xmlns="http://java.sun.com/xml/ns/j2ee"
-
-
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
- version="2.1">
-
- <display-name>MDB1</display-name>
-
- <enterprise-beans>
-
- <message-driven>
-
- <display-name>MDB_DURABLE_CMT</display-name>
-
- <ejb-name>MDB_DURABLE_CMT</ejb-name>
-
- <ejb-class>msgbean.MsgBean</ejb-class>
-
- <messaging-type>javax.jms.MessageListener
-
- </messaging-type>
-
-
-<transaction-type>Container</transaction-type>
-
- <activation-config>
-
- <activation-config-property>
-
- <activation-config-property-name>
-
- destinationType
-
- </activation-config-property-name>
-
- <activation-config-property-value>
-
- javax.jms.Topic
-
- </activation-config-property-value>
-
- </activation-config-property>
-
- <activation-config-property>
-
- <activation-config-property-name>
-
- SubscriptionDurability
-
- </activation-config-property-name>
-
- <activation-config-property-value>
-
- Durable
-
- </activation-config-property-value>
-
- </activation-config-property>
-
- <activation-config-property>
-
- <activation-config-property-name>
-
- MessageSelector
-
- </activation-config-property-name>
-
- <activation-config-property-value>
-
- JMSType = ’car’ AND color = ’blue’
-
- </activation-config-property-value>
-
- </activation-config-property>
-
- </activation-config>
-
- </message-driven>
-
- </enterprise-beans>
-
-</ejb-jar>
-
-=== Sample EJB 2.1 Deployment Descriptor
-
-<?xml version="1.0" encoding="UTF-8"?>
-
-<ejb-jar
-xmlns="http://java.sun.com/xml/ns/j2ee"
-
-
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
- version="2.1">
-
- <display-name>Ejb1</display-name>
-
- <enterprise-beans>
-
- <session>
-
- <display-name>JMSBean</display-name>
-
- <ejb-name>JMSBean</ejb-name>
-
- <home>jms.JMSHome</home>
-
- <remote>jms.JMS</remote>
-
- <ejb-class>jms.JMSEJB</ejb-class>
-
- <session-type>Stateful</session-type>
-
-
-<transaction-type>Container</transaction-type>
-
- <resource-ref>
-
- <description>description</description>
-
-
-<res-ref-name>jms/MyQueueConnectionFactory</res-ref-name>
-
-
-<res-type>jakarta.jms.QueueConnectionFactory</res-type>
-
- <res-auth>Application</res-auth>
-
-
-<res-sharing-scope>Shareable</res-sharing-scope>
-
- </resource-ref>
-
- <resource-env-ref>
-
-
-<resource-env-ref-name>jms/QueueName</resource-env-ref-name>
-
-
-<resource-env-ref-type>javax.jms.Queue</resource-env-ref-type>
-
- </resource-env-ref>
-
- </session>
-
- </enterprise-beans>
-
-</ejb-jar>
-
-=== Message-Driven Bean Asynchronously Receiving Messages
-
-=== Message-Driven Bean Deployment
-
-A message-driven bean application developer
+* A message-driven bean application developer
 or assembler supplies a deployment descriptor, or annotated application
 component, which specifies a destination type, message selector, and
 subscription durability information needed to setup subscription to a
@@ -11343,22 +10604,22 @@ certain destination, Queue or Topic. Note, this information is a hint
 which is used by the message-driven bean deployer to setup the
 subscription.
 
-The message-driven bean deployer selects an
+* The message-driven bean deployer selects an
 appropriate Jakarta Messaging resource adapter based on the quality-of-service and
 creates an ActivationSpec JavaBean instance and configures the required
 property "Destination" as well as other properties related to the Jakarta Messaging
 messaging style and the specific resource adapter.
 
-The endpoint deployer may need to interact
+* The endpoint deployer may need to interact
 with the Jakarta Messaging provider to setup an appropriate "Destination" and other
 steps necessary to complete message-driven bean deployment.
 
-The deployer deploys the message-driven bean
+* The deployer deploys the message-driven bean
 application. During deployment, the deployer provides the configured
 ActivationSpec JavaBean to the application server, along with
 information about the chosen Jakarta Messaging resource adapter.
 
-The application server calls the
+* The application server calls the
 endpointActivation method on the Jakarta Messaging resource adapter and passes the
 configured ActivationSpec JavaBean instance and a MessageEndpointFactory
 instance. During the endpointActivation method call the Jakarta Messaging adapter
@@ -11366,47 +10627,47 @@ interacts with its provider to setup message delivery to the
 message-driven bean. This completes the endpoint activation, and the
 message-driven bean is ready to receive messages.
 
-=== Message Delivery
+===== Message Delivery
 
-When messages start arriving, the Jakarta Messaging adapter
+* When messages start arriving, the Jakarta Messaging adapter
 uses the MessageEndpointFactory instance to get an endpoint instance and
 delivers messages to the endpoint through the
 jakarta.jms.MessageListener.onMessage method.
 
-The application server interposes the message
+* The application server interposes the message
 delivery and injects transactions based on the message-driven bean
 preferences, container-managed transaction or bean-managed transaction,
 before delivering the message to a message-driven bean instance.
 
-When a delivery is transacted, the
+* When a delivery is transacted, the
 application server notifies the Jakarta Messaging resource adapter using the
 XAResource object. The Jakarta Messaging resource adapter may use the notifications to
 send acknowledgements to its message provider.
 
-The Jakarta Messaging resource adapter, depending on the
+* The Jakarta Messaging resource adapter, depending on the
 traffic, may attempt concurrent delivery of messages by using multiple
 endpoint instances obtained through MessageEndpointFactory. The
 application server appropriately handles concurrent message deliveries
 and dispatches messages to separate message-driven bean instances.
 
-=== Message-Driven Bean Undeployment
+===== Message-Driven Bean Undeployment
 
-When the message-driven bean is undeployed,
+* When the message-driven bean is undeployed,
 the application server calls the endpointDeactivation method on the
 Jakarta Messaging resource adapter to deactivate the message endpoint.
 
-The Jakarta Messaging adapter in turn notifies its message
+* The Jakarta Messaging adapter in turn notifies its message
 provider.
 
-=== Jakarta Enterprise Beans Using Jakarta Messaging API to Send and Synchronously Receive Messages Via a Jakarta Messaging Resource Adapter
+==== Jakarta Enterprise Beans Using Jakarta Messaging API to Send and Synchronously Receive Messages Via a Jakarta Messaging Resource Adapter
 
-The Jakarta Messaging resource adapter provides
+* The Jakarta Messaging resource adapter provides
 jakarta.jms.Connection objects which expose the Jakarta Messaging API to the Jakarta Enterprise Beans
 application. The Jakarta Enterprise Beans directly uses the Jakarta Messaging API to send and synchronously
 receive messages. The jakarta.jms.Connection objects are obtained from a
 ConnectionFactory supplied by the Jakarta Messaging resource adapter.
 
-Based on the Jakarta Enterprise Beans deployment descriptor
+* Based on the Jakarta Enterprise Beans deployment descriptor
 information (resource-ref’s and resource-env-ref’s) or resource
 reference injection annotations (Resource annotation defined in
 <<a9757, Jakarta™ Annotations Specification,
@@ -11418,142 +10679,76 @@ the component name space. The Jakarta Messaging resource adapter provides the
 implementation of the various ConnectionFactory and administered
 objects.
 
-At runtime, the component does a JNDI lookup
+* At runtime, the component does a JNDI lookup
 of a ConnectionFactory object from its component name space
 (java:comp/env), and uses it to create a jakarta.jms.Connection object
 which is used for sending and synchronously receiving messages.
 Similarly, the component uses the JNDI lookup mechanism to obtain the
 configured Queue or Topic administered objects.
 
-=== Using Jakarta Messaging API to Send Messages
+===== Using Jakarta Messaging API to Send Messages
 
-=== Sending Messages Using the Jakarta Messaging API
-
+.Sending Messages Using the Jakarta Messaging API
+[source,Java]
+----
 // get JNDI handle
-
 Context jndiContext = new InitialContext();
 
-
-
 // get connection factory
-
-ConnectionFactory connectionFactory =
-(ConnectionFactory)
-
-
-jndiContext.lookup("QueueConnectionFactory");
-
-
+ConnectionFactory connectionFactory = (ConnectionFactory) jndiContext.lookup("QueueConnectionFactory");
 
 // get connection from factory
-
-Connection connection =
-connectionFactory.getConnection();
-
-
+Connection connection = connectionFactory.getConnection();
 
 // get session from connection
-
-Session session =
-connection.createSession(true,
-
- AUTO_ACKNOWLEDGE);
-
-
+Session session = connection.createSession(true, AUTO_ACKNOWLEDGE);
 
 // get destination from JNDI
-
-Queue stockQueue = (Queue)
-jndiContext.lookup("StockQueue");
-
-
+Queue stockQueue = (Queue) jndiContext.lookup("StockQueue");
 
 // create a message producer
-
-MessageProducer sender =
-session.createProducer(stockQueue);
-
-
+MessageProducer sender = session.createProducer(stockQueue);
 
 // create a message
-
-TextMessage message =
-session.createTextMessage();
-
+TextMessage message = session.createTextMessage();
 message.setText(msgData);
 
-
-
 // send the message
-
 sender.send(message);
+----
 
-=== Jakarta EE Component Using Jakarta Messaging API to Synchronously Receive Messages
+===== Jakarta EE Component Using Jakarta Messaging API to Synchronously Receive Messages
 
-=== Synchronously Receiving Messages in a Jakarta EE Component
-
+.Synchronously Receiving Messages in a Jakarta EE Component
+[source,Java]
+----
 // get JNDI handle
-
 Context jndiContext = new InitialContext();
 
-
-
 // get connection factory
-
-ConnectionFactory connectionFactory =
-(ConnectionFactory)
-
-
-jndiContext.lookup("QueueConnectionFactory");
-
-
+ConnectionFactory connectionFactory = (ConnectionFactory)
+                   jndiContext.lookup("QueueConnectionFactory");
 
 // get connection from factory
-
-Connection connection =
-connectionFactory.getConnection();
-
-
+Connection connection = connectionFactory.getConnection();
 
 // get session from connection
-
-Session session =
-connection.createSession(true,
-
- AUTO_ACKNOWLEDGE);
-
-
+Session session = connection.createSession(true, AUTO_ACKNOWLEDGE);
 
 // get destination from JNDI
-
-Queue stockQueue = (Queue)
-jndiContext.lookup("StockQueue");
-
-
+Queue stockQueue = (Queue) jndiContext.lookup("StockQueue");
 
 // create a message consumer
-
-MessageConsumer receiver =
-session.createConsumer(stockQueue);
-
-
+MessageConsumer receiver = session.createConsumer(stockQueue);
 
 // enable connection to receive messages
-
 connection.start();
 
-
-
 // synchronously receive the message
+TextMessage message = (TextMessage)receiver.receive(message);
+----
 
-TextMessage message = (TextMessage)
-receiver.receive(message);
-
-=== 
-
-image:conn-100.png[image]
-
-A Non-Jakarta Messaging Use Case
+=== A Non-Jakarta Messaging Use Case
 
 This illustration is intended to show that it
 is possible to plug a wide range of message providers into a Jakarta EE
@@ -11583,189 +10778,95 @@ ManagedConnectionFactory implementation for outbound communication to
 the EIS. This also takes a single configuration parameter called
 PortNumber.
 
-=== Deployment Descriptor for a Resource Adapter
-
+.Deployment Descriptor for a Resource Adapter
+[source,xml]
+----
 <?xml version="1.0" encoding="UTF-8"?>
-
-
-
-<connector
-xmlns="http://java.sun.com/xml/ns/j2ee"
-
-
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
- version="1.5">
-
-
-
- <display-name>KangarooAdapter</display-name>
-
- <vendor-name>Kangaroo Software
-Inc.</vendor-name>
-
- <eis-type>JMS Provider</eis-type>
-
-
-<resourceadapter-version>1.0</resourceadapter-version>
-
-
-
- <resourceadapter>
-
- <resourceadapter-class>
-
- com.kangaroo.MyEISAdapterImpl
-
- </resourceadapter-class>
-
-
-
- <!-- ResourceAdapter default configuration
-properties -->
-
- <config-property>
-
- <description>URL for EIS
-instance</description>
-
-
-<config-property-name>EIS_URL</config-property-name>
-
-
-<config-property-type>java.lang.String</config-property-type>
-
-
-<config-property-value>TBD</config-property-value>
-
- </config-property>
-
-
-
- <outbound-resourceadapter>
-
- <connection-definition>
-
- <managedconnectionfactory-class>
-
- com.Kangaroo.MyManagedConnectionFactoryImpl
-
- </managedconnectionfactory-class>
-
-
-
- <!-- ManagedConnectionFactory default
-configuration properties -->
-
- <config-property>
-
-
-<config-property-name>PortNumber</config-property-name>
-
-
-<config-property-type>java.lang.String</config-property-type>
-
-
-<config-property-value>1051</config-property-value>
-
- </config-property>
-
-
-
- <connectionfactory-interface>
-
- jakarta.resource.cci.ConnectionFactory
-
- </connectionfactory-interface>
-
- <connectionfactory-impl-class>
-
- com.Kangaroo.MyConnectionFactoryImpl
-
- </connectionfactory-impl-class>
-
-
-
- <connection-interface>
-
- jakarta.resource.cci.Connection
-
- </connection-interface>
-
- <connection-impl-class>
-
- com.Kangaroo.MyConnectionImpl
-
- </connection-impl-class>
-
- </connection-definition>
-
-
-
-
-<transaction-support>NoTransaction</transaction-support>
-
-
-<reauthentication-support>false</reauthentication-support>
-
- </outbound-resourceadapter>
-
-
-
- <inbound-resourceadapter>
-
- <messageadapter>
-
- <messagelistener>
-
- <messagelistener-type>
-
- com.kangaroo.MessageListener
-
- </messagelistener-type>
-
- <activationspec>
-
- <activationspec-class>
-
- com.Kangaroo.MyEISActivationSpecImpl
-
- </activationspec-class>
-
- <required-config-property>
-
-
-<config-property-name>PortNumber</config-property-name>
-
- </required-config-property>
-
- </activationspec>
-
- </messagelistener>
-
- </messageadapter>
-
- </inbound-resourceadapter>
-
-
-
- </resourceadapter>
-
+<connector xmlns="https://jakarta.ee/xml/ns/jakartaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           version="2.0">
+  <display-name>KangarooAdapter</display-name>
+  <vendor-name>Kangaroo Software Inc.</vendor-name>
+  <eis-type>JMS Provider</eis-type>
+  <resourceadapter-version>1.0</resourceadapter-version>
+  <resourceadapter-class>
+    com.kangaroo.MyEISAdapterImpl
+  </resourceadapter-class>
+  
+  <!-- ResourceAdapter default configuration properties -->
+  <config-property>
+    <description>URL for EIS instance</description>
+    <config-property-name>EIS_URL</config-property-name>
+    <config-property-type>java.lang.String</config-property-type>
+    <config-property-value>TBD</config-property-value>
+  </config-property>
+  <outbound-resourceadapter>
+    <connection-definition>
+      <managedconnectionfactory-class>
+        com.Kangaroo.MyManagedConnectionFactoryImpl
+      </managedconnectionfactory-class>
+      
+      <!-- ManagedConnectionFactory default configuration properties -->
+      <config-property>
+        <config-property-name>PortNumber</config-property-name>
+        <config-property-type>java.lang.String</config-property-type>
+        <config-property-value>1051</config-property-value>
+      </config-property>
+      
+      <connectionfactory-interface>
+        jakarta.resource.cci.ConnectionFactory
+      </connectionfactory-interface>
+      <connectionfactory-impl-class>
+        com.Kangaroo.MyConnectionFactoryImpl
+      </connectionfactory-impl-class>
+      
+      <connection-interface>
+        jakarta.resource.cci.Connection
+      </connection-interface>
+      <connection-impl-class>
+        com.Kangaroo.MyConnectionImpl
+      </connection-impl-class>
+    </connection-definition>
+    
+    <transaction-support>NoTransaction</transaction-support>
+    <reauthentication-support>false</reauthentication-support>
+  </outbound-resourceadapter>
+  
+  <inbound-resourceadapter>
+    <messageadapter>
+      <messagelistener>
+        <messagelistener-type>
+          com.kangaroo.MessageListener
+        </messagelistener-type>
+        <activationspec>
+          <activationspec-class>
+            com.Kangaroo.MyEISActivationSpecImpl
+          </activationspec-class>
+          <required-config-property>
+            <config-property-name>PortNumber</config-property-name>
+          </required-config-property>
+        </activationspec>
+      </messagelistener>
+    </messageadapter>
+  </inbound-resourceadapter>
+</resourceadapter>
 </connector>
+----
 
-=== Resource Adapter Deployment
+==== Resource Adapter Deployment
 
 Before use, the resource adapter is required
 to be deployed on the application server. During resource adapter
 deployment, the deployer configures a ResourceAdapter JavaBean instance
 and deploys the resource adapter.
 
-=== Message-Driven Bean Asynchronously Receiving Notifications From an EIS
+==== Message-Driven Bean Asynchronously Receiving Notifications From an EIS
 
-=== The Message-Driven Bean Deployment Descriptor
+===== The Message-Driven Bean Deployment Descriptor
 
-=== Deployment Descriptor for a Message-Driven Bean
-
+.Deployment Descriptor for a Message-Driven Bean
+[source,xml]
+----
 <?xml version="1.0" encoding="US-ASCII"?>
 
 
@@ -11840,6 +10941,7 @@ Bean</display-name>
  </enterprise-beans>
 
 </ejb-jar>
+----
 
 When the message-driven bean is deployed, the
 bean deployer chooses an appropriate resource adapter based on the type
@@ -11859,7 +10961,7 @@ Wombat Systems, which the deployer may choose to override.
 Finally, the deployer provides the configured
 ActivationSpec JavaBean instance to the application server.
 
-=== Message-Driven Bean and Resource Adapter Activation
+==== Message-Driven Bean and Resource Adapter Activation
 
 When the application server is started, it
 will activate the resource adapter by calling its start method. The
@@ -11871,7 +10973,7 @@ deployed message-driven bean, and a MessageEndpointFactory instance. The
 resource adapter will use the information in the ActivationSpec to
 establish a subscription to the requested data from the EIS.
 
-=== Message Delivery
+==== Message Delivery
 
 When a notification arrives from the EIS, the
 resource adapter has the responsibility of converting its data to a
@@ -11885,34 +10987,21 @@ is called the dispatch will occur. This will allow the resource adapter
 to continue to process incoming messages without blocking until
 message-driven bean dispatch has completed.
 
+== [[a3530]]Jakarta Enterprise Beans Invocation
 
 
-=== 
-
-=== 
-
-image:conn-111.png[image]
-
-[[a3530]]Jakarta Enterprise Beans Invocation
-
-image:conn-112.png[image]
 
 This chapter describes how to invoke session
 and entity beans from a resource adapter.
 
-=== 
-
-image:conn-113.png[image]
-
-Overview
+=== Overview
 
 A resource adapter may need to call session or
 entity beans for several reasons:
 
-To dispatch calls from an EIS to a bean in
+* To dispatch calls from an EIS to a bean in
 order to execute business logic
-
-To use Jakarta Enterprise Beans container-managed persistence (CMP)
+* To use Jakarta Enterprise Beans container-managed persistence (CMP)
 mechanism for persistence
 
 In order to dispatch calls to a session or
@@ -11921,19 +11010,14 @@ type, the method name, and the method parameters. Upon receiving a
 request from the EIS by way of a remote protocol, the resource adapter’s
 dispatch logic is required to:
 
-Choose an appropriate bean and a target method
+* Choose an appropriate bean and a target method
 name based on the request received from the EIS.
-
-Unmarshall, that is, deserialize, the request
+* Unmarshall, that is, deserialize, the request
 parameters received from the EIS and call the target bean method.
 
-=== 
+=== Jakarta Enterprise Beans Invocation Model
 
-image:conn-113.png[image]
-
-Jakarta Enterprise Beans Invocation Model
-
-Jakarta Enterprise Beans Invocation Model
+*Jakarta Enterprise Beans Invocation Model*
 
 image:conn-114.jpg[image]
 
@@ -11972,11 +11056,7 @@ from the EIS for bean invocations. Note, however, the application server
 may suspend the imported transaction depending on the transaction
 preference of the target bean method.
 
-=== 
-
-image:conn-113.png[image]
-
-An Illustrative Use Case
+=== An Illustrative Use Case
 
 Wombat Systems is a resource adapter vendor.
 The resource adapter supports inbound communication from an EIS to
@@ -11998,119 +11078,63 @@ request message arrives as part of a conversation.
 The following code sample shows a possible
 message-driven bean implementation:
 
-=== A Message-Driven Bean Implementation
-
+.A Message-Driven Bean Implementation
+[source,Java]
+----
 package com.wombat.ra;
 
-
-
 import jakarta.ejb.MessageDrivenBean;
-
 import javax.naming.InitialContext;
 
+public class WombatMDB implements MessageDrivenBean,
+                 WombatMessageListener {
 
-
-public class WombatMDB
-
- implements MessageDrivenBean,
-WombatMessageListener \{
-
-
-
-public static int CONV_START = 0;
-
- public static int CONV_CONTINUE = 1;
-
- public static int CONV_END = 2;
-
-
-
- private Context jndiContext = null;
-
- private ConvBeanHome chome = null;
-
-
-
- public void ejbCreate() \{
-
- jndiContext = new InitialContext();
-
- chome = (ConvBeanHome)
-
- jndi.lookup("java:comp/env/ConvBeanHome");
-
+  public static int CONV_START = 0;
+  public static int CONV_CONTINUE = 1;
+  public static int CONV_END = 2;
+  
+  private Context jndiContext = null;
+  private ConvBeanHome chome = null;
+  
+  public void ejbCreate() {
+    jndiContext = new InitialContext();
+    chome = (ConvBeanHome)jndi.lookup("java:comp/env/ConvBeanHome");
+  }
+  
+  ConvResponse onMessage(ConvRequest requestMsg) {
+  // get conversation id and request type fromthe request
+  // message
+  int convId = ...;
+  int type = ...;
+  
+  if (type == CONV_START) {
+    // create entity Jakarta Enterprise Beans for holding the specific
+    // conversation state
+    ConvBean cbean = chome.create(convId);
+  } else if (type == CONV_CONTINUE) {
+    ConvBean cbean = chome.findByPrimaryKey(convId);
+    
+    // unmarshall Jakarta Enterprise Beans method parameters
+    ...;
+    
+    // invoke Jakarta Enterprise Beans and return response
+    Object resp = cbean.myBusinessMethod(params);
+    ConvResponse cresp = Utility.convert(resp);
+    return cresponse;
+  } else if (type == CONV_END) {
+    cbean.remove();
  }
-
-
-
- ConvResponse onMessage(ConvRequest
-requestMsg) \{
-
- // get conversation id and request type from
-the request
-
- // message
-
- int convId = ...;
-
- int type = ...;
-
-
-
- if (type == CONV_START) \{
-
- // create entity Jakarta Enterprise Beans for holding the specific
-
- // conversation state
-
- ConvBean cbean = chome.create(convId);
-
- } else if (type == CONV_CONTINUE) \{
-
- ConvBean cbean =
-chome.findByPrimaryKey(convId);
-
-
-
- // unmarshall Jakarta Enterprise Beans method parameters
-
- ...;
-
-
-
- // invoke Jakarta Enterprise Beans and return response
-
- Object resp = cbean.myBusinessMethod(params);
-
- ConvResponse cresp = Utility.convert(resp);
-
- return cresponse;
-
- } else if (type == CONV_END) \{
-
- cbean.remove();
-
- }
-
-
-
  return null;
-
-
-
  }
 
 
 
- public void ejbRemove() \{
-
- jndiContext = null;
-
- chome = null;
-
+ public void ejbRemove() {
+   jndiContext = null;
+   chome = null;
  }
-
 }
+----
 
 The resource adapter uses the message-driven
 bean as a generic dispatcher for session and entity bean invocations,
@@ -12118,7 +11142,7 @@ and relies on the application server to efficiently pool message-driven
 bean instances. Each message-driven bean call should be just as
 efficient as a method call on a resource adapter local object.
 
-=== Message-Driven Bean Dispatcher Pattern
+===== Message-Driven Bean Dispatcher Pattern
 
 When a worker thread from a resource adapter
 accesses a message-driven bean method, the JNDI context of the bean is
@@ -12140,15 +11164,7 @@ resource adapter would provide the bean implementation as well.
 
 
 
-=== 
-
-=== 
-
-image:conn-115.png[image]
-
-[[a3613]]Transaction Inflow
-
-image:conn-116.png[image]
+== [[a3613]]Transaction Inflow
 
 This chapter specifies a contract between an
 application server and a resource adapter that allows a resource adapter
