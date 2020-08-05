@@ -15395,26 +15395,15 @@ they have the same class implementation.
 
 
 
-=== 
+== [[a5089]]Packaging Requirements
 
-=== 
-
-image:conn-151.png[image]
-
-[[a5089]]Packaging Requirements
-
-image:conn-152.png[image]
 
 This chapter specifies requirements for
 packaging and deploying a resource adapter. These requirements support a
 modular, portable deployment of a resource adapter into a Jakarta EE
 compliant application server.
 
-=== 
-
-image:conn-153.png[image]
-
-Overview
+=== Overview
 
 A resource adapter provider develops a set of
 Java interfaces and classes as part of its implementation of a resource
@@ -15436,8 +15425,7 @@ descriptor along with a resource adapter module.
 
 
 
-Packaging and Deployment Lifecycle of a
-Resource adapter
+*Packaging and Deployment Lifecycle of a Resource adapter*
 
 image:conn-154.jpg[image]
 
@@ -15453,10 +15441,9 @@ application client modules, and web client modules.
 A resource adapter module must be deployed
 either:
 
-Directly into an application server as a
+* Directly into an application server as a
 stand-alone unit or,
-
-Deployed with a Jakarta EE application that
+* Deployed with a Jakarta EE application that
 consists of one or more Jakarta EE modules in addition to a resource
 adapter module. The Jakarta EE specification specifies requirements for the
 assembly and packaging of Jakarta EE applications.
@@ -15464,8 +15451,7 @@ assembly and packaging of Jakarta EE applications.
 The following figure shows the composition
 model of a resource adapter module with other Jakarta EE modules.
 
-Deployment of a Resource
-Adapter Module
+*Deployment of a Resource Adapter Module*
 
 image:conn-155.jpg[image]
 
@@ -15480,11 +15466,7 @@ application supports the latter scenario.
 At deployment time, a resource adapter
 deployer deploys a resource adapter module to an application server.
 
-=== 
-
-image:conn-153.png[image]
-
-Packaging
+=== Packaging
 
 The file format for a packaged resource
 adapter module defines the contract between a resource adapter provider
@@ -15493,21 +15475,15 @@ and deployer.
 A packaged resource adapter includes the
 following elements:
 
-Java classes and interfaces that are required
+* Java classes and interfaces that are required
 for the implementation of both the Jakarta Connectors contracts and
 the functionality of the resource adapter.
+* Utility Java classes for the resource adapter.
+* Platform-dependent native libraries required by the resource adapter.
+* Help files and documentation.
+* Descriptive meta information that ties the above elements together.
 
-Utility Java classes for the resource adapter.
-
-Platform-dependent native libraries required
-by the resource adapter.
-
-Help files and documentation.
-
-Descriptive meta information that ties the
-above elements together.
-
-=== Resource Adapter Archive
+===== Resource Adapter Archive
 
 A resource adapter must be packaged using the
 Java Archive (JAR) format in to an RAR ( _r_ esource adapter _ar_
@@ -15535,46 +15511,22 @@ for more information on the Jakarta EE Platform’s support for libraries.
 The platform-specific libraries required by
 the resource adapter must be packaged with the resource adapter module.
 
-=== RAR Contents
+===== RAR Contents
 
 The following table describes the contents of
 a RAR file, where each element is located within the RAR file and
 whether they are required.
 
-=== Description of RAR File Contents
+.Table Description of RAR File Contents
+|===
+|Contents of RAR file |Requirements |Relative Location Within RAR File
+|Deployment Descriptor |Optional | _META-INF/ra.xml_
+|howto.html, image files, locale files, etc. |Optional |Arbitrary (that is, could be at root level or at a sub-level).
+|JAR files |Optional |Arbitrary
+|Platform-specific native libraries |Optional |Arbitrary
+|===
 
-Contents of RAR file
-
-Requirements
-
-Relative Location Within RAR File
-
-Deployment Descriptor
-
-Optional
-
- _META-INF/ra.xml_
-
-howto.html, image files, locale files, etc.
-
-Optional
-
-Arbitrary (that is, could be at root level or
-at a sub-level).
-
-JAR files
-
-Optional
-
-Arbitrary
-
-Platform-specific native libraries
-
-Optional
-
-Arbitrary
-
-=== Sample Directory Structure
+===== Sample Directory Structure
 
 The following lists the files in a sample
 resource adapter module:
@@ -15602,29 +15554,25 @@ Note that a resource adapter module can be
 structured such that various elements are partitioned using
 subdirectories.
 
-=== [[a5147]]Requirements
+===== [[a5147]]Requirements
 
-When a standalone resource adapter _RAR_ is
+* When a standalone resource adapter _RAR_ is
 deployed, the resource adapter may be made available to all Jakarta EE
 applications in the application server. The application server, however,
 must make the standalone resource adapter RAR available to applications
 that meet the requirements listed in <<a5151, Class Loading Requirements>>.
 
-When a resource adapter _RAR_ packaged within
+* When a resource adapter _RAR_ packaged within
 a Jakarta EE application _EAR_ (also referred to as an “embedded RAR”) is
 deployed, the resource adapter must be made available only to the Jakarta
 EE application with which it is packaged.
 
-A resource adapter must not implement or
+* A resource adapter must not implement or
 require a mixture of Jakarta and Java EE packages. If a resource adapter
 provider wishes to implement both specifications, it must do so by
 providing multiple _RAR_ files.
 
-=== 
-
-image:conn-153.png[image]
-
-[[a5151]]Class Loading Requirements
+=== [[a5151]]Class Loading Requirements
 
 This specification does not define the exact
 arrangement or hierarchy of classloaders that must be used by a
@@ -15641,24 +15589,24 @@ The requirements below specify the
 applications that must have visibility to a standalone resource adapter
 RAR.
 
-If an application references a resource using
+* If an application references a resource using
 a deployment descriptor entry or a corresponding annotation, and that
 resource is supplied by a standalone resource adapter, that standalone
 resource adapter must be made available to the application.
 
-If an application references an extension
+* If an application references an extension
 using the Extension Mechanism Architecture (see the section titled
 “Library Support” in the “Application Assembly and Deployment” chapter
 of the <<a9737, Jakarta™ EE Platform Specification Version 9>> and a jar file within a
 standalone resource adapter supplies that extension, the standalone
 resource adapter must be made available to the application.
 
-If a standalone resource adapter is
+* If a standalone resource adapter is
 configured to deliver messages to a message-driven bean in an
 application, the standalone resource adapter must be made available to
 the application.
 
-Even lacking such a reference, it must be
+* Even lacking such a reference, it must be
 possible for the Deployer to configure an application so that any
 particular standalone resource adapter is available to the application.
 
@@ -15667,11 +15615,7 @@ can portably assume the visibility of the corresponding standalone
 resource adapter RAR. An application server may choose to make all
 deployed standalone resource adapter RARs available to all applications.
 
-=== 
-
-image:conn-153.png[image]
-
-[[a5161]]Deployment
+=== [[a5161]]Deployment
 
 A deployment descriptor defines the contract
 between a resource adapter provider and a deployer. It captures the
@@ -15695,7 +15639,7 @@ The J2EE Deployment API Specification (
 <<a9747, J2EE Deployment API Specification>>)
 describes the general deployment procedure in detail.
 
-=== [[a5165]]Resource Adapter Provider
+==== [[a5165]]Resource Adapter Provider
 
 The resource adapter provider is responsible
 for specifying the deployment descriptor for a resource adapter.
@@ -15704,40 +15648,30 @@ The resource adapter provider may specify the
 following information in the deployment descriptor or through
 metadata-annotations:
 
-General information: The resource adapter
+* General information: The resource adapter
 provider should specify the following general information:
-
-Name of the resource adapter.
-
-Description of the resource adapter.
-
-URI of a UI icon for the resource adapter.
-
-Name of the vendor who provides the resource
+** Name of the resource adapter.
+** Description of the resource adapter.
+** URI of a UI icon for the resource adapter.
+** Name of the vendor who provides the resource
 adapter.
-
-Licensing requirement and description. Note
+** Licensing requirement and description. Note
 that the management of licensing is outside the scope of Jakarta Connectors.
-
-Type of the EIS system supported. For example,
+** Type of the EIS system supported. For example,
 the name of a specific database, ERP system, or mainframe TP system
 without any versioning information.
-
-Version of the Jakarta Connectors
+** Version of the Jakarta Connectors
 specification, represented as a string, supported by the resource
 adapter.
-
-Version of the resource adapter represented as
+** Version of the resource adapter represented as
 a string
-
-Required _WorkContext_ classes: A resource
+** Required _WorkContext_ classes: A resource
 adapter may optionally provide a list of _required-work-context_
 elements representing a list of _WorkContext_ classes that a resource
 adapter requires the application server to support. . The resource
 adapter provider must specify the name of a Java _Class_ that implements
 the _jakarta.resource.spi.work.WorkContext_ interface.
-
-ResourceAdapter class: The resource adapter
+* ResourceAdapter class: The resource adapter
 provider must specify, if available, the name of a Java class that
 implements the _jakarta.resource.spi.ResourceAdapter_ interface. The
 implementation of this class must be a JavaBean. A ResourceAdapter
@@ -15747,20 +15681,16 @@ ResourceAdapter JavaBean per functional resource adapter instance. The
 application server must create at least one functional resource adapter
 instance per resource adapter deployment. The configuration properties
 are specific to a resource adapter.
-
-ResourceAdapter class configuration
+* ResourceAdapter class configuration
 properties: The resource adapter provider may optionally provide a set
 of configuration properties for the ResourceAdapter instance, which may
 be used by the resource adapter deployer to configure a ResourceAdapter
 JavaBean instance.
-
-Outbound resource adapter information:
-
- _ManagedConnectionFactory_ class: The
+* Outbound resource adapter information:
+** _ManagedConnectionFactory_ class: The
 resource adapter provider must specify the name of the Java class that
 implements the jakarta.resource.spi.ManagedConnectionFactory_ interface.
 The implementation must be a JavaBean.
-
 Typically, a _ManagedConnectionFactory_ class
 is used to produce _ConnectionFactory_ and _Connection_ objects of a
 particular type. In order to produce objects of different types, a
@@ -15768,18 +15698,15 @@ separate _ManagedConnectionFactory_ class can be used for each supported
 type. The deployment descriptor element connection-definition can be
 used to specify different _ManagedConnectionFactory_ classes, each
 pertaining to a particular type.
-
- _ConnectionFactory_ interface and
+** _ConnectionFactory_ interface and
 implementation class: The resource adapter provider must specify the
 fully-qualified name of the Java interface and implementation class for
 each connection factory supported by the resource adapter.
-
- _Connection_ interface and implementation
+** _Connection_ interface and implementation
 class: The resource adapter provider must specify the fully-qualified
 name of the Java interface and implementation class for each connection
 supported by the resource adapter.
-
-Transactional support: The resource adapter
+** Transactional support: The resource adapter
 provider must specify the level of transaction support provided by the
 resource adapter implementation. The level of transaction support must
 be any one of the following: _NoTransaction_ , _LocalTransaction_ , or
@@ -15797,13 +15724,11 @@ local and Jakarta Transaction's transactions by implementing the _LocalTransacti
 _XAResource_ interfaces respectively. The requirements for supporting
 the _XAResource_ based contract are specified in
 <<a1169, XAResource-based Transaction Contract>>.
-
-Configurable properties per
+** Configurable properties per
 _ManagedConnectionFactory_ instance: The resource adapter provider
 specifies the name, type, description, and an optional default value for
 the properties that have to be configured on a per
 _ManagedConnectionFactory_ instance.
-
 Each _ManagedConnectionFactory_ instance
 creates connections to a specific EIS instance based on the properties
 configured on the _ManagedConnectionFactory_ instance. The configurable
@@ -15811,59 +15736,47 @@ properties are specified only once in the deployment descriptor, even
 though a resource adapter can be used to configure multiple
 _ManagedConnnectionFactory_ instances that create connections to
 different instances of the same underlying EIS type.
-
-Authentication mechanism: The resource adapter
+** Authentication mechanism: The resource adapter
 provider must specify all authentication mechanisms supported by the
 resource adapter. This includes the support provided by the resource
 adapter implementation but not by the underlying EIS instance. The
 standard values are: _BasicPassword_ and _Kerbv5_ . A resource adapter
 may support one or more of these authentication mechanisms.
-
-===  _BasicPassword:_ user-password based authentication mechanism that is specific to an EIS.
-
-===  _Kerbv5:_ Kerberos version 5 based authentication mechanism.
-
+*** ===  _BasicPassword:_ user-password based authentication mechanism that is specific to an EIS.
+*** ===  _Kerbv5:_ Kerberos version 5 based authentication mechanism.
 If no authentication mechanism is specified as
 part of the deployment descriptor, the resource adapter supports no
 standard security authentication mechanism as part of the security
 contract.
-
-Reauthentication support: The resource adapter
+** Reauthentication support: The resource adapter
 provider must specify whether a resource adapter supports
 re-authentication of an existing physical connection.
-
-Extended security permissions: The security
+** Extended security permissions: The security
 permissions listed in the deployment descriptor are different from those
 required by the default permission set. Refer to
 <<a6592, Runtime Environment>> for more details
 on security permissions.
-
-Inbound resource adapter information
-
-Message listener type: The resource adapter
+* Inbound resource adapter information
+** Message listener type: The resource adapter
 provider must specify one or more message listener types supported by a
 messaging resource adapter. The message listener type is the name of the
 Java type of a message listener interface.
-
-ActivationSpec class: The resource adapter
+** ActivationSpec class: The resource adapter
 provider must specify the Java class name of the activation
 specification class. The implementation of this class must be a
 JavaBean. An ActivationSpec specifies an activation specification per
 message listener type. The ActivationSpec is configured by a message
 endpoint deployer during application deployment.
-
-Required ActivationSpec properties: The
+** Required ActivationSpec properties: The
 resource adapter provider may optionally specify a set of required
 properties for an ActivationSpec. This is useful in validating the
 ActivationSpec during endpoint application deployment.
-
-ActivationSpec class configuration
+** ActivationSpec class configuration
 properties: The resource adapter provider may optionally provide a set
 of configuration properties for the _ActivationSpec_ instance, which may
 be used by the resource adapter deployer to configure a _ActivationSpec_
 JavaBean instance
-
-Administered objects: The resource adapter
+* Administered objects: The resource adapter
 provider must specify the name of the Java type of the interface
 implemented by an administered object, which must be a JavaBean, and its
 Java class name. Administered objects are specific to a messaging style
@@ -15880,18 +15793,17 @@ detailed in <<a4517, Metadata Annotations>>.
 
 
 
-image:conn-156.png[image]
-
+[NOTE]
+====
 Jakarta Connectors does not specify standard deployment
 properties for the configuration of non-Java parts, such as native
 libraries, of a resource adapter. This applies only to the properties of
 the non-Java part not exposed through the Java part of the resource
 adapter. The non-Java part of a resource adapter should be configured
 using mechanisms specific to a resource adapter.
+====
 
-image:conn-156.png[image]
-
-=== Deployer
+==== Deployer
 
 During resource adapter deployment, the
 deployer is responsible for configuring a resource adapter. The
@@ -15899,28 +15811,28 @@ configuration of a resource adapter is based on the properties defined
 in the deployment descriptor and metadata annotations (see
 <<a4531, Deployment Descriptors and Annotations>>) as part of the resource adapter module.
 
-=== Standalone Resource Adapter Module
+===== Standalone Resource Adapter Module
 
 During deployment, the deployer configures and
 deploys a resource adapter based on the deployment descriptor
 information. The deployer may choose to override the information in the
 deployment descriptor.
 
-=== Resource Adapter Module with Jakarta EE Application
+===== Resource Adapter Module with Jakarta EE Application
 
 Refer to the Jakarta EE platform specification
 (see <<a9737, Jakarta™ EE Platform Specification Version 9>>)
 for the requirements specified for
 the deployment of a Jakarta EE application.
 
-=== Configuration
+===== Configuration
 
 To configure a resource adapter, the deployer
 must configure a ResourceAdapter JavaBean instance. The configuration
 properties are specific to a resource adapter. In the case of outbound
 resource adapters, the deployer must do the following tasks:
 
-Configure one or more property sets (one
+* Configure one or more property sets (one
 property set per _ManagedConnectionFactory_ instance) for creating
 connections to various underlying EIS instances. The deployer creates a
 property set to set valid values for various configurable fields. The
@@ -15928,33 +15840,33 @@ configuration of each field is based on the name, type and description
 of the field specified in the deployment descriptor or metadata
 annotations described in <<a4517, Metadata Annotations>>.
 
-Each property set represents a specific
+* Each property set represents a specific
 configuration to be set on a _Managed-ConnectionFactory_ instance for
 creating connections to a specific EIS instance. Since a resource
 adapter may be used to create connections to multiple instances of the
 same EIS, there can be multiple property sets for a single resource
 adapter, one for each configured _ManagedConnectionFactory_ instance.
 
-Configure application server mechanisms for
+* Configure application server mechanisms for
 transaction management based on the level of transaction support
 specified by the resource adapter.
 
-Configure security in the target operational
+* Configure security in the target operational
 environment based on the security requirements specified by the resource
 adapter in its deployment descriptor or annotations discussed in
 <<a4658, @SecurityPermission>>.
 
-=== Security Configuration
+===== Security Configuration
 
 The security configuration is based on:
 
-Whether the resource adapter supports a
+* Whether the resource adapter supports a
 specific authentication mechanism and credentials interface. The
 deployment descriptor includes an element _authentication-mechanism_
 that specifies a supported authentication mechanism and the
 corresponding credentials interface.
 
-Whether the application server is configured
+* Whether the application server is configured
 to support a specific mechanism type. For example, if the application
 server is not configured for the Kerberos mechanism, it is not capable
 of passing Kerberos credentials to the resource adapter as part of the
@@ -15973,17 +15885,13 @@ instance. However if the deployer does not perform such checks during
 deployment, any invalid configurations should lead to runtime
 exceptions.
 
-=== 
-
-image:conn-153.png[image]
-
-Interfaces/Classes
+=== Interfaces/Classes
 
 This section specifies the Java classes and
 interfaces related to the configuration of a resource adapter in an
 operational environment.
 
-=== [[a5222]]ResourceAdapter
+==== [[a5222]]ResourceAdapter
 
 The Java class which implements the interface
 _jakarta.resource.spi.ResourceAdapter_ must be a JavaBean. The
@@ -16007,12 +15915,12 @@ _ResourceAdapter_ JavaBean instance during deployment. The deployer may
 override the configuration information in the deployment descriptor
 while configuring the _ResourceAdapter_ JavaBean instance.
 
-=== Requirements
+===== Requirements
 
 The _ResourceAdapter_ implementation must be a
 JavaBean.
 
-=== [[a5228]]ManagedConnectionFactory
+==== [[a5228]]ManagedConnectionFactory
 
 The class that implements the
 _ManagedConnectionFactory_ interface supports a set of properties. These
@@ -16032,7 +15940,7 @@ _ManagedConnectionFactory_ as a JavaBean improves the ability of tools
 that are based on the JavaBeans framework to manage the configuration of
 _ManagedConnectionFactory_ instances.
 
-=== Requirements
+===== Requirements
 
 The _ManagedConnectionFactory_ implementation
 must be a JavaBean. The _ManagedConnectionFactory_ implementation may
@@ -16043,7 +15951,7 @@ property in the deployment descriptor which does not have a matching
 property in the _ManagedConnectionFactory_ JavaBean should be treated as
 an error.
 
-=== Properties Conventions
+==== Properties Conventions
 
 The _ManagedConnectionFactory_ implementation
 class must provide getter and setter methods for each of its supported
@@ -16064,7 +15972,7 @@ interface. This requirement keeps the _ManagedConnectionFactory_
 interface independent of any resource adapter or EIS-specific
 properties.
 
-=== [[a5237]]Standard Properties
+==== [[a5237]]Standard Properties
 
 Jakarta Connectors identifies a
 standard set of properties common across various types of resource
@@ -16074,35 +15982,16 @@ standard property if that property does not apply to its configuration.
 These standard properties are defined as
 follows:
 
-=== Standard Properties of Jakarta Connectors
+.Table Standard Properties of Jakarta Connectors
+|===
+|Property |Description
+| _ServerName_ |Name of the server for the EIS instance.
+| _PortNumber_ |Port number for establishing a connection to an EIS instance.
+| _UserName_ |Name of the user establishing a connection to an EIS instance.
+| _Password_ |Password for the user establishing a connection.
+| _ConnectionURL_ |URL for the EIS instance to which it connects.
+|===
 
-Property
-
-Description
-
- _ServerName_
-
-Name of the server for the EIS instance.
-
- _PortNumber_
-
-Port number for establishing a connection to
-an EIS instance.
-
- _UserName_
-
-Name of the user establishing a connection to
-an EIS instance.
-
- _Password_
-
-Password for the user establishing a
-connection.
-
- _ConnectionURL_
-
-URL for the EIS instance to which it
-connects.
 
 In addition to these standard properties, a
 _ManagedConnectionFactory_ implementation class may support properties
@@ -16125,11 +16014,7 @@ adapter provider is not required to describe the bounds and constraints
 of properties and may use the Bean Validation annotations to describe
 bounds and constraints.
 
-=== 
-
-image:conn-153.png[image]
-
-[[a5258]]JNDI Configuration and Lookup
+=== [[a5258]]JNDI Configuration and Lookup
 
 This section specifies requirements for the
 configuration of the JNDI environment for a resource adapter.
@@ -16145,33 +16030,19 @@ specifies the application programming model in more detail.
 The following code extract shows the JNDI
 lookup of a _jakarta.resource.cci.ConnectionFactory_ instance.
 
-[width="100%",cols="100%",]
-|===
-a|
-// Application Component/Client Code
-
-obtain the initial JNDI context
-
+[source,java]
+----
+// Application Component/Client Code obtain the initial JNDI context
 Context initctx = new InitialContext();
 
-
-
-// perform JNDI lookup to obtain connection
-factory
-
+// perform JNDI lookup to obtain connection factory
 jakarta.resource.cci.ConnectionFactory cxf =
+     (jakarta.resource.cci.ConnectionFactory)initctx.lookup(“java:comp/env/eis/MyEIS”);
 
+jakarta.resource.cci.Connection cx = cxf.getConnection();
+----
 
-(jakarta.resource.cci.ConnectionFactory)initctx.lookup(“java:comp/env/eis/MyEIS”);
-
-
-
-jakarta.resource.cci.Connection cx =
-cxf.getConnection();
-
-|===
-
-=== Responsibilities
+==== Responsibilities
 
 In both managed and non-managed environments,
 registration of a connection factory instance in the JNDI namespace must
@@ -16180,14 +16051,11 @@ use either the JNDI _Reference_ or _Serializable_ mechanism.
 The choice between the two JNDI mechanisms
 depends on:
 
-Whether the JNDI provider being used supports
-a specific mechanism.
-
-Whether the application server and resource
+* Whether the JNDI provider being used supports a specific mechanism.
+* Whether the application server and resource
 adapter provide the necessary support, specified in the respective
 requirements.
-
-Constraints on the size of serialized objects
+* Constraints on the size of serialized objects
 that can be stored in the JNDI namespace. The reference mechanism allows
 only a reference to the actual object to be stored in the JNDI
 namespace. This is preferable to the serializable mechanism, which
@@ -16196,7 +16064,7 @@ stores the whole serialized object in the namespace.
 This section specifies the responsibilities of
 the roles involved in the JNDI configuration of a resource adapter.
 
-=== Deployer
+===== Deployer
 
 The deployer is responsible for configuring
 connection factory instances in the JNDI environment. The deployer
@@ -16204,7 +16072,7 @@ should manage the JNDI namespace such that the same programming model,
 as shown in <<a5258, JNDI Configuration and Lookup>>, for the JNDI-based
 connection factory lookup is supported in both managed and non-managed environments.
 
-=== Resource Adapter
+===== Resource Adapter
 
 The implementation class for a connection
 factory interface must implement both the _java.io.Serializable_ and
@@ -16213,18 +16081,14 @@ _jakarta.resource.Referenceable_ interfaces to support JNDI registration.
 The following code extract shows the
 _jakarta.resource.Referenceable_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface jakarta.resource.Referenceable
-
- extends javax.naming.Referenceable \{
+[source,java]
+----
+public interface jakarta.resource.Referenceable extends javax.naming.Referenceable {
 
  public void setReference(Reference ref);
 
 }
-
-|===
+----
 
 The _ManagedConnectionFactory_ implementation
 class must implement the _java.io.Serializable_ interface.
@@ -16234,7 +16098,7 @@ non-managed environment, a resource adapter or a helper class must
 provide an implementation of the _javax.naming.spi.ObjectFactory_
 interface.
 
-=== Application Server
+===== Application Server
 
 The implementation class for
 _jakarta.resource.spi.ConnectionManager_ must implement the
@@ -16248,7 +16112,7 @@ The implementation of this interface is application server-specific.
 <<a5327, Scenario:Referenceable>> specifies more details on _Reference_ mechanism-based
 JNDI configuration in a managed environment.
 
-=== Scenario: Serializable
+==== Scenario: Serializable
 
 The implementation classes for both the
 _jakarta.resource.cci.ConnectionFactory_ and
@@ -16261,39 +16125,21 @@ metadata annotations (see <<a4675, @ConfigProperty>>) for the resource adapter. 
 creates an instance of the _ManagedConnectionFactory_ implementation
 class and configures the properties of the instance.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 // Deployment Code
+// Create an instance of the ManagedConnectionFactory class
+com.myeis.ManagedConnectionFactoryImpl mcf = new com.myeis.ManagedConnectionFactoryImpl();
 
-// Create an instance of the
-ManagedConnectionFactory class
-
-com.myeis.ManagedConnectionFactoryImpl mcf =
-
- new
-com.myeis.ManagedConnectionFactoryImpl();
-
-
-
-// Set the properties of the
-ManagedConnectionFactory instance
-
-// Note: Properties are defined in the
-implementation class and
-
+// Set the properties of theManagedConnectionFactory instance
+// Note: Properties are defined in theimplementation class and
 // not in the
-
-//
-jakarta.resource.spi.ManagedConnectionFactory interface
+// jakarta.resource.spi.ManagedConnectionFactory interface
 
 mcf.setServerName(“...”);
-
 mcf.setPortNumber(“...”);
-
 ...
-
-|===
+----
 
 Note that in a non-managed environment, an
 application developer writes the deployment code. In a managed
@@ -16304,45 +16150,24 @@ _ManagedConnectionFactory_ instance to create a connection factory
 instance. The code then registers the connection factory instance in the
 JNDI namespace.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 // Deployment Code
+// In a managed environment, create a ConnectionManager specific to
+// the application server. Note that in a non-managed environment,
+// ConnectionManager will be specific to the resource adapter.
 
-// In a managed environment, create a
-ConnectionManager specific to
-
-// the application server. Note that in a
-non-managed environment,
-
-// ConnectionManager will be specific to the
-resource adapter.
-
-com.wombatserver.ConnectionManager cm =
-
- new com.wombatserver.ConnectionManager(...);
-
-
+com.wombatserver.ConnectionManager cm = new com.wombatserver.ConnectionManager(...);
 
 // Create an instance of a connection factory
-
 Object cxf = mcf.createConnectionFactory(cm);
 
-
-
 // Get the JNDI context
+javax.naming.Context ctx = new javax.naming.InitialContext(env);
 
-javax.naming.Context ctx = new
-javax.naming.InitialContext(env);
-
-
-
-// Bind to the JNDI namespace specifying a
-factory name
-
+// Bind to the JNDI namespace specifying a factory name
 ctx.bind("...", cxf);
-
-|===
+----
 
 When an application component does a JNDI
 lookup of a connection factory instance, the returned connection factory
@@ -16359,67 +16184,44 @@ _jakarta.resource.cci.ConnectionFactory_ and
 _jakarta.resource.cci.Connection_ as the connection factory and connection
 interfaces respectively.
 
-=== [[a5327]]Scenario: Referenceable
+==== [[a5327]]Scenario: Referenceable
 
 The implementation class for the
 _ConnectionFactory_ interface implements _jakarta.resource.Referenceable_
 shown in the following code extract. Refer to the JNDI specification for
 more details on the _Referenceable_ interface.
 
-[width="100%",cols="100%",]
-|===
-a|
-public class com.myeis.ConnectionFactoryImpl
-implements
-
- jakarta.resource.Referenceable,
-
- java.io.Serializable,
-
- jakarta.resource.cci.ConnectionFactory \{
-
+[source,java]
+----
+public class com.myeis.ConnectionFactoryImpl implements
+  jakarta.resource.Referenceable,
+  java.io.Serializable,
+   jakarta.resource.cci.ConnectionFactory {
 
 
  // Reference to this ConnectionFactory
-
  javax.naming.Reference reference;
 
-
-
- // setReference is called by the deployment
-code
-
- public void setReference(Reference ref) \{
-
- reference = ref;
-
+ // setReference is called by the deployment code
+ public void setReference(Reference ref) {
+   reference = ref;
  }
 
-
-
- // getReference is called by the JNDI
-provider during
-
+ // getReference is called by the JNDI provider during
  // Context.bind
 
- public Reference getReference() throws
-NamingException \{
-
- return reference;
-
+ public Reference getReference() throws NamingException {
+   return reference;
  }
-
  ...
-
 }
-
-|===
+----
 
 The getReference method on the
 _ConnectionFactory_ implementation class must return a non-null value or
 throw javax.naming.NamingException.
 
-=== ObjectFactory Implementation
+===== ObjectFactory Implementation
 
 An application server provides a class (in an
 application server-specific implementation) that implements the
@@ -16444,155 +16246,79 @@ _Reference_ is specific to an application server. The following code
 extract is an illustrative example. It illustrates an implementation of
 the _ObjectFactory.getObjectInstance_ method:
 
-[width="100%",cols="100%",]
-|===
-a|
-public class
-com.wombatserver.ApplicationServerJNDIHandler
-
- implements javax.naming.spi.ObjectFactory \{
+[source,java]
+----
+public class com.wombatserver.ApplicationServerJNDIHandler
+  implements javax.naming.spi.ObjectFactory {
 
  // ...
 
- public Object getObjectInstance(Object obj,
-Name name,
+ public Object getObjectInstance(Object obj, Name name, Context ctx, Hashtable env) throws Exception {
 
- Context ctx, Hashtable env)
+ javax.naming.Reference ref =  (javax.naming.Reference)obj;
 
- throws Exception \{
-
-
-
- javax.naming.Reference ref =
-
- (javax.naming.Reference)obj;
-
-
-
- // Using the information carried by the
-Reference
-
+ // Using the information carried by the Reference
  // instance,
-
- // (<referenceName, logicalName> in this
-example) lookup
-
- // a configured property set and then
-configure a
-
- // ManagedConnectionFactory instance with
-specified
-
+ // (<referenceName, logicalName> in this example) lookup
+ // a configured property set and then configure a
+ // ManagedConnectionFactory instance with specified
  // properties.
-
 {empty} ... // [implementation specific]
-
  //
-
  // For example, instantiation of the
-
  // ManagedConnectionFactory
-
  // class and invocation of its setter method
-
  // can be done using the Java Reflection
 mechanism.
 
+ jakarta.resource.spi.ManagedConnectionFactory mcf = ...
 
-
- jakarta.resource.spi.ManagedConnectionFactory
-mcf = ...
-
-
-
- // Create a Connection Manager instance
-specific to the
-
+ // Create a Connection Manager instance specific to the
  // application server
 
- com.wombatserver.ConnectionManager cxManager
-= ...
-
-
+ com.wombatserver.ConnectionManager cxManager = ...
 
  // Create a connection factory instance.
-
- // The ConnectionManager instance provided
-by the
-
+ // The ConnectionManager instance providedby the
  // application
-
  // server gets associated with the created
-
  // connection factory instance
 
- return
-mcf.createConnectionFactory(cxManager);
-
+ return mcf.createConnectionFactory(cxManager);
  }
-
  ...
-
 }
+----
 
-|===
-
-=== Deployment
+===== Deployment
 
 The following deployment code shows the
 registration of a reference to a connection factory instance in the JNDI
 namespace:
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 // Deployment Code
 
-javax.naming.Context ctx = new
-javax.naming.InitialContext(env);
+javax.naming.Context ctx = new javax.naming.InitialContext(env);
 
+// Create an instance of the connectionfactory
+com.myeis.ConnectionFactoryImpl cf = new com.myeis.ConnectionFactoryImpl();
 
+// Create a reference for the ConnectionFactory instance
 
-// Create an instance of the connection
-factory
-
-com.myeis.ConnectionFactoryImpl cf =
-
- new com.myeis.ConnectionFactoryImpl();
-
-
-
-// Create a reference for the
-ConnectionFactory instance
-
-javax.naming.Reference ref = new
-javax.naming.Reference(
-
+javax.naming.Reference ref = new javax.naming.Reference(
  ConnectionFactoryImpl.class.getName(),
-
- new javax.naming.StringRefAddr(
-
- “<referenceName>”, “<logicalName>”),
-
-
-ApplicationServerJNDIHandler.class.getName(),
-
+ new javax.naming.StringRefAddr( “<referenceName>”, “<logicalName>”),
+ ApplicationServerJNDIHandler.class.getName(),
  null);
-
-
 
 cf.setReference(ref);
 
-
-
-// Bind to the JNDI namespace specifying a
-name for the connection
-
+// Bind to the JNDI namespace specifying aname for the connection
 // factory
-
 ctx.bind("...", cf);
-
-|===
+----
 
 Note that the deployment code should be
 designed as generic, though the above example does not show it that way.
@@ -16602,17 +16328,16 @@ create a _Reference_ instance, and then set the reference.
 The _Context.bind_ method registers a
 _Reference_ to the connection factory instance in the JNDI namespace.
 
-=== Scenario: Connection Factory Lookup
+===== Scenario: Connection Factory Lookup
 
 The following steps occur when an application
 component calls the method JNDI _Context.lookup_ to lookup a connection
 factory instance:
 
-JNDI passes control to the application
+. JNDI passes control to the application
 server. The _ObjectFactory-.getObjectInstance_ method implemented by the
 application server is called.
-
-The application server creates a new instance
+. The application server creates a new instance
 of the _ManagedConnectionFactory_ implementation class provided by the
 resource adapter. The application server must follow the requirements in
 <<a428, ManagedConnectionFactory JavaBean and Outbound Communication>>
@@ -16620,8 +16345,7 @@ and <<a502, ManagedConnectionFactory JavaBean Instance Configuration>> while
 configuring a _ManagedConnectionFactory_ JavaBean instance. The
 application server may use an existing instance of the
 _ManagedConnectionFactory_ implementation class, if available.
-
-The application server calls setter methods
+. The application server calls setter methods
 on the _ManagedConnectionFactory_ instance to set various configuration
 properties of this instance. These properties provide information
 required by the _ManagedConnectionFactory_ instance to create physical
@@ -16629,30 +16353,26 @@ connections to the underlying EIS. The application server uses an
 existing property set configured during the deployment of a resource
 adapter to set the required properties of the _ManagedConnectionFactory_
 instance.
-
-After the newly created
+. After the newly created
 _ManagedConnectionFactory_ instance has been configured with its
 properties set, the application server creates a new _ConnectionManager_
 instance.
-
-The application server calls the
+. The application server calls the
 _createConnectionFactory_ method of the _ManagedConnectionFactory_
 instance, passing in the _ConnectionManager_ instance from the previous
 step, to get a _ConnectionFactory_ instance.
-
-The application server returns the connection
+. The application server returns the connection
 factory instance to the JNDI provider, so that this instance can be
 returned as a result of the JNDI lookup. The application component gets
 the _ConnectionFactory_ instance as a result of the JNDI lookup.
 
 
 
-[[a5426]]OID:Lookup of a
-ConnectionFactory Instance from JNDI
+*[[a5426]]OID:Lookup of a ConnectionFactory Instance from JNDI*
 
 image:conn-157.jpg[image]
 
-=== [[a5427]]Requirements
+==== [[a5427]]Requirements
 
 The default configuration values for the
 various JavaBean classes specified in the resource adapter deployment
@@ -16663,11 +16383,7 @@ developer through the JavaBean mechanism. Note, a deployer may finally
 override such default configuration information while configuring the
 various JavaBean instances.
 
-=== 
-
-image:conn-153.png[image]
-
-[[a5430]]Resource Adapter XML Schema Definition
+=== [[a5430]]Resource Adapter XML Schema Definition
 
 This section specifies the XML Schema
 Definition (XSD) for the deployment descriptor for a resource adapter.
@@ -16680,2642 +16396,1180 @@ description-group element defined in javaee_7.xsd allows multiple
 descriptions, in order to allow specifying the same description for
 different locales.
 
-=== Schema Definition for the Deployment Descriptor for a Resource Adapter
-
+.Schema Definition for the Deployment Descriptor for a Resource Adapter
+[source,xml]
+----
 <?xml version="1.0" encoding="UTF-8"?>
-
-<xsd:schema
-xmlns="http://www.w3.org/2001/XMLSchema"
-
-
-targetNamespace="http://xmlns.jcp.org/xml/ns/javaee"
-
-
-xmlns:javaee="http://xmlns.jcp.org/xml/ns/javaee"
-
- xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-
- elementFormDefault="qualified"
-
- attributeFormDefault="unqualified"
-
- version="1.7">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- $Id$
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- This is the XML Schema for the Connector 1.7
-deployment
-
- descriptor. The deployment descriptor must
-be named
-
- "META-INF/ra.xml" in the connector’s rar
-file. All Connector
-
- deployment descriptors must indicate the
-connector resource
-
- adapter schema by using the Jakarta EE
-namespace:
-
-
-
- http://xmlns.jcp.org/xml/ns/javaee
-
-
-
- and by indicating the version of the schema
-by
-
- using the version element as shown below:
-
-
-
- <connector
-xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-
-
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
-
-xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-
-
-http://xmlns.jcp.org/xml/ns/javaee/connector_1_7.xsd”
-
- version="1.7">
-
- ...
-
- </connector>
-
-
-
- The instance documents may indicate the
-published version of
-
- the schema using the xsi:schemaLocation
-attribute for Jakarta EE
-
- namespace with the following location:
-
-
-
-
-http://xmlns.jcp.org/xml/ns/javaee/connector_1_7.xsd
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The following conventions apply to all Jakarta
-EE
-
- deployment descriptor elements unless
-indicated otherwise.
-
-
-
- - In elements that specify a pathname to a
-file within the
-
- same JAR file, relative filenames (i.e.,
-those not
-
- starting with "/") are considered relative
-to the root of
-
- the JAR file’s namespace. Absolute filenames
-(i.e., those
-
- starting with "/") also specify names in the
-root of the
-
- JAR file’s namespace. In general, relative
-names are
-
- preferred. The exception is .war files where
-absolute
-
- names are preferred for consistency with the
-Servlet API.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:include schemaLocation="javaee_7.xsd"/>
-
-
-
-
-
-<!--
-**************************************************** -->
-
-
-
-
-
- <xsd:element name="connector"
-type="javaee:connectorType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The connector element is the root element of
-the deployment
-
- descriptor for the resource adapter. This
-element includes
-
- general information - vendor name, resource
-adapter version,
-
- icon - about the resource adapter module. It
-also includes
-
- information specific to the implementation
-of the resource
-
- adapter library as specified through the
-element
-
- resourceadapter.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- </xsd:element>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType name="activationspecType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The activationspecType specifies an
-activation
-
- specification. The information includes
-
- Java class name of an activation
-specification and a set of
-
- required configuration property names.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="activationspec-class"
-
- type="javaee:fully-qualified-classType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The element activationspec-class specifies
-the fully
-
- qualified Java class name of the activation
-
- specification class. This class must
-implement the
-
- jakarta.resource.spi.ActivationSpec interface.
-The
-
- implementation of this class is required to
-be a
-
- JavaBean.
-
-
-
- Example:
-
-
-<activationspec-class>com.wombat.ActivationSpecImpl
-
- </activationspec-class>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- <xsd:element name="required-config-property"
-
- type="javaee:required-config-propertyType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- <xsd:element name="config-property"
-
- type="javaee:config-propertyType"
-
- minOccurs="0"
-
- maxOccurs="unbounded">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- The required-config-property element is
-deprecated since
-
- Connector 1.6 specification. The resource
-adapter
-
- implementation is recommended to use the
-@NotNull
-
- Bean Validation annotation or its XML
-validation
-
- descriptor equivalent to indicate that a
-configuration
-
- property is required to be specified by the
-deployer.
-
- See the Connectors specification for more
-information.
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- </xsd:element>
-
-
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType name="adminobjectType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The adminobjectType specifies information
-about an
-
- administered object. Administered objects
-are specific to a
-
- messaging style or message provider. This
-contains
-
- information on the Java type of the
-interface implemented by
-
- an administered object, its Java class name
-and its
-
- configuration properties.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="adminobject-interface"
-
- type="javaee:fully-qualified-classType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The element adminobject-interface specifies
-the
-
- name of the Java type of the
-
- interface implemented by an administered
-object.
-
-
-
- Example:
-
- <adminobject-interface>jakarta.jms.Destination
-
- </adminobject-interface>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- </xsd:element>
-
- <xsd:element name="adminobject-class"
-
- type="javaee:fully-qualified-classType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The element adminobject-class specifies the
-fully
-
- qualified Java class name of an administered
-object.
-
-
-
- Example:
-
-
-<adminobject-class>com.wombat.DestinationImpl
-
- </adminobject-class>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
-
-
- <xsd:element name="config-property"
-
- type="javaee:config-propertyType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType
-name="authentication-mechanismType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The authentication-mechanismType specifies
-an authentication
-
- mechanism supported by the resource adapter.
-Note that this
-
- support is for the resource adapter and not
-for the
-
- underlying EIS instance. The optional
-description specifies
-
- any resource adapter specific requirement
-for the support of
-
- security contract and authentication
-mechanism.
-
-
-
- Note that BasicPassword mechanism type
-should support the
-
-
-jakarta.resource.spi.security.PasswordCredential interface.
-
- The Kerbv5 mechanism type should support the
-
- org.ietf.jgss.GSSCredential interface or the
-deprecated
-
-
-jakarta.resource.spi.security.GenericCredential interface.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="description"
-
- type="javaee:descriptionType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- <xsd:element
-name="authentication-mechanism-type"
-
- type="javaee:xsdStringType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The element authentication-mechanism-type
-specifies
-
- type of an authentication mechanism.
-
-
-
- The example values are:
-
-
-
- <authentication-mechanism-type>BasicPassword
-
- </authentication-mechanism-type>
-
-
-
- <authentication-mechanism-type>Kerbv5
-
- </authentication-mechanism-type>
-
-
-
- Any additional security mechanisms are
-outside the
-
- scope of the Jakarta Connectors
-specification.
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- </xsd:element>
-
- <xsd:element name="credential-interface"
-
- type="javaee:credential-interfaceType"/>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType
-name="config-property-nameType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The config-property-nameType contains the
-name of a
-
- configuration property.
-
-
-
- Jakarta Connectors defines a set of
-well-defined
-
- properties all of type java.lang.String.
-These are as
-
- follows.
-
-
-
- ServerName
-
- PortNumber
-
- UserName
-
- Password
-
- ConnectionURL
-
-
-
- A resource adapter provider can extend this
-property set to
-
- include properties specific to the resource
-adapter and its
-
- underlying EIS.
-
-
-
- Possible values include
-
- ServerName
-
- PortNumber
-
- UserName
-
- Password
-
- ConnectionURL
-
-
-
- Example:
-<config-property-name>ServerName</config-property-name>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- <xsd:simpleContent>
-
- <xsd:restriction
-base="javaee:xsdStringType"/>
-
- </xsd:simpleContent>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType
-name="config-property-typeType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The config-property-typeType contains the
-fully
-
- qualified Java type of a configuration
-property.
-
-
-
- The following are the legal values:
-
- java.lang.Boolean, java.lang.String,
-java.lang.Integer,
-
- java.lang.Double, java.lang.Byte,
-java.lang.Short,
-
- java.lang.Long, java.lang.Float,
-java.lang.Character
-
-
-
- Used in: config-property
-
-
-
- Example:
-
-
-<config-property-type>java.lang.String</config-property-type>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- <xsd:simpleContent>
-
- <xsd:restriction base="javaee:string">
-
- <xsd:enumeration value="java.lang.Boolean"/>
-
- <xsd:enumeration value="java.lang.String"/>
-
- <xsd:enumeration value="java.lang.Integer"/>
-
- <xsd:enumeration value="java.lang.Double"/>
-
- <xsd:enumeration value="java.lang.Byte"/>
-
- <xsd:enumeration value="java.lang.Short"/>
-
- <xsd:enumeration value="java.lang.Long"/>
-
- <xsd:enumeration value="java.lang.Float"/>
-
- <xsd:enumeration
-value="java.lang.Character"/>
-
- </xsd:restriction>
-
- </xsd:simpleContent>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType name="config-propertyType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The config-propertyType contains a
-declaration of a single
-
- configuration property that may be used for
-providing
-
- configuration information.
-
-
-
- The declaration consists of an optional
-description, name,
-
- type and an optional value of the
-configuration property. If
-
- the resource adapter provider does not
-specify a value than
-
- the deployer is responsible for providing a
-valid value for
-
- a configuration property.
-
-
-
- Any bounds or well-defined values of
-properties should be
-
- described in the description element.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- <xsd:sequence>
-
- <xsd:element name="description"
-
- type="javaee:descriptionType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- <xsd:element name="config-property-name"
-
- type="javaee:config-property-nameType"/>
-
- <xsd:element name="config-property-type"
-
- type="javaee:config-property-typeType"/>
-
- <xsd:element name="config-property-value"
-
- type="javaee:xsdStringType"
-
- minOccurs="0">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The element config-property-value contains
-the value
-
- of a configuration entry. Note, it is
-possible for a
-
- resource adapter deployer to override this
-
- configuration information during deployment.
-
-
-
- Example:
-
-
-<config-property-value>WombatServer</config-property-value>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
-
-
- <xsd:element name="config-property-ignore"
-type="javaee:true-falseType"
-
- minOccurs="0" maxOccurs="1">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The element config-property-ignore is used
-to specify
-
- whether the configuration tools must ignore
-considering the
-
- configuration property during auto-discovery
-of
-
- Configuration properties. See the Connector
-specification for
-
- more details. If unspecified, the container
-must not ignore
-
- the configuration property during
-auto-discovery.
-
- This element must be one of the following,
-"true" or "false".
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- <xsd:element
-name="config-property-supports-dynamic-updates" type
-"javaee:true-falseType"
-
- minOccurs="0" maxOccurs="1">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
- The element
-config-property-supports-dynamic-updates is used to specify
-
- whether the configuration property allows
-its value to be updated, by
-
- application server’s configuration tools,
-during the lifetime of
-
- the JavaBean instance. See the Connector
-specification for
-
- more details. If unspecified, the container
-must not dynamically
-
- reconfigure the property.
-
- This element must be one of the following,
-"true" or "false".
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
-
-
- <xsd:element
-name="config-property-confidential" type="javaee:true-falseType"
-
- minOccurs="0" maxOccurs="1">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
- The element config-property-confidential is
-used to specify
-
- whether the configuration property is
-confidential and
-
- recommends application server’s
-configuration tools to use special
-
- visual aids for editing them. See the
-Connector specification for
-
- more details. If unspecified, the container
-must not treat the
-
- property as confidential.
-
-
-
- This element must be one of the following,
-"true" or "false".
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
-
-
-
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType
-name="connection-definitionType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The connection-definitionType defines a set
-of connection
-
- interfaces and classes pertaining to a
-particular connection
-
- type. This also includes configurable
-properties for
-
- ManagedConnectionFactory instances that may
-be produced out
-
- of this set.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element
-name="managedconnectionfactory-class"
-
- type="javaee:fully-qualified-classType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The element managedconnectionfactory-class
-specifies
-
- the name of the Java class that
-
- implements the
-
- jakarta.resource.spi.ManagedConnectionFactory
-interface.
-
- This Java class is provided as part of
-resource
-
- adapter’s implementation of Jakarta Connectors
-
- specified contracts. The implementation of
-this
-
- class is required to be a JavaBean.
-
-
-
- Example:
-
- <managedconnectionfactory-class>
-
- com.wombat.ManagedConnectionFactoryImpl
-
- </managedconnectionfactory-class>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- <xsd:element name="config-property"
-
- type="javaee:config-propertyType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- <xsd:element
-name="connectionfactory-interface"
-
- type="javaee:fully-qualified-classType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The element connectionfactory-interface
-specifies
-
- the name of the ConnectionFactory
-
- interface supported by the resource adapter.
-
-
-
- Example:
-
-
-<connectionfactory-interface>com.wombat.ConnectionFactory
-
- </connectionfactory-interface>
-
-
-
- OR
-
-
-
-
-<connectionfactory-interface>jakarta.resource.cci.ConnectionFactory
-
- </connectionfactory-interface>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
-
-
- <xsd:element
-name="connectionfactory-impl-class"
-
- type="javaee:fully-qualified-classType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The element connectionfactory-impl-class
-specifies
-
- the name of the ConnectionFactory
-
- class that implements resource adapter
-
- specific ConnectionFactory interface.
-
-
-
- Example:
-
-
-
-
-<connectionfactory-impl-class>com.wombat.ConnectionFactoryImpl
-
- </connectionfactory-impl-class>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- <xsd:element name="connection-interface"
-
- type="javaee:fully-qualified-classType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The connection-interface element specifies
-the fully
-
- qualified name of the Connection interface
-supported
-
- by the resource adapter.
-
-
-
- Example:
-
-
-
-
-<connection-interface>jakarta.resource.cci.Connection
-
- </connection-interface>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- <xsd:element name="connection-impl-class"
-
- type="javaee:fully-qualified-classType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The connection-impl-classType specifies the
-fully
-
- qualified name of the Connection class that
-
- implements resource adapter specific
-Connection
-
- interface. It is used by the
-connection-impl-class
-
- elements.
-
-
-
- Example:
-
-
-
-
-<connection-impl-class>com.wombat.ConnectionImpl
-
- </connection-impl-class>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType name="connectorType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The connectorType defines a resource
-adapter.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="module-name"
-type="javaee:string" minOccurs="0">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The element module-name specifies the name
-of the
-
- resource adapter.
-
-
-
- If there is no module-name specified, the
-module-name
-
- is determined as defined in Section EE.8.1.1
-and EE.8.1.2
-
- of the Jakarta™ EE Platform Specification Version 9.
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- <xsd:group ref="javaee:descriptionGroup"/>
-
- <xsd:element name="vendor-name"
-
- type="javaee:xsdStringType" minOccurs=”0”>
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The element vendor-name specifies the name
-of
-
- resource adapter provider vendor.
-
-
-
-If there is no vendor-name specified, the
-application server
-
-server must consider the default ““ (empty
-string) as
-
-the name of the resource adapter provider
-vendor.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- <xsd:element name="eis-type"
-
- type="javaee:xsdStringType" minOccurs=”0”>
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The element eis-type contains information
-about the
-
- type of the EIS. For example, the type of an
-EIS can
-
- be product name of EIS independent of any
-version
-
- info.
-
-
-
- This helps in identifying EIS instances that
-can be
-
- used with this resource adapter.
-
-
-
- If there is no eis-type specified, the
-application
-
- server must consider the default "" (empty
-string) as
-
- the type of the EIS.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- <xsd:element name="resourceadapter-version"
-
- type="javaee:xsdStringType" minOccurs=”0”>
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The element resourceadapter-version
-specifies a string-based version
-
- of the resource adapter from the resource
-adapter
-
- provider.
-
-
-
- If there is no resourceadapter-version
-specified, the application
-
- server must consider the default "" (empty
-string) as
-
- the version of the resource adapter.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- </xsd:element>
-
- <xsd:element name="license"
-
- type="javaee:licenseType"
-
- minOccurs="0"/>
-
- <xsd:element name="resourceadapter"
-
- type="javaee:resourceadapterType"/>
-
-
-
- <xsd:element name="required-work-context"
-
- type="javaee:fully-qualified-classType”
-
- minOccurs="0”
-
- maxOccurs="unbounded”>
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The element required-work-context specifies
-the
-
- class name that implements WorkContext
-interface,
-
- that a resource adapter requires the
-application server to support.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
-
-
- </xsd:element>
-
-
-
- </xsd:sequence>
-
- <xsd:attribute name="version"
-
- type="javaee:dewey-versionType"
-
- fixed="1.7"
-
- use="required">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The version indicates the version of the
-schema to be used by the
-
- deployment tool. This attribute does not
-have a default, and the
-
- resource adapter developer/deployer is
-required to specify it.
-
- This attribute allows the deployment tool to
-choose which
-
- schema to validate the descriptor against.
-
-
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:attribute>
-
- <xsd:attribute name="metadata-complete"
-type="xsd:boolean">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- The metadata-complete attribute defines
-whether the deployment
-
- descriptor for the resource adapter module
-is complete, or whether
-
- the class files available to the module and
-packaged with the resource
-
- adapter should be examined for annotations
-that specify deployment
-
- information.
-
-
-
- If metadata-complete is set to "true", the
-deployment tool of the
-
- application server must ignore any
-annotations that specify
-
- deployment information, which might be
-present in the class files of
-
- the application.If metadata-complete is not
-specified or is set to
-
- “false”, the deployment tool must examine
-the class files of the
-
-application for annotations, as specified by
-this specification. If
-
-the deployment descriptor is not included or
-is included but not
-
- marked metadata-complete, the deployment
-tool will process
-
-annotations
-
-
-
- Application servers must assume that
-metadata-complete is true for
-
- resource adapter modules with deployment
-descriptor version
-
- lower than 1.6.
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:attribute>
-
-
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType
-name="credential-interfaceType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The credential-interfaceType specifies the
-
- interface that the resource adapter
-implementation
-
- supports for the representation of the
-
- credentials. This element(s) that use this
-type,
-
- i.e. credential-interface, should be used by
-
- application server to find out the
-Credential
-
- interface it should use as part of the
-security
-
- contract.
-
-
-
- The possible values are:
-
-
-
-
-jakarta.resource.spi.security.PasswordCredential
-
- org.ietf.jgss.GSSCredential
-
-
-jakarta.resource.spi.security.GenericCredential
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- <xsd:simpleContent>
-
- <xsd:restriction
-base="javaee:fully-qualified-classType">
-
- <xsd:enumeration
-
-
-value="jakarta.resource.spi.security.PasswordCredential"/>
-
- <xsd:enumeration
-
- value="org.ietf.jgss.GSSCredential"/>
-
- <xsd:enumeration
-
-
-value="jakarta.resource.spi.security.GenericCredential"/>
-
- </xsd:restriction>
-
- </xsd:simpleContent>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType
-name="inbound-resourceadapterType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The inbound-resourceadapterType specifies
-information
-
- about an inbound resource adapter. This
-contains information
-
- specific to the implementation of the
-resource adapter
-
- library as specified through the
-messageadapter element.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="messageadapter"
-
- type="javaee:messageadapterType"
-
- minOccurs="0">
-
- <xsd:unique
-name="messagelistener-type-uniqueness">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The messagelistener-type element content
-must be
-
- unique in the messageadapter. Several
-messagelisteners
-
- can not use the same messagelistener-type.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- <xsd:selector
-xpath="javaee:messagelistener"/>
-
- <xsd:field
-xpath="javaee:messagelistener-type"/>
-
- </xsd:unique>
-
- </xsd:element>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType name="licenseType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The licenseType specifies licensing
-requirements for the
-
- resource adapter module. This type specifies
-whether a
-
- license is required to deploy and use this
-resource adapter,
-
- and an optional description of the licensing
-terms
-
- (examples: duration of license, number of
-connection
-
- restrictions). It is used by the license
-element.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="description"
-
- type="javaee:descriptionType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- <xsd:element name="license-required"
-
- type="javaee:true-falseType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The element license-required specifies
-whether a
-
- license is required to deploy and use the
-
- resource adapter. This element must be one
-of
-
- the following, "true" or "false".
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType name="messageadapterType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The messageadapterType specifies information
-about the
-
- messaging capabilities of the resource
-adapter. This
-
- contains information specific to the
-implementation of the
-
- resource adapter library as specified
-through the
-
- messagelistener element.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="messagelistener"
-
- type="javaee:messagelistenerType"
-
- maxOccurs="unbounded"/>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType name="messagelistenerType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The messagelistenerType specifies
-information about a
-
- specific message listener supported by the
-messaging
-
- resource adapter. It contains information on
-the Java type
-
- of the message listener interface and an
-activation
-
- specification.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="messagelistener-type"
-
- type="javaee:fully-qualified-classType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The element messagelistener-type specifies
-the fully
-
- qualified name of the Java type of a message
-
- listener interface.
-
-
-
- Example:
-
-
-
-
-<messagelistener-type>jakarta.jms.MessageListener
-
- </messagelistener-type>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- </xsd:element>
-
- <xsd:element name="activationspec"
-
- type="javaee:activationspecType"/>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType
-name="outbound-resourceadapterType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The outbound-resourceadapterType specifies
-information about
-
- an outbound resource adapter. The
-information includes fully
-
- qualified names of classes/interfaces
-required as part of
-
- the Jakarta Connectors specified
-contracts for
-
- connection management, level of transaction
-support
-
- provided, one or more authentication
-mechanisms supported
-
- and additional required security
-permissions.
-
-
-
- If any of the outbound resource adapter
-elements (transaction-support,
-
- authentication-mechanism,
-reauthentication-support) is specified through
-
- this element or metadata annotations, and no
-connection-definition is
-
- specified as part of this element or through
-annotations, the
-
- application server must consider this an
-error and fail deployment.
-
-
-
- If there is no authentication-mechanism
-specified as part of
-
- this or metadata annotations, then the
-resource adapter does not
-
- support any standard security authentication
-mechanisms as
-
- part of security contract. The application
-server ignores
-
- the security part of the system contracts in
-this case.
-
-
-
- If there is no transaction-support specified
-as part of
-
- this element, then the application server
-must
-
- consider that the resource adapter does not
-support either
-
- the resource manager local or Jakarta Transaction's
-transactions and must consider
-
- the transaction support as NoTransaction.
-Note that resource adapters may
-
-specify the level of transaction support to
-be used at runtime for a
-
-ManagedConnectionFactory through the
-TransactionSupport interface.
-
-
-
- If there is no reauthentication-support
-specified as part of
-
- this element or metadata annotation, then
-the application server must
-
- consider that the resource adapter does not
-support re-authentication of
-
- ManagedConnections.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="connection-definition"
-
- type="javaee:connection-definitionType"
-
- maxOccurs="unbounded" minOccurs=”0”/>
-
- <xsd:element name="transaction-support"
-
- type="javaee:transaction-supportType"
-minOccurs=”0”/>
-
- <xsd:element name="authentication-mechanism"
-
- type="javaee:authentication-mechanismType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- <xsd:element name="reauthentication-support"
-
- type="javaee:true-falseType" minOccurs=”0”/>
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The element reauthentication-support
-specifies
-
- whether the resource adapter implementation
-supports
-
- re-authentication of existing Managed-
-Connection
-
- instance. Note that this information is for
-the
-
- resource adapter implementation and not for
-the
-
- underlying EIS instance. This element must
-have
-
- either a "true" or "false" value.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- </xsd:element>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType
-name="required-config-propertyType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- <![CDATA[
-
-
-
- The required-config-propertyType contains a
-declaration
-
- of a single configuration property used for
-specifying a
-
- required configuration property name. It is
-used
-
- by required-config-property elements.
-
-
-
-
-
- Usage of this type is deprecated from
-Connector 1.6 specification.
-
- Refer to required-config-property element
-for more information.
-
-
-
- Example:
-
-
-
-
-<required-config-property>Destination</required-config-property>
-
-
-
- ]]>
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="description"
-
- type="javaee:descriptionType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- <xsd:element name="config-property-name"
-
- type="javaee:config-property-nameType"/>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType name="resourceadapterType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The resourceadapterType specifies
-information about the
-
- resource adapter. The information includes
-
- resource adapter Java class name,
-configuration properties,
-
- information specific to the implementation
-of the resource
-
- adapter library as specified through the
-
- outbound-resourceadapter and
-inbound-resourceadapter
-
- elements, and an optional set of
-administered objects.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="resourceadapter-class"
-
- type="javaee:fully-qualified-classType"
-
- minOccurs="0">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The element resourceadapter-class specifies
-the
-
- name of a Java class that implements
-
- the jakarta.resource.spi.ResourceAdapter
-
- interface. This Java class is provided as
-part of
-
- resource adapter’s implementation of
- Jakarta Connectors specified contracts. The
-implementation
-
- of this class is required to be a JavaBean.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- </xsd:element>
-
- <xsd:element name="config-property"
-
- type="javaee:config-propertyType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- <xsd:element name="outbound-resourceadapter"
-
- type="javaee:outbound-resourceadapterType"
-
- minOccurs="0">
-
- <xsd:unique
-name="connectionfactory-interface-uniqueness">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The connectionfactory-interface element
-content
-
- must be unique in the
-outbound-resourceadapter.
-
- Multiple connection-definitions can not use
-the
-
- same connectionfactory-type.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- <xsd:selector
-xpath="javaee:connection-definition"/>
-
- <xsd:field
-xpath="javaee:connectionfactory-interface"/>
-
- </xsd:unique>
-
- </xsd:element>
-
- <xsd:element name="inbound-resourceadapter"
-
- type="javaee:inbound-resourceadapterType"
-
- minOccurs="0"/>
-
- <xsd:element name="adminobject"
-
- type="javaee:adminobjectType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
-
-
- <xsd:unique
-name="adminobject-type-uniqueness">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The adminobject-interface and
-adminobject-class element content must be
-
- unique in the resourceadapterType. Several
-admin objects
-
- can not use the same adminobject-interface
-and adminobject-class.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- <xsd:selector xpath="javaee:adminobject"/>
-
- <xsd:field
-xpath="javaee:adminobject-interface"/>
-
- <xsd:field
-xpath="javaee:adminobject-class"/>
-
- </xsd:unique>
-
-
-
- <xsd:element name="security-permission"
-
- type="javaee:security-permissionType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-<!--
-**************************************************** -->
-
-
-
- <xsd:complexType
-name="security-permissionType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The security-permissionType specifies a
-security
-
- permission that is required by the resource
-adapter code.
-
-
-
- The security permission listed in the
-deployment descriptor
-
- are ones that are different from those
-required by the
-
- default permission set as specified in the
-connector
-
- specification. The optional description can
-mention specific
-
- reason that resource adapter requires a
-given security
-
- permission.
-
-
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <xsd:sequence>
-
- <xsd:element name="description"
-
- type="javaee:descriptionType"
-
- minOccurs="0"
-
- maxOccurs="unbounded"/>
-
- <xsd:element name="security-permission-spec"
-
- type="javaee:xsdStringType">
-
- <xsd:annotation>
-
- <xsd:documentation>
-
-
-
- The element security-permission-spec
-specifies a security
-
- permission based on the Security policy file
-
- syntax. Refer to the following URL for Sun’s
-
- implementation of the security permission
-
- specification:
-
-
-
-
-http://docs.oracle.com/javase/6/docs/technotes/guides/security/PolicyF
-
- iles.html
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- </xsd:element>
-
- </xsd:sequence>
-
- <xsd:attribute name="id" type="xsd:ID"/>
-
- </xsd:complexType>
-
-
-
-
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="https://jakarta.ee/xml/ns/jakartaee"
+            xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified"
+            version="2.0">
+  <xsd:annotation>
+    <xsd:documentation>
+
+      Copyright (c) 2009, 2020 Oracle and/or its affiliates. All rights reserved.
+      
+      This program and the accompanying materials are made available under the
+      terms of the Eclipse Public License v. 2.0, which is available at
+      http://www.eclipse.org/legal/epl-2.0.
+      
+      This Source Code may also be made available under the following Secondary
+      Licenses when the conditions for such availability set forth in the
+      Eclipse Public License v. 2.0 are satisfied: GNU General Public License,
+      version 2 with the GNU Classpath Exception, which is available at
+      https://www.gnu.org/software/classpath/license.html.
+      
+      SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+      
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <xsd:annotation>
+    <xsd:documentation>
+      <![CDATA[
+      This is the XML Schema for the Connectors 2.0 deployment
+      descriptor.  The deployment descriptor must be named
+      "META-INF/ra.xml" in the connector's rar file.  All connector
+      deployment descriptors must indicate the connector resource
+      adapter schema by using the Jakarta EE namespace:
+      
+      https://jakarta.ee/xml/ns/jakartaee
+      
+      and by indicating the version of the schema by
+      using the version element as shown below:
+      
+      <connector xmlns="https://jakarta.ee/xml/ns/jakartaee"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+      	 https://jakarta.ee/xml/ns/jakartaee/connector_2_0.xsd"
+      version="2.0">
+      ...
+      </connector>
+      
+      The instance documents may indicate the published version of
+      the schema using the xsi:schemaLocation attribute for Jakarta EE
+      namespace with the following location:
+      
+      https://jakarta.ee/xml/ns/jakartaee/connector_2_0.xsd
+      
+      ]]>
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <xsd:annotation>
+    <xsd:documentation>
+
+      The following conventions apply to all Jakarta EE
+      deployment descriptor elements unless indicated otherwise.
+      
+      - In elements that specify a pathname to a file within the
+      same JAR file, relative filenames (i.e., those not
+      starting with "/") are considered relative to the root of
+      the JAR file's namespace.  Absolute filenames (i.e., those
+      starting with "/") also specify names in the root of the
+      JAR file's namespace.  In general, relative names are
+      preferred.  The exception is .war files where absolute
+      names are preferred for consistency with the Servlet API.
+      
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <xsd:include schemaLocation="jakartaee_9.xsd"/>
+
+
+<!-- **************************************************** -->
+
+  <xsd:element name="connector"
+               type="jakartaee:connectorType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The connector element is the root element of the deployment
+        descriptor for the resource adapter. This element includes
+        general information - vendor name, resource adapter version,
+        icon - about the resource adapter module. It also includes
+        information specific to the implementation of the resource
+        adapter library as specified through the element
+        resourceadapter.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="activationspecType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The activationspecType specifies an activation
+        specification.  The information includes fully qualified
+        Java class name of an activation specification and a set of
+        required configuration property names.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="activationspec-class"
+                   type="jakartaee:fully-qualified-classType">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The element activationspec-class specifies the fully
+            qualified Java class name of the activation
+            specification class. This class must implement the
+            jakarta.resource.spi.ActivationSpec interface. The
+            implementation of this class is required to be a
+            JavaBean.
+            
+            Example:
+            	  <activationspec-class>com.wombat.ActivationSpecImpl
+            	  </activationspec-class>
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="required-config-property"
+                   type="jakartaee:required-config-propertyType"
+                   minOccurs="0"
+                   maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The required-config-property element is deprecated since
+            Connectors 1.6 specification. The resource adapter 
+            implementation is recommended to use the @NotNull
+            Bean Validation annotation or its XML validation
+            descriptor equivalent to indicate that a configuration
+            property is required to be specified by the deployer.
+            See the Jakarta Connectors specification for more information. 
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="config-property"
+                   type="jakartaee:config-propertyType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="adminobjectType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The adminobjectType specifies information about an
+        administered object.  Administered objects are specific to a
+        messaging style or message provider.  This contains
+        information on the Java type of the interface implemented by
+        an administered object, its Java class name and its
+        configuration properties.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="adminobject-interface"
+                   type="jakartaee:fully-qualified-classType">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The element adminobject-interface specifies the
+            fully qualified name of the Java type of the
+            interface implemented by an administered object.
+            
+            Example:
+            	<adminobject-interface>jakarta.jms.Destination
+            	</adminobject-interface>
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="adminobject-class"
+                   type="jakartaee:fully-qualified-classType">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The element adminobject-class specifies the fully
+            qualified Java class name of an administered object.
+            
+            Example:
+            	  <adminobject-class>com.wombat.DestinationImpl
+            	  </adminobject-class>
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="config-property"
+                   type="jakartaee:config-propertyType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="authentication-mechanismType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The authentication-mechanismType specifies an authentication
+        mechanism supported by the resource adapter. Note that this
+        support is for the resource adapter and not for the
+        underlying EIS instance. The optional description specifies
+        any resource adapter specific requirement for the support of
+        security contract and authentication mechanism.
+        
+        Note that BasicPassword mechanism type should support the
+        jakarta.resource.spi.security.PasswordCredential interface.
+        The Kerbv5 mechanism type should support the
+        org.ietf.jgss.GSSCredential interface or the deprecated
+        jakarta.resource.spi.security.GenericCredential interface.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="description"
+                   type="jakartaee:descriptionType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+      <xsd:element name="authentication-mechanism-type"
+                   type="jakartaee:xsdStringType">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The element authentication-mechanism-type specifies
+            type of an authentication mechanism.
+            
+            The example values are:
+            
+            <authentication-mechanism-type>BasicPassword
+            </authentication-mechanism-type>
+            
+            <authentication-mechanism-type>Kerbv5
+            </authentication-mechanism-type>
+            
+            Any additional security mechanisms are outside the
+            scope of the Jakarta Connectors architecture specification.
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="credential-interface"
+                   type="jakartaee:credential-interfaceType"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="config-property-nameType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <![CDATA[
+        The config-property-nameType contains the name of a
+        configuration property.
+        
+        The connector architecture defines a set of well-defined
+        properties all of type java.lang.String. These are as
+        follows.
+        
+        ServerName
+        PortNumber
+        UserName
+        Password
+        ConnectionURL
+        
+        A resource adapter provider can extend this property set to
+        include properties specific to the resource adapter and its
+        underlying EIS.
+        
+        Possible values include
+        	  ServerName
+        	  PortNumber
+        	  UserName
+        	  Password
+        	  ConnectionURL
+        
+        Example: <config-property-name>ServerName</config-property-name>
+        
+        ]]>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:restriction base="jakartaee:xsdStringType"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="config-property-typeType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <![CDATA[
+        The config-property-typeType contains the fully
+        qualified Java type of a configuration property.
+        
+        The following are the legal values:
+        java.lang.Boolean, java.lang.String, java.lang.Integer,
+        java.lang.Double, java.lang.Byte, java.lang.Short,
+        java.lang.Long, java.lang.Float, java.lang.Character
+        
+        Used in: config-property
+        
+        Example:
+        <config-property-type>java.lang.String</config-property-type>
+        
+        ]]>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:restriction base="jakartaee:string">
+        <xsd:enumeration value="java.lang.Boolean"/>
+        <xsd:enumeration value="java.lang.String"/>
+        <xsd:enumeration value="java.lang.Integer"/>
+        <xsd:enumeration value="java.lang.Double"/>
+        <xsd:enumeration value="java.lang.Byte"/>
+        <xsd:enumeration value="java.lang.Short"/>
+        <xsd:enumeration value="java.lang.Long"/>
+        <xsd:enumeration value="java.lang.Float"/>
+        <xsd:enumeration value="java.lang.Character"/>
+      </xsd:restriction>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="config-propertyType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The config-propertyType contains a declaration of a single
+        configuration property that may be used for providing
+        configuration information.
+        
+        The declaration consists of an optional description, name,
+        type and an optional value of the configuration property. If
+        the resource adapter provider does not specify a value than
+        the deployer is responsible for providing a valid value for
+        a configuration property.
+        
+        Any bounds or well-defined values of properties should be
+        described in the description element.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="description"
+                   type="jakartaee:descriptionType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+      <xsd:element name="config-property-name"
+                   type="jakartaee:config-property-nameType"/>
+      <xsd:element name="config-property-type"
+                   type="jakartaee:config-property-typeType"/>
+      <xsd:element name="config-property-value"
+                   type="jakartaee:xsdStringType"
+                   minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The element config-property-value contains the value
+            of a configuration entry. Note, it is possible for a
+            resource adapter deployer to override this
+            configuration information during deployment.
+            
+            Example:
+            <config-property-value>WombatServer</config-property-value>
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="config-property-ignore"
+                   type="jakartaee:true-falseType"
+                   minOccurs="0"
+                   maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element config-property-ignore is used to specify 
+            whether the configuration tools must ignore considering the 
+            configuration property during auto-discovery of
+            Configuration properties. See the Jakarta Connectors specification for
+            more details. If unspecified, the container must not ignore
+            the configuration property during auto-discovery.
+            This element must be one of the following, "true" or "false".
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="config-property-supports-dynamic-updates"
+                   type="jakartaee:true-falseType"
+                   minOccurs="0"
+                   maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element config-property-supports-dynamic-updates is used to specify 
+            whether the configuration property allows its value to be updated, by
+            application server's configuration tools, during the lifetime of
+            the JavaBean instance. See the Jakarta Connectors specification for
+            more details. If unspecified, the container must not dynamically
+            reconfigure the property.
+            This element must be one of the following, "true" or "false".
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="config-property-confidential"
+                   type="jakartaee:true-falseType"
+                   minOccurs="0"
+                   maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element config-property-confidential is used to specify 
+            whether the configuration property is confidential and
+            recommends application server's configuration tools to use special 
+            visual aids for editing them. See the Jakarta Connectors specification for
+            more details. If unspecified, the container must not treat the
+            property as confidential.
+            This element must be one of the following, "true" or "false".
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="connection-definitionType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The connection-definitionType defines a set of connection
+        interfaces and classes pertaining to a particular connection
+        type. This also includes configurable properties for
+        ManagedConnectionFactory instances that may be produced out
+        of this set.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="managedconnectionfactory-class"
+                   type="jakartaee:fully-qualified-classType">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The element managedconnectionfactory-class specifies
+            the fully qualified name of the Java class that
+            implements the
+            jakarta.resource.spi.ManagedConnectionFactory interface.
+            This Java class is provided as part of resource
+            adapter's implementation of connector architecture
+            specified contracts. The implementation of this
+            class is required to be a JavaBean.
+            
+            Example:
+            <managedconnectionfactory-class>
+            	  com.wombat.ManagedConnectionFactoryImpl
+            </managedconnectionfactory-class>
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="config-property"
+                   type="jakartaee:config-propertyType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+      <xsd:element name="connectionfactory-interface"
+                   type="jakartaee:fully-qualified-classType">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The element connectionfactory-interface specifies
+            the fully qualified name of the ConnectionFactory
+            interface supported by the resource adapter.
+            
+            Example:
+            <connectionfactory-interface>com.wombat.ConnectionFactory
+            </connectionfactory-interface>
+            
+            OR
+            
+            <connectionfactory-interface>jakarta.resource.cci.ConnectionFactory
+            </connectionfactory-interface>
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="connectionfactory-impl-class"
+                   type="jakartaee:fully-qualified-classType">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The element connectionfactory-impl-class specifies
+            the fully qualified name of the ConnectionFactory
+            class that implements resource adapter
+            specific ConnectionFactory interface.
+            
+            Example:
+            
+            <connectionfactory-impl-class>com.wombat.ConnectionFactoryImpl
+            </connectionfactory-impl-class>
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="connection-interface"
+                   type="jakartaee:fully-qualified-classType">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The connection-interface element specifies the fully
+            qualified name of the Connection interface supported
+            by the resource adapter.
+            
+            Example:
+            
+            	  <connection-interface>jakarta.resource.cci.Connection
+            	  </connection-interface>
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="connection-impl-class"
+                   type="jakartaee:fully-qualified-classType">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The connection-impl-classType specifies the fully
+            qualified name of the Connection class that
+            implements resource adapter specific Connection
+            interface.  It is used by the connection-impl-class
+            elements.
+            
+            Example:
+            
+            	  <connection-impl-class>com.wombat.ConnectionImpl
+            	  </connection-impl-class>
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="connectorType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The connectorType defines a resource adapter.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="module-name"
+                   type="jakartaee:string"
+                   minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element module-name specifies the name of the
+            resource adapter.
+            
+            If there is no module-name specified, the module-name
+            is determined as defined in Section EE.8.1.1 and EE.8.1.2 
+            of the Java Platform, Enterprise Edition (Jakarta EE) 
+            Specification, version 6.
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:group ref="jakartaee:descriptionGroup"/>
+      <xsd:element name="vendor-name"
+                   type="jakartaee:xsdStringType"
+                   minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element vendor-name specifies the name of
+            resource adapter provider vendor.
+            
+            If there is no vendor-name specified, the application 
+            server must consider the default "" (empty string) as
+            the name of the resource adapter provider vendor.
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="eis-type"
+                   type="jakartaee:xsdStringType"
+                   minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element eis-type contains information about the
+            type of the EIS. For example, the type of an EIS can
+            be product name of EIS independent of any version
+            info.
+            
+            This helps in identifying EIS instances that can be
+            used with this resource adapter.
+            
+            If there is no eis-type specified, the application 
+            server must consider the default "" (empty string) as
+            the type of the EIS.
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="resourceadapter-version"
+                   type="jakartaee:xsdStringType"
+                   minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element resourceadapter-version specifies a string-based version
+            of the resource adapter from the resource adapter
+            provider.
+            
+            If there is no resourceadapter-version specified, the application 
+            server must consider the default "" (empty string) as
+            the version of the resource adapter.
+            	
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="license"
+                   type="jakartaee:licenseType"
+                   minOccurs="0"/>
+      <xsd:element name="resourceadapter"
+                   type="jakartaee:resourceadapterType"/>
+      <xsd:element name="required-work-context"
+                   type="jakartaee:fully-qualified-classType"
+                   minOccurs="0"
+                   maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element required-work-context specifies a fully qualified class 
+            name that implements WorkContext interface, that the resource adapter 
+            requires the application server to support.
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="version"
+                   type="jakartaee:dewey-versionType"
+                   fixed="2.0"
+                   use="required">
+      <xsd:annotation>
+        <xsd:documentation>
+
+          The version indicates the version of the schema to be used by the
+          deployment tool. This element doesn't have a default, and the resource adapter 
+          developer/deployer is required to specify it. The element allows the deployment 
+          tool to choose which schema to validate the descriptor against.
+          	  
+          
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="metadata-complete"
+                   type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation>
+
+          The metadata-complete attribute defines whether the deployment 
+          descriptor for the resource adapter module is complete, or whether
+          the class files available to the module and packaged with the resource 
+          adapter should be examined for annotations that specify deployment 
+          information.
+          
+          If metadata-complete is set to "true", the deployment tool of the 
+          application server must ignore any annotations that specify deployment 
+          information, which might be present in the class files of the 
+          application.If metadata-complete is not specified or is set to "false", 
+          the deployment tool must examine the class files of the application for 
+          annotations, as specified by this specification. If the 
+          deployment descriptor is not included or is included but not marked 
+          metadata-complete, the deployment tool will process annotations.
+          
+          Application servers must assume that metadata-complete is true for 
+          resource adapter modules with deployment descriptor version 
+          lower than 1.6.
+          		
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="credential-interfaceType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The credential-interfaceType specifies the
+        interface that the resource adapter implementation
+        supports for the representation of the
+        credentials. This element(s) that use this type,
+        i.e. credential-interface,  should be used by
+        application server to find out the Credential
+        interface it should use as part of the security
+        contract.
+        
+        The possible values are:
+        
+        jakarta.resource.spi.security.PasswordCredential
+        org.ietf.jgss.GSSCredential
+        jakarta.resource.spi.security.GenericCredential
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:restriction base="jakartaee:fully-qualified-classType">
+        <xsd:enumeration value="jakarta.resource.spi.security.PasswordCredential"/>
+        <xsd:enumeration value="org.ietf.jgss.GSSCredential"/>
+        <xsd:enumeration value="jakarta.resource.spi.security.GenericCredential"/>
+      </xsd:restriction>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="inbound-resourceadapterType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The inbound-resourceadapterType specifies information
+        about an inbound resource adapter. This contains information
+        specific to the implementation of the resource adapter
+        library as specified through the messageadapter element.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="messageadapter"
+                   type="jakartaee:messageadapterType"
+                   minOccurs="0">
+        <xsd:unique name="messagelistener-type-uniqueness">
+          <xsd:annotation>
+            <xsd:documentation>
+
+              The messagelistener-type element content must be
+              unique in the messageadapter. Several messagelisteners
+              can not use the same messagelistener-type.
+              
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:selector xpath="jakartaee:messagelistener"/>
+          <xsd:field xpath="jakartaee:messagelistener-type"/>
+        </xsd:unique>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="licenseType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The licenseType specifies licensing requirements for the
+        resource adapter module. This type specifies whether a
+        license is required to deploy and use this resource adapter,
+        and an optional description of the licensing terms
+        (examples: duration of license, number of connection
+        restrictions). It is used by the license element.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="description"
+                   type="jakartaee:descriptionType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+      <xsd:element name="license-required"
+                   type="jakartaee:true-falseType">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element license-required specifies whether a
+            license is required to deploy and use the
+            resource adapter. This element must be one of
+            the following, "true" or "false".
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="messageadapterType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The messageadapterType specifies information about the
+        messaging capabilities of the resource adapter. This
+        contains information specific to the implementation of the
+        resource adapter library as specified through the
+        messagelistener element.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="messagelistener"
+                   type="jakartaee:messagelistenerType"
+                   maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="messagelistenerType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The messagelistenerType specifies information about a
+        specific message listener supported by the messaging
+        resource adapter. It contains information on the Java type
+        of the message listener interface and an activation
+        specification.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="messagelistener-type"
+                   type="jakartaee:fully-qualified-classType">
+        <xsd:annotation>
+          <xsd:documentation>
+            <![CDATA[
+            The element messagelistener-type specifies the fully
+            qualified name of the Java type of a message
+            listener interface.
+            
+            Example:
+            
+            	<messagelistener-type>jakarta.jms.MessageListener
+            	</messagelistener-type>
+            
+            ]]>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="activationspec"
+                   type="jakartaee:activationspecType"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="outbound-resourceadapterType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The outbound-resourceadapterType specifies information about
+        an outbound resource adapter. The information includes fully
+        qualified names of classes/interfaces required as part of
+        the connector architecture specified contracts for
+        connection management, level of transaction support
+        provided, one or more authentication mechanisms supported
+        and additional required security permissions.
+        
+        If any of the outbound resource adapter elements (transaction-support,
+        authentication-mechanism, reauthentication-support) is specified through
+        this element or metadata annotations, and no  connection-definition is 
+        specified as part of this element or through annotations, the 
+        application server must consider this an error and fail deployment. 
+        
+        If there is no authentication-mechanism specified as part of
+        this element or metadata annotations, then the resource adapter does 
+        not support any standard security authentication mechanisms as 
+        part of security contract. The application server ignores the security 
+        part of the system contracts in this case.
+        
+        If there is no transaction-support specified as part of this element 
+        or metadata annotation, then the application server must consider that 
+        the resource adapter does not support either the resource manager local 
+        or Jakarta Transactions transactions and must consider the transaction support as 
+        NoTransaction. Note that resource adapters may specify the level of 
+        transaction support to be used at runtime for a ManagedConnectionFactory 
+        through the TransactionSupport interface.
+        
+        If there is no reauthentication-support specified as part of
+        this element or metadata annotation, then the application server must consider 
+        that the resource adapter does not support re-authentication of 
+        ManagedConnections.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="connection-definition"
+                   type="jakartaee:connection-definitionType"
+                   maxOccurs="unbounded"
+                   minOccurs="0"/>
+      <xsd:element name="transaction-support"
+                   type="jakartaee:transaction-supportType"
+                   minOccurs="0"/>
+      <xsd:element name="authentication-mechanism"
+                   type="jakartaee:authentication-mechanismType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+      <xsd:element name="reauthentication-support"
+                   type="jakartaee:true-falseType"
+                   minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            	    The element reauthentication-support specifies
+            	    whether the resource adapter implementation supports
+            	    re-authentication of existing Managed- Connection
+            	    instance. Note that this information is for the
+            	    resource adapter implementation and not for the
+            	    underlying EIS instance. This element must have
+            	    either a "true" or "false" value.
+            
+            	  
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="required-config-propertyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <![CDATA[
+        The required-config-propertyType contains a declaration
+        of a single configuration property used for specifying a
+        required configuration property name. It is used
+        by required-config-property elements.
+        
+        Usage of this type is deprecated from Connectors 1.6 specification. 
+        Refer to required-config-property element for more information.
+        
+        Example:
+        
+        <required-config-property>
+        <config-property-name>Destination</config-property-name>
+        </required-config-property>
+        
+        ]]>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="description"
+                   type="jakartaee:descriptionType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+      <xsd:element name="config-property-name"
+                   type="jakartaee:config-property-nameType"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="resourceadapterType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The resourceadapterType specifies information about the
+        resource adapter. The information includes fully qualified
+        resource adapter Java class name, configuration properties,
+        information specific to the implementation of the resource
+        adapter library as specified through the
+        outbound-resourceadapter and inbound-resourceadapter
+        elements, and an optional set of administered objects.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="resourceadapter-class"
+                   type="jakartaee:fully-qualified-classType"
+                   minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element resourceadapter-class specifies the
+            fully qualified name of a Java class that implements
+            the jakarta.resource.spi.ResourceAdapter
+            interface. This Java class is provided as part of
+            resource adapter's implementation of connector
+            architecture specified contracts. The implementation
+            of this class is required to be a JavaBean.
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="config-property"
+                   type="jakartaee:config-propertyType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+      <xsd:element name="outbound-resourceadapter"
+                   type="jakartaee:outbound-resourceadapterType"
+                   minOccurs="0">
+        <xsd:unique name="connectionfactory-interface-uniqueness">
+          <xsd:annotation>
+            <xsd:documentation>
+
+              The connectionfactory-interface element content
+              must be unique in the outbound-resourceadapter.
+              Multiple connection-definitions can not use the
+              same connectionfactory-type.
+              
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:selector xpath="jakartaee:connection-definition"/>
+          <xsd:field xpath="jakartaee:connectionfactory-interface"/>
+        </xsd:unique>
+      </xsd:element>
+      <xsd:element name="inbound-resourceadapter"
+                   type="jakartaee:inbound-resourceadapterType"
+                   minOccurs="0"/>
+      <xsd:element name="adminobject"
+                   type="jakartaee:adminobjectType"
+                   minOccurs="0"
+                   maxOccurs="unbounded">
+        <xsd:unique name="adminobject-type-uniqueness">
+          <xsd:annotation>
+            <xsd:documentation>
+
+              The adminobject-interface and adminobject-class element content must be
+              unique in the resourceadapterType. Several admin objects
+              can not use the same adminobject-interface and adminobject-class.
+              
+            </xsd:documentation>
+          </xsd:annotation>
+          <xsd:selector xpath="jakartaee:adminobject"/>
+          <xsd:field xpath="jakartaee:adminobject-interface"/>
+          <xsd:field xpath="jakartaee:adminobject-class"/>
+        </xsd:unique>
+      </xsd:element>
+      <xsd:element name="security-permission"
+                   type="jakartaee:security-permissionType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
+
+
+<!-- **************************************************** -->
+
+  <xsd:complexType name="security-permissionType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        The security-permissionType specifies a security
+        permission that is required by the resource adapter code.
+        
+        The security permission listed in the deployment descriptor
+        are ones that are different from those required by the
+        default permission set as specified in the connector
+        specification. The optional description can mention specific
+        reason that resource adapter requires a given security
+        permission.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="description"
+                   type="jakartaee:descriptionType"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+      <xsd:element name="security-permission-spec"
+                   type="jakartaee:xsdStringType">
+        <xsd:annotation>
+          <xsd:documentation>
+
+            The element security-permission-spec specifies a security
+            permission based on the Security policy file
+            syntax. Refer to the following URL for Sun's
+            implementation of the security permission
+            specification:
+            
+            http://docs.oracle.com/javase/6/docs/technotes/guides/security/PolicyFiles.html
+            
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="id"
+                   type="xsd:ID"/>
+  </xsd:complexType>
 
 </xsd:schema>
 
 
+----
 
-=== 
+== [[a6592]]Runtime Environment
 
-=== 
-
-image:conn-158.png[image]
-
-[[a6592]]Runtime Environment
-
-image:conn-159.png[image]
 
 This chapter focuses on the Java portion of a
 resource adapter that executes within a Java compatible runtime
