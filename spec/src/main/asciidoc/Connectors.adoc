@@ -15290,27 +15290,23 @@ for the resource adapter and application server implementations.
 
 === Requirements of the Application Server
 
-The application server must support the
+* The application server must support the
 deployment of a resource adapter in Jakarta Enterprise Beans and Web containers.
 
-The application server must support all the
+* The application server must support all the
 Jakarta Connectors requirements in Jakarta Enterprise Beans and Web containers.
 
-A single resource adapter instance may be
+* A single resource adapter instance may be
 shared by both a Web container and an Jakarta Enterprise Beans container.
 
-The application server must support all
+* The application server must support all
 versions of the resource adapter DTDs (Document Type Definitions) and
 the resource adapter XML Schema Definition. This ensures that resource
 adapters written to previous versions of this specification can be
 deployed on products supporting the current version of this
 specification.
 
-=== 
-
-image:conn-150.png[image]
-
-Requirements of the Resource adapter
+=== Requirements of the Resource adapter
 
 The following matrix specifies the required
 (+) and optional (?) API requirements on a resource adapter.
@@ -15331,96 +15327,29 @@ SM - Security management contract
 
 CCI - Common Client Interface
 
-=== Resource Adapter API Requirements
+.Table Resource Adapter API Requirements
+|===
+| |LM |WM |MI |TI |CM |TM |SM |CCI 
+|Outbound |? |? | | |+ |+ |+ |?
+|Inbound |+ |? |+ |? | | | | 
+|Bi-directional |+ |? |+ |? |+ |+ |+ |?
+|===
 
-
-
-LM
-
-WM
-
-MI
-
-TI
-
-CM
-
-TM
-
-SM
-
-CCI
-
-Outbound
-
- ?
-
- ?
-
- 
-
- 
-
- +
-
- +
-
- +
-
- ?
-
-Inbound
-
- +
-
- ?
-
- +
-
- ?
-
-
-
-
-
-
-
-
-
-Bi-directional
-
- +
-
- ?
-
- +
-
- ?
-
- +
-
- +
-
- +
-
- ?
-
-Note, the message inflow contract must be
+[NOTE]
+====
+The message inflow contract must be
 supported by an inbound resource adapter.
+====
 
-=== 
-
-image:conn-150.png[image]
-
-[[a5071]]JavaBean Requirements
+=== [[a5071]]JavaBean Requirements
 
 The various JavaBean implementations provided
 by a resource adapter must adhere to the following rules:
 
-A JavaBean implementation must contain a null
+* A JavaBean implementation must contain a null
 constructor.
 
-A JavaBean implementation must provide getter
+* A JavaBean implementation must provide getter
 and setter methods, to access and modify the public properties of the
 JavaBean instance.
 
@@ -15435,17 +15364,13 @@ _java.beans.XMLEncoder_ , and _java.beans.PersistenceDelegate_ .
 For details, refer to JavaBeans specification
 (see <<a9749, JavaBeans Specification 1.01 Final Release>>).
 
-=== 
-
-image:conn-150.png[image]
-
-[[a5078]]Equality Constraints
+=== [[a5078]]Equality Constraints
 
 This section specifies the equality
 constraints on object implementations of the various types defined by
 this specification.
 
-=== Equality based on Java Object Identity
+==== Equality based on Java Object Identity
 
 The candidate objects are implementations of
 MessageEndpointFactory, ActivationSpec, _ManagedConnection_ types.
@@ -15455,7 +15380,7 @@ the default _equals_ and _hashCode_ methods. However, if these methods
 are overridden, they must preserve the equality constraints based on
 Java object identity; that is, no two objects are considered equal.
 
-=== Equality Based on Config Properties and Class Information
+==== Equality Based on Config Properties and Class Information
 
 The candidate objects are implementations of
 ResourceAdapter, _ManagedConnectionFactory_ , _ConnectionRequestInfo_ ,
