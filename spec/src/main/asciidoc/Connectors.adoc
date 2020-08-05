@@ -685,16 +685,9 @@ resource adapter running in separate processes.
 The client API used by application components
 for EIS access may be defined as:
 
-<<<<<<< HEAD
-The standard Common Client Interface (CCI) as
-specified in <<a3927, Common Client Interface>>.
-
-A client API specific to the type of a
-=======
 * The standard Common Client Interface (CCI) as
-specified in link:conn.html#a3927[See Common Client Interface].
+specified in <<a3927, Common Client Interface>>.
 * A client API specific to the type of a
->>>>>>> Tidy formatting up to the end of chapter 7 Transaction Management
 resource adapter and its underlying EIS. An example of such an EIS
 specific client API is JDBC for relational databases.
 
@@ -4022,12 +4015,10 @@ The following table specifies various
 transaction management scenarios and mentions whether these scenarios
 are within the scope of Jakarta Connectors.
 
-[width="100%",cols="50%,50%",options="header",]
+.Table
 |===
-|Description
-|Supported / NotSupported
-a|
-TM does two-phase commit (2PC) on RMs that
+|Description |Supported / NotSupported
+|TM does two-phase commit (2PC) on RMs that
 support two-phase commit (as defined in RM’s requirements for
 _XAResource_ implementation in the subsection below)
 
@@ -4038,8 +4029,7 @@ that support 2PC in their _XAResource_ implementations.
 Jakarta Transaction/JTS and X/Open compliant, and RM’s support for 2PC in the
 _XAResource_ interface.
 
-a|
-TM does one-phase commit (1PC) optimization
+|TM does one-phase commit (1PC) optimization
 on the only RM involved in a transaction. RM supports 2PC in its
 _XAResource_ implementation (as defined in RM’s requirements for the
 _XAResource_ implementation in the subsection below).
@@ -4047,18 +4037,14 @@ _XAResource_ implementation in the subsection below).
 Example of RM: DB2 installation that supports
 2PC in its _XAResource_ implementation.
 
-a|
-Supported based on TM’s requirement to be
+|Supported based on TM’s requirement to be
 Jakarta Transaction/JTS and X/Open compliant, and RM’s support for the XAResource
 interface.
 
 Note: This scenario will also work if TM does
 2PC on RM.
 
-
-
-a|
-TM does one-phase commit optimization on the
+|TM does one-phase commit optimization on the
 only RM involved in a transaction. RM does not support 2PC but supports
 1PC in its _XAResource_ implementation.
 
@@ -4066,8 +4052,7 @@ Example of RM: ERP system or mainframe TP
 system that does not support 2PC, but implements 1PC in its XAResource
 implementation as defined in the RM’s requirements for 1PC.
 
-a|
-Supported by requiring that TM must support
+|Supported by requiring that TM must support
 1PC optimization. A successful transaction coordination of 1PC only RM
 comes as a result of required 1PC optimization for a TM.
 
@@ -4078,17 +4063,12 @@ for Jakarta Connectors.
 |TM does last-resource commit optimization
 across multiple RMs involved in a transaction—RMs that support 2PC (for
 example: Oracle and DB2) and a single RM that supports only 1PC (for
-example: an ERP system). a|
-Out of the scope of the Jakarta Connectors specification
-
-
+example: an ERP system). 
+|Out of the scope of the Jakarta Connectors specification
 
 |More than one RM that support only 1PC
-involved in a transaction with none or multiple 2PC enabled RMs a|
-Out of the scope of the Jakarta Connectors specification
-
-
-
+involved in a transaction with none or multiple 2PC enabled RMs 
+|Out of the scope of the Jakarta Connectors specification
 |===
 
 ==== Resource Adapter Requirements
