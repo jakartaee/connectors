@@ -12159,7 +12159,7 @@ public class XMPPResourceAdapterImpl implements ResourceAdapter {
 
 public class XMPPMessageDeliveryWork implements Work, WorkContextProvider {
 
-  void release()\{ ..}
+  void release(){ ..}
   
   List<WorkContext> getWorkContexts() {
     List<WorkContext> l = new ArrayList<WorkContext>();
@@ -12170,7 +12170,7 @@ public class XMPPMessageDeliveryWork implements Work, WorkContextProvider {
   
  void run(){
    // deliver "exchange message" from the user
-     // to MessageEndpoint;
+   // to MessageEndpoint;
  }
 }
 
@@ -12238,16 +12238,10 @@ Identity in the Container Security Domain>>.
 
 == [[a3927]]Common Client Interface
 
-image:conn-134.png[image]
-
 This chapter specifies the Common Client
 Interface (CCI).
 
-=== 
-
-image:conn-135.png[image]
-
-Overview
+=== Overview
 
 The CCI defines a standard client API for
 application components. The CCI enables application components and
@@ -12256,34 +12250,28 @@ interactions across heterogeneous EISs using a common client API. The
 following figure shows a high-level view of the CCI and its relationship
 to other application components.
 
-Common Client Interface
+*Common Client Interface* image:conn-136.jpg[image]
 
-image:conn-136.jpg[image]
-
-=== 
-
-image:conn-135.png[image]
-
-Goals
+=== Goals
 
 The CCI is designed with the following goals:
 
-It defines a remote function-call interface
+* It defines a remote function-call interface
 that focuses on executing functions on an EIS and retrieving the
 results. The CCI can form a base level API for EIS access on which
 higher level functionality can be built.
 
-It is targeted primarily towards application
+* It is targeted primarily towards application
 development tools and EAI frameworks.
 
-Although it is simple, it has sufficient
+* Although it is simple, it has sufficient
 functionality and an extensible application programming model.
 
-It provides an API that both leverages and is
+* It provides an API that both leverages and is
 consistent with various facilities defined by the Java SE and Jakarta EE
 platforms.
 
-It is independent of a specific EIS. For
+* It is independent of a specific EIS. For
 example, it does not use data types specific to an EIS. However, the CCI
 can be capable of being driven by EIS-specific metadata from a
 repository.
@@ -12299,17 +12287,13 @@ discourage the use of JDBC APIs by these vendors. For example, an EAI
 vendor will typically combine JDBC with CCI by using the JDBC API to
 access relational databases and using CCI to access other EISs.
 
-=== 
-
-image:conn-135.png[image]
-
-Scenarios
+=== Scenarios
 
 The following scenarios illustrate the use of
 CCI by enterprise tools and Enterprise Application Integration (EAI)
 vendors:
 
-=== Enterprise Application Integration Framework
+==== Enterprise Application Integration Framework
 
 The EAI vendor uses the Common Client
 Interface as a standard way to plug-in resource adapters for
@@ -12322,11 +12306,11 @@ The following figure also shows the use of
 JDBC by the EAI framework for connecting to and accessing relational
 databases.
 
-[[a3946]]Scenario: EAI Framework
+*[[a3946]]Scenario: EAI Framework*
 
 image:conn-137.jpg[image]
 
-=== Metadata Repository and API
+==== Metadata Repository and API
 
 An EAI or application development tool uses a
 metadata repository to drive CCI-based interactions with heterogeneous
@@ -12338,14 +12322,15 @@ structures for the invocation parameters, existing on an EIS system.
 
 
 
-image:conn-138.png[image]
+[NOTE]
+====
 
 The specification of a standard repository API and metadata format is
 outside the scope of the current version of Jakarta Connectors.
 
-image:conn-138.png[image]
+====
 
-=== Enterprise Application Development Tool
+==== Enterprise Application Development Tool
 
 The CCI functions as a plug-in contract for an
 application development tool that develops additional functionality
@@ -12362,80 +12347,76 @@ An application development tool can also
 compose or generate an application component that uses the generated
 Java classes for EIS access.
 
-[[a3954]]Scenario: Enterprise
+*[[a3954]]Scenario: Enterprise*
 Application Development Tool
 
 image:conn-139.jpg[image]
 
-=== 
-
-image:conn-135.png[image]
-
-Common Client Interface
+=== Common Client Interface
 
 The CCI is divided in to the following parts:
 
-Connection-related interfaces that represent a
+* Connection-related interfaces that represent a
 connection factory and an application level connection:
 
- _jakarta.resource.cci.ConnectionFactory_
+ ** _jakarta.resource.cci.ConnectionFactory_
 
- _jakarta.resource.cci.Connection_
+ ** _jakarta.resource.cci.Connection_
 
- _jakarta.resource.cci.ConnectionSpec_
+ ** _jakarta.resource.cci.ConnectionSpec_
 
- _jakarta.resource.cci.LocalTransaction_
+ ** _jakarta.resource.cci.LocalTransaction_
 
-Interaction-related interfaces that enable a
+* Interaction-related interfaces that enable a
 component to drive an interaction, specified through an
 _InteractionSpec_ , with an EIS instance:
 
- _jakarta.resource.cci.Interaction_
+ ** _jakarta.resource.cci.Interaction_
 
- _jakarta.resource.cci.InteractionSpec_
+ ** _jakarta.resource.cci.InteractionSpec_
 
-Service endpoint message listener interface:
+* Service endpoint message listener interface:
 
- _jakarta.resource.cci.MessageListener_
+ ** _jakarta.resource.cci.MessageListener_
 
-Data representation-related interfaces that
+* Data representation-related interfaces that
 are used to represent data structures involved in an interaction with an
 EIS instance:
 
- _jakarta.resource.cci.Record_
+ ** _jakarta.resource.cci.Record_
 
- _jakarta.resource.cci.MappedRecord_
+ ** _jakarta.resource.cci.MappedRecord_
 
- _jakarta.resource.cci.IndexedRecord_
+ ** _jakarta.resource.cci.IndexedRecord_
 
- _jakarta.resource.cci.RecordFactory_
+ ** _jakarta.resource.cci.RecordFactory_
 
- _jakarta.resource.cci.Streamable_
+ ** _jakarta.resource.cci.Streamable_
 
- _jakarta.resource.cci.ResultSet_
+ ** _jakarta.resource.cci.ResultSet_
 
- _java.sql.ResultSetMetaData_
+ ** _java.sql.ResultSetMetaData_
 
-Metadata related-interfaces that provide basic
+* Metadata related-interfaces that provide basic
 meta information about a resource adapter implementation and an EIS
 connection:
 
- _jakarta.resource.cci.ConnectionMetaData_
+ ** _jakarta.resource.cci.ConnectionMetaData_
 
- _jakarta.resource.cci.ResourceAdapterMetaData_
+ ** _jakarta.resource.cci.ResourceAdapterMetaData_
 
- _jakarta.resource.cci.ResultSetInfo_
+ ** _jakarta.resource.cci.ResultSetInfo_
 
-Additional classes:
+* Additional classes:
 
- _jakarta.resource.ResourceException_
+ ** _jakarta.resource.ResourceException_
 
- _jakarta.resource.cci.ResourceWarning_
+ ** _jakarta.resource.cci.ResourceWarning_
 
 See <<a3988, Class
 Diagram: Common Client Interface>> for the class diagram for CCI.
 
-=== Requirements
+==== Requirements
 
 A resource adapter provider provides an
 implementation of the CCI interfaces as part of its resource adapter
@@ -12444,13 +12425,12 @@ resource adapter support the CCI interfaces as its client API.
 
 
 
-image:conn-138.png[image]
-
+[NOTE]
+====
 A resource adapter is allowed to support a client API specific to its
 underlying EIS. An example of an EIS-specific client APIs is JDBC API
 for relational databases.
-
-image:conn-138.png[image]
+====
 
 Jakarta Connectors also allows a
 third-party vendor to provide an implementation of CCI interfaces above
@@ -12467,21 +12447,16 @@ structures required to drive interactions wthird-partyith an EIS
 instance. The section on the _Record_ interface specification describes
 this case in more detail.
 
-[[a3988]]Class Diagram: Common
-Client Interface
+*[[a3988]]Class Diagram: Common Client Interface*
 
 image:conn-140.jpg[image]
 
-=== 
-
-image:conn-135.png[image]
-
-[[a3990]]Connection Interfaces
+=== [[a3990]]Connection Interfaces
 
 This section specifies interfaces for the
 connection factory and application level connection.
 
-=== ConnectionFactory
+==== ConnectionFactory
 
 The _jakarta.resource.cci.ConnectionFactory_
 provides an interface for getting a connection to an EIS instance. A
@@ -12491,46 +12466,21 @@ namespace and then uses it to get a connection to the EIS instance.
 The following code extract shows the
 _ConnectionFactory_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.ConnectionFactory
+[source,Java]
+----
+public interface jakarta.resource.cci.ConnectionFactory
+          extends java.io.Serializable, jakarta.resource.Referenceable {
+ 
+ public RecordFactory getRecordFactory() throws ResourceException;
 
- extends java.io.Serializable,
+ public Connection getConnection() throws ResourceException;
 
- jakarta.resource.Referenceable \{
+ public Connection getConnection(jakarta.resource.cci.ConnectionSpec properties)
+                     throws ResourceException;
 
-
-
- public RecordFactory getRecordFactory()
-
- throws ResourceException;
-
-
-
- public Connection getConnection()
-
- throws ResourceException;
-
- public Connection getConnection(
-
- jakarta.resource.cci.ConnectionSpec
-properties)
-
- throws ResourceException;
-
-
-
- public ResourceAdapterMetaData getMetaData()
-
- throws ResourceException;
-
-
-
+ public ResourceAdapterMetaData getMetaData() throws ResourceException;
 }
-
-|===
+----
 
 The _getConnection_ method gets a connection
 to an EIS instance. The _getConnection_ variant with no parameters is
@@ -12568,7 +12518,7 @@ _ConnectionFactory_ implementation class may throw a
 _jakarta.resource.NotSupportedException_ from the method
 _getRecordFactory_ .
 
-=== Requirements
+==== Requirements
 
 An implementation class for
 _ConnectionFactory_ must implement the _java.io.Serializable_ interface
@@ -12598,15 +12548,12 @@ interface must be implemented as a JavaBean. Refer to
 The following code extract shows the
 _ConnectionSpec_ interface.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.ConnectionSpec \{
+[source,Java]
+----
+public interface jakarta.resource.cci.ConnectionSpec {
 
 }
-
-|===
+----
 
 The CCI specification defines a set of
 standard properties for a _ConnectionSpec_ . The properties are defined
@@ -12617,21 +12564,18 @@ additional properties specific to its underlying EIS.
 The following standard properties are defined
 by the CCI specification for _ConnectionSpec_ :
 
-=== Standard Properties for ConnectionSpec
+.Table Standard Properties for ConnectionSpec
+|===
+|Property|Description
 
-Property
-
-Description
-
- _UserName_
-
-The name of the user establishing a
+|_UserName_
+|The name of the user establishing a
 connection to an EIS instance.
 
- _Password_
-
-The password for the user establishing a
+|_Password_
+|The password for the user establishing a
 connection.
+|===
 
 An important point to note is about the
 relationship between _ConnectionSpec_ and _ConnectionRequestInfo_ . The
@@ -12647,7 +12591,7 @@ The mapping between CCI’s _ConnectionSpec_ and
 _ConnectionRequestInfo_ is achieved in an implementation-specific manner
 by a resource adapter.
 
-=== Connection
+==== Connection
 
 A _jakarta.resource.cci.Connection_ represents
 an application level connection handle that is used by a component to
@@ -12662,44 +12606,22 @@ instances.
 The following code extract shows the
 _Connection_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.Connection \{
+[source,java]
+----
+public interface jakarta.resource.cci.Connection {
 
- public Interaction createInteraction()
-throws
+ public Interaction createInteraction() throws ResourceException;
 
- ResourceException;
+ public ConnectionMetaData getMetaData() throws ResourceException;
 
+ public ResultSetInfo getResultSetInfo() throws ResourceException;
 
+ public LocalTransaction getLocalTransaction() throws ResourceException;
 
- public ConnectionMetaData getMetaData()
-throws
-
- ResourceException;
-
- public ResultSetInfo getResultSetInfo()
-throws
-
- ResourceException;
-
-
-
- public LocalTransaction
-getLocalTransaction()
-
- throws ResourceException;
-
-
-
- public void close() throws
-ResourceException;
+ public void close() throws ResourceException;
 
 }
-
-|===
+----
 
 The _createInteraction_ method creates an
 _Interaction_ instance associated with the _Connection_ instance. An
@@ -12728,7 +12650,7 @@ allow a component to demarcate local transactions using the
 _LocalTransaction_ interface, the _getLocalTransaction_ method must
 throw a _NotSupportedException_ .
 
-=== Auto Commit
+===== Auto Commit
 
 When a _Connection_ is in an auto-commit mode,
 an _Interaction_ , associated with the _Connection_ , automatically
@@ -12743,13 +12665,13 @@ the application programming model for the transaction management.
 A resource adapter must manage the auto-commit
 mode as follows:
 
-A transactional resource adapter either at the
+* A transactional resource adapter either at the
 _XATransaction_ or _LocalTransaction_ level must set the auto-commit
 mode of _Connection_ instances participating in a transaction to off
 within the transaction. This requirement holds for true both
 container-managed and bean-managed transaction demarcation.
 
-A transactional resource adapter must set the
+* A transactional resource adapter must set the
 auto-commit mode of _Connection_ instances to on when used outside a
 transaction.
 
@@ -12762,28 +12684,24 @@ A non-transactional resource adapter at the
 _NoTransaction_ level, is not required to support the auto-commit mode
 for _Connection_ .
 
-=== 
-
-image:conn-135.png[image]
-
-Interaction Interfaces
+=== Interaction Interfaces
 
 This section specifies interfaces that enable
 a component to drive an interaction with an EIS instance and to
 demarcate resource manager local transactions.
 
-=== Interaction
+==== Interaction
 
 The _jakarta.resource.cci.Interaction_ enables a
 component to execute EIS functions. An _Interaction_ instance supports
 the following interactions with an EIS instance:
 
-An _execute_ method that takes an input
+* An _execute_ method that takes an input
 _Record_ , output _Record_ , and an _InteractionSpec_ . This method
 executes the EIS function represented by the _InteractionSpec_ and
 updates the output _Record_ .
 
-An _execute_ method that takes an input
+* An _execute_ method that takes an input
 _Record_ and an _InteractionSpec_ . This method implementation executes
 the EIS function represented by the _InteractionSpec_ and produces the
 output _Record_ as a return value.
@@ -12805,43 +12723,22 @@ instance should not close the associated _Connection_ instance.
 The following code extract shows the
 _Interaction_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.Interaction \{
-
-
+[source,java]
+----
+public interface jakarta.resource.cci.Interaction {
 
  public Connection getConnection();
 
+ public void close() throws ResourceException;
 
+ public boolean execute(InteractionSpec ispec, Record input, Record output) throws ResourceException;
 
- public void close() throws
-ResourceException;
-
-
-
- public boolean execute(InteractionSpec
-ispec,
-
- Record input,
-
- Record output) throws ResourceException;
-
-
-
- public Record execute(InteractionSpec ispec,
-
- Record input) throws ResourceException;
-
+ public Record execute(InteractionSpec ispec, Record input) throws ResourceException;
  ...
-
 }
+----
 
-|===
-
-=== InteractionSpec
+==== InteractionSpec
 
 A _jakarta.resource.cci.InteractionSpec_ holds
 properties for driving an _Interaction_ with an EIS instance. An
@@ -12854,30 +12751,16 @@ defined either on a derived interface or an implementation class of an
 empty _InteractionSpec_ interface. The following code extract shows the
 _InteractionSpec_ interface.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.InteractionSpec
-
- extends java.io.Serializable \{
-
-
+[source,java]
+----
+public interface jakarta.resource.cci.InteractionSpec extends java.io.Serializable {
 
  // Standard Interaction Verbs
-
  public static final int SYNC_SEND = 0;
-
- public static final int SYNC_SEND_RECEIVE =
-1;
-
+ public static final int SYNC_SEND_RECEIVE = 1;
  public static final int SYNC_RECEIVE = 2;
-
-
-
 }
-
-|===
+----
 
 An _InteractionSpec_ implementation is not
 required to support a standard property if that property does not apply
@@ -12886,32 +12769,32 @@ provide getter and setter methods for each of its supported properties.
 The getter and setter methods convention should be based on the
 JavaBeans design pattern.
 
-=== Standard Properties
+===== Standard Properties
 
 The standard properties are as follows:
 
- _FunctionName_ . A string representing the
+ * _FunctionName_ . A string representing the
 name of an EIS function. Some examples are the name of a transaction
 program in a CICS system or the name of a business object or function
 module in an ERP system. The format of the name is specific to an EIS
 and is outside the scope of the CCI specification.
 
- _InteractionVerb_ . An integer representing
+ * _InteractionVerb_ . An integer representing
 the mode of interaction with an EIS instance as specified by the
 _InteractionSpec_ . The values of the interaction verb may be one of the
 following:
 
- _SYNC_SEND._ The execution of an
+ * _SYNC_SEND._ The execution of an
 _Interaction_ does only a send to the target EIS instance. The input
 record is sent to the EIS instance without any synchronous response in
 terms of an output _Record_ or _ResultSet_ .
 
- _SYNC_SEND_RECEIVE._ The execution of an
+ * _SYNC_SEND_RECEIVE._ The execution of an
 _Interaction_ sends a request to the EIS instance and receives a
 response synchronously. The input record is sent to the EIS instance
 with the output received either as _Record_ or a _ResultSet_ .
 
- _SYNC_RECEIVE._ The execution of an
+ * _SYNC_RECEIVE._ The execution of an
 _Interaction_ results in a synchronous receive of an output _Record_ .
 For instance, a session bean gets a method invocation and it uses this
 _SYNC_RECEIVE_ form of interaction to retrieve messages that have been
@@ -12931,34 +12814,34 @@ The CCI does not support asynchronous delivery
 of messages to the component instances. The message inflow contract
 should be used for asynchronous delivery of messages.
 
- _ExecutionTimeout_ . An integer representing
+ * _ExecutionTimeout_ . An integer representing
 the number of milliseconds an _Interaction_ waits for an EIS __ to
 execute the specified function.
 
-=== ResultSet Properties
+===== ResultSet Properties
 
 The following standard properties give hints
 to an _Interaction_ instance about the _ResultSet_ requirements:
 
- _FetchSize_ . An integer representing the
+ * _FetchSize_ . An integer representing the
 number of rows that should be fetched from an EIS when more rows are
 needed for a result set. If the value is zero, the hint is ignored. The
 default value is zero.
 
- _FetchDirection_ . An integer representing
+ * _FetchDirection_ . An integer representing
 the direction in which the rows in a result set are processed. The valid
 integer values are defined in the _java.sql.ResultSet_ interface. The
 default value is _ResultSet_ . _FETCH_FORWARD_ .
 
- _MaxFieldSize_ . An integer representing the
+ * _MaxFieldSize_ . An integer representing the
 maximum number of bytes allowed for any value in a column of a result
 set or a value in a _Record_ .
 
- _ResultSetType_ . An integer representing the
+ * _ResultSetType_ . An integer representing the
 type of the result set produced by an execution of the _InteractionSpec_
 . The _java.sql.ResultSet_ interface defines the result set types.
 
- _ResultSetConcurrency_ . An integer
+ * _ResultSetConcurrency_ . An integer
 representing the concurrency type of the result set produced by the
 execution of the _InteractionSpec_ . The _java.sql.ResultSet_ interface
 defines the concurrency types for a result set.
@@ -12973,14 +12856,14 @@ A component can determine the actual scrolling
 ability and concurrency type of a result set by invoking the _getType_
 and _getConcurrencyType_ methods of the _ResultSet_ interface.
 
-=== Additional Properties
+===== Additional Properties
 
 An _InteractionSpec_ implementation may define
 additional properties besides the standard properties. Note that the
 format and type of the additional properties is specific to an EIS and
 is outside the scope of the CCI specification.
 
-=== Implementation
+===== Implementation
 
 The _InteractionSpec_ interface must be
 implemented as a JavaBean to support tools. The properties on the
@@ -13002,7 +12885,7 @@ specification (refer to
 http://www.oracle.com/technetwork/java/javase/documentation/spec-136004.html)
 for details on bound and constrained properties.
 
-=== Administered Object
+===== Administered Object
 
 An _InteractionSpec_ instance may be, though
 it is not required to be, registered as an administered object in the
@@ -13018,7 +12901,7 @@ The Jakarta Enterprise Beans specification (see
  Specification, Version 4.0>>) specifies resource environment references
 in more detail.
 
-=== Illustrative Scenario
+===== Illustrative Scenario
 
 The development tool introspects the
 _InteractionSpec_ implementation class and shows a property sheet with
@@ -13030,7 +12913,7 @@ instance is used to specify properties for the execution of an
 _Interaction_ . The runtime environment may lookup an _InteractionSpec_
 instance using a logical name from the JNDI namespace.
 
-=== LocalTransaction
+==== LocalTransaction
 
 The _jakarta.resource.cci.LocalTransaction_
 defines a transaction demarcation interface for resource manager local
@@ -13048,26 +12931,20 @@ management.
 The following code extract shows the
 _LocalTransaction_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.LocalTransaction \{
+[source,java]
+----
+public interface jakarta.resource.cci.LocalTransaction {
 
- public void begin() throws
-ResourceException;
+ public void begin() throws ResourceException;
 
- public void commit() throws
-ResourceException;
+ public void commit() throws ResourceException;
 
- public void rollback() throws
-ResourceException;
+ public void rollback() throws ResourceException;
 
 }
+----
 
-|===
-
-=== Requirements
+===== Requirements
 
 A CCI implementation may, though is not
 required to, implement the _LocalTransaction_ interface.
@@ -13086,17 +12963,13 @@ interface for managing local transactions. Refer to
 <<a1280, Local Transaction Management Contract>>
 for more details on local transaction management.
 
-=== 
-
-image:conn-135.png[image]
-
-Basic Metadata Interfaces
+=== Basic Metadata Interfaces
 
 This section specifies the interfaces that
 provide basic meta information about a resource adapter implementation
 and an EIS connection.
 
-=== ConnectionMetaData
+==== ConnectionMetaData
 
 The _jakarta.resource.cci.ConnectionMetaData_
 interface provides information about an EIS instance connected through a
@@ -13106,27 +12979,18 @@ method to get a _ConnectionMetaData_ instance.
 The following code extract shows the
 _ConnectionMetaData_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.ConnectionMetaData \{
+[source,java]
+----
+public interface jakarta.resource.cci.ConnectionMetaData {
 
- public String getEISProductName() throws
-ResourceException;
+ public String getEISProductName() throws ResourceException;
 
- public String getEISProductVersion() throws
+ public String getEISProductVersion() throws ResourceException;
 
- ResourceException;
-
- public String getUserName() throws
-ResourceException;
-
-
+ public String getUserName() throws ResourceException;
 
 }
-
-|===
+----
 
 The _getEISProductName_ and
 _getEISProductVersion_ methods return information about the EIS
@@ -13137,7 +13001,7 @@ for an active connection as known to the underlying EIS instance. The
 name corresponds the resource principal under whose security context a
 connection to the EIS instance has been established.
 
-=== Implementation
+===== Implementation
 
 A CCI implementation must provide an
 implementation class for the _ConnectionMetaData_ interface.
@@ -13148,7 +13012,7 @@ additional information. Note that the format and type of the additional
 information is specific to an EIS and is outside the scope of the CCI
 specification.
 
-=== ResourceAdapterMetaData
+==== ResourceAdapterMetaData
 
 The
 _jakarta.resource.cci.ResourceAdapterMetaData_ interface provides
@@ -13164,43 +13028,27 @@ connection to an EIS instance be established.
 The following code extract shows the
 _ResourceAdapterMetaData_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.ResourceAdapterMetaData \{
+[source,java]
+----
+public interface jakarta.resource.cci.ResourceAdapterMetaData {
 
  public String getAdapterVersion();
-
  public String getAdapterVendorName();
-
  public String getAdapterName();
-
  public String getAdapterShortDescription();
-
-
 
  public String getSpecVersion();
 
+ public String[] getInteractionSpecsSupported();
 
+ public boolean supportsExecuteWithInputAndOutputRecord();
 
- public String[]
-getInteractionSpecsSupported();
+ public boolean supportsExecuteWithInputRecordOnly();
 
- public boolean
-supportsExecuteWithInputAndOutputRecord();
-
- public boolean
-supportsExecuteWithInputRecordOnly();
-
-
-
- public boolean
-supportsLocalTransactionDemarcation();
+ public boolean supportsLocalTransactionDemarcation();
 
 }
-
-|===
+----
 
 The _getSpecVersion_ method returns a string
 representation of the version of the Jakarta Connectors
@@ -13241,11 +13089,7 @@ The _ResourceAdapterMetaData_ interface may be
 extended to provide more information specific to a resource adapter
 implementation.
 
-=== 
-
-image:conn-135.png[image]
-
-Service Endpoint Message Listener Interface
+=== Service Endpoint Message Listener Interface
 
 The MessageListener interface serves as a
 request-response message listener type that message endpoints (refer to
@@ -13253,41 +13097,31 @@ request-response message listener type that message endpoints (refer to
 allows an EIS to communicate with an endpoint using a request-response
 style.
 
-[width="100%",cols="100%",]
-|===
-a|
+[[source,java]
+----
 interface jakarta.resource.cci.MessageListener
-\{
-
- Record onMessage(Record inputData) throws
-ResourceException;
-
+{
+ Record onMessage(Record inputData) throws ResourceException
 }
+----
 
-|===
-
-=== 
-
-image:conn-135.png[image]
-
-Exception Interfaces
+=== Exception Interfaces
 
 This section specifies _ResourceException_
 class defined by the CCI.
 
-=== ResourceException
+==== ResourceException
 
 The _jakarta.resource.ResourceException_ class
 is used as the root of the exception hierarchy for CCI. A
 _ResourceException_ provides the following information:
 
-A resource adapter-specific string describing
+* A resource adapter-specific string describing
 the error. This string is a standard Java exception message and is
 available through the _getMessage_ method.
+* A resource adapter-specific error code.
 
-A resource adapter-specific error code.
-
-A reference to another exception. A
+* A reference to another exception. A
 _ResourceException_ is often the result of a lower level problem. If
 appropriate, this lower level exception, a _java.lang.Exception_ or its
 derived exception type, can be linked to a _ResourceException_ instance.
@@ -13299,7 +13133,7 @@ _ResourceException_ interface to throw more specific exceptions. It may
 also chain instances of _java.lang.Exception_ or its subtypes to a
 _ResourceException_ .
 
-=== ResourceWarning
+==== ResourceWarning
 
 The _jakarta.resource.cci.ResourceWarning_ class
 provides information on the warnings related to interactions with EIS. A
@@ -13311,11 +13145,7 @@ component to access the first _ResourceWarning_ in a chain of warnings.
 Other _ResourceWarning_ instances are chained to the first returned
 _ResourceWarning_ instance.
 
-=== 
-
-image:conn-135.png[image]
-
-Record
+=== Record
 
 A _Record_ is the Java representation of a
 data structure used as input or output to an EIS function.
@@ -13324,7 +13154,7 @@ A _Record_ has both development-time and
 runtime aspects. See the following figure for an illustration of this.
 An implementation of a _Record_ is either:
 
-A custom _Record_ implementation that gets
+* A custom _Record_ implementation that gets
 generated at the development time by a tool. The generation of a custom
 implementation is based on the meta information accessed by the tool
 from a metadata repository. The type mapping and data
@@ -13332,17 +13162,19 @@ representatiothird-partyn is generated as part of the custom _Record_
 implementation. So the custom _Record_ implementation typically does not
 need to access the metadata repository at runtime.
 
-A generic _Record_ implementation that uses a
+* A generic _Record_ implementation that uses a
 metadata repository at runtime for meta information. For example, a
 generic type of _Record_ may access the type mapping information from
 the repository at runtime.
 
-Note: The specification of a standard
+[NOTE]
+====
+The specification of a standard
 repository API and metadata format is outside the scope of the current
 version of Jakarta Connectors.
+====
 
-Record at Development-time
-and Runtime
+*Record at Development-time and Runtime*
 
 image:conn-141.jpg[image]
 
@@ -13350,15 +13182,13 @@ The meta information used in a _Record_
 representation and type mapping may be available in a metadata
 repository as:
 
-Meta information expressed in an EIS-specific
+* Meta information expressed in an EIS-specific
 format. For example, an ERP system has its own descriptive format for
 its meta information.
-
-Formatted in structures based on the
+* Formatted in structures based on the
 programming language that has been used for writing the target EIS
 function, such as, _COBOL_ structures used by CICS transaction programs.
-
-A standard representation of data structures
+* A standard representation of data structures
 as required for EIS functions. The standard representation is typically
 aggregated in a metadata repository based on the meta information
 extracted from multiple EISs.
@@ -13372,7 +13202,7 @@ requires that a _Record_ implementation must support both component-view
 and resource adapter-view contracts, as specified in the following
 subsections.
 
-=== Component-View Contract
+==== Component-View Contract
 
 The component-view contract provides a
 standard contract for using a _Record_ for components and component
@@ -13382,11 +13212,11 @@ component-view contract.
 The application programming model for a
 _Record_ is as follows:
 
-A component creates an instance of a
+* A component creates an instance of a
 generated implementation class for a custom record. The implementation
 class represents an EIS-specific data structure.
 
-A component uses the _RecordFactory_
+* A component uses the _RecordFactory_
 interface to create an instance of the generic _Record_ implementation
 class. The implementation class of a generic _Record_ is independent of
 any EIS-specific data structure.
@@ -13396,19 +13226,19 @@ in the CCI data representation interfaces (namely, _Record_ ,
 _MappedRecord_ , and _IndexedRecord_ ) for the type mapping facility.
 The issue has to be addressed based on the following parameters:
 
-There is no standardized mapping across
+* There is no standardized mapping across
 various type systems. For example, the existing type systems range from
 Java, CORBA, COM, COBOL and many more. It is difficult to standardize
 the type specification and mappings across such a diverse set of type
 systems within the Jakarta Connectors scope.
 
-Building a limited type mapping facility into
+* Building a limited type mapping facility into
 the CCI data representation interfaces will constrain the use of CCI
 data representation interfaces across different types of EISs. For
 example, it may be difficult to support EISs that have complex
 structured types with a limited type mapping support.
 
-Building an extensive type mapping facility
+* Building an extensive type mapping facility
 into the current version of CCI data representation interfaces will
 limit the future extensibility of these interfaces. This applies
 specifically to the support for standards that are emerging for
@@ -13420,7 +13250,7 @@ This specification proposes that the type
 mapping support for the CCI be kept open for future versions. A future
 version of this specification may standardize type mappings.
 
-=== Type Mapping
+===== Type Mapping
 
 Type mapping for EIS-specific types to Java
 types is not directly exposed to an application component. For example
@@ -13448,46 +13278,46 @@ In cases of both custom and generic _Records_
 , the type mapping information is provided by a metadata repository
 either at development-time or runtime.
 
-=== Record Interface
+===== Record Interface
 
 The _jakarta.resource.cci.Record_ interface is
 the base interface for the representation of a record. A _Record_
 instance is used as an input or output to the _execute_ methods defined
 in an _Interaction_ .
 
-Component-view Contract
+*Component-view Contract*
 
 image:conn-142.jpg[image]
 
 The _Record_ interface may be extended to
 form one of the following representations:
 
- _jakarta.resource.cci.MappedRecord_ : A
+* _jakarta.resource.cci.MappedRecord_ : A
 key-value pair based collection represents a record. This interface is
 based on _java.util.Map._
 
- _jakarta.resource.cci.IndexedRecord_ : An
+* _jakarta.resource.cci.IndexedRecord_ : An
 ordered and indexed collection represents a record. This interface is
 based on _java.util.List._
 
- _jakarta.resource.cci.ResultSet_ : This
+* _jakarta.resource.cci.ResultSet_ : This
 interface extends both _java.sql.ResultSet_ and
 _jakarta.resource.cci.Record_ . A result set represents tabular data.
 <<a4320, ResultSet>> specifies the requirements
 for the _ResultSet_ interface in detail.
 
-A JavaBean based representation of an EIS
+* A JavaBean based representation of an EIS
 data structure: An example is a custom record generated to represent a
 purchase order in an ERP system or an invoice in a mainframe TP system.
 
 Refer to <<a4425, Code Samples>> for code samples that illustrate the use of record.
 
- _MappedRecord_ or _IndexedRecord_ may
+_MappedRecord_ or _IndexedRecord_ may
 contain another _Record_ . This means that _MappedRecord_ and
 _IndexedRecord_ can be used to create a hierarchical structure of any
 arbitrary depth.
 
- _MappedRecord_ and _IndexedRecord_ can be
+_MappedRecord_ and _IndexedRecord_ can be
 used to represent either a generic or custom record.
 
 A basic Java type is used as the leaf element
@@ -13500,72 +13330,52 @@ other records to form a hierarchical structure.
 The following code extract shows the _Record_
 interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface jakarta.resource.cci.Record
-
- extends java.lang.Cloneable,
-java.io.Serializable \{
-
-
+[source,java]
+----
+public interface jakarta.resource.cci.Record extends java.lang.Cloneable,
+                          java.io.Serializable {
 
  public String getRecordName();
-
+ 
  public void setRecordName(String name);
-
-
-
- public void setRecordShortDescription(String
-description);
+ 
+ public void setRecordShortDescription(String description);
 
  public String getRecordShortDescription();
-
-
 
  public boolean equals(Object other);
 
  public int hashCode();
-
-
-
- public Object clone() throws
-CloneNotSupportedException;
+ 
+ public Object clone() throws CloneNotSupportedException;
 
 }
-
-|===
+----
 
 The _Record_ interface defines the following
 set of standard properties:
 
- _Name_ of a _Record_ : Note that the CCI
+* _Name_ of a _Record_ : Note that the CCI
 does not define a standard format for naming a _Record_ . The name
 format is specific to an EIS type.
 
- _Description_ of a _Record_ : This property
+* _Description_ of a _Record_ : This property
 is used primarily by tools to show a description of a _Record_ instance.
 
-=== MappedRecord and IndexedRecord Interfaces
+===== MappedRecord and IndexedRecord Interfaces
 
 The _jakarta.resource.cci.MappedRecord_
 interface is used for representing a key-value map based collection of
 record elements. The _MappedRecord_ interface extends both the _Record_
 and _java.util.Map_ interface.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.MappedRecord
-
- extends Record, java.util.Map,
-
- java.io.Serializable \{
+[source,java]
+----
+public interface jakarta.resource.cci.MappedRecord 
+   extends Record, Map, Serializable {
 
 }
-
-|===
+----
 
 The _jakarta.resource.cci.IndexedRecord_
 interface represents an ordered collection of record elements based on
@@ -13573,21 +13383,14 @@ the _java.util.List_ interface. This interface allows a component to
 access record elements by their integer index, position in the list, and
 search for elements in the list.
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.IndexedRecord
-
- extends Record, java.util.List,
-
- java.io.Serializable \{
+[source,java]
+----
+public interface jakarta.resource.cci.IndexedRecord extends Record, List, Serializable {
 
 }
+----
 
-|===
-
-=== RecordFactory
+===== RecordFactory
 
 The _jakarta.resource.cci.RecordFactory_
 interface is used for creating _MappedRecord_ and _IndexedRecord_
@@ -13598,29 +13401,16 @@ implementation class for the _RecordFactory_ interface.
 The following code extract shows the
 _RecordFactory_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.RecordFactory \{
+[source,java]
+----
+public interface jakarta.resource.cci.RecordFactory {
 
- public MappedRecord
-createMappedRecord(String recordName)
-
- throws ResourceException;
-
-
-
- public IndexedRecord
-createIndexedRecord(String
-
- recordName) throws ResourceException;
-
-
+ public MappedRecord createMappedRecord(String recordName) throws ResourceException;
+ 
+ public IndexedRecord createIndexedRecord(String recordName) throws ResourceException;
 
 }
-
-|===
+----
 
 The methods _createMappedRecord_ and
 _createIndexedRecord_ take the name of the record that is to be created
@@ -13634,29 +13424,28 @@ A _RecordFactory_ implementation should be
 capable of using the name of the desired _Record_ and accessing meta
 information for the creation of the _Record_ .
 
-=== [[a4292]]Interaction and Record
+==== [[a4292]]Interaction and Record
 
 Records should be used as follows for the two
 variants of the _execute_ method of the _Interaction_ interface:
 
-boolean execute(InteractionSpec, Record
-input, Record output)
+`boolean execute(InteractionSpec, Record input, Record output)`
 
-A custom record instance is used as an input
+* A custom record instance is used as an input
 or output to the _execute_ method. A custom record implementation class
 is generated by an application development tool or EAI framework based
 on the meta information.
 
-The _RecordFactory_ interface is used to
+* The _RecordFactory_ interface is used to
 create a generic _MappedRecord_ or _IndexedRecord_ instance. The generic
 record is used as input or output to the _execute_ method.
 
-Record execute(InteractionSpec, Record input)
+`Record execute(InteractionSpec, Record input)`
 
-The input record can be either a custom or
+* The input record can be either a custom or
 generic record.
 
-The returned record is a generic record
+* The returned record is a generic record
 instance created by the implementation of the _execute_ method. The
 generic record instance may represent a _ResultSet_ or a hierarchical
 structure as represented through the _MappedRecord_ and _IndexedRecord_
@@ -13676,15 +13465,15 @@ implementation in the _execute_ method to get the active connection, if
 so needed. The contract between the generic record and _Interaction_
 implementation classes is specific to a CCI implementation.
 
-=== Resource Adapter-view Contract
+==== Resource Adapter-view Contract
 
 A resource adapter views the data represented
 by a _Record_ either as:
 
-A stream of bytes through the _Streamable_
+* A stream of bytes through the _Streamable_
 interface, or,
 
-A format specific to a resource adapter. For
+* A format specific to a resource adapter. For
 example, a resource adapter may extract or set the data for a _Record_
 using an interface defined specifically for the resource adapter.
 
@@ -13694,14 +13483,14 @@ specification. A resource adapter must describe the resource
 adapter-specific interface to the users, typically tools vendors, of the
 resource adapter-view contract.
 
-=== Streamable Interface
+===== Streamable Interface
 
 The _jakarta.resource.cci.Streamable_ interface
 enables a resource adapter to extract data from an input _Record_ or set
 data into an output _Record_ as a stream of bytes. See the following
 figure.
 
-Streamable Interface
+*Streamable Interface*
 
 image:conn-143.jpg[image]
 
@@ -13717,21 +13506,16 @@ implementation.
 The following code extract shows the
 _Streamable_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface
-jakarta.resource.cci.Streamable \{
+[source,java]
+----
+public interface jakarta.resource.cci.Streamable {
 
- public void read(InputStream istream) throws
-IOException;
+ public void read(InputStream istream) throws IOException;
 
- public void write(OutputStream ostream)
-throws IOException;
+ public void write(OutputStream ostream) throws IOException;
 
 }
-
-|===
+----
 
 The _read_ extracts method data from an
 _InputStream_ and initializes fields of a _Streamable_ object. The
@@ -13744,11 +13528,7 @@ An implementation class of _Record_ may
 choose to implement the _Streamable_ interface or support a resource
 adapter-specific interface to manage record data.
 
-=== 
-
-image:conn-135.png[image]
-
-[[a4320]]ResultSet
+=== [[a4320]]ResultSet
 
 A result set represents tabular data that is
 retrieved from an EIS instance by the execution of an interaction. The
@@ -13762,18 +13542,14 @@ _java.sql.ResultSet_ and _jakarta.resource.cci.-Record_ interfaces.
 The following code extract shows the
 _ResultSet_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface jakarta.resource.cci.ResultSet
-
- extends Record, java.sql.ResultSet \{
+[source,java]
+----
+public interface jakarta.resource.cci.ResultSet extends Record, java.sql.ResultSet {
 
 }
+----
 
-|===
-
-ResultSet Interface
+*ResultSet Interface*
 
 image:conn-144.jpg[image]
 
@@ -13792,32 +13568,31 @@ mentioned in the following section.
 CCI uses the JDBC _ResultSet_ interface
 because:
 
-JDBC _ResultSet_ is a standard, established,
+* JDBC _ResultSet_ is a standard, established,
 and well-documented interface for accessing and updating tabular data.
 
-JDBC _ResultSet_ interface is defined in the
+* JDBC _ResultSet_ interface is defined in the
 core _java.sql package_ . An introduction of an independent CCI-specific
 _ResultSet_ interface (that is, different from the JDBC _ResultSet_
 interface) may create confusion in terms of differences in the
 programming model and functionality.
 
-The use of the JDBC _ResultSet_ interface
+* The use of the JDBC _ResultSet_ interface
 enables a tool or EAI vendor to leverage existing facilities that have
 been for the JDBC _ResultSet_ .
 
 
 
-image:conn-138.png[image]
-
+[NOTE]
+====
 A CCI implementation is not required to support the
 _jakarta.resource.cci.ResultSet_ interface. If a CCI implementation does
 not support result set functionality, it should not support interfaces
 and methods that are associated with the result set functionality. An
 example is the _java.sql.ResultSetMetaData_ interface.
+====
 
-image:conn-138.png[image]
-
-=== ResultSet Interface
+==== ResultSet Interface
 
 The _ResultSet_ interface provides a set of
 getter methods for retrieving column values from the current row. A
@@ -13830,7 +13605,7 @@ The _ResultSet_ interface also defines a set
 of _update_ XXX methods for updating the column values of the current
 row.
 
-=== Type Mapping
+===== Type Mapping
 
 A _ResultSet_ implementation should attempt
 to convert the underlying EIS-specific data type to the Java type as
@@ -13844,7 +13619,7 @@ type mapping is specific to an EIS.
 The CCI specification does not specify
 standard type mappings specific to each type of EIS.
 
-=== ResultSet Types
+===== `ResultSet` Types
 
 The CCI _ResultSet_ , similar to the JDBC
 _ResultSet_ , supports the following types of result set: _forward-only_
@@ -13879,7 +13654,7 @@ if the updated column values can be retrieved by calling the _get_ XXX
 method after the corresponding _update_ XXX method. Refer to the JDBC
 (see <<a9727, JDBC API Specification, version 4.1>>) specification for more details on this feature.
 
-=== Scrolling
+===== Scrolling
 
 The CCI _ResultSet_ supports the same
 scrolling ability as the JDBC _ResultSet_ .
@@ -13902,7 +13677,7 @@ Note that a CCI _ResultSet_ implementation
 should only provide support for scrollable result sets if the underlying
 EIS supports such a facility.
 
-=== Concurrency Types
+===== Concurrency Types
 
 A component can set the concurrency type of a
 CCI _ResultSet_ to be either read-only or updatable. These types are
@@ -13917,7 +13692,7 @@ Refer to the JDBC specification (see
 <<a9727, JDBC API Specification, version 4.1>>)
 for detailed information and examples.
 
-=== Updatability
+===== Updatability
 
 A result set of concurrency type
 _CONCUR_UPDATABLE_ supports the ability to update, insert, and delete
@@ -13936,7 +13711,7 @@ Refer to the JDBC specification (see
 <<a9727, JDBC API Specification, version 4.1>>)
 for more information.
 
-=== Persistence of Java Objects
+===== Persistence of Java Objects
 
 The _ResultSet_ interface provides the
 _getObject_ method to enable a component to retrieve column values as
@@ -13945,7 +13720,7 @@ method is compatible with the type mapping supported by a resource
 adapter-specific to its underlying EIS. The _updateObject_ method
 enables a component to update a column value using a Java object.
 
-=== Support for SQL Types
+===== Support for SQL Types
 
 It is optional for a CCI _ResultSet_ to
 support the _SQL_ type _JAVA_OBJECT_ as defined in _java.sql.Types_ .The
@@ -13956,32 +13731,24 @@ The support for the following _SQL_ types as
 defined in _java.sql.Types_ is optional for a CCI _ResultSet_
 implementation:
 
-Binary large object ( _BLOB_ )
-
-Character large object ( _CLOB_ )
-
- _SQL ARRAY_ type
-
- _SQL REF_ type
-
- _SQL DISTINCT_ type
-
- _SQL STRUCT_ type
+* Binary large object ( _BLOB_ )
+* Character large object ( _CLOB_ )
+* _SQL ARRAY_ type
+* _SQL REF_ type
+* _SQL DISTINCT_ type
+* _SQL STRUCT_ type
 
 If an implementation of the CCI _ResultSet_
 interface does not support these types, it must throw a
 _java.sql.SQLException_ indicating that the method is not supported, or
 _java.lang.UnsupportedOperationException_ from the following methods:
 
- _getBlob_
+* _getBlob_
+* _getClob_
+* _getArray_
+* _getRef_
 
- _getClob_
-
- _getArray_
-
- _getRef_
-
-=== Support for Customized SQL Type Mapping
+===== Support for Customized SQL Type Mapping
 
 The CCI is not required to support customized
 mapping of SQL structured and distinct types to Java classes. The JDBC
@@ -13992,7 +13759,7 @@ _java.sql.SQLException_ indicating that the method is not supported or
 _java.lang.UnsupportedOperationException_ from the _getObject_ method
 that takes a _java.util.Map_ parameter.
 
-=== ResultSetMetaData
+==== ResultSetMetaData
 
 The _java.sql.ResultSetMetaData_ interface
 provides information about the columns in a _ResultSet_ instance. A
@@ -14002,7 +13769,7 @@ about a _ResultSet_ .
 Refer to the JDBC API documentation for a
 detailed specification of the _ResultSetMetaData_ interface.
 
-=== ResultSetInfo
+==== ResultSetInfo
 
 The _jakarta.resource.cci.ResultSetInfo_
 interface provides information on the support provided for _ResultSet_
@@ -14017,77 +13784,35 @@ the _ResultSet_ facility.
 The following code extract shows the
 _ResultSetInfo_ interface:
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 public interface
-jakarta.resource.cci.ResultSetInfo \{
+jakarta.resource.cci.ResultSetInfo {
 
- public boolean updatesAreDetected(int type)
+ public boolean updatesAreDetected(int type) throws ResourceException;
 
- throws ResourceException;
+ public boolean insertsAreDetected(int type) throws ResourceException;
 
- public boolean insertsAreDetected(int type)
+ public boolean deletesAreDetected(int type) throws ResourceException;
 
- throws ResourceException;
+ public boolean supportsResultSetType(int type) throws ResourceException;
 
- public boolean deletesAreDetected(int type)
+ public boolean supportsResultTypeConcurrency(int type, int concurrency) throws ResourceException;
 
- throws ResourceException;
+ public boolean ownUpdatesAreVisible(int type) throws ResourceException;
 
- 
+ public boolean ownInsertsAreVisible(int type) throws ResourceException;
 
- public boolean supportsResultSetType(int
-type)
+ public boolean ownDeletesAreVisible(int type) throws ResourceException;
 
- throws ResourceException;
+ public boolean othersUpdatesAreVisible(int type) throws ResourceException;
 
- public boolean
-supportsResultTypeConcurrency(int type,
+ public boolean othersInsertsAreVisible(int type) throws ResourceException;
 
- int concurrency)
-
- throws ResourceException;
-
-
-
- public boolean ownUpdatesAreVisible(int
-type)
-
- throws ResourceException;
-
- public boolean ownInsertsAreVisible(int
-type)
-
- throws ResourceException;
-
- public boolean ownDeletesAreVisible(int
-type)
-
- throws ResourceException;
-
-
-
-
-
- public boolean othersUpdatesAreVisible(int
-type)
-
- throws ResourceException;
-
- public boolean othersInsertsAreVisible(int
-type)
-
- throws ResourceException;
-
- public boolean othersDeletesAreVisible(int
-type)
-
- throws ResourceException;
+ public boolean othersDeletesAreVisible(int type) throws ResourceException;
 
 }
-
-|===
+----
 
 The type parameter to the above methods
 represents the type of the _ResultSet,_ defined as _TYPE__ XXX in the
@@ -14096,10 +13821,10 @@ _ResultSet_ interface.
 Note that these methods should throw a
 _ResourceException_ in the following cases:
 
-A resource adapter and the connected EIS
+* A resource adapter and the connected EIS
 instance cannot provide any meaningful values for these properties.
 
-The CCI implementation does not support the
+* The CCI implementation does not support the
 _ResultSet_ functionality. In this case, a _NotSupportedException_
 should be thrown from invocations on the above methods.
 
@@ -14123,11 +13848,7 @@ The _supportsResultSetTypeConcurency_ method
 provides information on the _ResultSet_ concurrency types supported by a
 resource adapter and its underlying EIS instance.
 
-=== 
-
-image:conn-135.png[image]
-
-[[a4425]]Code Samples
+=== [[a4425]]Code Samples
 
 The following code extracts illustrate the
 application programming model based on the CCI.
@@ -14139,302 +13860,211 @@ generates a set of Java classes that abstract the CCI-based application
 programming model and offers a simple programming model to an
 application developer.
 
-=== Connection
+==== Connection
 
-Get a _Connection_ to an EIS instance after a
+. Get a _Connection_ to an EIS instance after a
 lookup of a _ConnectionFactory_ instance from the JNDI namespace. In
 this case, the component allows the container to manage the EIS sign-on.
 
-[width="100%",cols="100%",]
-|===
-a|
-javax.naming.Context nc = new
-InitialContext();
+[source,java]
+----
+javax.naming.Context nc = new InitialContext();
 
-jakarta.resource.cci.ConnectionFactory cf =
+jakarta.resource.cci.ConnectionFactory cf = (ConnectionFactory)nc.lookup( "java:comp/env/eis/ConnectionFactory");
 
- (ConnectionFactory)nc.lookup(
+jakarta.resource.cci.Connection cx = cf.getConnection(); 
+----
 
- "java:comp/env/eis/ConnectionFactory");
+. Create an _Interaction_ instance:
 
-jakarta.resource.cci.Connection cx =
-cf.getConnection();
+`jakarta.resource.cci.Interaction ix = cx.createInteraction();`
 
-|===
+==== InteractionSpec
 
-Create an _Interaction_ instance:
-
-jakarta.resource.cci.Interaction ix =
-cx.createInteraction();
-
-=== InteractionSpec
-
-Create a new instance of the respective
+* Create a new instance of the respective
 _InteractionSpec_ class or look up a pre-configured _InteractionSpec_ in
 the runtime environment using JNDI.
 
-[width="100%",cols="100%",]
-|===
-a|
-com.wombat.cci.InteractionSpecImpl ixSpec =
-// ...
-
-
+[source,java]
+----
+com.wombat.cci.InteractionSpecImpl ixSpec = // ...
 
 ixSpec.setFunctionName("<EIS_SPECIFIC_FUNCTION_NAME>");
 
 ixSpec.setInteractionVerb(InteractionSpec.SYNC_SEND_RECEIVE);
 
 ...
+----
 
-|===
+==== Mapped Record
 
-=== Mapped Record
+* Get a _RecordFactory_ instance:
 
-Get a _RecordFactory_ instance:
+`jakarta.resource.cci.RecordFactory rf = // ...get a RecordFactory`
 
-jakarta.resource.cci.RecordFactory rf = // ...
-get a RecordFactory
-
-Create a generic _MappedRecord_ using the
+* Create a generic _MappedRecord_ using the
 _RecordFactory_ instance. This record instance acts as an input to the
 execution of an interaction. The name of the _Record_ acts as a pointer
 to the meta information, stored in the metadata repository, for a
 specific record type.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 jakarta.resource.cci.MappedRecord input =
-
  rf.createMappedRecord(“<NAME_OF_RECORD>”);
+----
 
-|===
-
-Populate the generic _MappedRecord_ instance
+* Populate the generic _MappedRecord_ instance
 with input values. The component code adds the values based on the meta
 information it has accessed from the metadata repository.
 
-[width="100%",cols="100%",]
-|===
-a|
-input.put(“<key: element1>", new
-String(“<VALUE>”));
-
+[source,java]
+----
+input.put(“<key: element1>", new String(“<VALUE>”));
 input.put(“<key: element2>", ...);
 
 ...
+----
 
-|===
-
-Create a generic _IndexedRecord_ to hold the
+* Create a generic _IndexedRecord_ to hold the
 output values that are set by the execution of the interaction.
 
-[width="100%",cols="100%",]
-|===
-a|
-jakarta.resource.cci.IndexedRecord output =
+[source,java]
+----
+jakarta.resource.cci.IndexedRecord output = rf.createIndexedRecord(“<NAME_OF_RECORD>”);
+----
 
- rf.createIndexedRecord(“<NAME_OF_RECORD>”);
+* Execute the _Interaction_ :
 
-|===
+`boolean ret = ix.execute(ixSpec, input, output);`
 
-Execute the _Interaction_ :
-
-boolean ret = ix.execute(ixSpec, input,
-output);
-
-Extract data from the output _IndexedRecord._
+* Extract data from the output _IndexedRecord._
 Note that the type mapping is done in the generic _IndexedRecord_ by
 means of the type mapping information in the metadata repository. Since
 the component uses generic methods on the _IndexedRecord_ , the
 component code does the required type casting.
 
-[width="100%",cols="100%",]
-|===
-a|
-java.util.Iterator iterator =
-output.iterator();
+[source,java]
+----
+java.util.Iterator iterator = output.iterator();
 
-while (iterator.hasNext()) \{
+while (iterator.hasNext()) {
 
  // Get a record element and extract value
 
 }
+----
 
-|===
+==== ResultSet
 
-=== ResultSet
-
-Set the requirements for the _ResultSet_
+* Set the requirements for the _ResultSet_
 returned by the execution of an _Interaction_ . This step is optional.
 Default values are used if the requirements are not explicitly set:
 
-[width="100%",cols="100%",]
-|===
-a|
-com.wombat.cci.InteractionSpecImpl ixSpec =
-.. // get an
-
- // InteractionSpec;
-
-
+[source,java]
+----
+com.wombat.cci.InteractionSpecImpl ixSpec = .. // get an InteractionSpec;
 
 ixSpec.setFetchSize(20);
-
 ixSpec.setResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE);
+----
 
-|===
-
-Execute an _Interaction_ that returns a
+* Execute an _Interaction_ that returns a
 _ResultSet_ :
 
-[width="100%",cols="100%",]
-|===
-a|
-jakarta.resource.cci.ResultSet rs =
-(jakarta.resource.cci.ResultSet)
+[source,java]
+----
+jakarta.resource.cci.ResultSet rs = (jakarta.resource.cci.ResultSet) ix.execute(ixSpec, input);
+----
 
- ix.execute(ixSpec, input);
-
-|===
-
-Iterate over the _ResultSet_ . The example
+* Iterate over the _ResultSet_ . The example
 here positions the cursor on the first row and then iterates forward
 through the contents of the _ResultSet_ . The _get_ XXX methods are used
 to retrieve column values:
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 rs.beforeFirst();
 
-while (rs.next()) \{
+while (rs.next()) {
 
- // get the column values for the current row
-using getXXX
-
+ // get the column values for the current row using getXXX
  // method
 
 }
+----
 
-|===
-
-The following example shows a backward
+* The following example shows a backward
 iteration through the _ResultSet_ :
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 rs.afterLast();
 
-while (rs.previous()) \{
+while (rs.previous()) {
 
- // get the column values for the current row
-using getXXX
-
+ // get the column values for the current row using getXXX
  // method
 
 }
+----
 
-|===
+==== Custom Record
 
-=== Custom Record
-
-Extend the _Record_ interface to represent an
+* Extend the _Record_ interface to represent an
 EIS-specific custom Record. The _CustomerRecord_ interface supports a
 simple getter-setter design pattern for its field values. A development
 tool generates the implementation class of the _CustomerRecord_ .
 
-[width="100%",cols="100%",]
-|===
-a|
-public interface CustomerRecord extends
-jakarta.resource.cci.Record,
-
- jakarta.resource.cci.Streamable \{
-
-
+[source,java]
+----
+public interface CustomerRecord extends jakarta.resource.cci.Record, jakarta.resource.cci.Streamable {
 
  public void setName(String name);
-
  public void setId(String custId);
-
  public void setAddress(String address);
-
-
-
  public String getName();
-
  public String getId();
-
  public String getAddress();
-
 }
+----
 
-|===
-
-Create an empty _CustomerRecord_ instance to
+* Create an empty _CustomerRecord_ instance to
 hold output from the execution of an _Interaction_ .
 
-CustomerRecord customer = ... // create an
-instance
+`CustomerRecord customer = ... // create an instance`
 
-Create a _PurchaseOrderRecord_ instance as an
+* Create a _PurchaseOrderRecord_ instance as an
 input to the _Interaction_ and set the properties on this instance. The
 _PurchaseOrderRecord_ is another example of a custom _Record_ .
 
-[width="100%",cols="100%",]
-|===
-a|
-PurchaseOrderRecord purchaseOrder = ... //
-create an instance
-
+[source,java]
+----
+PurchaseOrderRecord purchaseOrder = ... // create an instance
 purchaseOrder.setProductName(“...”);
-
 purchaseOrder.setQuantity(“...”);
-
 ...
 
-|===
+----
 
-Execute an _Interaction_ that populates the
+* Execute an _Interaction_ that populates the
 output _CustomerRecord_ instance.
 
-[width="100%",cols="100%",]
-|===
-a|
+[source,java]
+----
 // Execute the Interaction
-
-boolean ret = ix.execute(ixSpec,
-purchaseOrder, customer);
-
-
+boolean ret = ix.execute(ixSpec, purchaseOrder, customer);
 
 // Check the CustomerRecord
-
-System.out.println( customer.getName() + ":"
-+
-
+System.out.println( customer.getName() + ":" +
  customer.getId() + ":" +
-
  customer.getAddress());
 
-|===
+----
 
 
 
-=== 
-
-=== 
-
-image:conn-145.png[image]
-
-[[a4517]]Metadata Annotations
-
-image:conn-146.png[image]
-
-=== 
+== [[a4517]]Metadata Annotations
 
 This chapter defines a simplified API for
 development of resource adapters. The goal of the API is to simplify the
@@ -14445,11 +14075,7 @@ for use in resource adapters that require them and resource adapter
 implementations written to those APIs may be used in conjunction with
 components written to the new Connector 1.6 APIs.
 
-=== 
-
-image:conn-147.png[image]
-
-Overview
+=== Overview
 
 The simplified API makes extensive use of Java
 language annotations, that was introduced in Java SE 5.0 (see
@@ -14469,36 +14095,28 @@ annotations defined in the Web Services Metadata specification have
 already brought such ease of development simplifications to the
 developer.
 
-=== 
-
-image:conn-147.png[image]
-
-Goals
+=== Goals
 
 The simplified API is designed with the
 following goals:
 
-Define Java language metadata annotations that
+* Define Java language metadata annotations that
 can be used to annotate resource adapter artifacts. These annotations
 may reduce the need for implementing certain interfaces and assist in
 reducing the number of classes required to build a resource adapter
 implementation.
 
-Reduce the need to write redundant code by
+* Reduce the need to write redundant code by
 leveraging existing facilities in the Jakarta EE platform.
 
-Limit and reduce the need for a deployment
+* Limit and reduce the need for a deployment
 descriptor for common scenarios by defining related metadata annotations
 
-Define “programmatic defaults” to reduce the
+* Define “programmatic defaults” to reduce the
 need for a resource adapter developer to develop code to represent
 common scenarios.
 
-=== 
-
-image:conn-147.png[image]
-
-[[a4531]]Deployment Descriptors and Annotations
+=== [[a4531]]Deployment Descriptors and Annotations
 
 Deployment descriptors are considered as an
 alternative to metadata annotations or as a mechanism for the overriding
@@ -14523,9 +14141,9 @@ combination is used, if the specification does not define a particular
 behavior, the rules for the use of deployment descriptors as an
 overriding mechanism apply.
 
-=== metadata-complete Deployment Descriptor Element
+==== metadata-complete Deployment Descriptor Element
 
-A new attribute, _metadata-complete_ , is
+A new attribute, _metadata-complete_ , was
 introduced in the Connector 1.6 deployment descriptor ( _ra.xml_ ). The
 _metadata-complete_ attribute defines whether the deployment descriptor
 for the resource adapter module is complete, or whether the class files
@@ -14547,40 +14165,16 @@ descriptor version lower than 1.6. The following table describes the
 requirements for determining when to process annotations on the classes
 in a resource adapter archive.
 
-=== Annotation Processing Requirements for a Resource Adapter Archive
+.Table Annotation Processing Requirements for a Resource Adapter Archive
+|===
+|Deployment Descriptor |metadata-complete? |process annotations
+|Connector 1.5 ra.xml or earlier |Not applicable |No
+| Connector 1.6 _ra.xml_ |True |No
+| Connector 1.6 _ra.xml_ |False or Unspecified |Yes
+| No _ra.xml_ bundled with the RAR module archive |Not Applicable |Yes
+|===
 
-Deployment Descriptor
-
-metadata-complete?
-
-process annotations
-
-Connector 1.5 ra.xml or earlier
-
-Not applicable
-
-No
-
-Connector 1.6 _ra.xml_
-
-True
-
-No
-
-Connector 1.6 _ra.xml_
-
-False or Unspecified
-
-Yes
-
-No _ra.xml_ bundled with the RAR module
-archive
-
-Not Applicable
-
-Yes
-
-=== Merging Annotations and Deployment Descriptor
+==== Merging Annotations and Deployment Descriptor
 
 An application assembler or deployer may use
 the deployment descriptor to override the metadata annotations specified
@@ -14626,49 +14220,44 @@ While merging the information present in the
 annotations and the deployment descriptor, the application server must
 satisfy the following requirements:
 
-If a deployment descriptor element and one or
+. If a deployment descriptor element and one or
 more annotations specify information for the same unique identity (as
 specified by the XML schema), the information provided in the deployment
 descriptor overrides the value specified in the annotation.
-
-If there is no match between the identity of
+. If there is no match between the identity of
 the annotations and the deployment descriptor, and as long as the XML
 schema allow the combination of these identities, the information
 provided in the deployment descriptor must be considered in addition to
 the annotations.
-
-It is an error, either by way of annotations
+. It is an error, either by way of annotations
 alone or as a result of the combination of annotation and deployment
 descriptor, to specify combinations of identities that do not satisfy
 the uniqueness constraints in the deployment descriptor schema.
 
- The application server must consider the
+The application server must consider the
 following exceptions to the third rule above:
 
-If a resource adapter module specifies the
+* If a resource adapter module specifies the
 fully qualified Java class name of the resource adapter class in the
 deployment descriptor through the _resourceadapter-class_ element, the
 application server must ignore any _Connector_ annotations in the
 resource adapter module’s annotation discovery scope.
 
-If the JavaBean class specified in the
+* If the JavaBean class specified in the
 _resourceadapter-class_ element is annotated with the _Connector_
 annotation, the application server must use the information in the
 deployment descriptor to override the values specified in the
 annotation.
 
-=== Annotation Processing Requirements of Superclasses
+==== Annotation Processing Requirements of Superclasses
 
 The following JavaBeans are permitted to have
 superclasses that are themselves of the same type:
 
- _ResourceAdapter_
-
- _ManagedConnectionFactory_
-
- _ActivationSpec_
-
-Administered Object
+* _ResourceAdapter_
+* _ManagedConnectionFactory_
+* _ActivationSpec_
+* Administered Object
 
 For instance, a _ResourceAdapter_ JavaBean is
 permitted to have a superclass that is itself a _ResourceAdapter_
@@ -14705,11 +14294,7 @@ this chapter are in the _jakarta.resource.spi_ package unless otherwise
 specified. The following sections will describe the metadata annotations
 that are required to be supported by the application server.
 
-=== 
-
-image:conn-147.png[image]
-
-[[a4581]]@Connector
+=== [[a4581]]@Connector
 
 The _Connector_ annotation is a
 component-defining annotation and it can be used by the resource adapter
@@ -14730,72 +14315,35 @@ _Connector_ annotation and not providing a deployment descriptor.
 
 
 
-=== Connector Annotation
-
-
-
+.Connector Annotation
+[source,java]
+----
  package jakarta.resource.spi;
 
  @Documented
-
  @Retention(RUNTIME)
-
  @Target(TYPE)
+ public @interface Connector {
 
- public @interface Connector \{
-
- String[] description() default \{};
-
- String[] displayName() default \{};
-
- String[] smallIcon() default \{};
-
- String[] largeIcon() default \{};
-
-
-
+ String[] description() default {};
+ String[] displayName() default {};
+ String[] smallIcon() default {};
+ String[] largeIcon() default {};
  String vendorName() default "";
-
  String eisType() default "";
-
  String version() default "";
-
-
-
- String[] licenseDescription() default \{};
-
+ String[] licenseDescription() default {};
  boolean licenseRequired() default false;
+ AuthenticationMechanism[] authMechanisms() default {};
+ boolean reauthenticationSupport() default false;
+ SecurityPermission[] securityPermissions() default {};
+ TransactionSupport.TransactionSupportLevel transactionSupport()
+ default TransactionSupport.TransactionSupportLevel.NoTransaction;
 
-
-
- AuthenticationMechanism[] authMechanisms()
-default \{};
-
- boolean reauthenticationSupport() default
-false;
-
-
-
- SecurityPermission[] securityPermissions()
-default \{};
-
-
-
- TransactionSupport.TransactionSupportLevel
-transactionSupport()
-
- default
-TransactionSupport.TransactionSupportLevel.NoTransaction;
-
-
-
- Class<? extends WorkContext>[]
-requiredWorkContexts()
-
- default \{};
+ Class<? extends WorkContext>[] requiredWorkContexts() default {};
 
  }
-
+----
 
 
 The _smallIcon_ and _largeIcon_ annotation
@@ -14842,7 +14390,7 @@ specifies a list of fully qualified classes that implements the
 _WorkContext_ interface that a resource adapter requires the application
 server to support.
 
-=== Implementing the ResourceAdapter Interface
+==== Implementing the ResourceAdapter Interface
 
 It is optional for a resource adapter
 implementation to bundle a JavaBean class implementing the
@@ -14868,7 +14416,7 @@ and must satisfy the requirements listed in
 <<a415, ResourceAdapter JavaBean and
 Bootstrapping a Resource Adapter Instance>>.
 
-=== Example
+==== Example
 
 A simple resource adapter JavaBean, that does
 not support transactions, could be defined as follows by the resource
@@ -14876,22 +14424,18 @@ adapter provider.
 
 
 
-=== Connector Annotation Usage Example
-
-
-
+.Connector Annotation Usage Example
+[source,java]
+----
  @Connector( )
-
- public class MyResourceAdapter implements
-ResourceAdapter\{
+ public class MyResourceAdapter implements ResourceAdapter{
 
  // Define common configuration properties.
-
  ...
-
  }
+----
 
-=== [[a4636]]@AuthenticationMechanism
+==== [[a4636]]@AuthenticationMechanism
 
 The _AuthenticationMechanism_ annotation can
 be used by the developer, as part of the _Connector_ annotation, to
@@ -14900,43 +14444,28 @@ specify the authentication mechanism supported by the resource adapter
 
 
 
-=== AuthenticationMechanism Annotation
-
-
-
+.AuthenticationMechanism Annotation
+[source,java]
+----
  package jakarta.resource.spi;
 
-
-
  @Documented
-
  @Retention(RUNTIME)
-
  @Target(\{})
 
- public @interface AuthenticationMechanism \{
+ public @interface AuthenticationMechanism {
 
- public enum CredentialInterface \{
-
- PasswordCredential, GSSCredential,
-GenericCredential
-
+ public enum CredentialInterface {
+ PasswordCredential, 
+ GSSCredential,
+ GenericCredential
  }
 
-
-
- String authMechanism() default
-"BasicPassword";
-
- String[] description() default \{};
-
- CredentialInterface credentialInterface()
-
- default
-CredentialInterface.PasswordCredential;
-
+ String authMechanism() default "BasicPassword";
+ String[] description() default {};
+ CredentialInterface credentialInterface() default CredentialInterface.PasswordCredential;
  }
-
+----
 
 
 The _authMechanism_ annotation element
@@ -14948,7 +14477,7 @@ can be used by the resource adaper to support the representation of
 credentials and the _credentialInterface_ annotation element is used to
 specify the credential interface supported by the resource adapter.
 
-=== [[a4658]]@SecurityPermission
+==== [[a4658]]@SecurityPermission
 
 The _SecurityPermission_ annotation can be
 used by the developer, as part of the _Connector_ annotation, to specify
@@ -14957,27 +14486,20 @@ the extended security permissions required by the resource adapter (see
 
 
 
-=== SecurityPermission annotation
-
+.SecurityPermission annotation
+[source,java]
+----
  package jakarta.resource.spi;
 
-
-
  @Documented
-
  @Retention(RUNTIME)
-
- @Target(\{})
-
- public @interface SecurityPermission \{
-
- String[] description() default \{};
-
+ @Target({})
+ public @interface SecurityPermission {
+ String[] description() default {};
  String permissionSpec() default "";
 
  }
-
-
+----
 
 The _description_ element is used to provide
 an optional description to mention any specific reason that a resource
@@ -14988,11 +14510,7 @@ security permission based on the Security policy file syntax. These
 security permissions are different from those required by the default
 permission set as specified in <<a6602, Security Permissions>>.
 
-=== 
-
-image:conn-147.png[image]
-
-[[a4675]]@ConfigProperty
+=== [[a4675]]@ConfigProperty
 
 The _ConfigProperty_ annotation can be used
 by the developer on JavaBeans listed below to indicate to the
@@ -15003,40 +14521,24 @@ configuration information. The _ConfigProperty_ annotation may be placed
 on a property mutator method (the setter method) or the field
 corresponding to the JavaBean property.
 
-
-
-=== ConfigProperty Annotation
-
-
-
+.ConfigProperty Annotation
+[source,java]
+----
  package jakarta.resource.spi;
 
-
-
  @Documented
-
  @Retention(RUNTIME)
-
- @Target(\{FIELD, METHOD})
-
- public @interface ConfigProperty \{
+ @Target({FIELD, METHOD})
+ public @interface ConfigProperty {
 
  Class type() default Object.class;
-
- String[] description() default \{};
-
+ String[] description() default {};
  String defaultValue() default "";
-
  boolean ignore() default false;
-
- boolean supportsDynamicUpdates() default
-false;
-
+ boolean supportsDynamicUpdates() default false;
  boolean confidential() default false;
-
  }
-
-
+----
 
 The _type_ element defines the Java type of
 the configuration property and the _defaultValue_ element specifies the
@@ -15087,20 +14589,20 @@ The application server is required to process
 _ConfigProperty_ annotations specified in the field or setter method
 declaration of the following JavaBeans:
 
- _ResourceAdapter_ . A JavaBean implementing
+* _ResourceAdapter_ . A JavaBean implementing
 the _ResourceAdapter_ interface or a JavaBean annotated with the
 _Connector_ annotation
 
- _ManagedConnectionFactory_ . A JavaBean
+* _ManagedConnectionFactory_ . A JavaBean
 implementing the _ManagedConnectionFactory_ interface or a JavaBean
 annotated with the _ConnectionDefinition_ annotation
 
- _AdministeredObject_ . A JavaBean annotated
+* _AdministeredObject_ . A JavaBean annotated
 with the _AdministeredObject_ annotation or a JavaBean specified as an
 administered object’s implementation class using the deployment
 descriptor
 
- _ActivationSpec_ . A JavaBean implementing
+* _ActivationSpec_ . A JavaBean implementing
 the _ActivationSpec_ interface or a JavaBean annotated with the
 _Activation_ annotation.
 
@@ -15111,7 +14613,7 @@ ConfigProperty annotations in the JavaBeans listed above irrespective of
 whether the JavaBeans are specified by way of deployment descriptor
 elements or metadata annotations.
 
-=== [[a4707]]Discovery of Configuration Properties
+==== [[a4707]]Discovery of Configuration Properties
 
 Configuration tools provided by the container
 must introspect the JavaBeans listed in <<a4675,
@@ -15129,11 +14631,7 @@ provider need only annotate that property in the JavaBean with the
 _ConfigProperty_ annotation and specifying the _ignore_ annotation
 element as true.
 
-=== 
-
-image:conn-147.png[image]
-
-[[a4711]]@ConnectionDefinition and @ConnectionDefinitions
+=== [[a4711]]@ConnectionDefinition and @ConnectionDefinitions
 
 The _ConnectionDefinition_ and
 _ConnectionDefinitions_ annotations are applied to the JavaBean class
@@ -15167,55 +14665,34 @@ these two annotations.
 
 
 
-=== ConnectionDefinitions Annotation
-
-
-
+.ConnectionDefinitions Annotation
+[source,java]
+----
  package jakarta.resource.spi;
 
-
-
  @Documented
-
  @Retention(RUNTIME)
-
  @Target(TYPE)
-
-
-
- public @interface ConnectionDefinitions \{
-
+ public @interface ConnectionDefinitions {
  ConnectionDefinition[] value();
-
  }
+----
 
-
-
-=== ConnectionDefinition Annotation
-
-
-
+.ConnectionDefinition Annotation
+[source,java]
+----
  package jakarta.resource.spi;
 
  @Documented
-
  @Retention(RUNTIME)
-
  @Target(TYPE)
-
- public @interface ConnectionDefinition \{
-
+ public @interface ConnectionDefinition {
  Class connectionFactory();
-
  Class connectionFactoryImpl();
-
  Class connection();
-
  Class connectionImpl();
-
  }
-
-
+----
 
 The _connectionFactory_ and
 _connectionFactoryImpl_ annotation elements are used by the developer to
@@ -15229,40 +14706,26 @@ qualified Java interface and implementation class for the connection
 that is supported by the resource adapter as part of the
 connectionDefinition.
 
-=== Example
+==== Example
 
 A simple _ManagedConnectionFactory_
 implementation that is part of a connection definition, could be defined
 as follows
 
-=== ConnectionDefinition Annotation Usage Example
-
-
-
+.ConnectionDefinition Annotation Usage Example
+[source,java]
+----
  @ConnectionDefinition(
-connectionFactory=com.wombat.ra.CF.class,
-
- connectionFactoryImpl=
-
- com.wombat.ra.CFImpl.class,
-
- connection=com.wombat.ra.Conn.class,
-
- connectionImpl=com.wombat.ra.ConnImpl.class)
-
- public class ManagedConnectionFactoryImpl
-
- implements ManagedConnectionFactory \{
-
+   connectionFactory=com.wombat.ra.CF.class,
+   connectionFactoryImpl= com.wombat.ra.CFImpl.class,
+   connection=com.wombat.ra.Conn.class,
+   connectionImpl=com.wombat.ra.ConnImpl.class)
+ public class ManagedConnectionFactoryImpl implements ManagedConnectionFactory {
  ...
-
  }
+----
 
-=== 
-
-image:conn-147.png[image]
-
-[[a4758]]@Activation
+=== [[a4758]]@Activation
 
 The _ActivationSpec_ JavaBean contains the
 configuration information pertaining to inbound connectivity from an EIS
@@ -15282,25 +14745,18 @@ more JavaBeans with the _Activation_ annotation. The JavaBean is
 required to implement the _jakarta.resource.spi.ActivationSpec_ interface
 even if the JavaBean is annotated with the _Activation_ annotation.
 
-=== Activation Annotation
-
-
-
+.Activation Annotation
+[source,java]
+----
  package jakarta.resource.spi;
 
-
-
  @Documented
-
  @Retention(RUNTIME)
-
  @Target(TYPE)
-
- public @interface Activation \{
-
- Class[] messageListeners();
-
+ public @interface Activation {
+ Class [] messageListeners();
  }
+----
 
 The _messageListeners_ annotation element
 indicates the message listener type(s) supported with the ActivationSpec
@@ -15308,7 +14764,7 @@ JavaBean. Together with the _messageListeners_ annotation element, this
 annotation specifies information about the specific message listener
 types supported by the messaging resource adapter.
 
-=== Example
+==== Example
 
 An _ActivationSpec_ JavaBean that is
 associated with the _MyMessageListener_ message listener type, uses Bean
@@ -15316,46 +14772,26 @@ Validation annotations and the _validate_ method to validate the state
 of the JavaBean could be defined as follows by the resource adapter
 provider.
 
-=== Activation Annotation Usage Example
+.Activation Annotation Usage Example
+[source,java]
+----
+ @Activation(messageListeners = {com.wombat.ra.MyMessageListener.class})
+ public class MyActivationSpec implements ActivationSpec{
 
-
-
- @Activation(messageListeners =
-
- \{com.wombat.ra.MyMessageListener.class})
-
- public class MyActivationSpec implements
-ActivationSpec\{
-
- //Use of Bean Validation annotations to
-express
-
+ //Use of Bean Validation annotations to express
  //validation requirements
-
  @Size(min=5, max=5)
-
  private int length;
 
-
-
  //... other methods
-
  //Use of validate() method is also allowed
-
- public void validate() throws
-InvalidPropertyException \{
-
- //custom validation logic
-
+ public void validate() throws InvalidPropertyException {
+   //custom validation logic
  }
-
  }
+----
 
-=== 
-
-image:conn-147.png[image]
-
-[[a4791]]@AdministeredObject
+=== [[a4791]]@AdministeredObject
 
 The _AdministeredObject_ annotation can be
 used by the resource adapter provider to designate a JavaBean as an
@@ -15369,27 +14805,18 @@ the _AdministeredObject_ annotation.
 
 
 
-=== AdministeredObject Annotation
-
-
-
+.AdministeredObject Annotation
+[source,java]
+----
  package jakarta.resource.spi;
 
-
-
  @Documented
-
  @Retention(RUNTIME)
-
  @Target(TYPE)
-
- public @interface AdministeredObject \{
-
- Class[] adminObjectInterfaces() default \{};
-
+ public @interface AdministeredObject {
+ Class[] adminObjectInterfaces() default {};
  }
-
-
+----
 
 The _adminObjectInterfaces_ annotation
 element specifies the Java type of the interface implemented by the
@@ -15398,21 +14825,17 @@ value is not provided by the resource adapter provider, the application
 server must use the following rules to determine the Java interfaces of
 the administered object:
 
-The following interfaces must be excluded
+* The following interfaces must be excluded
 while determining the Java interfaces of the administered object:
+** _java.io.Serializable_
+** _java.io.Externalizable_
+** _jakarta.resource.spi.ResourceAdapterAssociation_
 
- _java.io.Serializable_
-
- _java.io.Externalizable_
-
-
-_jakarta.resource.spi.ResourceAdapterAssociation_
-
-If the JavaBean implements only one
+* If the JavaBean implements only one
 interface, that interface is chosen as the Java Interface implemented by
 the administered object
 
-If the JavaBean class implements more than
+* If the JavaBean class implements more than
 one Java interface, the resource adapter provider must explicitly state
 the interfaces supported by the administered object either through the
 _adminObjectInterfaces_ annotation element or through the deployment
@@ -15420,11 +14843,7 @@ descriptor. It is an error if the resource adapter provider does not use
 either of the two schemes to specify the Java types of the interfaces
 supported by the administered object.
 
-=== 
-
-image:conn-147.png[image]
-
-[[a4814]]Resource Definition Annotations
+=== [[a4814]]Resource Definition Annotations
 
 Resource definition annotations allow an
 application to be deployed into a Jakarta EE environment with less
@@ -15469,7 +14888,7 @@ It is not required to support the placement
 of these resource definitions in classes packaged in resource adapter
 modules.
 
-=== @ConnectionFactoryDefinition
+==== @ConnectionFactoryDefinition
 
 The _ConnectionFactoryDefinition_ annotation
 is a repeatable resource definition annotation that is used to define a connector
@@ -15490,61 +14909,32 @@ EE Platform Specification.
 
 
 
-=== ConnectionFactoryDefinition Annotation
-
-
-
+.ConnectionFactoryDefinition Annotation
+[source,java]
+----
  package jakarta.resource;
 
  import java.lang.annotation.Target;
-
  import java.lang.annotation.Retention;
-
  import java.lang.annotation.ElementType;
-
  import java.lang.annotation.RetentionPolicy;
 
-
-
  @Documented
-
- @Target(\{ElementType.TYPE})
-
+ @Target({ElementType.TYPE})
  @Retention(RetentionPolicy.RUNTIME)
  @Repeatable(ConnectionFactoryDefinitions.class)
+ public @interface ConnectionFactoryDefinition {
+   String name();
+   String description() default "";
+   String resourceAdapter();
+   String interfaceName();
+   TransactionSupport.TransactionSupportLevel transactionSupport() default TransactionSupport.TransactionSupportLevel.NoTransaction;
 
- public @interface
-ConnectionFactoryDefinition \{
-
- String name();
-
- String description() default "";
-
-
-
- String resourceAdapter();
-
- String interfaceName();
-
-
-
- TransactionSupport.TransactionSupportLevel
-transactionSupport()
-
- default
-
-
-TransactionSupport.TransactionSupportLevel.NoTransaction;
-
- int maxPoolSize() default -1;
-
- int minPoolSize() default -1;
-
- String[] properties() default \{};
-
+   int maxPoolSize() default -1;
+   int minPoolSize() default -1;
+   String[] properties() default \{};
  }
-
-
+----
 
 The connection factory will be registered in
 JNDI under the name specified in the mandatory _name_ annotation
@@ -15591,29 +14981,20 @@ Properties, if specified, that do not match configuration property names
 of the _ManagedConnectionFactory_ or cannot be mapped to vendor-specific
 properties may be ignored.
 
-=== Example
+===== Example
 
 A XA-capable connection factory resource may
 be defined in a Servlet as follows:
 
-
-
-=== ConnectionFactoryDefinition Annotation Definition Example
-
-
-
+.ConnectionFactoryDefinition Annotation Definition Example
+[source,java]
+----
 
 @ConnectionFactoryDefinition(name="java:comp/eis/MyEISCF",
-
- interfaceName="com.eis.ConnectionFactory",
-
- resourceAdapter="MyEISRA",
-
- transactionSupport=
-
-
-TransactionSupport.TransactionSupportLevel.XATransaction)
-
+  interfaceName="com.eis.ConnectionFactory",
+   resourceAdapter="MyEISRA",
+   transactionSupport= TransactionSupport.TransactionSupportLevel.XATransaction)
+----
 
 
 Once defined, a connector connection factory
@@ -15624,23 +15005,19 @@ deployment descriptor element or the _Resource_ annotation. For example,
 the above connection factory could be referenced as follows in a
 Stateless Session Bean in the same enterprise application archive.
 
+.ConnectionFactoryDefinition Annotation Usage Example
+[source,java]
+----
+ @Stateless public class MySessionBean {
 
-
-=== ConnectionFactoryDefinition Annotation Usage Example
-
- @Stateless
-
- public class MySessionBean \{
-
- @Resource(lookup = "java:comp/eis/MyEISCF")
-
- com.eis.ConnectionFactory myCF;
+ @Resource(lookup = "java:comp/eis/MyEISCF") com.eis.ConnectionFactory myCF;
 
  ...
 
  }
+----
 
-=== @ConnectionFactoryDefinitions
+==== @ConnectionFactoryDefinitions
 
 The _ConnectionFactoryDefinition_ annotation
 is a resource definition annotation that is used to define a connector
@@ -15649,71 +15026,49 @@ annotation acts as a container for multiple connector connection factory
 definitions. As the _ConnectionFactoryDefinition_ annotation is _Repeatable_
 use of the _ConnectionFactoryDefinitions_ annotation is optional.
 
-=== ConnectionFactoryDefinitions Annotation
-
-
-
+.ConnectionFactoryDefinitions Annotation
+[source,java]
+----
  package jakarta.resource;
-
+ 
  import java.lang.annotation.Target;
-
  import java.lang.annotation.Retention;
-
  import java.lang.annotation.ElementType;
-
  import java.lang.annotation.RetentionPolicy;
 
-
-
  @Documented
-
- @Target(\{ElementType.TYPE})
-
+ @Target({ElementType.TYPE})
  @Retention(RetentionPolicy.RUNTIME)
-
- public @interface
-ConnectionFactoryDefinitions \{
-
- ConnectionFactoryDefinition[] value();
-
+ public @interface ConnectionFactoryDefinitions {
+   ConnectionFactoryDefinition[] value();
  }
+----
 
 The _value_ annotation element contains the
 multiple connector connection factory definitions.
 
-=== Example
+===== Example
 
 Multiple connector connection factory
 definitions may be declared in a Servlet as follows:
 
-=== ConnectionFactoryDefinitions Annotation Definition Example
+.ConnectionFactoryDefinitions Annotation Definition Example
+[source,java]
+----
 
+ @ConnectionFactoryDefinitions({
+ 
+    @ConnectionFactoryDefinition(name="java:comp/eis/MyXACF",
+      interfaceName="com.eis.FooConnectionFactory",
+      resourceAdapter="MyEISRA1",
+      transactionSupport=XATransaction),
 
-
- @ConnectionFactoryDefinitions(\{
-
-
-@ConnectionFactoryDefinition(name="java:comp/eis/MyXACF",
-
-
-interfaceName="com.eis.FooConnectionFactory",
-
- resourceAdapter="MyEISRA1",
-
- transactionSupport=XATransaction),
-
-
-@ConnectionFactoryDefinition(name="java:comp/eis/MyNoTXCF",
-
-
-interfaceName="com.eis.BarConnectionFactory",
-
- resourceAdapter="MyEISRA2",
-
- transactionSupport=NoTransaction)
-
+    @ConnectionFactoryDefinition(name="java:comp/eis/MyNoTXCF",
+      interfaceName="com.eis.BarConnectionFactory",
+      resourceAdapter="MyEISRA2",
+      transactionSupport=NoTransaction)
  })
-
+----
 
 
 Once defined, the connector connection
@@ -15725,27 +15080,23 @@ annotation. For example, the above connection factories could be
 referenced as follows in a Stateless Session Bean in the same enterprise
 application archive.
 
-=== ConnectionFactoryDefinitions Annotation Usage Example
-
- @Stateless
-
- public class MySessionBean \{
+.ConnectionFactoryDefinitions Annotation Usage Example
+[source,java]
+----
+ @Stateless public class MySessionBean {
 
  @Resource(lookup = "java:comp/eis/MyXACF")
-
  com.eis.FooConnectionFactory xacf;
 
  ...
 
  @Resource(lookup = "java:comp/eis/MyNoTXCF")
-
  com.eis.BarConnectionFactory notxcf;
-
  ...
-
  }
+----
 
-=== @AdministeredObjectDefinition
+==== @AdministeredObjectDefinition
 
 The _AdministeredObjectDefinition_ annotation
 is a repeatable resource definition annotation that is used to define an
@@ -15764,50 +15115,30 @@ defined in the _AdministeredObjectDefinition_ annotation, is described
 in the section titled “Common Jakarta EE XML Schema definitions” of the
 Jakarta EE Platform Specification.
 
-
-
-=== AdministeredObjectDefinition Annotation
-
-
-
+.AdministeredObjectDefinition Annotation
+[source,java]
+----
  package jakarta.resource;
 
  import java.lang.annotation.Target;
-
  import java.lang.annotation.Retention;
-
  import java.lang.annotation.ElementType;
-
  import java.lang.annotation.RetentionPolicy;
 
-
-
  @Documented
-
- @Target(\{ElementType.TYPE})
-
+ @Target({ElementType.TYPE})
  @Retention(RetentionPolicy.RUNTIME)
  @Repeatable(AdministeredObjectDefinitions.class)
- public @interface
-AdministeredObjectDefinition \{
-
- String name();
-
- String description() default "";
-
-
-
- String resourceAdapter();
-
- String className();
-
- String interfaceName() default “”;
-
-
-
- String[] properties() default \{};
-
+ public @interface AdministeredObjectDefinition {
+ 
+   String name();
+   String description() default "";
+   String resourceAdapter();
+   String className();
+   String interfaceName() default “”;
+   String[] properties() default {};
  }
+----
 
 
 
@@ -15838,24 +15169,18 @@ _properties_ element. Properties, if specified, that do not match
 configuration property names of the _AdministeredObject_ JavaBean or
 cannot be mapped to vendor-specific properties may be ignored.
 
-=== Example
+===== Example
 
 A Queue Administered Object resource of an
 embedded JMS resource adapter may be defined in a Servlet as follows:
 
-=== AdministeredObjectDefinition Annotation Definition Example
-
-
-
- @AdministeredObjectDefinition
-(name="java:comp/eis/MyQueue",
-
-
-className="com.wombat.connector.jms.QueueImpl",
-
- resourceAdapter="#MyJMSRA")
-
-
+.AdministeredObjectDefinition Annotation Definition Example
+[source,java]
+----
+ @AdministeredObjectDefinition (name="java:comp/eis/MyQueue",
+              className="com.wombat.connector.jms.QueueImpl",
+              resourceAdapter="#MyJMSRA")
+----
 
 Once defined, the Queue resource may be
 referenced by a component, that has the embedded _MyJMSRA_ resource
@@ -15866,23 +15191,17 @@ the above administered object definition could be referenced as follows
 in a Stateless Session Bean in the same enterprise application _EAR_
 archive.
 
+.AdministeredObjectDefinition Annotation Usage Example
+[source,java]
+----
+ @Stateless public class MySessionBean {
 
-
-=== AdministeredObjectDefinition Annotation Usage Example
-
- @Stateless
-
- public class MySessionBean \{
-
- @Resource(lookup = "java:comp/eis/MyQueue")
-
- jakarta.jms.Queue myQ;
-
+ @Resource(lookup = "java:comp/eis/MyQueue") jakarta.jms.Queue myQ;
  ...
-
  }
+----
 
-=== @AdministeredObjectDefinitions
+==== @AdministeredObjectDefinitions
 
 The _AdministeredObjectDefinition_ annotation
 is a resource definition annotation that is used to define an
@@ -15891,74 +15210,49 @@ annotation acts as a container for multiple administered object
 definitions. Use of the _AdministeredObjectDefinitions_ annotation is optional 
 as the _AdministeredObjectDefinition_ annotation is marked as Repeatable_
 
-
-
-=== AdministeredObjectDefinitions Annotation
-
-
-
+.AdministeredObjectDefinitions Annotation
+[source,java]
+----
  package jakarta.resource;
 
  import java.lang.annotation.Target;
-
  import java.lang.annotation.Retention;
-
  import java.lang.annotation.ElementType;
-
  import java.lang.annotation.RetentionPolicy;
 
-
-
  @Documented
-
- @Target(\{ElementType.TYPE})
-
+ @Target({ElementType.TYPE})
  @Retention(RetentionPolicy.RUNTIME)
-
- public @interface
-AdministeredObjectDefinitions \{
+ public @interface AdministeredObjectDefinitions {
 
  AdministeredObjectDefinition[] value();
 
  }
-
-
+----
 
 The _value_ annotation element contains the
 multiple administered object definitions.
 
-=== Example
+===== Example
 
 Multiple administered object definitions, for
 instance a Queue and a Topic administered object, may be declared
 together in a Servlet as follows:
 
+.AdministeredObjectDefinitions Annotation Definition Example
+[source,java]
+----
 
+ @AdministeredObjectDefinitions({
+   @AdministeredObjectDefinition(name="java:comp/eis/MyQueue",
+    className="com.wombat.connector.jms.QueueImpl",
+    resourceAdapter="MyJMSRA"),
 
-=== AdministeredObjectDefinitions Annotation Definition Example
-
-
-
- @AdministeredObjectDefinitions(\{
-
- @AdministeredObjectDefinition
-(name="java:comp/eis/MyQueue",
-
-
-className="com.wombat.connector.jms.QueueImpl",
-
- resourceAdapter="MyJMSRA"),
-
- @AdministeredObjectDefinition
-(name="java:comp/eis/MyTopic",
-
-
-className="com.wombat.connector.jms.TopicImpl",
-
- resourceAdapter="MyJMSRA")
-
+ @AdministeredObjectDefinition  (name="java:comp/eis/MyTopic",
+    className="com.wombat.connector.jms.TopicImpl",
+    resourceAdapter="MyJMSRA")
  })
-
+----
 
 
 Once defined, the Queue and Topic
@@ -15970,46 +15264,31 @@ annotation. For example, the above administered objects could be
 referenced as follows in a Stateless Session Bean in the same enterprise
 application archive.
 
-
-
-=== AdministeredObjectDefinitions Annotation Usage Example
-
+.AdministeredObjectDefinitions Annotation Usage Example
+[source,java]
+----
  @Stateless
-
- public class MySessionBean \{
+ public class MySessionBean {
 
  @Resource(lookup = "java:comp/eis/MyQueue")
-
  jakarta.jms.Queue myQ;
 
  ...
 
  @Resource(lookup = "java:comp/eis/MyTopic")
-
  jakarta.jms.Queue myT;
-
+ 
  ...
-
  }
+----
 
-=== 
 
-=== 
-
-image:conn-148.png[image]
-
-[[a5015]]API Requirements
-
-image:conn-149.png[image]
+== [[a5015]]API Requirements
 
 This chapter specifies the API requirements
 for the resource adapter and application server implementations.
 
-=== 
-
-image:conn-150.png[image]
-
-Requirements of the Application Server
+=== Requirements of the Application Server
 
 The application server must support the
 deployment of a resource adapter in Jakarta Enterprise Beans and Web containers.
