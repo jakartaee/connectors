@@ -577,15 +577,10 @@ space of the application server. Examples of resource adapters are:
 
 * A JDBC driver to connect to a
 relational database, as specified in the JDBC specification. For more
-<<<<<<< HEAD
 information on JDBC, see <<a9727, JDBC API Specification, version 4.1>>
-=======
-information on JDBC, see link:conn.html#a9727[See JDBC API
-Specification, version 4.1]
 * A resource adapter to connect to an ERP system
 * A resource adapter to connect to a TP system
 * A resource adapter to plug-in a messaging system
->>>>>>> Tidy formatting up to the end of chapter 7 Transaction Management
 
 A resource adapter may provide different types of connectivity between an application and an EIS.
 
