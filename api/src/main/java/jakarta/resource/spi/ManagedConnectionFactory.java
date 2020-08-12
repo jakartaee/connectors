@@ -132,7 +132,7 @@ public interface ManagedConnectionFactory extends java.io.Serializable {
 	throws ResourceException;
 
     /** 
-     * Set the log writer for this ManagedConnectionFactory instance.</p>
+     * <p>Set the log writer for this ManagedConnectionFactory instance.</p>
      *
      *  <p>The log writer is a character output stream to which all logging and
      *  tracing messages for this ManagedConnectionfactory instance will be 
@@ -143,12 +143,12 @@ public interface ManagedConnectionFactory extends java.io.Serializable {
      *  created the log writer is initially null, in other words, logging is 
      *  disabled. Once a log writer is associated with a
      *  ManagedConnectionFactory, logging and tracing for 
-     *  ManagedConnectionFactory instance is enabled.
+     *  ManagedConnectionFactory instance is enabled.</p>
      *
      *  <p>The ManagedConnection instances created by ManagedConnectionFactory
      *  "inherits" the log writer, which can be overridden by ApplicationServer
      *  using ManagedConnection.setLogWriter to set ManagedConnection specific
-     *  logging and tracing.
+     *  logging and tracing.</p>
      *
      *  @param   out                   PrintWriter - an out stream for
      *                                 error logging and tracing
@@ -163,12 +163,12 @@ public interface ManagedConnectionFactory extends java.io.Serializable {
      *
      *  <p>The log writer is a character output stream to which all logging and
      *  tracing messages for this ManagedConnectionFactory instance will be 
-     *  printed
+     *  printed</p>
      *
      *  <p>ApplicationServer manages the association of output stream with the
      *  ManagedConnectionFactory. When a ManagedConnectionFactory object is 
      *  created the log writer is initially null, in other words, logging is 
-     *  disabled.
+     *  disabled.</p>
      *
      *  @return  PrintWriter
      *  @throws  ResourceException     generic exception
@@ -180,13 +180,15 @@ public interface ManagedConnectionFactory extends java.io.Serializable {
      * 
      *  @return  hash code for the ManagedConnectionFactory
      */
+    @Override
     public int hashCode();
 
     /** 
      * Check if this ManagedConnectionFactory is equal to another
      * ManagedConnectionFactory.
-     *
+     *  @param other to check
      *  @return  true if two instances are equal
      */
+    @Override
     public boolean equals(Object other);
 }

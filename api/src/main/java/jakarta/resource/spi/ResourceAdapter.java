@@ -98,7 +98,7 @@ public interface ResourceAdapter {
     /**
      * This is called when a message endpoint is deactivated. The instances
      * passed as arguments to this method call should be identical to those
-     * passed in for the corresponding </code>endpointActivation</code> call.
+     * passed in for the corresponding <code>endpointActivation</code> call.
      * This causes the resource adapter to stop delivering messages to the
      * message endpoint. 
      *

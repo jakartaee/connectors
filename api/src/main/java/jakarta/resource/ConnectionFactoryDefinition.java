@@ -42,11 +42,13 @@ public @interface ConnectionFactoryDefinition {
 
     /**
      *  JNDI name of the connection factory resource being defined.
+     * @return name
      */
     String name();
 
     /**
      *  Description of the resource.
+     * @return description
      */
     String description() default "";
 
@@ -54,12 +56,14 @@ public @interface ConnectionFactoryDefinition {
      *  The name of the resource adapter that the administered object must be 
      *  created from. The resource adapter is required to be available at 
      *  deployment time.
+     * @return name of the resource adapter
      */
     String resourceAdapter();
 
     /**
      *  The fully qualified name of the connection factory interface 
      *  class.
+     * @return fully qualified name of the connection factory interface 
      */
     String interfaceName();
     
@@ -70,6 +74,8 @@ public @interface ConnectionFactoryDefinition {
      *  <code>TransactionSupport.TransactionSupportLevel</code> enum is equal
      *  to or lesser than the resource adapter's transaction support 
      *  classification.
+     * @return The level of transaction support the connection factory resource 
+     *  needs to support.
      */
     TransactionSupportLevel transactionSupport() 
                 default TransactionSupportLevel.NoTransaction;
@@ -78,13 +84,17 @@ public @interface ConnectionFactoryDefinition {
      *  The maximum number of connections that should be allocated for a 
      *  connection pool that backs this connnection factory resource. The 
      *  default for this attribute is vendor specific. 
+     * @return The maximum number of connections that should be allocated for a 
+     *  connection pool
      */
     int maxPoolSize() default -1;
     
     /**
      *  The minimum number of connections that should be allocated for a 
      *  connection pool that backs this connnection factory resource. The 
-     *  default for this attribute is vendor specific. 
+     *  default for this attribute is vendor specific.
+     * @return The minimum number of connections that should be allocated for a 
+     *  connection pool
      */
     int minPoolSize() default -1;
     
@@ -97,6 +107,7 @@ public @interface ConnectionFactoryDefinition {
      *  Connection Factory properties that are specified and are not supported 
      *  in a given resource adapter or cannot be mapped to a vendor specific 
      *  configuration property may be ignored.  
+     * @return properties
      */
     String[] properties() default {};
 }

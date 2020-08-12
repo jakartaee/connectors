@@ -43,6 +43,7 @@ public @interface ConnectionDefinition {
 	 * Specifies the ConnectionFactory interface supported by the resource
 	 * adapter. Example: jakarta.resource.cci.ConnectionFactory or
 	 * com.wombat.ConnectionFactory
+         * @return the ConnectionFactory interface
 	 */
 	Class connectionFactory();
 
@@ -50,12 +51,14 @@ public @interface ConnectionDefinition {
 	 * Specifies the Class provided by the resource adapter that implements the
 	 * resource adapter specific ConnectionFactory interface. Example:
 	 * com.wombat.ConnectionFactoryImpl
+         * @return the implementation class of the ConnectionFactory interface
 	 */
 	Class connectionFactoryImpl();
 
 	/**
 	 * Specifies the Connection interface supported by the resource adapter.
 	 * Example: jakarta.resource.cci.Connection or com.wombat.Connection
+         * @return the Connection interface
 	 */
 	Class connection();
 
@@ -63,6 +66,7 @@ public @interface ConnectionDefinition {
 	 * Specifies the class provided by the resource adapter that implements the
 	 * resource adapter specific Connection interface. Example:
 	 * com.wombat.ConnectionImpl
+         * @return the implementation class of the Connection interface
 	 */
 	Class connectionImpl();
 

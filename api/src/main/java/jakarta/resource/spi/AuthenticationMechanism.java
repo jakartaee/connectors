@@ -65,11 +65,12 @@ public @interface AuthenticationMechanism {
     }
 
     /**
-     * The authentication-mechanismType specifies an authentication
+     * The authentication-mechanism Type specifies an authentication
      * mechanism supported by the resource adapter. Note that this
      * support is for the resource adapter and not for the
      * underlying EIS instance.
-     *
+     * @return authentication
+     * mechanism supported by the resource adapter
      */
     String authMechanism() default  "BasicPassword";
 
@@ -77,6 +78,7 @@ public @interface AuthenticationMechanism {
      * The optional description specifies
      * any resource adapter specific requirement for the support of
      * security contract and authentication mechanism.
+     * @return description
      */
     String[] description() default {};
 
@@ -89,6 +91,8 @@ public @interface AuthenticationMechanism {
      * The Kerbv5 mechanism type should support the
      * <code>org.ietf.jgss.GSSCredential</code> interface or the deprecated
      * <code>jakarta.resource.spi.security.GenericCredential</code> interface.
+     * @return interface that the resource adapter implementation
+     * supports for the representation of the credentials
      */
     CredentialInterface credentialInterface() 
     					default CredentialInterface.PasswordCredential;

@@ -40,12 +40,14 @@ import java.lang.annotation.Target;
 public @interface AdministeredObjectDefinition {
 
     /**
-     *  JNDI name of the administered object being defined.
+     * JNDI name of the administered object being defined.
+     * @return name
      */
     String name();
     
     /**
-     *  Description of the administered object.
+     * Description of the administered object.
+     * @return description
      */
     String description() default "";
 
@@ -53,16 +55,19 @@ public @interface AdministeredObjectDefinition {
      *  The name of the resource adapter that the administered object must be 
      *  created from. The resource adapter is required to be available at 
      *  deployment time.
+     * @return resource adapter
      */
     String resourceAdapter();
 
     /**
      *  Fully qualified name of the administered object’s class
+     * @return className
      */
     String className();
 
     /**
      *  Fully qualified name of the administered object’s interface 
+     * @return fully qualified name
      */
     String interfaceName() default "";
 
@@ -75,6 +80,7 @@ public @interface AdministeredObjectDefinition {
      *  Administered Object properties that are specified and are not supported 
      *  in a given resource adapter or cannot be mapped to a vendor specific 
      *  configuration property may be ignored.  
+     * @return properties of the administered object.
      */
     String[] properties() default {};
 }

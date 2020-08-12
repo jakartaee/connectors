@@ -35,7 +35,7 @@ public interface ManagedConnectionMetaData {
 
   /** Returns Product name of the underlying EIS instance connected 
    *  through the ManagedConnection.
-   *
+   *  @throws ResourceException if an error occurs
    *  @return  Product name of the EIS instance.
   **/
   public
@@ -43,7 +43,7 @@ public interface ManagedConnectionMetaData {
 
   /** Returns product version of the underlying EIS instance connected 
    *  through the ManagedConnection.
-   *
+   *  @throws ResourceException if an error occurs
    *  @return  Product version of the EIS instance
   **/
   public
@@ -53,7 +53,7 @@ public interface ManagedConnectionMetaData {
    *  that an EIS instance can support across client processes. If an EIS 
    *  instance does not know about (or does not have) any such limit, it 
    *  returns a 0.
-   *
+   *  @throws ResourceException if an error occurs
    *  @return  Maximum limit for number of active concurrent connections
   **/
   public
@@ -63,7 +63,7 @@ public interface ManagedConnectionMetaData {
    *  instance. The name corresponds to the resource principal under whose
    *  whose security context, a connection to the EIS instance has been
    *  established.
-   *
+   *  @throws ResourceException if an error occurs
    *  @return  name of the user
   **/
   public

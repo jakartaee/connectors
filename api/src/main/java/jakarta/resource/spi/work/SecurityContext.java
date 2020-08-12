@@ -46,10 +46,10 @@ import javax.security.auth.callback.CallbackHandler;
  * belong to the application server's security domain.
  * <p>
  * 
- * 
+ * <p>
  * There are therefore, two scenarios while a resource adapter propagates a
  * security identity from an EIS to the application server:
- * <p>
+ * </p>
  * 
  * <ul>
  * <li>Case 1: Resource adapter flows-in an identity in the application server's
@@ -81,6 +81,7 @@ public abstract class SecurityContext implements WorkContext {
 	/**
 	 * {@inheritDoc}
 	 */
+        @Override
 	public String getDescription() {
 		return "Security Context";
 	}
@@ -88,6 +89,7 @@ public abstract class SecurityContext implements WorkContext {
 	/**
 	 * {@inheritDoc}
 	 */
+        @Override
 	public String getName() {
 		return "SecurityContext";
 	}
@@ -101,22 +103,22 @@ public abstract class SecurityContext implements WorkContext {
 	 * <code>CallbackHandler</code> passed to this method must support the
 	 * following <code>Callback</code>s defined in the Jakarta Authentication
 	 * specification:
-	 * <p>
+	 * 
 	 * <ul>
 	 * <li>CallerPrincipalCallback</li>
 	 * <li>GroupPrincipalCallback</li>
 	 * <li>PasswordValidationCallback</li>
 	 * </ul>
-     * <p>
+         * <p>
 	 * The following <code>Callback</code>s may be supported by the container.
-     * <p>
+         * </p>
 	 * <ul>
 	 * <li>CertStoreCallback</li>
 	 * <li>PrivateKeyCallback</li>
 	 * <li>SecretKeyCallback</li>
 	 * <li>TrustStoreCallback</li>
 	 * </ul>
-	 * <p>
+	 * 
 	 * 
 	 * A resource adapter might use the <code>CallerPrincipalCallback</code> "to
 	 * set the container's representation of the caller principal. The
@@ -177,7 +179,7 @@ public abstract class SecurityContext implements WorkContext {
 	 * </ul>
 	 * <p>
 	 * 
-	 * @see Jakarta Authentication specification and
+	 * See Jakarta Authentication specification and
 	 *      related JavaDoc
 	 * 
 	 * @param handler

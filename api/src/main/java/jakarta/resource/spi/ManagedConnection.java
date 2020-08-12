@@ -46,14 +46,15 @@ import jakarta.resource.ResourceException;
 
 public interface ManagedConnection {
   
-  /** Creates a new connection handle for the underlying physical connection 
+  /** 
+   *  <p>Creates a new connection handle for the underlying physical connection 
    *  represented by the ManagedConnection instance. This connection handle
    *  is used by the application code to refer to the underlying physical 
    *  connection. This connection handle is associated with its 
    *  ManagedConnection instance in a resource adapter implementation 
-   *  specific way.</P>
+   *  specific way.</p>
    *
-   *  <P>The ManagedConnection uses the Subject and additional ConnectionRequest
+   *  <p>The ManagedConnection uses the Subject and additional ConnectionRequest
    *  Info (which is specific to resource adapter and opaque to application
    *  server) to set the state of the physical connection.</p>
    *
@@ -82,7 +83,7 @@ public interface ManagedConnection {
   /** Destroys the physical connection to the underlying resource manager.
    *
    *  <p>To manage the size of the connection pool, an application server can 
-   *  explictly call ManagedConnection.destroy to destroy a  
+   *  explicitly call ManagedConnection.destroy to destroy a  
    *  physical connection. A resource adapter should destroy all allocated 
    *  system resources for this ManagedConnection instance when the method 
    *  destroy is called.
@@ -122,7 +123,7 @@ public interface ManagedConnection {
    *  @throws    ResourceAdapterInternalException
    *                                   resource adapter internal error condition
    *  @throws    IllegalStateException Illegal state for calling connection
-   *                                   cleanup. Example - if a localtransaction 
+   *                                   cleanup. Example - if a local transaction 
    *                                   is in progress that doesn't allow 
    *                                   connection cleanup
    *
@@ -195,7 +196,6 @@ public interface ManagedConnection {
    *  @return     XAResource instance
    *
    *  @throws     ResourceException     generic exception if operation fails
-   *  @throws     NotSupportedException if the operation is not supported
    *  @throws     ResourceAdapterInternalException
    *                                    resource adapter internal error condition
   **/
@@ -209,7 +209,6 @@ public interface ManagedConnection {
    *  @return     LocalTransaction instance
    *
    *  @throws     ResourceException     generic exception if operation fails
-   *  @throws     NotSupportedException if the operation is not supported
    *  @throws     ResourceAdapterInternalException
    *                                    resource adapter internal error condition
   **/
@@ -224,7 +223,6 @@ public interface ManagedConnection {
    *  @return     ManagedConnectionMetaData instance
    *
    *  @throws     ResourceException     generic exception if operation fails
-   *  @throws     NotSupportedException if the operation is not supported
   **/
   public 
   ManagedConnectionMetaData getMetaData() throws ResourceException;

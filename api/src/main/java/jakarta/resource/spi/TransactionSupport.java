@@ -64,7 +64,7 @@ public interface TransactionSupport extends java.io.Serializable {
      * return a level of transaction support whose ordinal value in
      * <code>TransactionSupportLevel</code> enum is equal to or lesser than
      * the resource adapter's transaction support classification.
-     *
+     * @return transaction support level
      * @since 1.6
      */
     public TransactionSupportLevel getTransactionSupport();

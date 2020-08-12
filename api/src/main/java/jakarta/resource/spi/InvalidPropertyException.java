@@ -82,6 +82,7 @@ public class InvalidPropertyException
 
     /**
      * Set a list of invalid properties.
+     * @param invalidProperties set property descriptors
      */
     public void setInvalidPropertyDescriptors(
             PropertyDescriptor[] invalidProperties) {
@@ -90,6 +91,7 @@ public class InvalidPropertyException
 
     /**
      * Get the list of invalid properties.
+     * @return property descriptors
      */
     public PropertyDescriptor[] getInvalidPropertyDescriptors() {
         return this.invalidProperties;

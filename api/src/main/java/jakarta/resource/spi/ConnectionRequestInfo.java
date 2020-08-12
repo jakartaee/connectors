@@ -48,7 +48,7 @@ public interface ConnectionRequestInfo {
    * this method. The conditions for equality are specific
    * to the resource adapter.
    *
-   * @param other
+   * @param other to check
    * @return True if the two instances are equal.
   **/
   public boolean equals(Object other);
