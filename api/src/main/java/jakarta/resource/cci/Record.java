@@ -48,7 +48,7 @@ package jakarta.resource.cci;
  *  @see     jakarta.resource.cci.Interaction
  *  @see     java.sql.ResultSet
 **/    
-public interface Record extends java.lang.Cloneable, java.io.Serializable {
+public interface Record extends Cloneable, java.io.Serializable {
  
   /** Gets the name of the Record.
    *  

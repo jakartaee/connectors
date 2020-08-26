@@ -16,11 +16,6 @@
 
 package jakarta.resource.spi.work;
 
-import java.lang.Object;
-import java.lang.Runnable;
-import java.lang.Exception;
-import java.lang.Throwable;
-
 /**
  * This interface models a <code>WorkManager</code> which provides a facility
  * to submit <code>Work</code> instances for execution. This frees the user

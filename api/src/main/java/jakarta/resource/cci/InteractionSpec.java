@@ -69,7 +69,7 @@ import java.io.Serializable;
  *  @see     jakarta.resource.cci.Interaction
 **/
 
-public interface InteractionSpec extends java.io.Serializable {
+public interface InteractionSpec extends Serializable {
   
   /**Interaction Verb type: The execution of an Interaction does only a 
    * send to the target EIS instance. The input record is sent to the

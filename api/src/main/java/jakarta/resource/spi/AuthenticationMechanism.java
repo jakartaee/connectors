@@ -17,7 +17,6 @@
 package jakarta.resource.spi;
 
 import java.lang.annotation.Target;
-import static java.lang.annotation.ElementType.*;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Documented;
 import static java.lang.annotation.RetentionPolicy.*;
@@ -63,7 +62,7 @@ public @interface AuthenticationMechanism {
          * <code>javax.resource.spi.security.GenericCredential</code>
          */
         GenericCredential 
-    };
+    }
 
     /**
      * The authentication-mechanismType specifies an authentication

@@ -16,7 +16,6 @@
 
 package jakarta.resource.spi.endpoint;
 
-import java.lang.NoSuchMethodException;
 import javax.transaction.xa.XAResource;
 import jakarta.resource.spi.UnavailableException;
 
