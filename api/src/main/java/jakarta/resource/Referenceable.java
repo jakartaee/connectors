@@ -26,7 +26,7 @@ import javax.naming.Reference;
  *
  *  <p>The implementation class for a connection factory interface is 
  *  required to implement both java.io.Serializable and 
- *  javax.resource.Referenceable interfaces to support JNDI registration.
+ *  jakarta.resource.Referenceable interfaces to support JNDI registration.
  *
  *  @version     0.9
  *  @author      Rahul Sharma

@@ -41,7 +41,7 @@ public @interface ConnectionDefinition {
 
 	/**
 	 * Specifies the ConnectionFactory interface supported by the resource
-	 * adapter. Example: javax.resource.cci.ConnectionFactory or
+	 * adapter. Example: jakarta.resource.cci.ConnectionFactory or
 	 * com.wombat.ConnectionFactory
 	 */
 	Class connectionFactory();
@@ -55,7 +55,7 @@ public @interface ConnectionDefinition {
 
 	/**
 	 * Specifies the Connection interface supported by the resource adapter.
-	 * Example: javax.resource.cci.Connection or com.wombat.Connection
+	 * Example: jakarta.resource.cci.Connection or com.wombat.Connection
 	 */
 	Class connection();
 

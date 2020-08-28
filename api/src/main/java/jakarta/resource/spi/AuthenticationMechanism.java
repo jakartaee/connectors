@@ -47,7 +47,7 @@ public @interface AuthenticationMechanism {
     public enum CredentialInterface {
         /**
          * Corresponds to 
-         * <code>javax.resource.spi.security.PasswordCredential</code>.
+         * <code>jakarta.resource.spi.security.PasswordCredential</code>.
          * This is the default credential interface
          */
         PasswordCredential, 
@@ -59,7 +59,7 @@ public @interface AuthenticationMechanism {
         
         /**
          * Corresponds to 
-         * <code>javax.resource.spi.security.GenericCredential</code>
+         * <code>jakarta.resource.spi.security.GenericCredential</code>
          */
         GenericCredential 
     }
@@ -85,10 +85,10 @@ public @interface AuthenticationMechanism {
      * supports for the representation of the credentials.
      *
      * Note that BasicPassword mechanism type should support the
-     * <code>javax.resource.spi.security.PasswordCredential</code> interface.
+     * <code>jakarta.resource.spi.security.PasswordCredential</code> interface.
      * The Kerbv5 mechanism type should support the
      * <code>org.ietf.jgss.GSSCredential</code> interface or the deprecated
-     * <code>javax.resource.spi.security.GenericCredential</code> interface.
+     * <code>jakarta.resource.spi.security.GenericCredential</code> interface.
      */
     CredentialInterface credentialInterface() 
     					default CredentialInterface.PasswordCredential;

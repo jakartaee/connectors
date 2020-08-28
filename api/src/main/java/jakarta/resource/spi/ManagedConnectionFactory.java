@@ -45,7 +45,7 @@ public interface ManagedConnectionFactory extends java.io.Serializable {
      *  @param    cxManager    ConnectionManager to be associated with
      *                         created EIS connection factory instance
      *  @return   EIS-specific Connection Factory instance or
-     *            javax.resource.cci.ConnectionFactory instance
+     *            jakarta.resource.cci.ConnectionFactory instance
      *   
      *  @throws   ResourceException     Generic exception
      *  @throws   ResourceAdapterInternalException
@@ -60,7 +60,7 @@ public interface ManagedConnectionFactory extends java.io.Serializable {
      *  by the resource adapter.
      *
      *  @return   EIS-specific Connection Factory instance or
-     *            javax.resource.cci.ConnectionFactory instance
+     *            jakarta.resource.cci.ConnectionFactory instance
      *
      *  @throws   ResourceException     Generic exception
      *  @throws   ResourceAdapterInternalException
