@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
  *  by a component using the <code>lookup</code> element of the
  *  <code>Resource</code> annotation.
  *
- *  @see javax.annotation.Resource
+ *  @see jakarta.annotation.Resource
  *  @version 1.7
  *  @since 1.7
  */

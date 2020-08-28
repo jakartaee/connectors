@@ -20,7 +20,7 @@ import jakarta.resource.ResourceException;
 import jakarta.resource.NotSupportedException;
 
 
-/** The <code>javax.resource.cci.Interaction</code> enables a component to 
+/** The <code>jakarta.resource.cci.Interaction</code> enables a component to 
  *  execute EIS functions. An Interaction instance supports the following ways 
  *  of interacting with an EIS instance:
  *  <UL>

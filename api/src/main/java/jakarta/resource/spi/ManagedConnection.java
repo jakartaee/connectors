@@ -25,7 +25,7 @@ import jakarta.resource.ResourceException;
  *
  *  <p>A ManagedConnection instance provides access to a pair of 
  *  interfaces: <code>javax.transaction.xa.XAResource</code> and 
- *  <code>javax.resource.spi.LocalTransaction</code>.
+ *  <code>jakarta.resource.spi.LocalTransaction</code>.
  *
  *  <p><code> XAResource</code> interface is used by the transaction 
  *  manager to associate and dissociate a transaction with the underlying 
@@ -62,7 +62,7 @@ public interface ManagedConnection {
    *  @return       generic Object instance representing the connection 
    *                handle. For CCI, the connection handle created by a 
    *                ManagedConnection instance is of the type 
-   *                javax.resource.cci.Connection.
+   *                jakarta.resource.cci.Connection.
    *
    *  @throws  ResourceException     generic exception if operation fails
    *  @throws  ResourceAdapterInternalException
@@ -202,7 +202,7 @@ public interface ManagedConnection {
   public 
   XAResource getXAResource() throws ResourceException;
 
-  /** Returns an <code>javax.resource.spi.LocalTransaction</code> instance. 
+  /** Returns an <code>jakarta.resource.spi.LocalTransaction</code> instance. 
    *  The LocalTransaction interface is used by the container to manage
    *  local transactions for a RM instance.
    *

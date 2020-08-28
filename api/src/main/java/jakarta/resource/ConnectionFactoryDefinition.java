@@ -31,7 +31,7 @@ import java.lang.annotation.Repeatable;
  *  Once defined, a resource may be referenced by a component using the
  *  <code>lookup</code> element of the <code>Resource</code> annotation.
  *
- *  @see javax.annotation.Resource
+ *  @see jakarta.annotation.Resource
  *  @version 1.7
  *  @since 1.7
  */

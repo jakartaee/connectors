@@ -68,7 +68,7 @@ public interface ConnectionFactory
   Connection getConnection() throws ResourceException;
 
   /** Gets a connection to an EIS instance. A component should use 
-   *  the getConnection variant with javax.resource.cci.ConnectionSpec
+   *  the getConnection variant with jakarta.resource.cci.ConnectionSpec
    *  parameter, if it needs to pass any resource adapter specific 
    *  security information and connection parameters. In the component-
    *  managed sign-on case, an application component passes security 

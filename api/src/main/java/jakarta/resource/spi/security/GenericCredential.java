@@ -18,7 +18,7 @@ package jakarta.resource.spi.security;
 
 import jakarta.resource.spi.SecurityException;
 
-/** The interface <code>javax.resource.spi.security.GenericCredential</code> 
+/** The interface <code>jakarta.resource.spi.security.GenericCredential</code> 
  *  defines a security mechanism independent interface for accessing 
  *  security credential of a resource principal. 
  *

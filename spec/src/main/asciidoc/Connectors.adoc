@@ -3822,7 +3822,7 @@ public interface jakarta.resource.spi.ManagedConnection {
 ----
 
 A _Managed_ Connection instance provides
-access to a pair of interfaces: _jakarta.transaction.xa.XAResource_ and
+access to a pair of interfaces: _javax.transaction.xa.XAResource_ and
 _jakarta.resource.spi.LocalTransaction_ .
 
 Depending on the transaction support level of
@@ -3850,7 +3850,7 @@ _LocalTransaction_ interface to manage local transactions.
 
 ==== Interface: XAResource
 
-The _jakarta.transaction.xa.XAResource_
+The _javax.transaction.xa.XAResource_
 interface is a Java mapping of the industry standard _XA_ interface
 based on _X/Open CAE specification_ (see
 <<a9729, X/Open CAE Specification -- Distributed
@@ -3867,7 +3867,7 @@ specifications:
 [source,Java]
 ----
 public interface
-jakarta.transaction.xa.XAResource {
+javax.transaction.xa.XAResource {
 
  public void commit(Xid xid, boolean onePhase) throws XAException;
 
@@ -11654,8 +11654,8 @@ image:conn-127.jpg[image]
 ----
  package jakarta.resource.spi.work;
 
- import jakarta.security.auth.Subject;
- import jakarta.security.auth.callback.CallbackHandler;
+ import javax.security.auth.Subject;
+ import javax.security.auth.callback.CallbackHandler;
 
  public abstract class SecurityContext implements WorkContext {
 
@@ -12500,7 +12500,7 @@ _ConnectionFactory_ must implement the _java.io.Serializable_ interface
 to support JNDI registration. A _ConnectionFactory_ implementation class
 is also required to implement _jakarta.resource.Referenceable_ . Note that
 the _jakarta.resource.Referenceable_ interface extends the
-_jakarta.naming.Referenceable_ interface. Refer to
+_javax.naming.Referenceable_ interface. Refer to
 <<a5258, JNDI Configuration and Lookup>> for more
 details on JNDI based requirements for the _ConnectionFactory_
 implementation.

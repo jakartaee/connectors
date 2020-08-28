@@ -16,7 +16,7 @@
 
 package jakarta.resource.cci;
 
-/** The interface <code>javax.resource.cci.MappedRecord</code> is 
+/** The interface <code>jakarta.resource.cci.MappedRecord</code> is 
  *  used for key-value map based representation of record elements. 
  *  The MappedRecord interface extends both <code>Record</code> and 
  *  <code>java.util.Map</code>interfaces. 

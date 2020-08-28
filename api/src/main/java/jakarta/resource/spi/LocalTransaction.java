@@ -22,7 +22,7 @@ import jakarta.resource.ResourceException;
  *  are managed internal to an EIS resource manager, and do not require
  *  an external transaction manager.
  * 
- *  <p>A resource adapter implements the javax.resource.spi.LocalTransaction 
+ *  <p>A resource adapter implements the jakarta.resource.spi.LocalTransaction 
  *  interface to provide support for local transactions that are performed
  *  on the underlying resource manager.
  *

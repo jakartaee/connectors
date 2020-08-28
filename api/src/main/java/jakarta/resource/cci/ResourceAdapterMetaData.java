@@ -16,7 +16,7 @@
 
 package jakarta.resource.cci;
 
-/** The interface <code>javax.resource.cci.ResourceAdapterMetaData</code> 
+/** The interface <code>jakarta.resource.cci.ResourceAdapterMetaData</code> 
  *  provides information about capabilities of a resource adapter 
  *  implementation. Note that this interface does not provide information 
  *  about an EIS instance that is connected through the resource adapter.
