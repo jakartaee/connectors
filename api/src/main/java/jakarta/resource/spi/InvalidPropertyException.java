@@ -82,7 +82,7 @@ public class InvalidPropertyException
 
     /**
      * Set a list of invalid properties.
-     * @param invalidProperties set property descriptors
+     * @param invalidProperties set of invalid property descriptors
      */
     public void setInvalidPropertyDescriptors(
             PropertyDescriptor[] invalidProperties) {

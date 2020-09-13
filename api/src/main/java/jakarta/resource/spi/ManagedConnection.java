@@ -19,6 +19,7 @@ package jakarta.resource.spi;
 import javax.security.auth.Subject;
 import javax.transaction.xa.XAResource;
 import jakarta.resource.ResourceException;
+import jakarta.resource.NotSupportedException;
 
 /** ManagedConnection instance represents a physical connection
  *  to the underlying EIS.
@@ -196,8 +197,8 @@ public interface ManagedConnection {
    *  @return     XAResource instance
    *
    *  @throws     ResourceException     generic exception if operation fails
-   *  @throws     ResourceAdapterInternalException
-   *                                    resource adapter internal error condition
+   *  @throws     ResourceAdapterInternalException resource adapter internal error condition
+   *  @throws     NotSupportedException if this is not supported by the connector
   **/
   public 
   XAResource getXAResource() throws ResourceException;
@@ -211,6 +212,7 @@ public interface ManagedConnection {
    *  @throws     ResourceException     generic exception if operation fails
    *  @throws     ResourceAdapterInternalException
    *                                    resource adapter internal error condition
+   *  @throws     NotSupportedException if this is not supported by the Connector
   **/
   public 
   LocalTransaction getLocalTransaction() throws ResourceException;
@@ -223,6 +225,7 @@ public interface ManagedConnection {
    *  @return     ManagedConnectionMetaData instance
    *
    *  @throws     ResourceException     generic exception if operation fails
+   *  @throws     NotSupportedException if this is not supported by the Connector
   **/
   public 
   ManagedConnectionMetaData getMetaData() throws ResourceException;

@@ -29,25 +29,14 @@ import java.util.HashMap;
  */
 public class HintsContext implements WorkContext {
 
-<<<<<<< HEAD
-	/**
-	 * Determines if a deserialized instance of this class
-	 * is compatible with this class.
-	 */
-	private static final long serialVersionUID = 7956353628297167255L;
-	
-	public static final String NAME_HINT = "jakarta.resource.Name";
-	public static final String LONGRUNNING_HINT = "jakarta.resource.LongRunning";
-=======
     /**
      * Determines if a deserialized instance of this class is compatible with
      * this class.
      */
     private static final long serialVersionUID = 7956353628297167255L;
 
-    public static final String NAME_HINT = "javax.resource.Name";
-    public static final String LONGRUNNING_HINT = "javax.resource.LongRunning";
->>>>>>> Update to latest javadoc plugin and tidy javadoc
+    public static final String NAME_HINT = "jakarta.resource.Name";
+    public static final String LONGRUNNING_HINT = "jakarta.resource.LongRunning";
 
     protected String description = "Hints Context";
     protected String name = "HintsContext";
@@ -94,8 +83,9 @@ public class HintsContext implements WorkContext {
     Map<String, Serializable> hints = new HashMap<>();
 
     /**
-     * Set a Hint and a related value. The hintName must be non-Null. Standard
-     * HintNames are defined in the Jakarta Connectors specification. Use of
+     * Set a Hint and a related value. 
+     * The hintName must be non-Null. 
+     * Standard HintNames are defined in the Jakarta Connectors specification. Use of
      * "jakarta.resource." prefixed hintNames are reserved for use by the
      * Jakarta Connectors specification.
      *

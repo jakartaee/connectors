@@ -95,7 +95,7 @@ public @interface Connector {
 
     /**
      * Specifies licensing requirements for the resource adapter module and an
-     * optional description of the licensing terms .
+     * optional description of the licensing terms.
      * @return licensing requirements
      */
     String[] licenseDescription() default {};
@@ -112,7 +112,7 @@ public @interface Connector {
      * adapter.
      *
      * @see AuthenticationMechanism
-     * @return Support Authentication Mechanisms
+     * @return Supported Authentication Mechanisms
      */
     AuthenticationMechanism[] authMechanisms() default {};
 

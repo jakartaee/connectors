@@ -65,7 +65,7 @@ public @interface AuthenticationMechanism {
     }
 
     /**
-     * The authentication-mechanism Type specifies an authentication
+     * The authentication-mechanism-type specifies an authentication
      * mechanism supported by the resource adapter. Note that this
      * support is for the resource adapter and not for the
      * underlying EIS instance.
