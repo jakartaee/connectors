@@ -21,6 +21,7 @@ import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
+import jakarta.annotation.Resource;
 
 /**
  *  Annotation used to define a Connector administered object to be

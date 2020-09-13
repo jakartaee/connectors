@@ -24,27 +24,25 @@ import javax.security.auth.callback.CallbackHandler;
  * instance to propagate security related context information from an EIS to an
  * application server.
  * <p>
- * 
- * 
  * This allows an EIS/resource adapter to flow-in security context information
  * and execute a Work instance, and call methods on a MessageEndpoint interface,
  * to effect message inflow, within that Work instance, in the context of an
  * established identity.
+ * </p>
+ * 
  * <p>
- * 
- * 
  * A resource adapter indicates to the WorkManager, that a Work instance needs
  * to be run in a specified security execution context by submitting a Work
  * instance that implements WorkContextProvider interface and ensuring that the
  * List of WorkContexts for that Work instance contains an instance of its
- * subclass of Securitytext.
+ * subclass of SecurityContext.
+ * </p>
+ * 
  * <p>
- * 
- * 
  * It should be noted however that when a resource adapter flows-in an identity
  * to be used by the application server, the propagated identity may or may not
  * belong to the application server's security domain.
- * <p>
+ * </p>
  * 
  * <p>
  * There are therefore, two scenarios while a resource adapter propagates a
