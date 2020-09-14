@@ -126,7 +126,7 @@ public class ConnectionEvent extends java.util.EventObject {
 
   /**
    * Set the connection handle. Used for CONNECTION_CLOSED event
-   * @param connectionHandle
+   * @param connectionHandle to set
    */
   public void setConnectionHandle(Object connectionHandle) {
     this.connectionHandle = connectionHandle;

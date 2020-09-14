@@ -35,22 +35,27 @@ public @interface ConfigProperty {
 
 	/**
 	 * Inferred by the container if unspecified.
+         * @return property type
 	 */
 	Class type() default Object.class;
 
     /**
      * Describes the configuration property.
+     * @return property description
      */
 	String[] description() default {};
 
 	/**
 	 * Inferred by the container for field based annotations if possible.
+         * @return default value
 	 */
 	String defaultValue() default "";
 
 	/**
 	 * Indicates that the configuration tools must ignore considering this
 	 * Property during auto-discovery of Configuration properties.
+         * @return true if configuration tools must ignore considering this
+	 * Property during auto-discovery of Configuration properties
 	 */
 	boolean ignore() default false;
 	
@@ -58,6 +63,8 @@ public @interface ConfigProperty {
 	 * Indicates that the configuration property supports
 	 * dynamic updates to its value during the lifetime of
 	 * the JavaBean
+         * @return true if the configuration property supports
+	 * dynamic updates
 	 */
 	boolean supportsDynamicUpdates() default false;
 	
@@ -65,6 +72,7 @@ public @interface ConfigProperty {
 	 * Indicates that the configuration property is confidential and
 	 * recommends application server's configuration tools to 
 	 * use special visual aids for editing them. 
+         * @return true if the configuration property is confidential
 	 */
 	boolean confidential() default false;
 }

@@ -19,6 +19,7 @@ package jakarta.resource.spi.endpoint;
 import jakarta.resource.ResourceException;
 import jakarta.resource.spi.IllegalStateException;
 import jakarta.resource.spi.UnavailableException;
+import jakarta.resource.spi.ApplicationServerInternalException;
 
 /**
  * This defines a contract for a message endpoint. This is implemented by an

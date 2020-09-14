@@ -37,6 +37,8 @@ public @interface AdministeredObject {
 	/**
 	 * Specifies the Java type of the interface implemented by the administered
 	 * object.
+         * @return the Java type of the interface implemented by the administered
+	 * object.
 	 */
 	Class[] adminObjectInterfaces() default {};
 }

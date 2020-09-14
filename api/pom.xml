@@ -212,9 +212,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.8</version>
+                <version>3.2.0</version>
                 <configuration>
                     <additionalparam>-Xdoclint:none</additionalparam>
+                    <header><![CDATA[<br>Jakarta Connectors API v${project.version}]]></header>
                     <bottom>
 <![CDATA[Copyright (c) 2020 Eclipse Foundation.
     Use is subject to
@@ -304,6 +305,11 @@
             <groupId>jakarta.transaction</groupId>
             <artifactId>jakarta.transaction-api</artifactId>
             <version>2.0.0-RC1</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>2.0.0</version>
         </dependency>
     </dependencies>
 </project>

@@ -41,6 +41,7 @@ public @interface SecurityPermission {
 	/**
 	 * Specifies an optional description to mention any specific reason that a
 	 * resource requires a given security permission.
+         * @return description
 	 */
 	String[] description() default {};
 
@@ -48,6 +49,7 @@ public @interface SecurityPermission {
 	 * Specifies a security permission based on the Security policy file syntax.
 	 * These security permissions are different from those required by the
 	 * default permission set as specified in the connector specification.
+         * @return permissionSpec
 	 */
 	String permissionSpec() default "";
 }
