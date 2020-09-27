@@ -831,7 +831,7 @@ the same as that of a container provider.
 
 The Jakarta EE platform specification (see
 <<a9737, Jakarta Platform, Enterprise Edition (Jakarta
-EE) Specification, version 8>>) specifies requirements for a Jakarta EE
+EE) Specification, version 9>>) specifies requirements for a Jakarta EE
 platform provider.
 
 ==== Container Provider
