@@ -447,7 +447,7 @@ from an m x n problem to an m + n problem.
 
 *Figure* System Level Pluggability Between Application Servers and EISs
 
-image:conn-15.jpg[image]
+image:conn-15.svg[image]
 
 ==== Common Client Interface
 
