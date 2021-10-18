@@ -552,7 +552,7 @@ connectivity with multiple EISs.
 
 [[a265]] *Figure* Overview of the Jakarta Connectors architecture
 
-image:conn-18.jpg[image]
+image:conn-18.svg[image]
 
 
 === System Contracts
@@ -1012,7 +1012,7 @@ pieces that comprise this scenario:
 
 ==== Illustration of a Scenario Based on the Connector Architecture
 
-image:conn-23.jpg[image]
+image:conn-23.svg[image]
 
 ERP Software Inc. is an enterprise system
 vendor that provides an enterprise resource planning (ERP) system. ERP
