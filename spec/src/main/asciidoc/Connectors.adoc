@@ -1115,7 +1115,7 @@ its business applications (deployed on the application server).
 
 ==== Connector Architecture Usage in Business Integration Scenario
 
-image:conn-24.jpg[image]
+image:conn-24.svg[image]
 
 
 
