@@ -447,7 +447,7 @@ from an m x n problem to an m + n problem.
 
 *Figure* System Level Pluggability Between Application Servers and EISs
 
-image:conn-15.jpg[image]
+image:conn-15.svg[image]
 
 ==== Common Client Interface
 
@@ -552,7 +552,7 @@ connectivity with multiple EISs.
 
 [[a265]] *Figure* Overview of the Jakarta Connectors architecture
 
-image:conn-18.jpg[image]
+image:conn-18.svg[image]
 
 
 === System Contracts
@@ -1012,7 +1012,7 @@ pieces that comprise this scenario:
 
 ==== Illustration of a Scenario Based on the Connector Architecture
 
-image:conn-23.jpg[image]
+image:conn-23.svg[image]
 
 ERP Software Inc. is an enterprise system
 vendor that provides an enterprise resource planning (ERP) system. ERP
@@ -1115,7 +1115,7 @@ its business applications (deployed on the application server).
 
 ==== Connector Architecture Usage in Business Integration Scenario
 
-image:conn-24.jpg[image]
+image:conn-24.svg[image]
 
 
 
