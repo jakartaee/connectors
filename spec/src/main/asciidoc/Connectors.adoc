@@ -1158,7 +1158,7 @@ to manage the lifecycle of a resource adapter instance.
 
 Lifecycle Management Contract (Interfaces)
 
-image:conn-28.jpg[image]
+image:conn-28.svg[image]
 
 Lifecycle Management (Object Diagram)
 
