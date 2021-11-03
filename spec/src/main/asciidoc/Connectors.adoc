@@ -1162,7 +1162,7 @@ image:conn-28.svg[image]
 
 Lifecycle Management (Object Diagram)
 
-image:conn-29.jpg[image]
+image:conn-29.svg[image]
 
 
 
@@ -1292,7 +1292,7 @@ ManagedConnectionFactory and ActivationSpec JavaBeans.
 
 *Resource Adapter Instance (Composition)*
 
-image:conn-30.jpg[image]
+image:conn-30.svg[image]
 
 [[a428]]
 ==== _ManagedConnectionFactory_ JavaBean and Outbound Communication
@@ -1515,7 +1515,7 @@ adapter instance.
 
 *Resource Adapter Lifecycle (State Diagram)*
 
-image:conn-31.jpg[image]
+image:conn-31.svg[image]
 
 ==== Resource Adapter Implementation Guidelines
 
@@ -2463,7 +2463,7 @@ the requirements of this specification.
 
 *ConnectionManager and Application Server Specific Services*
 
-image:conn-39.jpg[image]
+image:conn-39.svg[image]
 
 [[a754]]
 ==== ManagedConnectionFactory
@@ -3434,7 +3434,7 @@ connection event mechanism to drive its internal interactions.
 
 *Architecture Diagram: Non-Managed Application Scenario*
 
-image:conn-44.jpg[image]
+image:conn-44.svg[image]
 
 ==== Scenario: Programmatic Access to ConnectionFactory
 
@@ -3652,7 +3652,7 @@ managers.
 
 *Transaction Management Contract*
 
-image:conn-49.jpg[image]
+image:conn-49.svg[image]
 
 A resource manager can support two types of
 transactions:
