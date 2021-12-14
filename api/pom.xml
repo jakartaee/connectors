@@ -115,8 +115,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <release>8</release>
-                    <compilerArgument>-Xlint:unchecked</compilerArgument>
+                    <release>11</release>
+                    <compilerArgs>
+                        <arg>-Xlint:unchecked</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -237,6 +239,7 @@
                             <addDefaultEntries>false</addDefaultEntries>
                         </manifest>
                     </archive>
+                    <source>11</source>
                     <doclint>none</doclint>
                     <notimestamp>true</notimestamp>
                     <docfilessubdirs>true</docfilessubdirs>
