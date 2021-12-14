@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -51,7 +51,7 @@ public interface RecordFactory {
    *                            
   **/
   public
-  MappedRecord createMappedRecord(String recordName) 
+  <K, V> MappedRecord<K, V> createMappedRecord(String recordName)
                   throws ResourceException;
 
   /** Creates a IndexedRecord. The method takes the name of the record
@@ -72,7 +72,7 @@ public interface RecordFactory {
    *  @throws NotSupportedException Operation not supported          
  **/
   public
-  IndexedRecord createIndexedRecord(String recordName) 
+  <E> IndexedRecord<E> createIndexedRecord(String recordName)
                   throws ResourceException;
 
 }

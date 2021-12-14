@@ -24,7 +24,7 @@ package jakarta.resource.cci;
  *  @author  Rahul Sharma
  *  @version   0.8
 **/
-public interface MappedRecord extends Record, java.util.Map,
+public interface MappedRecord<K, V> extends Record, java.util.Map<K, V>,
                                        java.io.Serializable {
 
 }

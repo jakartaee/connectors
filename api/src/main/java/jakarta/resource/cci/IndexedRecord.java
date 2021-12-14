@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -24,7 +24,7 @@ package jakarta.resource.cci;
  *  @author  Rahul Sharma
  *  @since   0.8
 **/
-public interface IndexedRecord extends Record, java.util.List, 
+public interface IndexedRecord<E> extends Record, java.util.List<E>,
                                        java.io.Serializable {
 
 }
