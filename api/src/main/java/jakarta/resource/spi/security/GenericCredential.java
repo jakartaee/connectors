@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -53,7 +53,7 @@ import jakarta.resource.spi.SecurityException;
  *  is via the <code>org.ietf.jgss.GSSCredential</code> interface in 
  *  J2SE Version 1.4, which provides similar functionality.
  */
-@Deprecated
+
 public interface GenericCredential {
 
   /** Returns the name of the resource principal associated 
