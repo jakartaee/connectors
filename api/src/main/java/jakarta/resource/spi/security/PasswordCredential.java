@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -104,7 +104,7 @@ public final class PasswordCredential implements java.io.Serializable {
    *  they are equal in username and password.
    *
    *  @param other  Object to which PasswordCredential is to be compared
-   *  @return <tt>true</tt> if and if the specified object is a
+   *  @return {@code true} if and if the specified object is a
    *            PasswordCredential whose username and password are
    *            equal to this instance.
   **/

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -14,17 +14,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
+/**
+ * The jakarta.resource.cci package contains API specification for the Common
+ * Client Interface (CCI).
+ */
 package jakarta.resource.cci;
-
-/** The interface <code>jakarta.resource.cci.MappedRecord</code> is 
- *  used for key-value map based representation of record elements. 
- *  The MappedRecord interface extends both <code>Record</code> and 
- *  <code>java.util.Map</code>interfaces. 
- *
- *  @author  Rahul Sharma
- *  @version   0.8
-**/
-public interface MappedRecord<K, V> extends Record, java.util.Map<K, V>,
-                                       java.io.Serializable {
-
-}
