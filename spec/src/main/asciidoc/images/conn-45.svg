@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Generato da Microsoft Visio 11.0, SVG Export, v1.0 conn-45.svg Pagina 1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="9.71718in"
+		height="7.97276in" viewBox="0 0 699.637 574.038" xml:space="preserve" color-interpolation-filters="sRGB" class="st10">
+	<v:documentProperties v:langID="1040" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="MBSAAddinOutlineVisible" v:prompt="" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#ffffff;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st2 {stroke:#8c8c8c;stroke-dasharray:0,6.48;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.5;stroke-width:2.16}
+		.st3 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st4 {fill:#000000;font-family:Arial;font-size:0.666664em}
+		.st5 {font-size:1em}
+		.st6 {stroke:#f28226;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st7 {fill:#173660;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st8 {fill:#ffffff;font-family:Arial;font-size:0.666664em}
+		.st9 {fill:#facca7;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st10 {fill:none;fill-rule:evenodd;font-size:12;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>Pagina 1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<g id="shape139-1" v:mID="139" v:groupContext="shape" transform="translate(0.72,-0.72)">
+			<title>Foglio.139</title>
+			<rect x="0" y="1.44" width="651.969" height="572.598" class="st1"/>
+		</g>
+		<g id="shape6-3" v:mID="6" v:groupContext="shape" transform="translate(-542.137,559.145) rotate(-90)">
+			<title>Foglio.6</title>
+			<path d="M0 574.04 L494.04 574.04" class="st2"/>
+		</g>
+		<g id="shape16-6" v:mID="16" v:groupContext="shape" transform="translate(-428.751,559.145) rotate(-90)">
+			<title>Foglio.16</title>
+			<path d="M0 574.04 L494.04 574.04" class="st2"/>
+		</g>
+		<g id="shape17-9" v:mID="17" v:groupContext="shape" transform="translate(-298.358,559.145) rotate(-90)">
+			<title>Foglio.17</title>
+			<path d="M0 574.04 L494.04 574.04" class="st2"/>
+		</g>
+		<g id="shape18-12" v:mID="18" v:groupContext="shape" transform="translate(-81.7259,559.145) rotate(-90)">
+			<title>Foglio.18</title>
+			<path d="M0 574.04 L501.73 574.04" class="st2"/>
+		</g>
+		<g id="shape20-15" v:mID="20" v:groupContext="shape" transform="translate(22.3942,559.145) rotate(-90)">
+			<title>Foglio.20</title>
+			<path d="M0 574.04 L501.73 574.04" class="st2"/>
+		</g>
+		<g id="shape3-18" v:mID="3" v:groupContext="shape" transform="translate(3.55465,-524.606)">
+			<title>Foglio.3</title>
+			<desc>Application Client</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="27.2835" cy="564.25" width="54.57" height="19.5768"/>
+			<rect x="0" y="554.462" width="54.5669" height="19.5768" class="st3"/>
+			<text x="4" y="561.85" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Application <tspan x="4" dy="1.2em"
+						class="st5">Client</tspan></text>		</g>
+		<g id="shape19-22" v:mID="19" v:groupContext="shape" transform="translate(39.6964,-444.041)">
+			<title>Foglio.19</title>
+			<desc>getConnection</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="32.9528" cy="567.085" width="65.91" height="13.9075"/>
+			<rect x="0" y="560.131" width="65.9055" height="13.9075" class="st3"/>
+			<text x="4" y="569.48" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>getConnection</text>		</g>
+		<g id="shape10-25" v:mID="10" v:groupContext="shape" transform="translate(136.783,701.467) rotate(180)">
+			<title>Foglio.10</title>
+			<path d="M5.1 574.04 L0 568.94 L5.1 563.83" class="st6"/>
+		</g>
+		<g id="shape23-28" v:mID="23" v:groupContext="shape" transform="translate(133.948,706.569) rotate(180)">
+			<title>Foglio.23</title>
+			<path d="M0 574.04 L90.71 574.04" class="st6"/>
+		</g>
+		<g id="shape1-31" v:mID="1" v:groupContext="shape" transform="translate(87.8854,-508.122)">
+			<title>Foglio.1</title>
+			<rect x="0" y="526.839" width="564.803" height="47.1997" rx="8.50394" ry="8.50394" class="st7"/>
+		</g>
+		<g id="shape4-33" v:mID="4" v:groupContext="shape" transform="translate(93.5546,-521.034)">
+			<title>Foglio.4</title>
+			<desc>jakarta.resource.cci.ConnectionFactory</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="40.3937" cy="563.147" width="80.79" height="21.7829"/>
+			<rect x="0" y="552.256" width="80.7874" height="21.7829" class="st3"/>
+			<text x="4" y="560.75" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>jakarta.resource.cci.<tspan x="4"
+						dy="1.2em" class="st5">ConnectionFactory</tspan></text>		</g>
+		<g id="shape9-37" v:mID="9" v:groupContext="shape" transform="translate(240.519,-521.034)">
+			<title>Foglio.9</title>
+			<desc>ConnectionManager</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="26.6575" cy="563.147" width="53.32" height="21.7829"/>
+			<rect x="0" y="552.256" width="53.315" height="21.7829" class="st3"/>
+			<text x="6.42" y="560.75" class="st8" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Connection<tspan
+						x="10.87" dy="1.2em" class="st5">Manager</tspan></text>		</g>
+		<g id="shape21-41" v:mID="21" v:groupContext="shape" transform="translate(264.342,753) rotate(180)">
+			<title>Foglio.21</title>
+			<path d="M5.1 574.04 L0 568.94 L5.1 563.83" class="st6"/>
+		</g>
+		<g id="shape22-44" v:mID="22" v:groupContext="shape" transform="translate(261.507,758.102) rotate(180)">
+			<title>Foglio.22</title>
+			<path d="M0 574.04 L104.88 574.04" class="st6"/>
+		</g>
+		<g id="shape32-47" v:mID="32" v:groupContext="shape" transform="translate(26.2318,-37.5704)">
+			<title>Foglio.32</title>
+			<rect x="0" y="123.33" width="11.3386" height="450.709" class="st9"/>
+		</g>
+		<g id="shape34-49" v:mID="34" v:groupContext="shape" transform="translate(139.618,-73.5704)">
+			<title>Foglio.34</title>
+			<rect x="0" y="205.534" width="11.3386" height="368.504" class="st9"/>
+		</g>
+		<g id="shape38-51" v:mID="38" v:groupContext="shape" transform="translate(44.3735,1094.92) scale(1,-1)">
+			<title>Foglio.38</title>
+			<path d="M0 574.04 L100.91 574.04" class="st6"/>
+		</g>
+		<g id="shape39-54" v:mID="39" v:groupContext="shape" transform="translate(43.2397,1089.81) scale(1,-1)">
+			<title>Foglio.39</title>
+			<path d="M5.1 574.04 L0 568.94 L5.1 563.83" class="st6"/>
+		</g>
+		<g id="shape140-57" v:mID="140" v:groupContext="shape" transform="translate(155.917,-394.151)">
+			<title>Foglio.140</title>
+			<desc>allocateConnection</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="78.3071" cy="567.085" width="156.62" height="13.9075"/>
+			<rect x="0" y="560.131" width="156.614" height="13.9075" class="st3"/>
+			<text x="4" y="569.48" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>allocateConnection</text>		</g>
+		<g id="shape143-60" v:mID="143" v:groupContext="shape" transform="translate(581.822,970.643) rotate(180)">
+			<title>Foglio.143</title>
+			<path d="M0 574.04 L297.64 574.04" class="st6"/>
+		</g>
+		<g id="shape144-63" v:mID="144" v:groupContext="shape" transform="translate(584.657,965.39) rotate(180)">
+			<title>Foglio.144</title>
+			<path d="M5.1 574.04 L0 568.94 L5.1 563.83" class="st6"/>
+		</g>
+		<g id="shape145-66" v:mID="145" v:groupContext="shape" transform="translate(475.182,-180.268) scale(-1,1)">
+			<title>Foglio.145</title>
+			<desc>getConnection(Subject, ConnectionRequestInfo)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="94.0813" cy="567.085" width="188.17" height="13.9075"/>
+			<rect x="0" y="560.131" width="188.163" height="13.9075" class="st3"/>
+			<text x="-184.16" y="569.48" transform="scale(-1,1)" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>getConnection(Subject, ConnectionRequestInfo)</text>		</g>
+		<g id="shape147-69" v:mID="147" v:groupContext="shape" transform="translate(150.956,1033.38) scale(1,-1)">
+			<title>Foglio.147</title>
+			<path d="M0 574.04 L116.22 574.04" class="st6"/>
+		</g>
+		<g id="shape148-72" v:mID="148" v:groupContext="shape" transform="translate(150.956,1028.13) scale(1,-1)">
+			<title>Foglio.148</title>
+			<path d="M5.1 574.04 L0 568.94 L5.1 563.83" class="st6"/>
+		</g>
+		<g id="shape2-75" v:mID="2" v:groupContext="shape" transform="translate(326.449,-559.145)">
+			<title>Foglio.2</title>
+			<desc>Resource Adapter</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="38.3953" cy="568.369" width="76.8" height="11.3386"/>
+			<rect x="0" y="562.7" width="76.7906" height="11.3386" class="st3"/>
+			<text x="4" y="570.77" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Resource Adapter</text>		</g>
+		<g id="shape7-78" v:mID="7" v:groupContext="shape" transform="translate(270.011,-117.64)">
+			<title>Foglio.7</title>
+			<rect x="0" y="301.912" width="11.3386" height="272.126" class="st9"/>
+		</g>
+		<g id="shape12-80" v:mID="12" v:groupContext="shape" transform="translate(446.958,-521.911)">
+			<title>Foglio.12</title>
+			<desc>ManagedConnection Factory</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="42.7382" cy="563.147" width="85.48" height="21.7829"/>
+			<rect x="0" y="552.256" width="85.4764" height="21.7829" class="st3"/>
+			<text x="5.82" y="560.75" class="st8" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>ManagedConnection <tspan
+						x="29.4" dy="1.2em" class="st5">Factory</tspan></text>		</g>
+		<g id="shape14-84" v:mID="14" v:groupContext="shape" transform="translate(578.988,-518.462)">
+			<title>Foglio.14</title>
+			<desc>Managed Connection</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="59.9646" cy="558.416" width="119.93" height="31.2451"/>
+			<rect x="0" y="542.793" width="119.929" height="31.2451" class="st3"/>
+			<text x="4" y="556.02" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>Managed <v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st5">Connection</tspan></text>		</g>
+		<g id="shape26-88" v:mID="26" v:groupContext="shape" transform="translate(255.838,-56.8283) scale(-1,1)">
+			<title>Foglio.26</title>
+			<desc>return jakarta.resource.cci.Connection</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="102.954" cy="567.085" width="205.91" height="13.9075"/>
+			<rect x="0" y="560.131" width="205.908" height="13.9075" class="st3"/>
+			<text x="-201.91" y="569.48" transform="scale(-1,1)" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>return jakarta.resource.cci.Connection</text>		</g>
+		<g id="shape149-91" v:mID="149" v:groupContext="shape" transform="translate(364.461,-117.527) scale(-1,1)">
+			<title>Foglio.149</title>
+			<desc>return jakarta.resource.cci.Connection</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="102.954" cy="567.085" width="205.91" height="13.9075"/>
+			<rect x="0" y="560.131" width="205.908" height="13.9075" class="st3"/>
+			<text x="-201.91" y="569.48" transform="scale(-1,1)" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>return jakarta.resource.cci.Connection</text>		</g>
+		<g id="shape35-94" v:mID="35" v:groupContext="shape" transform="translate(590.326,-130.263)">
+			<title>Foglio.35</title>
+			<rect x="0" y="525.3" width="11.3386" height="48.7382" class="st9"/>
+		</g>
+		<g id="shape40-96" v:mID="40" v:groupContext="shape" transform="translate(485.444,845.919) rotate(180)">
+			<title>Foglio.40</title>
+			<path d="M0 574.04 L198.43 574.04" class="st6"/>
+		</g>
+		<g id="shape41-99" v:mID="41" v:groupContext="shape" transform="translate(485.444,840.816) rotate(180)">
+			<title>Foglio.41</title>
+			<path d="M5.1 574.04 L0 568.94 L5.1 563.83" class="st6"/>
+		</g>
+		<g id="shape42-102" v:mID="42" v:groupContext="shape" transform="translate(287.019,-304.993)">
+			<title>Foglio.42</title>
+			<desc>createManagedConnection</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="82.2047" cy="567.085" width="164.41" height="13.9075"/>
+			<rect x="0" y="560.131" width="164.409" height="13.9075" class="st3"/>
+			<text x="4" y="569.48" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>createManagedConnection</text>		</g>
+		<g id="shape43-105" v:mID="43" v:groupContext="shape" transform="translate(588.909,920.452) rotate(180)">
+			<title>Foglio.43</title>
+			<path d="M0 574.04 L89.29 574.04" class="st6"/>
+		</g>
+		<g id="shape44-108" v:mID="44" v:groupContext="shape" transform="translate(591.744,915.35) rotate(180)">
+			<title>Foglio.44</title>
+			<path d="M5.1 574.04 L0 568.94 L5.1 563.83" class="st6"/>
+		</g>
+		<g id="shape45-111" v:mID="45" v:groupContext="shape" transform="translate(496.783,-230.459)">
+			<title>Foglio.45</title>
+			<desc>create a new instance</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="82.2047" cy="567.085" width="164.41" height="13.9075"/>
+			<rect x="0" y="560.131" width="164.409" height="13.9075" class="st3"/>
+			<text x="4" y="569.48" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>create a new instance</text>		</g>
+		<g id="shape5-114" v:mID="5" v:groupContext="shape" transform="translate(486.862,-211.184)">
+			<title>Foglio.5</title>
+			<rect x="0" y="480.495" width="11.3386" height="93.5433" class="st9"/>
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Generato da Microsoft Visio 11.0, SVG Export, v1.0 conn-106.svg Pagina 1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="8.16961in"
+		height="8.01213in" viewBox="0 0 588.212 576.873" xml:space="preserve" color-interpolation-filters="sRGB" class="st11">
+	<v:documentProperties v:langID="1040" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="MBSAAddinOutlineVisible" v:prompt="" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#ffffff;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st2 {fill:#173660;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st3 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st4 {fill:#ffffff;font-family:Arial;font-size:0.666664em}
+		.st5 {font-size:1em}
+		.st6 {stroke:#8c8c8c;stroke-dasharray:0,6.48;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st7 {stroke:#f28226;stroke-dasharray:0,6.48;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st8 {fill:#facca7;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st9 {stroke:#f28226;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st10 {fill:#000000;font-family:Arial;font-size:0.666664em}
+		.st11 {fill:none;fill-rule:evenodd;font-size:12;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>Pagina 1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<g id="shape139-1" v:mID="139" v:groupContext="shape" transform="translate(0.72,-0.72)">
+			<title>Foglio.139</title>
+			<rect x="0" y="1.44" width="586.772" height="575.433" class="st1"/>
+		</g>
+		<g id="shape11-3" v:mID="11" v:groupContext="shape" transform="translate(192.944,-517.214)">
+			<title>Foglio.11</title>
+			<rect x="0" y="531.873" width="113.917" height="45" rx="8.50394" ry="8.50394" class="st2"/>
+		</g>
+		<g id="shape12-5" v:mID="12" v:groupContext="shape" transform="translate(201.992,-532.389)">
+			<title>Foglio.12</title>
+			<desc>Resource Adapter (from adapter)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="39.7677" cy="567.085" width="79.54" height="19.5768"/>
+			<rect x="0" y="557.296" width="79.5354" height="19.5768" class="st3"/>
+			<text x="4" y="564.68" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Resource Adapter<v:newlineChar/><tspan
+						x="4" dy="1.2em" class="st5">(</tspan>from adapter)</text>		</g>
+		<g id="shape16-9" v:mID="16" v:groupContext="shape" transform="translate(-462.767,565.918) rotate(-90)">
+			<title>Foglio.16</title>
+			<path d="M0 576.87 L507.89 576.87" class="st6"/>
+		</g>
+		<g id="shape17-12" v:mID="17" v:groupContext="shape" transform="translate(-335.208,565.918) rotate(-90)">
+			<title>Foglio.17</title>
+			<path d="M0 576.87 L507.89 576.87" class="st6"/>
+		</g>
+		<g id="shape18-15" v:mID="18" v:groupContext="shape" transform="translate(-258.673,567.649) rotate(-90)">
+			<title>Foglio.18</title>
+			<path d="M0 576.87 L490.1 576.87" class="st6"/>
+		</g>
+		<g id="shape1-18" v:mID="1" v:groupContext="shape" transform="translate(97.098,-516.86)">
+			<title>Foglio.1</title>
+			<rect x="0" y="531.873" width="85.0394" height="45" rx="8.50394" ry="8.50394" class="st2"/>
+		</g>
+		<g id="shape4-20" v:mID="4" v:groupContext="shape" transform="translate(99.9326,-532.189)">
+			<title>Foglio.4</title>
+			<desc>Jakarta EE app server</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="25.9104" cy="567.085" width="51.83" height="19.5768"/>
+			<rect x="0" y="557.296" width="51.8209" height="19.5768" class="st3"/>
+			<text x="4" y="564.68" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Jakarta EE<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st5">app server</tspan></text>		</g>
+		<g id="shape56-24" v:mID="56" v:groupContext="shape" transform="translate(14.8932,-516.86)">
+			<title>Foglio.56</title>
+			<rect x="0" y="531.873" width="70.8661" height="45" rx="8.50394" ry="8.50394" class="st2"/>
+		</g>
+		<g id="shape57-26" v:mID="57" v:groupContext="shape" transform="translate(18.6137,-531.299)">
+			<title>Foglio.57</title>
+			<desc>Endpoint deployer</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="21.7913" cy="567.085" width="43.59" height="19.5768"/>
+			<rect x="0" y="557.296" width="43.5827" height="19.5768" class="st3"/>
+			<text x="4" y="564.68" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Endpoint<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st5">deployer</tspan></text>		</g>
+		<g id="shape146-30" v:mID="146" v:groupContext="shape" transform="translate(-542.137,565.87) rotate(-90)">
+			<title>Foglio.146</title>
+			<path d="M0 576.87 L507.89 576.87" class="st6"/>
+		</g>
+		<g id="shape19-33" v:mID="19" v:groupContext="shape" transform="translate(316.074,-516.98)">
+			<title>Foglio.19</title>
+			<rect x="0" y="531.873" width="138.189" height="45" rx="8.50394" ry="8.50394" class="st2"/>
+		</g>
+		<g id="shape21-35" v:mID="21" v:groupContext="shape" transform="translate(319.972,-528.987)">
+			<title>Foglio.21</title>
+			<desc>MessageEndpointFactory (from app server)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="52.0866" cy="562.7" width="104.18" height="28.3465"/>
+			<rect x="0" y="548.527" width="104.173" height="28.3465" class="st3"/>
+			<text x="4" y="560.3" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>MessageEndpointFactory<v:newlineChar/><tspan
+						x="4" dy="1.2em" class="st5">(</tspan>from app server)</text>		</g>
+		<g id="shape36-39" v:mID="36" v:groupContext="shape" transform="translate(464.185,-516.803)">
+			<title>Foglio.36</title>
+			<rect x="0" y="531.873" width="106.299" height="45" rx="8.50394" ry="8.50394" class="st2"/>
+		</g>
+		<g id="shape37-41" v:mID="37" v:groupContext="shape" transform="translate(469.854,-528.81)">
+			<title>Foglio.37</title>
+			<desc>Message provider</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="38.9764" cy="562.7" width="77.96" height="28.3465"/>
+			<rect x="0" y="548.527" width="77.9528" height="28.3465" class="st3"/>
+			<text x="4" y="565.1" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Message provider</text>		</g>
+		<g id="shape5-44" v:mID="5" v:groupContext="shape" transform="translate(265.051,-459.933)">
+			<title>Foglio.5</title>
+			<rect x="0" y="531.873" width="106.299" height="45" rx="8.50394" ry="8.50394" class="st2"/>
+		</g>
+		<g id="shape9-46" v:mID="9" v:groupContext="shape" transform="translate(270.72,-471.94)">
+			<title>Foglio.9</title>
+			<desc>ActivationSpec (from adapter)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="38.9764" cy="562.7" width="77.96" height="28.3465"/>
+			<rect x="0" y="548.527" width="77.9528" height="28.3465" class="st3"/>
+			<text x="4" y="560.3" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>ActivationSpec<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st5">(</tspan>from adapter)</text>		</g>
+		<g id="shape147-50" v:mID="147" v:groupContext="shape" transform="translate(-176.468,567.649) rotate(-90)">
+			<title>Foglio.147</title>
+			<path d="M0 576.87 L507.89 576.87" class="st6"/>
+		</g>
+		<g id="shape148-53" v:mID="148" v:groupContext="shape" transform="translate(-68.7515,567.148) rotate(-90)">
+			<title>Foglio.148</title>
+			<path d="M0 576.87 L507.89 576.87" class="st6"/>
+		</g>
+		<g id="shape22-56" v:mID="22" v:groupContext="shape" transform="translate(20.5625,-387.649)">
+			<title>Foglio.22</title>
+			<rect x="0" y="513.182" width="552.756" height="63.691" rx="8.50394" ry="8.50394" class="st2"/>
+		</g>
+		<g id="shape23-58" v:mID="23" v:groupContext="shape" transform="translate(24.7941,-403.107)">
+			<title>Foglio.23</title>
+			<desc>The endpoint deployer choses a suitable resource adapter base...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="204.813" cy="556.898" width="409.63" height="39.9508"/>
+			<rect x="0" y="536.922" width="409.627" height="39.9508" class="st3"/>
+			<text x="4" y="549.7" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>The endpoint deployer choses a suitable resource adapter based on supported message listener type and QoS <tspan
+						x="4" dy="1.2em" class="st5">capabilities</tspan>, configures an ActivationSpec JavaBean instance obtained from the resource adapter. The <tspan
+						x="4" dy="1.2em" class="st5">configuration includes message style</tspan>-specific information and may include message provider specific information.</text>		</g>
+		<g id="shape54-63" v:mID="54" v:groupContext="shape" transform="translate(114.106,891.483) rotate(180)">
+			<title>Foglio.54</title>
+			<path d="M0 576.87 L73.7 576.87" class="st7"/>
+		</g>
+		<g id="shape55-66" v:mID="55" v:groupContext="shape" transform="translate(29.0665,-36.3893)">
+			<title>Foglio.55</title>
+			<rect x="0" y="330.731" width="11.3386" height="246.142" class="st8"/>
+		</g>
+		<g id="shape58-68" v:mID="58" v:groupContext="shape" transform="translate(114.106,886.522) rotate(180)">
+			<title>Foglio.58</title>
+			<path d="M5.1 576.87 L0 571.77 L5.1 566.67" class="st9"/>
+		</g>
+		<g id="shape59-71" v:mID="59" v:groupContext="shape" transform="translate(48.909,-267.791)">
+			<title>Foglio.59</title>
+			<desc>2. deploy endpoint application (pass the configured Activatio...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="176.258" cy="569.919" width="352.52" height="13.9075"/>
+			<rect x="0" y="562.966" width="352.517" height="13.9075" class="st3"/>
+			<text x="4" y="572.32" class="st10" v:langID="1040"><v:paragraph/><v:tabList/>2. deploy endpoint application (pass the configured ActivationSpec JavaBean)</text>		</g>
+		<g id="shape152-74" v:mID="152" v:groupContext="shape" transform="translate(394.736,935.184) rotate(180)">
+			<title>Foglio.152</title>
+			<path d="M0 576.87 L280.63 576.87" class="st7"/>
+		</g>
+		<g id="shape153-77" v:mID="153" v:groupContext="shape" transform="translate(108.95,-204.814)">
+			<title>Foglio.153</title>
+			<rect x="0" y="542.857" width="11.3386" height="34.0157" class="st8"/>
+		</g>
+		<g id="shape154-79" v:mID="154" v:groupContext="shape" transform="translate(399.838,930.223) rotate(180)">
+			<title>Foglio.154</title>
+			<path d="M5.1 576.87 L0 571.77 L5.1 566.67" class="st9"/>
+		</g>
+		<g id="shape155-82" v:mID="155" v:groupContext="shape" transform="translate(130.607,-224.09)">
+			<title>Foglio.155</title>
+			<desc>3. create an instance</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="153.324" cy="569.919" width="306.65" height="13.9075"/>
+			<rect x="0" y="562.966" width="306.648" height="13.9075" class="st3"/>
+			<text x="4" y="572.32" class="st10" v:langID="1040"><v:paragraph/><v:tabList/>3. create an instance</text>		</g>
+		<g id="shape164-85" v:mID="164" v:groupContext="shape" transform="translate(241.665,1011.72) rotate(180)">
+			<title>Foglio.164</title>
+			<path d="M0 576.87 L121.35 576.87" class="st9"/>
+		</g>
+		<g id="shape165-88" v:mID="165" v:groupContext="shape" transform="translate(108.977,-37.5704)">
+			<title>Foglio.165</title>
+			<rect x="0" y="452.149" width="11.3386" height="124.724" class="st8"/>
+		</g>
+		<g id="shape166-90" v:mID="166" v:groupContext="shape" transform="translate(241.098,1006.76) rotate(180)">
+			<title>Foglio.166</title>
+			<path d="M5.1 576.87 L0 571.77 L5.1 566.67" class="st9"/>
+		</g>
+		<g id="shape167-93" v:mID="167" v:groupContext="shape" transform="translate(131.114,-146.837)">
+			<title>Foglio.167</title>
+			<desc>4. endpointActivation(MessageEndpointFactory, ActivationSpec)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="153.324" cy="569.919" width="306.65" height="13.9075"/>
+			<rect x="0" y="562.966" width="306.648" height="13.9075" class="st3"/>
+			<text x="4" y="572.32" class="st10" v:langID="1040"><v:paragraph/><v:tabList/>4. endpointActivation(MessageEndpointFactory, ActivationSpec)</text>		</g>
+		<g id="shape168-96" v:mID="168" v:groupContext="shape" transform="translate(508.122,1082.59) rotate(180)">
+			<title>Foglio.168</title>
+			<path d="M0 576.87 L259.99 576.87" class="st7"/>
+		</g>
+		<g id="shape169-99" v:mID="169" v:groupContext="shape" transform="translate(236.793,-57.4129)">
+			<title>Foglio.169</title>
+			<rect x="0" y="542.857" width="11.3386" height="34.0157" class="st8"/>
+		</g>
+		<g id="shape170-101" v:mID="170" v:groupContext="shape" transform="translate(505.287,1077.62) rotate(180)">
+			<title>Foglio.170</title>
+			<path d="M5.1 576.87 L0 571.77 L5.1 566.67" class="st9"/>
+		</g>
+		<g id="shape171-104" v:mID="171" v:groupContext="shape" transform="translate(258.45,-76.6885)">
+			<title>Foglio.171</title>
+			<desc>5. setup for message delivery (private contract)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="89.403" cy="569.919" width="178.81" height="13.9075"/>
+			<rect x="0" y="562.966" width="178.806" height="13.9075" class="st3"/>
+			<text x="4" y="572.32" class="st10" v:langID="1040"><v:paragraph/><v:tabList/>5. setup for message delivery (private contract)</text>		</g>
+		<g id="shape160-107" v:mID="160" v:groupContext="shape" transform="translate(318.2,807.625) rotate(180)">
+			<title>Foglio.160</title>
+			<path d="M0 576.87 L277.25 576.87" class="st7"/>
+		</g>
+		<g id="shape161-110" v:mID="161" v:groupContext="shape" transform="translate(29.6068,-332.374)">
+			<title>Foglio.161</title>
+			<rect x="0" y="542.857" width="11.3386" height="34.0157" class="st8"/>
+		</g>
+		<g id="shape162-112" v:mID="162" v:groupContext="shape" transform="translate(317.917,802.664) rotate(180)">
+			<title>Foglio.162</title>
+			<path d="M5.1 576.87 L0 571.77 L5.1 566.67" class="st9"/>
+		</g>
+		<g id="shape163-115" v:mID="163" v:groupContext="shape" transform="translate(51.2635,-352.216)">
+			<title>Foglio.163</title>
+			<desc>1. create and configure an ActivationSpec JavaBean</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="153.324" cy="569.919" width="306.65" height="13.9075"/>
+			<rect x="0" y="562.966" width="306.648" height="13.9075" class="st3"/>
+			<text x="4" y="572.32" class="st10" v:langID="1040"><v:paragraph/><v:tabList/>1. create and configure an ActivationSpec JavaBean</text>		</g>
+	</g>
+</svg>

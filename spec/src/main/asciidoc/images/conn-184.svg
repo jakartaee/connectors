@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Generato da Microsoft Visio 11.0, SVG Export, v1.0 conn-184.svg Pagina 1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="5.95012in"
+		height="1.04362in" viewBox="0 0 428.409 75.1408" xml:space="preserve" color-interpolation-filters="sRGB" class="st5">
+	<v:documentProperties v:langID="1040" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="MBSAAddinOutlineVisible" v:prompt="" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#ffffff;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st2 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st3 {fill:#000000;font-family:Arial;font-size:0.666664em;font-weight:bold}
+		.st4 {stroke:#173660;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.08}
+		.st5 {fill:none;fill-rule:evenodd;font-size:12;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>Pagina 1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<g id="shape139-1" v:mID="139" v:groupContext="shape" transform="translate(0.72,-0.72)">
+			<title>Foglio.139</title>
+			<rect x="0" y="1.44" width="426.969" height="73.7008" class="st1"/>
+		</g>
+		<g id="shape5-3" v:mID="5" v:groupContext="shape" transform="translate(73.6265,-36.2859)">
+			<title>Foglio.5</title>
+			<desc>Initiating Principal = Resource Principal</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="81.4381" cy="65.3524" width="162.88" height="19.5768"/>
+			<rect x="0" y="55.564" width="162.876" height="19.5768" class="st2"/>
+			<text x="4" y="67.75" class="st3" v:langID="1040"><v:paragraph/><v:tabList/>Initiating Principal = Resource Principal</text>		</g>
+		<g id="shape9-6" v:mID="9" v:groupContext="shape" transform="translate(-17.0263,43.2397) rotate(-90)">
+			<title>Foglio.9</title>
+			<path d="M0 75.14 L28.35 75.14" class="st4"/>
+		</g>
+		<g id="shape10-9" v:mID="10" v:groupContext="shape" transform="translate(6.92481,-5.10484)">
+			<title>Foglio.10</title>
+			<desc>Application Security domain</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="58.9457" cy="65.3524" width="117.9" height="19.5768"/>
+			<rect x="0" y="55.564" width="117.891" height="19.5768" class="st2"/>
+			<text x="4" y="67.75" class="st3" v:langID="1040"><v:paragraph/><v:tabList/>Application Security domain</text>		</g>
+		<g id="shape1-12" v:mID="1" v:groupContext="shape" transform="translate(73.6265,90.034) rotate(180)">
+			<title>Foglio.1</title>
+			<path d="M0 75.14 L15.51 75.14" class="st4"/>
+		</g>
+		<g id="shape2-15" v:mID="2" v:groupContext="shape" transform="translate(73.6265,118.38) rotate(180)">
+			<title>Foglio.2</title>
+			<path d="M0 75.14 L15.51 75.14" class="st4"/>
+		</g>
+		<g id="shape3-18" v:mID="3" v:groupContext="shape" transform="translate(376.794,43.2397) rotate(90) scale(-1,1)">
+			<title>Foglio.3</title>
+			<path d="M0 75.14 L28.35 75.14" class="st4"/>
+		</g>
+		<g id="shape4-21" v:mID="4" v:groupContext="shape" transform="translate(286.141,90.034) scale(1,-1)">
+			<title>Foglio.4</title>
+			<path d="M0 75.14 L15.51 75.14" class="st4"/>
+		</g>
+		<g id="shape6-24" v:mID="6" v:groupContext="shape" transform="translate(286.141,118.38) scale(1,-1)">
+			<title>Foglio.6</title>
+			<path d="M0 75.14 L15.51 75.14" class="st4"/>
+		</g>
+		<g id="shape18-27" v:mID="18" v:groupContext="shape" transform="translate(232.625,-5.10484)">
+			<title>Foglio.18</title>
+			<desc>ERP System Security domain</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="62.8237" cy="65.3524" width="125.65" height="19.5768"/>
+			<rect x="0" y="55.564" width="125.647" height="19.5768" class="st2"/>
+			<text x="4" y="67.75" class="st3" v:langID="1040"><v:paragraph/><v:tabList/>ERP System Security domain</text>		</g>
+	</g>
+</svg>
