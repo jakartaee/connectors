@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Generato da Microsoft Visio 11.0, SVG Export, v1.0 conn-90.svg Pagina 1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="5.25622in"
+		height="5.02in" viewBox="0 0 378.448 361.44" xml:space="preserve" color-interpolation-filters="sRGB" class="st10"
+		xmlns:xlink="http://www.w3.org/1999/xlink">
+	<v:documentProperties v:langID="1040" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="MBSAAddinOutlineVisible" v:prompt="" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#d9680d;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st2 {fill:url(#ptrn12-6);shape-rendering:crispEdges;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st3 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st4 {fill:#ffffff;font-family:Arial;font-size:0.666664em;font-weight:bold}
+		.st5 {fill:#f8b57e;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st6 {fill:#262626;font-family:Arial;font-size:0.666664em;font-weight:bold}
+		.st7 {font-size:1em}
+		.st8 {fill:#f28226;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st9 {font-size:1em;font-style:italic}
+		.st10 {fill:none;fill-rule:evenodd;font-size:12;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Patterns_And_Gradients">
+		<pattern id="ptrn12-6" v:fillPattern="12" v:foreground="#d9d9d9" v:background="#f28226" patternUnits="userSpaceOnUse"
+				width="6" height="6" viewBox="0 0 64 64">
+			<image x="0" y="0" width="64" height="64" image-rendering="optimizeSpeed"
+					xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAlSURBVChTY/jUpPYfhm/evAlnwzCKAmwYrwKQiaSZMCBuUPsPAN0NqgVsNZf2AAAAAElFTkSuQmCC"/>
+		</pattern>
+	</defs>
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>Pagina 1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<g id="shape2-1" v:mID="2" v:groupContext="shape" transform="translate(0.72,-275.681)">
+			<title>Foglio.2</title>
+			<rect x="0" y="276.401" width="99.2126" height="85.0394" rx="8.50394" ry="8.50394" class="st1"/>
+		</g>
+		<g id="shape1-3" v:mID="1" v:groupContext="shape" transform="translate(0.72,-0.72)">
+			<title>Foglio.1</title>
+			<rect x="0" y="15.6132" width="377.008" height="345.827" rx="8.50394" ry="8.50394" class="st2"/>
+		</g>
+		<g id="shape46-7" v:mID="46" v:groupContext="shape" transform="translate(111.271,-315.631)">
+			<title>Foglio.46</title>
+			<desc>jakarta.resource.spi.work</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="52.5591" cy="351.652" width="105.12" height="19.5768"/>
+			<rect x="0" y="341.863" width="105.118" height="19.5768" class="st3"/>
+			<text x="4" y="354.05" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>jakarta.resource.spi.work</text>		</g>
+		<g id="shape6-10" v:mID="6" v:groupContext="shape" transform="translate(23.3972,-266.55)">
+			<title>Foglio.6</title>
+			<rect x="0" y="321.128" width="152.646" height="40.3118" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape3-12" v:mID="3" v:groupContext="shape" transform="translate(27.7543,-278.515)">
+			<title>Foglio.3</title>
+			<desc>WorkManager (from app server)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="38.1626" cy="347.267" width="76.33" height="28.3465"/>
+			<rect x="0" y="333.094" width="76.3252" height="28.3465" class="st3"/>
+			<text x="4" y="344.87" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>WorkManager <v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st7">(</tspan>from app server)</text>		</g>
+		<g id="shape4-16" v:mID="4" v:groupContext="shape" transform="translate(23.3972,-217.57)">
+			<title>Foglio.4</title>
+			<rect x="0" y="310.416" width="152.646" height="51.0236" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape5-18" v:mID="5" v:groupContext="shape" transform="translate(27.7972,-226.074)">
+			<title>Foglio.5</title>
+			<desc>doWork() startWork() scheduleWork()</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="43.7889" cy="344.01" width="87.58" height="34.8609"/>
+			<rect x="0" y="326.579" width="87.5779" height="34.8609" class="st3"/>
+			<text x="4" y="336.81" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>doWork()<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st7">startWork</tspan>()<v:newlineChar/><tspan x="4" dy="1.2em" class="st7">scheduleWork</tspan>()</text>		</g>
+		<g id="shape7-23" v:mID="7" v:groupContext="shape" transform="translate(207.649,-270.011)">
+			<title>Foglio.7</title>
+			<rect x="0" y="324.59" width="146.74" height="36.8504" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape8-25" v:mID="8" v:groupContext="shape" transform="translate(212.832,-281.35)">
+			<title>Foglio.8</title>
+			<desc>WorkContextProvider (from adapter)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="55.2756" cy="350.946" width="110.56" height="20.9872"/>
+			<rect x="0" y="340.453" width="110.551" height="20.9872" class="st3"/>
+			<text x="4" y="348.55" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>WorkContextProvider<v:newlineChar/><tspan
+						x="4" dy="1.2em" class="st7">(</tspan>from adapter)</text>		</g>
+		<g id="shape9-29" v:mID="9" v:groupContext="shape" transform="translate(207.649,-241.665)">
+			<title>Foglio.9</title>
+			<rect x="0" y="333.094" width="146.74" height="28.3465" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape10-31" v:mID="10" v:groupContext="shape" transform="translate(215.912,-244.5)">
+			<title>Foglio.10</title>
+			<desc>getWorkContexts()</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="42.6401" cy="353.617" width="85.29" height="15.6452"/>
+			<rect x="0" y="345.795" width="85.2803" height="15.6452" class="st3"/>
+			<text x="4" y="356.02" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>getWorkContexts()</text>		</g>
+		<g id="shape12-34" v:mID="12" v:groupContext="shape" transform="translate(23.3972,-262.925)">
+			<title>Foglio.12</title>
+			<rect x="0" y="347.267" width="152.646" height="14.1732" class="st8"/>
+		</g>
+		<g id="shape11-36" v:mID="11" v:groupContext="shape" transform="translate(207.649,-264.342)">
+			<title>Foglio.11</title>
+			<rect x="0" y="347.267" width="146.74" height="14.1732" class="st8"/>
+		</g>
+		<g id="shape47-38" v:mID="47" v:groupContext="shape" transform="translate(25.3069,-155.999)">
+			<title>Foglio.47</title>
+			<rect x="0" y="321.128" width="152.646" height="40.3118" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape48-40" v:mID="48" v:groupContext="shape" transform="translate(29.415,-167.964)">
+			<title>Foglio.48</title>
+			<desc>WorkContextErorCodes (from app server)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="53.684" cy="347.267" width="107.37" height="28.3465"/>
+			<rect x="0" y="333.094" width="107.368" height="28.3465" class="st3"/>
+			<text x="4" y="344.87" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>WorkContextErorCodes <v:newlineChar/><tspan
+						x="4" dy="1.2em" class="st7">(</tspan>from app server)</text>		</g>
+		<g id="shape49-44" v:mID="49" v:groupContext="shape" transform="translate(25.3069,-133.948)">
+			<title>Foglio.49</title>
+			<rect x="0" y="338.763" width="152.646" height="22.6772" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape51-46" v:mID="51" v:groupContext="shape" transform="translate(25.3069,-150.956)">
+			<title>Foglio.51</title>
+			<rect x="0" y="347.267" width="152.646" height="14.1732" class="st8"/>
+		</g>
+		<g id="shape52-48" v:mID="52" v:groupContext="shape" transform="translate(207.649,-184.345)">
+			<title>Foglio.52</title>
+			<rect x="0" y="321.128" width="146.74" height="40.3118" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape53-50" v:mID="53" v:groupContext="shape" transform="translate(212.832,-200.563)">
+			<title>Foglio.53</title>
+			<desc>WorkContext (from adapter)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="55.2756" cy="351.655" width="110.56" height="19.5699"/>
+			<rect x="0" y="341.87" width="110.551" height="19.5699" class="st3"/>
+			<text x="4" y="349.26" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>WorkContext<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st7">(</tspan>from adapter)</text>		</g>
+		<g id="shape54-54" v:mID="54" v:groupContext="shape" transform="translate(207.649,-146.704)">
+			<title>Foglio.54</title>
+			<rect x="0" y="329.632" width="146.74" height="31.8078" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape55-56" v:mID="55" v:groupContext="shape" transform="translate(215.912,-150.902)">
+			<title>Foglio.55</title>
+			<desc>getName() getDescription()</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="52.318" cy="350.783" width="104.64" height="21.3145"/>
+			<rect x="0" y="340.126" width="104.636" height="21.3145" class="st3"/>
+			<text x="4" y="348.38" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>getName()<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st7">getDescription</tspan>()</text>		</g>
+		<g id="shape56-60" v:mID="56" v:groupContext="shape" transform="translate(207.649,-175.051)">
+			<title>Foglio.56</title>
+			<rect x="0" y="341.597" width="146.74" height="19.8425" class="st8"/>
+		</g>
+		<g id="shape57-62" v:mID="57" v:groupContext="shape" transform="translate(25.3069,-67.3342)">
+			<title>Foglio.57</title>
+			<rect x="0" y="313.251" width="152.646" height="48.189" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape58-64" v:mID="58" v:groupContext="shape" transform="translate(30.2404,-80.3627)">
+			<title>Foglio.58</title>
+			<desc>WorkContextLifecycle-Listener (from adapter)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="55.2756" cy="346.122" width="110.56" height="30.6358"/>
+			<rect x="0" y="330.804" width="110.551" height="30.6358" class="st3"/>
+			<text x="4" y="338.92" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>WorkContextLifecycle-<tspan x="4"
+						dy="1.2em" class="st7">Listener<v:newlineChar/></tspan><tspan x="4" dy="1.2em" class="st7">(</tspan>from adapter)</text>		</g>
+		<g id="shape59-69" v:mID="59" v:groupContext="shape" transform="translate(25.3069,-20.5625)">
+			<title>Foglio.59</title>
+			<rect x="0" y="328.215" width="152.646" height="33.2252" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape61-71" v:mID="61" v:groupContext="shape" transform="translate(25.3069,-50.3263)">
+			<title>Foglio.61</title>
+			<rect x="0" y="341.597" width="152.646" height="19.8425" class="st8"/>
+		</g>
+		<g id="shape70-73" v:mID="70" v:groupContext="shape" transform="translate(209.485,-51.7436)">
+			<title>Foglio.70</title>
+			<rect x="0" y="282.07" width="146.74" height="79.3701" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape71-75" v:mID="71" v:groupContext="shape" transform="translate(214.979,-73.9848)">
+			<title>Foglio.71</title>
+			<desc>TransactionContext implements WorkContext extends ExecutionCo...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="55.2756" cy="334.293" width="110.56" height="54.2943"/>
+			<rect x="0" y="307.146" width="110.551" height="54.2943" class="st3"/>
+			<text x="4" y="315.09" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>TransactionContext<v:newlineChar/><v:newlineChar/><tspan
+						x="4" dy="1.8em" class="st9">implements WorkContext<v:newlineChar/><v:newlineChar/></tspan><tspan x="4"
+						dy="1.8em" class="st9">extends ExecutionContext<v:newlineChar/><v:newlineChar/></tspan><tspan x="4"
+						dy="1.8em" class="st7">(</tspan>from app server)</text>		</g>
+		<g id="shape72-81" v:mID="72" v:groupContext="shape" transform="translate(209.485,-20.5625)">
+			<title>Foglio.72</title>
+			<rect x="0" y="338.763" width="146.74" height="22.6772" rx="5.66929" ry="5.66929" class="st5"/>
+		</g>
+		<g id="shape73-83" v:mID="73" v:groupContext="shape" transform="translate(209.485,-37.5704)">
+			<title>Foglio.73</title>
+			<rect x="0" y="341.597" width="146.74" height="19.8425" class="st8"/>
+		</g>
+		<g id="shape50-85" v:mID="50" v:groupContext="shape" transform="translate(31.9011,-27.5945)">
+			<title>Foglio.50</title>
+			<desc>contextSetupComplete() contextSetupFailed()</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="52.318" cy="350.783" width="104.64" height="21.3145"/>
+			<rect x="0" y="340.126" width="104.636" height="21.3145" class="st3"/>
+			<text x="4" y="348.38" class="st6" v:langID="1040"><v:paragraph/><v:tabList/>contextSetupComplete()<v:newlineChar/><tspan
+						x="4" dy="1.2em" class="st7">contextSetupFailed</tspan>()</text>		</g>
+	</g>
+</svg>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Generato da Microsoft Visio 11.0, SVG Export, v1.0 conn-122.svg Pagina 1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="7.81528in"
+		height="10.0987in" viewBox="0 0 562.7 727.109" xml:space="preserve" color-interpolation-filters="sRGB" class="st12">
+	<v:documentProperties v:langID="1040" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="MBSAAddinOutlineVisible" v:prompt="" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#ffffff;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st2 {stroke:#8c8c8c;stroke-dasharray:0,6.48;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st3 {fill:#173660;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st4 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st5 {fill:#ffffff;font-family:Arial;font-size:0.666664em}
+		.st6 {font-size:1em}
+		.st7 {fill:#ffffff;fill-opacity:0;stroke:#8c8c8c;stroke-dasharray:0,6.48;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st8 {stroke:#f28226;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st9 {fill:#000000;font-family:Arial;font-size:0.666664em}
+		.st10 {fill:#facca7;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st11 {stroke:#f28226;stroke-dasharray:0,6.48;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st12 {fill:none;fill-rule:evenodd;font-size:12;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>Pagina 1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<g id="shape139-1" v:mID="139" v:groupContext="shape" transform="translate(0.72,-0.72)">
+			<title>Foglio.139</title>
+			<rect x="0" y="1.44" width="561.26" height="725.669" class="st1"/>
+		</g>
+		<g id="shape16-3" v:mID="16" v:groupContext="shape" transform="translate(-567.649,655.523) rotate(-90)">
+			<title>Foglio.16</title>
+			<path d="M0 727.11 L597.31 727.11" class="st2"/>
+		</g>
+		<g id="shape17-6" v:mID="17" v:groupContext="shape" transform="translate(-406.074,695.208) rotate(-90)">
+			<title>Foglio.17</title>
+			<path d="M0 727.11 L637 727.11" class="st2"/>
+		</g>
+		<g id="shape20-9" v:mID="20" v:groupContext="shape" transform="translate(-227.492,695.208) rotate(-90)">
+			<title>Foglio.20</title>
+			<path d="M0 727.11 L637.35 727.11" class="st2"/>
+		</g>
+		<g id="shape13-12" v:mID="13" v:groupContext="shape" transform="translate(447.177,-667.451)">
+			<title>Foglio.13</title>
+			<rect x="0" y="682.109" width="107.717" height="45" rx="8.50394" ry="8.50394" class="st3"/>
+		</g>
+		<g id="shape14-14" v:mID="14" v:groupContext="shape" transform="translate(456.224,-682.625)">
+			<title>Foglio.14</title>
+			<desc>XATerminator (from app server)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="37.2874" cy="717.321" width="74.58" height="19.5768"/>
+			<rect x="0" y="707.533" width="74.5748" height="19.5768" class="st4"/>
+			<text x="4" y="714.92" class="st5" v:langID="1040"><v:paragraph/><v:tabList/>XATerminator<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st6">(</tspan>from app server)</text>		</g>
+		<g id="shape145-18" v:mID="145" v:groupContext="shape" transform="translate(9.22394,-442.925)">
+			<title>Foglio.145</title>
+			<rect x="0" y="517.346" width="547.087" height="209.764" rx="11.3386" ry="11.3386" class="st7"/>
+		</g>
+		<g id="shape42-20" v:mID="42" v:groupContext="shape" transform="translate(139.051,1192.36) rotate(180)">
+			<title>Foglio.42</title>
+			<path d="M5.1 727.11 L0 722.01 L5.1 716.9" class="st8"/>
+		</g>
+		<g id="shape43-23" v:mID="43" v:groupContext="shape" transform="translate(136.783,1197.46) rotate(180)">
+			<title>Foglio.43</title>
+			<path d="M0 727.11 L101.69 727.11" class="st8"/>
+		</g>
+		<g id="shape45-26" v:mID="45" v:groupContext="shape" transform="translate(34.2043,-262.925)">
+			<title>Foglio.45</title>
+			<desc>1. EIS recovers queries for a list of in-doubt transactions</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="133.76" cy="720.156" width="267.52" height="13.9075"/>
+			<rect x="0" y="713.202" width="267.52" height="13.9075" class="st4"/>
+			<text x="4" y="722.56" class="st9" v:langID="1040"><v:paragraph/><v:tabList/>1. EIS recovers queries for a list of in-doubt transactions</text>		</g>
+		<g id="shape46-29" v:mID="46" v:groupContext="shape" transform="translate(8.51528,-12.0586)">
+			<title>Foglio.46</title>
+			<rect x="0" y="311.834" width="545.669" height="415.276" rx="11.3386" ry="11.3386" class="st7"/>
+		</g>
+		<g id="shape51-31" v:mID="51" v:groupContext="shape" transform="translate(493.948,1224.46) rotate(180)">
+			<title>Foglio.51</title>
+			<path d="M5.1 727.11 L0 722.01 L5.1 716.9" class="st8"/>
+		</g>
+		<g id="shape52-34" v:mID="52" v:groupContext="shape" transform="translate(493.948,1229.56) rotate(180)">
+			<title>Foglio.52</title>
+			<path d="M0 727.11 L325.98 727.11" class="st8"/>
+		</g>
+		<g id="shape53-37" v:mID="53" v:groupContext="shape" transform="translate(153.791,-216.153)">
+			<title>Foglio.53</title>
+			<rect x="0" y="696.703" width="11.3386" height="30.406" class="st10"/>
+		</g>
+		<g id="shape146-39" v:mID="146" v:groupContext="shape" transform="translate(-700.877,655.466) rotate(-90)">
+			<title>Foglio.146</title>
+			<path d="M0 727.11 L597.31 727.11" class="st2"/>
+		</g>
+		<g id="shape19-42" v:mID="19" v:groupContext="shape" transform="translate(34.7357,-567.649)">
+			<title>Foglio.19</title>
+			<rect x="0" y="650.928" width="507.402" height="76.1811" rx="8.50394" ry="8.50394" class="st3"/>
+		</g>
+		<g id="shape21-44" v:mID="21" v:groupContext="shape" transform="translate(43.9483,-587.492)">
+			<title>Foglio.21</title>
+			<desc>EIS crashes when a transaction is in an active state When the...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="185.669" cy="701.597" width="371.34" height="51.0236"/>
+			<rect x="0" y="676.086" width="371.339" height="51.0236" class="st4"/>
+			<text x="94.29" y="684.8" class="st5" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>EIS crashes when a transaction is in an active state<v:newlineChar/><v:paragraph/><v:newlineChar/><tspan
+						x="4" dy="2.4em" class="st6">When the resource adapter detects the failure of the EIS site while the transaction is active </tspan>(that is, <tspan
+						x="4" dy="1.2em" class="st6">transaction completion has not begun</tspan>), it aborts all active transactions which originated from the EIS. <tspan
+						x="4" dy="1.2em" class="st6">The resource adapter must keep a list of active transactions and abort them upon EIS failure</tspan>.</text>		</g>
+		<g id="shape22-50" v:mID="22" v:groupContext="shape" transform="translate(36.1938,-329.539)">
+			<title>Foglio.22</title>
+			<rect x="0" y="637.995" width="505.944" height="89.1142" rx="8.50394" ry="8.50394" class="st3"/>
+		</g>
+		<g id="shape23-52" v:mID="23" v:groupContext="shape" transform="translate(45.3657,-351.419)">
+			<title>Foglio.23</title>
+			<desc>EIS crashes when a transaction is in an in-doubt state When t...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="185.669" cy="695.131" width="371.34" height="63.9567"/>
+			<rect x="0" y="663.153" width="371.339" height="63.9567" class="st4"/>
+			<text x="90.28" y="673.53" class="st5" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>EIS crashes when a transaction is in an in-doubt state<v:newlineChar/><v:paragraph/><v:newlineChar/><tspan
+						x="4" dy="2.4em" class="st6">When the resource adapter detects the failure of the EIS site while the transaction is in</tspan>-doubt (that is, <tspan
+						x="4" dy="1.2em" class="st6">the transaction has already beeb prepared</tspan>), it waits for the EIS to recover. When the EIS recovers, it <tspan
+						x="4" dy="1.2em" class="st6">re</tspan>-establishes network communication with the resource adapter, and queries it for a list of in-doubt <tspan
+						x="4" dy="1.2em" class="st6">transactions</tspan>. It then completes the in-doubt transactions.</text>		</g>
+		<g id="shape44-59" v:mID="44" v:groupContext="shape" transform="translate(20.5625,-235.996)">
+			<title>Foglio.44</title>
+			<rect x="0" y="666.164" width="11.3386" height="60.9449" class="st10"/>
+		</g>
+		<g id="shape24-61" v:mID="24" v:groupContext="shape" transform="translate(317.917,1319.42) rotate(180)">
+			<title>Foglio.24</title>
+			<path d="M5.1 727.11 L0 722.01 L5.1 716.9" class="st8"/>
+		</g>
+		<g id="shape25-64" v:mID="25" v:groupContext="shape" transform="translate(315.366,1324.52) rotate(180)">
+			<title>Foglio.25</title>
+			<path d="M0 727.11 L150.24 727.11" class="st11"/>
+		</g>
+		<g id="shape26-67" v:mID="26" v:groupContext="shape" transform="translate(153.791,-112.689)">
+			<title>Foglio.26</title>
+			<rect x="0" y="693.094" width="11.3386" height="34.0157" class="st10"/>
+		</g>
+		<g id="shape27-69" v:mID="27" v:groupContext="shape" transform="translate(171.334,-134.081)">
+			<title>Foglio.27</title>
+			<desc>4. construct a Xid for each in-doubt transaction</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="93.2758" cy="720.156" width="186.56" height="13.9075"/>
+			<rect x="0" y="713.202" width="186.552" height="13.9075" class="st4"/>
+			<text x="4" y="722.56" class="st9" v:langID="1040"><v:paragraph/><v:tabList/>4. construct a Xid for each in-doubt transaction</text>		</g>
+		<g id="shape28-72" v:mID="28" v:groupContext="shape" transform="translate(496.216,1370.94) rotate(180)">
+			<title>Foglio.28</title>
+			<path d="M5.1 727.11 L0 722.01 L5.1 716.9" class="st8"/>
+		</g>
+		<g id="shape33-75" v:mID="33" v:groupContext="shape" transform="translate(493.948,1376.05) rotate(180)">
+			<title>Foglio.33</title>
+			<path d="M0 727.11 L328.82 727.11" class="st8"/>
+		</g>
+		<g id="shape34-78" v:mID="34" v:groupContext="shape" transform="translate(153.791,-61.6649)">
+			<title>Foglio.34</title>
+			<rect x="0" y="687.424" width="11.3386" height="39.685" class="st10"/>
+		</g>
+		<g id="shape35-80" v:mID="35" v:groupContext="shape" transform="translate(171.334,-80.223)">
+			<title>Foglio.35</title>
+			<desc>5. commit (Xid) or rollback (Xid) the in-doubt transaction</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="138.63" cy="720.156" width="277.27" height="13.9075"/>
+			<rect x="0" y="713.202" width="277.26" height="13.9075" class="st4"/>
+			<text x="4" y="722.56" class="st9" v:langID="1040"><v:paragraph/><v:tabList/>5. commit (Xid) or rollback (Xid) the in-doubt transaction</text>		</g>
+		<g id="shape11-83" v:mID="11" v:groupContext="shape" transform="translate(275.149,-667.451)">
+			<title>Foglio.11</title>
+			<rect x="0" y="682.109" width="97.4409" height="45" rx="8.50394" ry="8.50394" class="st3"/>
+		</g>
+		<g id="shape12-85" v:mID="12" v:groupContext="shape" transform="translate(284.196,-682.625)">
+			<title>Foglio.12</title>
+			<desc>Xid (from adapter)</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="39.7677" cy="717.321" width="79.54" height="19.5768"/>
+			<rect x="0" y="707.533" width="79.5354" height="19.5768" class="st4"/>
+			<text x="4" y="714.92" class="st5" v:langID="1040"><v:paragraph/><v:tabList/>Xid<v:newlineChar/><tspan x="4" dy="1.2em"
+						class="st6">(</tspan>from adapter)</text>		</g>
+		<g id="shape1-89" v:mID="1" v:groupContext="shape" transform="translate(119.775,-667.096)">
+			<title>Foglio.1</title>
+			<rect x="0" y="682.109" width="85.0394" height="45" rx="8.50394" ry="8.50394" class="st3"/>
+		</g>
+		<g id="shape4-91" v:mID="4" v:groupContext="shape" transform="translate(130.316,-682.425)">
+			<title>Foglio.4</title>
+			<desc>Resource Adapter</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="23.4744" cy="717.321" width="46.95" height="19.5768"/>
+			<rect x="0" y="707.533" width="46.9488" height="19.5768" class="st4"/>
+			<text x="4" y="714.92" class="st5" v:langID="1040"><v:paragraph/><v:tabList/>Resource <tspan x="4" dy="1.2em"
+						class="st6">Adapter</tspan></text>		</g>
+		<g id="shape56-95" v:mID="56" v:groupContext="shape" transform="translate(4.97197,-667.096)">
+			<title>Foglio.56</title>
+			<rect x="0" y="682.109" width="46.7717" height="45" rx="8.50394" ry="8.50394" class="st3"/>
+		</g>
+		<g id="shape57-97" v:mID="57" v:groupContext="shape" transform="translate(13.8302,-681.535)">
+			<title>Foglio.57</title>
+			<desc>EIS</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="17.5394" cy="717.321" width="35.08" height="19.5768"/>
+			<rect x="0" y="707.533" width="35.0787" height="19.5768" class="st4"/>
+			<text x="4" y="719.72" class="st5" v:langID="1040"><v:paragraph/><v:tabList/>EIS</text>		</g>
+		<g id="shape5-100" v:mID="5" v:groupContext="shape" transform="translate(317.525,918.317) rotate(-179.947)">
+			<title>Foglio.5</title>
+			<path d="M0 727.11 L152.56 727.11" class="st11"/>
+		</g>
+		<g id="shape6-103" v:mID="6" v:groupContext="shape" transform="translate(154.305,-522.295)">
+			<title>Foglio.6</title>
+			<rect x="0" y="693.094" width="11.3386" height="34.0157" class="st10"/>
+		</g>
+		<g id="shape7-105" v:mID="7" v:groupContext="shape" transform="translate(318.2,913.215) rotate(180)">
+			<title>Foglio.7</title>
+			<path d="M5.1 727.11 L0 722.01 L5.1 716.9" class="st8"/>
+		</g>
+		<g id="shape8-108" v:mID="8" v:groupContext="shape" transform="translate(175.961,-541.57)">
+			<title>Foglio.8</title>
+			<desc>1. create a Xid for each active transaction</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="81.0407" cy="720.156" width="162.09" height="13.9075"/>
+			<rect x="0" y="713.202" width="162.081" height="13.9075" class="st4"/>
+			<text x="4" y="722.56" class="st9" v:langID="1040"><v:paragraph/><v:tabList/>1. create a Xid for each active transaction</text>		</g>
+		<g id="shape9-111" v:mID="9" v:groupContext="shape" transform="translate(493.948,980.538) rotate(180)">
+			<title>Foglio.9</title>
+			<path d="M0 727.11 L328.31 727.11" class="st8"/>
+		</g>
+		<g id="shape10-114" v:mID="10" v:groupContext="shape" transform="translate(154.305,-459.933)">
+			<title>Foglio.10</title>
+			<rect x="0" y="693.094" width="11.3386" height="34.0157" class="st10"/>
+		</g>
+		<g id="shape15-116" v:mID="15" v:groupContext="shape" transform="translate(496.5,975.577) rotate(180)">
+			<title>Foglio.15</title>
+			<path d="M5.1 727.11 L0 722.01 L5.1 716.9" class="st8"/>
+		</g>
+		<g id="shape18-119" v:mID="18" v:groupContext="shape" transform="translate(175.961,-479.208)">
+			<title>Foglio.18</title>
+			<desc>2. rollback (Xid) for each active transaction</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="81.0407" cy="720.156" width="162.09" height="13.9075"/>
+			<rect x="0" y="713.202" width="162.081" height="13.9075" class="st4"/>
+			<text x="4" y="722.56" class="st9" v:langID="1040"><v:paragraph/><v:tabList/>2. rollback (Xid) for each active transaction</text>		</g>
+		<g id="shape36-122" v:mID="36" v:groupContext="shape" transform="translate(170.267,-231.876)">
+			<title>Foglio.36</title>
+			<desc>2. recover() [returns a list of in-doubt transactions]</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="133.76" cy="720.156" width="267.52" height="13.9075"/>
+			<rect x="0" y="713.202" width="267.52" height="13.9075" class="st4"/>
+			<text x="4" y="722.56" class="st9" v:langID="1040"><v:paragraph/><v:tabList/>2. recover() [returns a list of in-doubt transactions]</text>		</g>
+		<g id="shape37-125" v:mID="37" v:groupContext="shape" transform="translate(140.202,1274.57) rotate(180)">
+			<title>Foglio.37</title>
+			<path d="M5.1 727.11 L0 722.01 L5.1 716.9" class="st8"/>
+		</g>
+		<g id="shape38-128" v:mID="38" v:groupContext="shape" transform="translate(137.935,1279.67) rotate(180)">
+			<title>Foglio.38</title>
+			<path d="M0 727.11 L101.69 727.11" class="st8"/>
+		</g>
+		<g id="shape39-131" v:mID="39" v:groupContext="shape" transform="translate(35.3558,-180.72)">
+			<title>Foglio.39</title>
+			<desc>3. send commit or rollback to the in-doubt transactions</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="133.76" cy="720.156" width="267.52" height="13.9075"/>
+			<rect x="0" y="713.202" width="267.52" height="13.9075" class="st4"/>
+			<text x="4" y="722.56" class="st9" v:langID="1040"><v:paragraph/><v:tabList/>3. send commit or rollback to the in-doubt transactions</text>		</g>
+		<g id="shape40-134" v:mID="40" v:groupContext="shape" transform="translate(21.7141,-60.2476)">
+			<title>Foglio.40</title>
+			<rect x="0" y="572.621" width="11.3386" height="154.488" class="st10"/>
+		</g>
+	</g>
+</svg>

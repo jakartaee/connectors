@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Generato da Microsoft Visio 11.0, SVG Export, v1.0 conn-97.svg Pagina 1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="8.40583in"
+		height="9.4885in" viewBox="0 0 605.22 683.172" xml:space="preserve" color-interpolation-filters="sRGB" class="st17">
+	<v:documentProperties v:langID="1040" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="MBSAAddinOutlineVisible" v:prompt="" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#ffffff;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st2 {fill:#f28226;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st3 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st4 {fill:#ffffff;font-family:Arial;font-size:0.666664em;font-weight:bold}
+		.st5 {fill:#ffffff;fill-opacity:0;stroke:#8c8c8c;stroke-dasharray:0,6.48;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st6 {fill:#ffffff;font-family:Arial;font-size:0.666664em}
+		.st7 {fill:#facca7;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st8 {fill:#000000;font-family:Arial;font-size:0.666664em;font-weight:bold}
+		.st9 {font-size:1em}
+		.st10 {stroke:#ffffff;stroke-dasharray:0,6.48;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st11 {stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st12 {stroke:#f28226;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st13 {stroke:#f28226;stroke-dasharray:0,6.48;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st14 {fill:#d9680d;font-family:Arial;font-size:0.666664em;font-weight:bold}
+		.st15 {fill:#173660;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.72}
+		.st16 {stroke:#8c8c8c;stroke-dasharray:0,6.48;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.16}
+		.st17 {fill:none;fill-rule:evenodd;font-size:12;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>Pagina 1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<g id="shape139-1" v:mID="139" v:groupContext="shape" transform="translate(0.72,-0.72)">
+			<title>Foglio.139</title>
+			<rect x="0" y="1.44" width="595.276" height="681.732" class="st1"/>
+		</g>
+		<g id="shape8-3" v:mID="8" v:groupContext="shape" transform="translate(29.0665,-489.696)">
+			<title>Foglio.8</title>
+			<rect x="0" y="649.157" width="538.583" height="34.0157" rx="5.66929" ry="5.66929" class="st2"/>
+		</g>
+		<g id="shape6-5" v:mID="6" v:groupContext="shape" transform="translate(136.283,-499.751)">
+			<title>Foglio.6</title>
+			<desc>Outbound Resource Adapters</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="108.216" cy="676.219" width="216.44" height="13.9075"/>
+			<rect x="0" y="669.265" width="216.433" height="13.9075" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="51.32" y="678.62" class="st4" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Outbound Resource Adapters</text>		</g>
+		<g id="shape1-8" v:mID="1" v:groupContext="shape" transform="translate(17.7279,-160.877)">
+			<title>Foglio.1</title>
+			<rect x="0" y="308.999" width="564.094" height="374.173" rx="11.3386" ry="11.3386" class="st5"/>
+		</g>
+		<g id="shape9-10" v:mID="9" v:groupContext="shape" transform="translate(377.228,-35.0215)">
+			<title>Foglio.9</title>
+			<desc>&#60;interface&#62;</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.431" cy="676.219" width="62.87" height="13.9075"/>
+			<rect x="0" y="669.265" width="62.862" height="13.9075" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="11.42" y="678.62" class="st6" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;interface&#62;</text>		</g>
+		<g id="shape62-13" v:mID="62" v:groupContext="shape" transform="translate(29.0665,-177.885)">
+			<title>Foglio.62</title>
+			<rect x="0" y="649.157" width="538.583" height="34.0157" rx="5.66929" ry="5.66929" class="st2"/>
+		</g>
+		<g id="shape63-15" v:mID="63" v:groupContext="shape" transform="translate(136.283,-187.939)">
+			<title>Foglio.63</title>
+			<desc>Inbound Resource Adapters</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="108.216" cy="676.219" width="216.44" height="13.9075"/>
+			<rect x="0" y="669.265" width="216.433" height="13.9075" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="54.65" y="678.62" class="st4" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Inbound Resource Adapters</text>		</g>
+		<g id="shape2-18" v:mID="2" v:groupContext="shape" transform="translate(29.0665,-251.586)">
+			<title>Foglio.2</title>
+			<rect x="0" y="470.574" width="538.583" height="212.598" rx="5.66929" ry="5.66929" class="st7"/>
+		</g>
+		<g id="shape3-20" v:mID="3" v:groupContext="shape" transform="translate(145.287,-277.098)">
+			<title>Foglio.3</title>
+			<rect x="0" y="524.432" width="297.638" height="158.74" rx="5.66929" ry="5.66929" class="st2"/>
+		</g>
+		<g id="shape4-22" v:mID="4" v:groupContext="shape" transform="translate(153.791,-368.388)">
+			<title>Foglio.4</title>
+			<ellipse cx="29.0551" cy="654.117" rx="29.0551" ry="29.0551" class="st1"/>
+		</g>
+		<g id="shape7-24" v:mID="7" v:groupContext="shape" transform="translate(374.185,-369.224)">
+			<title>Foglio.7</title>
+			<ellipse cx="29.0551" cy="654.117" rx="29.0551" ry="29.0551" class="st1"/>
+		</g>
+		<g id="shape5-26" v:mID="5" v:groupContext="shape" transform="translate(207.649,-288.437)">
+			<title>Foglio.5</title>
+			<rect x="0" y="637.818" width="175.748" height="45.3543" rx="5.66929" ry="5.66929" class="st1"/>
+		</g>
+		<g id="shape10-28" v:mID="10" v:groupContext="shape" transform="translate(233.039,-301.325)">
+			<title>Foglio.10</title>
+			<desc>message-drven beans</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="36.9728" cy="675.443" width="73.95" height="15.4577"/>
+			<rect x="0" y="667.715" width="73.9455" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="673.04" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>message-drven <v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st9">beans</tspan></text>		</g>
+		<g id="shape11-32" v:mID="11" v:groupContext="shape" transform="translate(156.437,-393.318)">
+			<title>Foglio.11</title>
+			<desc>session beans</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="20.0313" cy="675.443" width="40.07" height="15.4577"/>
+			<rect x="0" y="667.715" width="40.0625" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="673.04" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>session<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st9">beans</tspan></text>		</g>
+		<g id="shape12-36" v:mID="12" v:groupContext="shape" transform="translate(377.539,-393.318)">
+			<title>Foglio.12</title>
+			<desc>entity beans</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="20.0313" cy="675.443" width="40.07" height="15.4577"/>
+			<rect x="0" y="667.715" width="40.0625" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="673.04" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>entity<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st9">beans</tspan></text>		</g>
+		<g id="shape13-40" v:mID="13" v:groupContext="shape" transform="translate(865.986,799.616) rotate(135)">
+			<title>Foglio.13</title>
+			<path d="M0 683.17 L44.38 683.17" class="st10"/>
+		</g>
+		<g id="shape14-43" v:mID="14" v:groupContext="shape" transform="translate(866.387,791.999) rotate(135)">
+			<title>Foglio.14</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st11"/>
+		</g>
+		<g id="shape15-46" v:mID="15" v:groupContext="shape" transform="translate(-277.087,798.241) rotate(45) scale(1,-1)">
+			<title>Foglio.15</title>
+			<path d="M0 683.17 L44.38 683.17" class="st10"/>
+		</g>
+		<g id="shape18-49" v:mID="18" v:groupContext="shape" transform="translate(-277.488,790.624) rotate(45) scale(1,-1)">
+			<title>Foglio.18</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st11"/>
+		</g>
+		<g id="shape19-52" v:mID="19" v:groupContext="shape" transform="translate(1123.26,434.137) rotate(90)">
+			<title>Foglio.19</title>
+			<path d="M0 683.17 L34.3 683.17" class="st12"/>
+		</g>
+		<g id="shape20-55" v:mID="20" v:groupContext="shape" transform="translate(1118.16,431.586) rotate(90)">
+			<title>Foglio.20</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape21-58" v:mID="21" v:groupContext="shape" transform="translate(830.727,434.137) rotate(90)">
+			<title>Foglio.21</title>
+			<path d="M0 683.17 L34.3 683.17" class="st12"/>
+		</g>
+		<g id="shape22-61" v:mID="22" v:groupContext="shape" transform="translate(825.625,431.586) rotate(90)">
+			<title>Foglio.22</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape23-64" v:mID="23" v:groupContext="shape" transform="translate(982.097,408.909) rotate(90)">
+			<title>Foglio.23</title>
+			<path d="M0 683.17 L61.88 683.17" class="st13"/>
+		</g>
+		<g id="shape24-67" v:mID="24" v:groupContext="shape" transform="translate(976.995,409.192) rotate(90)">
+			<title>Foglio.24</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape25-70" v:mID="25" v:groupContext="shape" transform="translate(377.606,-255.971)">
+			<title>Foglio.25</title>
+			<desc>Application</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="36.9728" cy="675.443" width="73.95" height="15.4577"/>
+			<rect x="0" y="667.715" width="73.9455" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="677.84" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>Application</text>		</g>
+		<g id="shape26-73" v:mID="26" v:groupContext="shape" transform="translate(465.224,-255.971)">
+			<title>Foglio.26</title>
+			<desc>Application Server</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="41.2911" cy="675.443" width="82.59" height="15.4577"/>
+			<rect x="0" y="667.715" width="82.5822" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="677.84" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>Application Server</text>		</g>
+		<g id="shape27-76" v:mID="27" v:groupContext="shape" transform="translate(466.83,-214.736)">
+			<title>Foglio.27</title>
+			<desc>Inbound contracts</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="41.2911" cy="675.443" width="82.59" height="15.4577"/>
+			<rect x="0" y="667.715" width="82.5822" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="677.84" class="st14" v:langID="1040"><v:paragraph/><v:tabList/>Inbound contracts</text>		</g>
+		<g id="shape28-79" v:mID="28" v:groupContext="shape" transform="translate(468.437,-464.185)">
+			<title>Foglio.28</title>
+			<desc>Outbound contracts</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="45.5431" cy="675.443" width="91.09" height="15.4577"/>
+			<rect x="0" y="667.715" width="91.0861" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="677.84" class="st14" v:langID="1040"><v:paragraph/><v:tabList/>Outbound contracts</text>		</g>
+		<g id="shape29-82" v:mID="29" v:groupContext="shape" transform="translate(864.743,193.963) rotate(90)">
+			<title>Foglio.29</title>
+			<path d="M0 683.17 L61.88 683.17" class="st13"/>
+		</g>
+		<g id="shape30-85" v:mID="30" v:groupContext="shape" transform="translate(859.64,194.246) rotate(90)">
+			<title>Foglio.30</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape31-88" v:mID="31" v:groupContext="shape" transform="translate(982.097,193.719) rotate(90)">
+			<title>Foglio.31</title>
+			<path d="M0 683.17 L61.88 683.17" class="st13"/>
+		</g>
+		<g id="shape32-91" v:mID="32" v:groupContext="shape" transform="translate(976.995,194.003) rotate(90)">
+			<title>Foglio.32</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape33-94" v:mID="33" v:groupContext="shape" transform="translate(1094.35,193.476) rotate(90)">
+			<title>Foglio.33</title>
+			<path d="M0 683.17 L61.88 683.17" class="st13"/>
+		</g>
+		<g id="shape34-97" v:mID="34" v:groupContext="shape" transform="translate(1089.25,193.759) rotate(90)">
+			<title>Foglio.34</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape35-100" v:mID="35" v:groupContext="shape" transform="translate(29.0665,-554.893)">
+			<title>Foglio.35</title>
+			<rect x="0" y="649.157" width="85.0394" height="34.0157" rx="5.66929" ry="5.66929" class="st15"/>
+		</g>
+		<g id="shape36-102" v:mID="36" v:groupContext="shape" transform="translate(34.7357,-562.113)">
+			<title>Foglio.36</title>
+			<desc>Database Systems</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="672.609" width="62.37" height="21.127"/>
+			<rect x="0" y="662.045" width="62.3622" height="21.127" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="670.21" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Database<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st9">Systems</tspan></text>		</g>
+		<g id="shape37-106" v:mID="37" v:groupContext="shape" transform="translate(136.783,-554.893)">
+			<title>Foglio.37</title>
+			<rect x="0" y="649.157" width="85.0394" height="34.0157" rx="5.66929" ry="5.66929" class="st15"/>
+		</g>
+		<g id="shape38-108" v:mID="38" v:groupContext="shape" transform="translate(145.287,-562.113)">
+			<title>Foglio.38</title>
+			<desc>ERP Systems</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="672.609" width="62.37" height="21.127"/>
+			<rect x="0" y="662.045" width="62.3622" height="21.127" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="670.21" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>ERP<v:newlineChar/><tspan x="4" dy="1.2em"
+						class="st9">Systems</tspan></text>		</g>
+		<g id="shape39-112" v:mID="39" v:groupContext="shape" transform="translate(244.5,-554.893)">
+			<title>Foglio.39</title>
+			<rect x="0" y="649.157" width="85.0394" height="34.0157" rx="5.66929" ry="5.66929" class="st15"/>
+		</g>
+		<g id="shape40-114" v:mID="40" v:groupContext="shape" transform="translate(253.003,-562.113)">
+			<title>Foglio.40</title>
+			<desc>Message Publishers</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="672.609" width="62.37" height="21.127"/>
+			<rect x="0" y="662.045" width="62.3622" height="21.127" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="670.21" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Message<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st9">Publishers</tspan></text>		</g>
+		<g id="shape41-118" v:mID="41" v:groupContext="shape" transform="translate(752.491,128.766) rotate(90)">
+			<title>Foglio.41</title>
+			<path d="M0 683.17 L61.88 683.17" class="st13"/>
+		</g>
+		<g id="shape42-121" v:mID="42" v:groupContext="shape" transform="translate(747.388,129.049) rotate(90)">
+			<title>Foglio.42</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape43-124" v:mID="43" v:groupContext="shape" transform="translate(859.073,128.766) rotate(90)">
+			<title>Foglio.43</title>
+			<path d="M0 683.17 L61.88 683.17" class="st13"/>
+		</g>
+		<g id="shape44-127" v:mID="44" v:groupContext="shape" transform="translate(853.971,129.049) rotate(90)">
+			<title>Foglio.44</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape45-130" v:mID="45" v:groupContext="shape" transform="translate(967.357,128.766) rotate(90)">
+			<title>Foglio.45</title>
+			<path d="M0 683.17 L61.88 683.17" class="st13"/>
+		</g>
+		<g id="shape46-133" v:mID="46" v:groupContext="shape" transform="translate(962.254,129.049) rotate(90)">
+			<title>Foglio.46</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape47-136" v:mID="47" v:groupContext="shape" transform="translate(363.555,-640.136)">
+			<title>Foglio.47</title>
+			<rect x="0" y="649.157" width="85.0394" height="34.0157" rx="5.66929" ry="5.66929" class="st15"/>
+		</g>
+		<g id="shape48-138" v:mID="48" v:groupContext="shape" transform="translate(372.059,-647.356)">
+			<title>Foglio.48</title>
+			<desc>Message Publishers</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="672.609" width="62.37" height="21.127"/>
+			<rect x="0" y="662.045" width="62.3622" height="21.127" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="670.21" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Message<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st9">Publishers</tspan></text>		</g>
+		<g id="shape49-142" v:mID="49" v:groupContext="shape" transform="translate(471.271,-640.136)">
+			<title>Foglio.49</title>
+			<rect x="0" y="649.157" width="85.0394" height="34.0157" rx="5.66929" ry="5.66929" class="st15"/>
+		</g>
+		<g id="shape50-144" v:mID="50" v:groupContext="shape" transform="translate(479.775,-647.356)">
+			<title>Foglio.50</title>
+			<desc>Web Service Endpoints</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="672.609" width="62.37" height="21.127"/>
+			<rect x="0" y="662.045" width="62.3622" height="21.127" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="670.21" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Web Service<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st9">Endpoints</tspan></text>		</g>
+		<g id="shape51-148" v:mID="51" v:groupContext="shape" transform="translate(1085.85,52.2305) rotate(90)">
+			<title>Foglio.51</title>
+			<path d="M0 683.17 L104.4 683.17" class="st13"/>
+		</g>
+		<g id="shape52-151" v:mID="52" v:groupContext="shape" transform="translate(1080.74,43.8066) rotate(90)">
+			<title>Foglio.52</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape53-154" v:mID="53" v:groupContext="shape" transform="translate(1194.13,52.2305) rotate(90)">
+			<title>Foglio.53</title>
+			<path d="M0 683.17 L104.4 683.17" class="st13"/>
+		</g>
+		<g id="shape54-157" v:mID="54" v:groupContext="shape" transform="translate(1189.03,43.8066) rotate(90)">
+			<title>Foglio.54</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape55-160" v:mID="55" v:groupContext="shape" transform="translate(581.822,760.428) rotate(180)">
+			<title>Foglio.55</title>
+			<path d="M0 683.17 L566.93 683.17" class="st16"/>
+		</g>
+		<g id="shape56-163" v:mID="56" v:groupContext="shape" transform="translate(14.8932,-612.361)">
+			<title>Foglio.56</title>
+			<desc>corporate firewall boundary</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="59.5276" cy="675.443" width="119.06" height="15.4577"/>
+			<rect x="0" y="667.715" width="119.055" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="677.84" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>corporate firewall boundary</text>		</g>
+		<g id="shape57-166" v:mID="57" v:groupContext="shape" transform="translate(471.271,-608.751)">
+			<title>Foglio.57</title>
+			<desc>SOAP / HTTP / HTTPS</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="59.5276" cy="675.443" width="119.06" height="15.4577"/>
+			<rect x="0" y="667.715" width="119.055" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="677.84" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>SOAP / HTTP / HTTPS</text>		</g>
+		<g id="shape64-169" v:mID="64" v:groupContext="shape" transform="translate(474.106,-539.436)">
+			<title>Foglio.64</title>
+			<desc>same address space</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="59.5276" cy="675.443" width="119.06" height="15.4577"/>
+			<rect x="0" y="667.715" width="119.055" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="677.84" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>same address space</text>		</g>
+		<g id="shape16-172" v:mID="16" v:groupContext="shape" transform="translate(581.822,1294.63) rotate(180)">
+			<title>Foglio.16</title>
+			<path d="M0 683.17 L566.93 683.17" class="st16"/>
+		</g>
+		<g id="shape17-175" v:mID="17" v:groupContext="shape" transform="translate(14.8932,-71.719)">
+			<title>Foglio.17</title>
+			<desc>corporate firewall boundary</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="59.5276" cy="675.443" width="119.06" height="15.4577"/>
+			<rect x="0" y="667.715" width="119.055" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="677.84" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>corporate firewall boundary</text>		</g>
+		<g id="shape58-178" v:mID="58" v:groupContext="shape" transform="translate(377.728,-13.5888)">
+			<title>Foglio.58</title>
+			<rect x="0" y="649.157" width="85.0394" height="34.0157" rx="5.66929" ry="5.66929" class="st15"/>
+		</g>
+		<g id="shape59-180" v:mID="59" v:groupContext="shape" transform="translate(386.232,-20.8083)">
+			<title>Foglio.59</title>
+			<desc>Message Publishers</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="672.609" width="62.37" height="21.127"/>
+			<rect x="0" y="662.045" width="62.3622" height="21.127" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="670.21" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Message<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st9">Publishers</tspan></text>		</g>
+		<g id="shape60-184" v:mID="60" v:groupContext="shape" transform="translate(485.444,-13.5888)">
+			<title>Foglio.60</title>
+			<rect x="0" y="649.157" width="85.0394" height="34.0157" rx="5.66929" ry="5.66929" class="st15"/>
+		</g>
+		<g id="shape61-186" v:mID="61" v:groupContext="shape" transform="translate(493.948,-20.8083)">
+			<title>Foglio.61</title>
+			<desc>Web Service Endpoints</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="672.609" width="62.37" height="21.127"/>
+			<rect x="0" y="662.045" width="62.3622" height="21.127" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="670.21" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Web Service<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st9">Endpoints</tspan></text>		</g>
+		<g id="shape65-190" v:mID="65" v:groupContext="shape" transform="translate(1100.02,519.664) rotate(90)">
+			<title>Foglio.65</title>
+			<path d="M0 683.17 L116.02 683.17" class="st13"/>
+		</g>
+		<g id="shape66-193" v:mID="66" v:groupContext="shape" transform="translate(1094.92,511.24) rotate(90)">
+			<title>Foglio.66</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape67-196" v:mID="67" v:groupContext="shape" transform="translate(1208.3,519.664) rotate(90)">
+			<title>Foglio.67</title>
+			<path d="M0 683.17 L116.02 683.17" class="st13"/>
+		</g>
+		<g id="shape68-199" v:mID="68" v:groupContext="shape" transform="translate(1203.2,511.24) rotate(90)">
+			<title>Foglio.68</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape69-202" v:mID="69" v:groupContext="shape" transform="translate(485.444,-54.7111)">
+			<title>Foglio.69</title>
+			<desc>SOAP / HTTP / HTTPS</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="59.5276" cy="675.443" width="119.06" height="15.4577"/>
+			<rect x="0" y="667.715" width="119.055" height="15.4577" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="677.84" class="st8" v:langID="1040"><v:paragraph/><v:tabList/>SOAP / HTTP / HTTPS</text>		</g>
+		<g id="shape76-205" v:mID="76" v:groupContext="shape" transform="translate(755.325,505.774) rotate(90)">
+			<title>Foglio.76</title>
+			<path d="M0 683.17 L61.88 683.17" class="st13"/>
+		</g>
+		<g id="shape77-208" v:mID="77" v:groupContext="shape" transform="translate(750.223,506.057) rotate(90)">
+			<title>Foglio.77</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape78-211" v:mID="78" v:groupContext="shape" transform="translate(861.908,505.774) rotate(90)">
+			<title>Foglio.78</title>
+			<path d="M0 683.17 L61.88 683.17" class="st13"/>
+		</g>
+		<g id="shape79-214" v:mID="79" v:groupContext="shape" transform="translate(856.806,506.057) rotate(90)">
+			<title>Foglio.79</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape80-217" v:mID="80" v:groupContext="shape" transform="translate(970.191,505.774) rotate(90)">
+			<title>Foglio.80</title>
+			<path d="M0 683.17 L61.88 683.17" class="st13"/>
+		</g>
+		<g id="shape81-220" v:mID="81" v:groupContext="shape" transform="translate(965.089,506.057) rotate(90)">
+			<title>Foglio.81</title>
+			<path d="M5.1 683.17 L0 678.07 L5.1 672.97" class="st12"/>
+		</g>
+		<g id="shape70-223" v:mID="70" v:groupContext="shape" transform="translate(31.9011,-104.185)">
+			<title>Foglio.70</title>
+			<rect x="0" y="649.157" width="85.0394" height="34.0157" rx="5.66929" ry="5.66929" class="st15"/>
+		</g>
+		<g id="shape71-225" v:mID="71" v:groupContext="shape" transform="translate(37.5704,-111.404)">
+			<title>Foglio.71</title>
+			<desc>ERP Systems</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="672.609" width="62.37" height="21.127"/>
+			<rect x="0" y="662.045" width="62.3622" height="21.127" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="670.21" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>ERP<v:newlineChar/><tspan x="4" dy="1.2em"
+						class="st9">Systems</tspan></text>		</g>
+		<g id="shape72-229" v:mID="72" v:groupContext="shape" transform="translate(139.618,-104.185)">
+			<title>Foglio.72</title>
+			<rect x="0" y="649.157" width="85.0394" height="34.0157" rx="5.66929" ry="5.66929" class="st15"/>
+		</g>
+		<g id="shape73-231" v:mID="73" v:groupContext="shape" transform="translate(148.122,-111.404)">
+			<title>Foglio.73</title>
+			<desc>CRM Systems</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="672.609" width="62.37" height="21.127"/>
+			<rect x="0" y="662.045" width="62.3622" height="21.127" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="670.21" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>CRM<v:newlineChar/><tspan x="4" dy="1.2em"
+						class="st9">Systems</tspan></text>		</g>
+		<g id="shape74-235" v:mID="74" v:groupContext="shape" transform="translate(247.334,-104.185)">
+			<title>Foglio.74</title>
+			<rect x="0" y="649.157" width="85.0394" height="34.0157" rx="5.66929" ry="5.66929" class="st15"/>
+		</g>
+		<g id="shape75-237" v:mID="75" v:groupContext="shape" transform="translate(255.838,-111.404)">
+			<title>Foglio.75</title>
+			<desc>Message Providers</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="672.609" width="62.37" height="21.127"/>
+			<rect x="0" y="662.045" width="62.3622" height="21.127" rx="5.66929" ry="5.66929" class="st3"/>
+			<text x="4" y="670.21" class="st4" v:langID="1040"><v:paragraph/><v:tabList/>Message<v:newlineChar/><tspan x="4"
+						dy="1.2em" class="st9">Providers</tspan></text>		</g>
+	</g>
+</svg>
