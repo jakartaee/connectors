@@ -16,7 +16,7 @@ Run the full build:
 `mvn install`
 
 Locate the html files:
-- target/generated-docs/Connectors.html
+- target/generated-docs/jakarta-connectors-spec.html
 
 Locate the PDF files:
-- target/generated-docs/Connectors.pdf
+- target/generated-docs/jakarta-connectors-spec.pdf
