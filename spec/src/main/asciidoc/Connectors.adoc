@@ -1,7 +1,7 @@
 :sectnums:
-== Jakarta Connectors, Version 2.0
+== Jakarta Connectors, Version 2.1
 
-Copyright (c) 2013, 2020 Oracle and/or its affiliates
+Copyright (c) 2013, 2022 Eclipse Foundation, Oracle and/or its affiliates
 
 Oracle and Java are registered trademarks of Oracle and/or its 
 affiliates. Other names may be trademarks of their respective owners. 
@@ -74,7 +74,7 @@ application server that supports the connector architecture.
 
 === Scope
 
-Version 2.0 of the connector architecture
+Version 2.1 of the connector architecture
 defines:
 
 * A standard set of system-level contracts
@@ -153,6 +153,7 @@ _Work_ instance in the context of an established identity. It also
 supports the propagation of user information/Principal information from
 an EIS to a MessageEndpoint during Message Inflow.
 
+Version 2.1 of Jakarta Connectors provides minor updates required for Jakarta EE 10 including compiled with Java 11
 Version 2.0 of Jakarta Connectors moves the old Java Connectors Architecture specification to Jakarta EE.
 
 === Target Audience
@@ -273,7 +274,7 @@ to specify a prescriptive way of implementing a particular contract.
 
 This document uses the Jakarta Enterprise Beans component model to
 describe some scenarios. The Jakarta Enterprise Beans specification (see
-<<a9723, Jakarta Enterprise Beans Specification, version 3.2>> provides the latest details of the
+<<a9723, Jakarta Enterprise Beans Specification, version 4.0>> provides the latest details of the
 component model.
 
 == Overview
@@ -399,7 +400,7 @@ that provides deployment and runtime support for application components.
 It provides a federated view of the services provided by the underlying
 application server for the application components. For more details on
 different types of standard containers, refer to the Jakarta Enterprise Beans (see
-<<a9723, Jakarta™ Enterprise Beans Specification, Version 3.2>>,
+<<a9723, Jakarta™ Enterprise Beans Specification, Version 4.0>>,
 Jakarta Server Pages, and servlet specifications.
 
 === Rationale
@@ -740,7 +741,7 @@ implementation of the Jakarta EE Full Profile. The minimum set, listed
 below, must be supported for a compliant Jakarta EE Connectors
 container within an implementation of any subset of the Jakarta EE Full
 Profile. Overall profile requirements are described within the
-<<a9737, Jakarta™ EE Platform Specification Version 9>>.
+<<a9737, Jakarta™ EE Platform Specification Version 10>>.
 
 Non-”Full Profile” implementations may only
 support a subset of the component specifications that were mandated to
@@ -758,7 +759,7 @@ Inflow requirements specified in <<a2576, Message Inflow>> must be satisfied by 
 
 * If an implementation of the Bean Validation
 specification is provided, the requirements in
-<<a516, Jakarta™ Bean Validation Specification, Version 2.0>> must be supported.
+<<a516, Jakarta™ Bean Validation Specification, Version 3.0>> must be supported.
 
 An existing resource adapter archive RAR may
 not be fully functional in a standalone implementation, though. For
@@ -786,7 +787,7 @@ support the baseline compatibility requirements as defined by the
 Jakarta™ Authentication
 specification and support the Security Inflow requirements specified in
 <<a3707, Security Inflow>>. See
-<<a9751, Jakarta™ Authentication Specification, Version 1.1>>
+<<a9751, Jakarta™ Authentication Specification, Version 3.0>>
 for more information on the Jakarta™ Authentication specification.
 
 This specification does not define new
@@ -831,7 +832,7 @@ the same as that of a container provider.
 
 The Jakarta EE platform specification (see
 <<a9737, Jakarta Platform, Enterprise Edition (Jakarta
-EE) Specification, version 9>>) specifies requirements for a Jakarta EE
+EE) Specification, version 10>>) specifies requirements for a Jakarta EE
 platform provider.
 
 ==== Container Provider
@@ -4702,12 +4703,12 @@ connections that are marked _unshareable_ .
 Jakarta EE application components may use the
 optional deployment descriptor element _res-sharing-scope_ or the
 _shareable_ annotation element of _Resource_ annotation defined in the
-Common Annotations specification (see <<a9757, Jakarta™ Annotations 2.0>>),
+Common Annotations specification (see <<a9757, Jakarta™ Annotations 2.1>>),
 to indicate whether a connection to a resource manager is shareable or
 unshareable. Containers must assume connections to be shareable if no
 deployment hint is provided. Refer to the Enterprise Beans specification
-(see <<a9723, Jakarta™ Enterprise Beans Specification, Version 3.2>>) and the servlet specification (see
-<<a9741, Jakarta™ Servlet Specification, Version 4.0>>)
+(see <<a9723, Jakarta™ Enterprise Beans Specification, Version 4.0>>) and the servlet specification (see
+<<a9741, Jakarta™ Servlet Specification, Version 6.0>>)
 for a description of the deployment descriptor element.
 
 Jakarta EE application components may cache
@@ -4786,7 +4787,7 @@ various transaction scenarios.
 ==== Requirements
 
 The Jakarta EE platform specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 9>>) identifies the following as transactional
+<<a9737, Jakarta™ EE Platform Specification Version 10>>) identifies the following as transactional
 resources:
 
 * JDBC connections
@@ -5207,7 +5208,7 @@ in an existing transaction. The mechanism through which the application
 server and its transaction manager coordinates the initial local
 transaction and lazily started Jakarta Transaction transactions is outside the scope of
 the connector specification. Refer to the Jakarta EE platform specification
-(see <<a9737, Jakarta™ EE Platform Specification Version 9>>)
+(see <<a9737, Jakarta™ EE Platform Specification Version 10>>)
 for more details on the local
 transaction optimization.
 
@@ -6262,7 +6263,7 @@ This chapter references the following
 chapters and documents:
 
 The security model specified in the Jakarta EE platform specification
-(see <<a9737, Jakarta Platform, Enterprise Edition (Jakarta EE) Specification, version 9>>).
+(see <<a9737, Jakarta Platform, Enterprise Edition (Jakarta EE) Specification, version 10>>).
 
 Security architecture specified in
 <<a1563, Security Architecture>>.
@@ -10646,7 +10647,7 @@ ConnectionFactory supplied by the Jakarta Messaging resource adapter.
 information (resource-ref’s and resource-env-ref’s) or resource
 reference injection annotations (Resource annotation defined in
 <<a9757, Jakarta™ Annotations Specification,
- Version 2.0>>), the Jakarta Enterprise Beans deployer configures the
+ Version 2.1>>), the Jakarta Enterprise Beans deployer configures the
 appropriate ConnectionFactory objects (resource-ref’s) in the component
 name space (java:comp/env). The application deployer also configures the
 necessary Queue or Topic administered objects (resource-env-ref’s) in
@@ -11522,7 +11523,7 @@ architecture (Refer to Appendix D <<a9530,
 Security Scenarios>>)
 
 * <<a9751, Jakarta™ Authentication
-Specification, Version 2.0>> (JSR-196)
+Specification, Version 3.0>> (JSR-196)
 
 *Security Inflow Contract*
 
@@ -11747,7 +11748,7 @@ server provider while calling the _setupSecurityContext_ method:
 * The _handler_ argument must not be null, and
 the _CallbackHandler_ implementation passed as the argument _handler_ to
 _setupSecurityContext_ must support the following _Callback_ s defined
-in <<a9751, Jakarta™ Authentication Specification, Version 2.0>>:
+in <<a9751, Jakarta™ Authentication Specification, Version 3.0>>:
 ** _CallerPrincipalCallback_
 ** _GroupPrincipalCallback_
 ** _PasswordValidationCallback_
@@ -11830,9 +11831,9 @@ image:conn-129.svg[image]
 As part of step 3 described in the section
 above, the following _Callback_ s may be employed by a resource adapter.
 The descriptions of the _Callback_ s below have been taken from the
-<<a9751, Jakarta™ Authentication Specification, Version 2.0>>. For
+<<a9751, Jakarta™ Authentication Specification, Version 3.0>>. For
 detailed information, refer to the <<a9751, Jakarta™ Authentication
-Specification, Version 2.0>> and the Java API documentation of the _Callback_ s defined
+Specification, Version 3.0>> and the Java API documentation of the _Callback_ s defined
 in the _jakarta.security.auth.message.callback_ package of that
 specification:
 
@@ -14102,7 +14103,7 @@ stage of the development or application assembly etc).
 For additional requirements on annotations
 discovery and processing by the application server, see the Deployment
 Section of the “Application Assembly and Deployment” chapter of
-<<a9737, Jakarta™ EE Platform Specification, Version 9>>.
+<<a9737, Jakarta™ EE Platform Specification, Version 10>>.
 
 Deployment descriptors may be “sparse”,
 unlike the full deployment descriptors required as part of the J2EE
@@ -14155,7 +14156,7 @@ An application assembler or deployer may use
 the deployment descriptor to override the metadata annotations specified
 by the resource adapter developer. See the chapter titled “Resources,
 Naming, and Injection” in the Jakarta EE Platform specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 9>>)
+<<a9737, Jakarta™ EE Platform Specification Version 10>>)
 for general rules on annotations and
 injection and override behavior. The rules below complement the rules
 specified in that section.
@@ -14181,7 +14182,7 @@ the resource adapter for annotations. The deployment tool must follow
 the annotation discovery and processing requirements specified in the
 “Deployment Section” of the “Application Assembly and Deployment”
 chapter of the Jakarta EE Platform Specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 9>>).
+<<a9737, Jakarta™ EE Platform Specification Version 10>>).
 
 The information provided by the annotations
 must be merged with the deployment descriptor packaged along with the
@@ -14825,7 +14826,7 @@ application to be deployed into a Jakarta EE environment with less
 administrative configuration. Refer to the section titled “Resource
 Definition and Configuration” in the “Resources, Naming and Injection”
 chapter of the Jakarta EE Platform Specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 9>>)
+<<a9737, Jakarta™ EE Platform Specification Version 10>>)
 for an overview of resource definition annotations.
 
 The _ConnectionFactoryDefinition_ and
@@ -15407,7 +15408,7 @@ image:conn-154.svg[image]
 A resource adapter module corresponds to a
 Jakarta EE module in terms of the Jakarta EE composition hierarchy. Refer to
 the Jakarta EE Platform specification (see <<a9737,
-Jakarta™ EE Platform Specification Version 9>>)
+Jakarta™ EE Platform Specification Version 10>>)
 for more details on the deployment of Jakarta EE modules and applications.
 A Jakarta EE module represents the basic unit of composition of a Jakarta EE
 application. Examples of Jakarta EE modules include Jakarta Enterprise Beans modules,
@@ -15480,7 +15481,7 @@ must use the _.jar_ file extension.
 The resource adapter may also use the library
 support mechanisms described in the Jakarta EE Platform Specification to
 specify library dependencies. See the <<a9737,
-Jakarta™ EE Platform Specification Version 9>>
+Jakarta™ EE Platform Specification Version 10>>
 for more information on the Jakarta EE Platform’s support for libraries.
 
 The platform-specific libraries required by
@@ -15572,7 +15573,7 @@ resource adapter must be made available to the application.
 * If an application references an extension
 using the Extension Mechanism Architecture (see the section titled
 “Library Support” in the “Application Assembly and Deployment” chapter
-of the <<a9737, Jakarta™ EE Platform Specification Version 9>> and a jar file within a
+of the <<a9737, Jakarta™ EE Platform Specification Version 10>> and a jar file within a
 standalone resource adapter supplies that extension, the standalone
 resource adapter must be made available to the application.
 
@@ -15796,7 +15797,7 @@ deployment descriptor.
 ===== Resource Adapter Module with Jakarta EE Application
 
 Refer to the Jakarta EE platform specification
-(see <<a9737, Jakarta™ EE Platform Specification Version 9>>)
+(see <<a9737, Jakarta™ EE Platform Specification Version 10>>)
 for the requirements specified for
 the deployment of a Jakarta EE application.
 
@@ -16364,7 +16365,7 @@ This section specifies the XML Schema
 Definition (XSD) for the deployment descriptor for a resource adapter.
 Some of the types used in this XSD are defined in the Jakarta EE platform
 specification (<<a9737, Jakarta™ EE Platform
-Specification Version 9>>). The comments in
+Specification Version 10>>). The comments in
 the XSD specify additional requirements for syntax and semantics that
 cannot be specified by using the XML Schema language. Note, the
 description-group element defined in javaee_7.xsd allows multiple
@@ -17567,14 +17568,14 @@ with multiple configured resource adapters.
 A resource adapter provider relies on a Jakarta
 EE compliant application server to provide the following APIs:
 
-* Java SDK, Standard Edition, version 8.0 or above that
+* Java SDK, Standard Edition, version 11.0 or above that
 includes the following as part of either the core platform or standard
-extensions: Java IDL, JNDI Standard Extension, and RMI-IIOP. (see
-<<a9745, Java Platform, Standard Edition 8 APISpecification>>)
+extensions: JNDI Standard Extension. (see
+<<a9745, Java Platform, Standard Edition 11 APISpecification>>)
 
 * Required APIs for Jakarta _TM_ Platform,
-Enterprise Edition, Version 9 as specified in the Jakarta EE platform
-specification (see <<a9737, Jakarta™ EE Platform Specification Version 9>>).
+Enterprise Edition, Version 10 as specified in the Jakarta EE platform
+specification (see <<a9737, Jakarta™ EE Platform Specification Version 10>>).
 
 * Java Authentication and Authorization Service
 (JAAS) 1.0 that requires at least Java 2 SDK, Standard Edition, version
@@ -17848,10 +17849,10 @@ permission restrictions.
 
 A resource adapter archive can be a bean
 archive (see Chapter 12 of <<a9759, Jakarta™ Contexts and Dependency
-Injection Specification, Version 3.0>>). The section titled
+Injection Specification, Version 4.0>>). The section titled
 “Support for Dependency Injection” in the “Resources, Naming and
 Injection” chapter of the Jakarta EE Platform Specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 9>>)
+<<a9737, Jakarta™ EE Platform Specification Version 10>>)
 provides more details on the dependency
 injection requirements of an application server.
 
@@ -18102,7 +18103,7 @@ an exception.
 === Additional Exceptions
 
 The Jakarta Transaction specification (see
-<<a9725, Jakarta™ Transaction Specification, Version 1.3>>) specifies the
+<<a9725, Jakarta™ Transaction Specification, Version 2.0>>) specifies the
 javax.transaction.xa.XAException class for exceptions related to the
 XAResource-based transaction management contract.
 
@@ -18115,7 +18116,7 @@ migration issues for the Jakarta EE Connectors specification. For a
 detailed description on Compatibility and Migration and how they relate
 to the Jakarta EE Platform in general, refer the chapter on “Compatibility
 and Migration” in the Jakarta EE platform specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 9>>).
+<<a9737, Jakarta™ EE Platform Specification Version 10>>).
 
 === Compatibility
 
