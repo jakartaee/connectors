@@ -25,6 +25,8 @@ package jakarta.resource.cci;
  */
 public class ResourceWarning extends jakarta.resource.ResourceException {
 
+    private static final long serialVersionUID = 8649016274040384688L;
+
     /**
      * Constructs a new instance with null as its detail message.
      */
