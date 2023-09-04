@@ -31,6 +31,8 @@ import jakarta.resource.spi.ManagedConnectionFactory;
 
 public final class PasswordCredential implements java.io.Serializable {
 
+  private static final long serialVersionUID = -4354608956077368442L;
+
   private String userName;
   private char[] password;
   private ManagedConnectionFactory mcf;
