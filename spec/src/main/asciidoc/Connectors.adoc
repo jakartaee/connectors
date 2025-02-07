@@ -10348,7 +10348,7 @@ contracts.
      <config-property-value>WombatServer</config-property-value>
    </config-property>
    <config-property>
-     config-property-name>PortNumber</config-property-name>
+     <config-property-name>PortNumber</config-property-name>
      <config-property-type>java.lang.String</config-property-type>
      <config-property-value>1050</config-property-value>
    </config-property>
@@ -10376,6 +10376,7 @@ contracts.
         <config-property-value>
            WombatQueueServer
         </config-property-value>
+      </config-property>
       <config-property>
         <config-property-name>PortNumber</config-property-name>
         <config-property-type>java.lang.String</config-property-type>
