@@ -35,7 +35,7 @@
         <non.final>false</non.final>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.5.0.0</spotbugs.version>
+        <spotbugs.version>4.7.3.6</spotbugs.version>
     </properties>
     <name>${extension.name} API</name>
     <description>Jakarta Connectors ${spec.version}</description>
