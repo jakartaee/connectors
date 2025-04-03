@@ -32,6 +32,8 @@ package jakarta.resource.spi;
 public class ApplicationServerInternalException 
         extends jakarta.resource.ResourceException {
 
+    private static final long serialVersionUID = -8263963456909242211L;
+
     /**
      * Constructs a new instance with null as its detail message.
      */

@@ -34,6 +34,8 @@ package jakarta.resource.spi.work;
  */
 public class WorkRejectedException extends WorkException {
 
+    private static final long serialVersionUID = -2264663401505996627L;
+
     /**
      * Constructs a new instance with null as its detail message.
      */
