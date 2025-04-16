@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025 Contributors to Eclipse Foundation. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -86,7 +87,7 @@ public class ResourceWarning extends jakarta.resource.ResourceException {
      */
     public ResourceWarning getLinkedWarning() {
 	try {
-	    return ((ResourceWarning)getLinkedException());
+	    return (ResourceWarning)getLinkedException();
 	} 
 	catch (ClassCastException ex) {
 	    return null;
