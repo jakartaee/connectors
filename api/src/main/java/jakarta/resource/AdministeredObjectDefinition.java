@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2012, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2025 Contributors to Eclipse Foundation. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -21,7 +22,6 @@ import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
-import jakarta.annotation.Resource;
 
 /**
  *  Annotation used to define a Connector administered object to be
