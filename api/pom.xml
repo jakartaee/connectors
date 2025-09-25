@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2012, 2021 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2012, 2025 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -19,28 +19,28 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <parent>
-        <groupId>org.eclipse.ee4j</groupId>
-        <artifactId>project</artifactId>
-        <version>1.0.7</version>
+        <groupId>jakarta.resource</groupId>
+        <artifactId>jakarta.resource.parent</artifactId>
+        <version>2.2.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>jakarta.resource</groupId>
     <artifactId>jakarta.resource-api</artifactId>
-    <version>2.1.1-SNAPSHOT</version>
     
     <properties>
         <extension.name>jakarta.resource</extension.name>
-        <spec.version>2.1</spec.version>
+        <spec.version>2.2</spec.version>
         <non.final>false</non.final>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
         <spotbugs.version>4.5.0.0</spotbugs.version>
     </properties>
+
     <name>${extension.name} API</name>
     <description>Jakarta Connectors ${spec.version}</description>
     
-    <url>https://github.com/eclipse-ee4j/jca-api</url>
+    <url>https://github.com/jakartaee/connectors</url>
 
     <developers>
         <developer>
@@ -76,14 +76,16 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
     <issueManagement>
         <system>github</system>
-        <url>https://github.com/eclipse-ee4j/jca-api/issues</url>
+        <url>https://github.com/jakartaee/connectors/issues</url>
     </issueManagement>
+    
     <scm>
-        <connection>scm:git:ssh://git@github.com/eclipse-ee4j/jca-api.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/jca-api.git</developerConnection>
-        <url>https://github.com/eclipse-ee4j/jca-api</url>
+        <connection>scm:git:ssh://git@github.com/jakartaee/connectors.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/jakartaee/connectors.git</developerConnection>
+        <url>https://github.com/jakartaee/connectors</url>
         <tag>HEAD</tag>
     </scm>
 
