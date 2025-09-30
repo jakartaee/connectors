@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017, 2020 Contributors to the Eclipse Foundation
+// Copyright (c) 2017, 2025 Contributors to the Eclipse Foundation
 //
 
 = Jakarta Connectors
@@ -7,6 +7,7 @@
 :email: https://dev.eclipse.org/mailman/listinfo/jca-dev
 :version-label!:
 :doctype: book
+:docinfo: shared
 :license: Eclipse Foundation Specification License v1.0
 :source-highlighter: coderay
 :toc: left
