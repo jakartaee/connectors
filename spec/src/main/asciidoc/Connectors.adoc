@@ -1,7 +1,7 @@
 :sectnums:
 == Jakarta Connectors, Version {specVersion}
 
-Copyright (c) 2013, 2022 Eclipse Foundation, Oracle and/or its affiliates
+Copyright (c) 2013, 2025 Eclipse Foundation, Oracle and/or its affiliates
 
 Oracle and Java are registered trademarks of Oracle and/or its 
 affiliates. Other names may be trademarks of their respective owners. 
@@ -7028,10 +7028,6 @@ control over the runtime behavior of its system components, including
 resource adapters. For example, an application server may choose to
 intercept operations on a thread object, perform checks, and enforce
 correct behavior.
-
-* An application server may disallow resource
-adapters from creating their own threads based on its security policy
-setting, enforced by a security manager.
 
 === Goals
 
