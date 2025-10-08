@@ -4957,12 +4957,14 @@ transaction context.
 session bean B instance. In this scenario, A does not close the
 connection handle before invoking the method on B.
 
++
 [NOTE]
 ====
 A container should ensure that the connection sharing mechanism is
 equally applicable if A were to close the connection handle before
 calling the B instance.
 ====
++
 
 5. In the invoked method, B makes a request to
 acquire a connection to the same EIS resource manager.
@@ -4987,7 +4989,8 @@ there is still an uncompleted local transaction associated with the
 shared physical connection. In this scenario, the cleanup of a physical
 connection refers to the dissociation of the local transaction context
 from the _ManagedConnection_ instance. In the absence of support for
-Lazy Connection Association (see <<a1502, Lazy Connection Association Optimization>> ) from the resource adapter and the
+Lazy Connection Association (see <<a1502, Lazy Connection Association Optimization>> )
+from the resource adapter and the
 application server, the component B should not cache the connection
 handle. See <<a645, Guidelines>> for a suggested
 scheme of obtaining and closing connection handles. A component caching
@@ -4999,7 +5002,7 @@ connection handle, to access EIS resources. All recoverable units of
 work on the EIS resource manager will be included in the existing local
 transaction context.
 
-
++
 [NOTE]
 ====
 If A closes the connection handle before calling B, and then reacquires
@@ -5007,6 +5010,7 @@ the connection handle when regaining control, the container should
 ensure that the local transaction context stays associated with the
 shared connection.
 ====
++
 
 10. A eventually calls the close method on its
 connection handle. The container gets a connection close event
@@ -5028,6 +5032,7 @@ calls the _LocalTransaction.commit_ method to commit the transaction.
 container initiates a cleanup of the physical connection instance by
 calling the _ManagedConnection.cleanup_ method.
 
++
 [NOTE]
 ====
 The container should initiate cleanup of the
@@ -5036,6 +5041,7 @@ method on the connection handle before returning. The container
 identifies the need for cleaning up the _ManagedConnection_ instance
 based on the scope of connection sharing.
 ====
++
 
 14. On the _cleanup_ method invocation, the
 _ManagedConnection_ instance does a cleanup of its local transaction
@@ -11102,7 +11108,7 @@ and relies on the application server to efficiently pool message-driven
 bean instances. Each message-driven bean call should be just as
 efficient as a method call on a resource adapter local object.
 
-===== Message-Driven Bean Dispatcher Pattern
+==== Message-Driven Bean Dispatcher Pattern
 
 When a worker thread from a resource adapter
 accesses a message-driven bean method, the JNDI context of the bean is
@@ -15456,7 +15462,7 @@ the functionality of the resource adapter.
 * Help files and documentation.
 * Descriptive meta information that ties the above elements together.
 
-===== Resource Adapter Archive
+==== Resource Adapter Archive
 
 A resource adapter must be packaged using the
 Java Archive (JAR) format in to an RAR ( _r_ esource adapter _ar_
@@ -15483,7 +15489,7 @@ for more information on the Jakarta EE Platform's support for libraries.
 The platform-specific libraries required by
 the resource adapter must be packaged with the resource adapter module.
 
-===== RAR Contents
+==== RAR Contents
 
 The following table describes the contents of
 a RAR file, where each element is located within the RAR file and
@@ -15498,7 +15504,7 @@ whether they are required.
 |Platform-specific native libraries |Optional |Arbitrary
 |===
 
-===== Sample Directory Structure
+==== Sample Directory Structure
 
 The following lists the files in a sample
 resource adapter module:
@@ -15527,7 +15533,7 @@ structured such that various elements are partitioned using
 subdirectories.
 
 [[a5147]]
-===== Requirements
+==== Requirements
 
 * When a standalone resource adapter _RAR_ is
 deployed, the resource adapter may be made available to all Jakarta EE
@@ -18197,7 +18203,7 @@ introduces only the synchronization contract.
 This section specifies the synchronization
 contract between the application server and the caching manager.
 
-==== Interface
+=== Interface
 
 Each caching manager implements the
 _jakarta.transaction.Synchronization_ interface. A caching manager
@@ -18222,7 +18228,7 @@ is called after the transaction has completed. The status of transaction
 completion is passed in as a parameter. The caching manager uses this
 notification to do any cache cleanups if a rollback has occurred.
 
-==== Implementation
+=== Implementation
 
 The caching manager must support the
 _jakarta.transaction.Synchronization_ interface. If the caching manager
