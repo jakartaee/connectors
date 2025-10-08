@@ -2010,7 +2010,7 @@ component using a deployment descriptor mechanism. For example, a bean
 provider specifies the following elements in the deployment descriptor
 for a connection factory reference. Note that the connection factory
 reference is part of the deployment descriptor for Jakarta Enterprise Bean components and
-not the resource adapter. Refer {lkEjbSpec}
+not the resource adapter. Refer to the {lkEjbSpec}
 for details on the deployment mechanism for Jakarta Enterprise Bean components:
 
 * _res-ref-name: eis/MyEIS_
