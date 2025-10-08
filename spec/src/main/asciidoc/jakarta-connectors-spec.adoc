@@ -7,6 +7,7 @@
 :email: https://dev.eclipse.org/mailman/listinfo/jca-dev
 :version-label!:
 :doctype: book
+:docinfo: shared
 :license: Eclipse Foundation Specification License v1.0
 :source-highlighter: coderay
 :toc: left
