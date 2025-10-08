@@ -2152,7 +2152,7 @@ implementation:
 image:conn-38.svg[image]
 
 [[a663]]
-==== ConnectionFactory and Connection {fnConnectionSymantics}
+==== ConnectionFactory and Connection {fnConnectionSemantics}
 
 A connection factory provides an interface to
 get a connection to an EIS instance. A connection provides connectivity
