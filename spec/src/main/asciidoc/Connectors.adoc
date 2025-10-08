@@ -203,8 +203,8 @@ EIS access tools based on CCI.
 The connector architecture defines a standard
 SPI (Service Provider Interface) for integrating the transaction,
 security, and connection management facilities of an application server
-with those of a transactional resource manager. The JDBC 3.0
-specification <<a9727, JDBC API Specification, version 4.1>> specifies the relationship of JDBC to the
+with those of a transactional resource manager. The {lkJdbcSpec}
+specifies the relationship of JDBC to the
 SPI specified in the connector architecture.
 
 
@@ -273,8 +273,7 @@ document are illustrative in scope. The intent of the scenarios is not
 to specify a prescriptive way of implementing a particular contract.
 
 This document uses the Jakarta Enterprise Beans component model to
-describe some scenarios. The Jakarta Enterprise Beans specification (see
-<<a9723, Jakarta Enterprise Beans Specification, version 4.0>> provides the latest details of the
+describe some scenarios. The {lkEjbSpec} provides the latest details of the
 component model.
 
 == Overview
@@ -399,8 +398,7 @@ A container is a part of an application server
 that provides deployment and runtime support for application components.
 It provides a federated view of the services provided by the underlying
 application server for the application components. For more details on
-different types of standard containers, refer to the Jakarta Enterprise Beans (see
-<<a9723, Jakarta™ Enterprise Beans Specification, Version 4.0>>,
+different types of standard containers, refer to the {lkEjbSpec},
 Jakarta Server Pages, and servlet specifications.
 
 === Rationale
@@ -577,8 +575,7 @@ A resource adapter is used within the address
 space of the application server. Examples of resource adapters are:
 
 * A JDBC driver to connect to a
-relational database, as specified in the JDBC specification. For more
-information on JDBC, see <<a9727, JDBC API Specification, version 4.1>>
+relational database, as specified in the {lkJdbcSpecLink}
 * A resource adapter to connect to an ERP system
 * A resource adapter to connect to a TP system
 * A resource adapter to plug-in a messaging system
@@ -741,7 +738,7 @@ implementation of the Jakarta EE Full Profile. The minimum set, listed
 below, must be supported for a compliant Jakarta EE Connectors
 container within an implementation of any subset of the Jakarta EE Full
 Profile. Overall profile requirements are described within the
-<<a9737, Jakarta™ EE Platform Specification Version 10>>.
+{lkPlatformSpec}.
 
 Non-”Full Profile” implementations may only
 support a subset of the component specifications that were mandated to
@@ -786,8 +783,7 @@ The standalone connector container must
 support the baseline compatibility requirements as defined by the
 Jakarta™ Authentication
 specification and support the Security Inflow requirements specified in
-<<a3707, Security Inflow>>. See
-<<a9751, Jakarta™ Authentication Specification, Version 3.0>>
+<<a3707, Security Inflow>>. See {lkAuthSpec}
 for more information on the Jakarta™ Authentication specification.
 
 This specification does not define new
@@ -830,9 +826,7 @@ application server vendor is an OS vendor, middleware vendor, or
 database vendor. The role of an application server vendor is typically
 the same as that of a container provider.
 
-The Jakarta EE platform specification (see
-<<a9737, Jakarta Platform, Enterprise Edition (Jakarta
-EE) Specification, version 10>>) specifies requirements for a Jakarta EE
+The {lkPlatformSpec} specifies requirements for a Jakarta EE
 platform provider.
 
 ==== Container Provider
@@ -858,8 +852,7 @@ resource adapter.
 * It insulates application components from the
 specifics of the underlying system-level mechanisms by supporting a
 simple, standard contract with the application component. Refer to the
-Jakarta Enterprise Beans specification (<<a9723,
-Jakarta Enterprise Beans Specification, version 4.0>>) for more details
+{lkEjbSpec} for more details
 on the Jakarta Enterprise Beans component contract.
 
 The expertise of the container provider is
@@ -1226,7 +1219,7 @@ one functional resource adapter instance per resource adapter
 deployment. An application server may create more than one functional
 resource adapter instance per resource adapter deployment, in order to
 create replicas of a single functional resource adapter instance on
-multiple Java(TM) Virtual Machines (<<a10023, 2>>). In general,
+multiple Java(TM) Virtual Machines{fnJVM}. In general,
 however, there should be just one functional resource adapter instance
 per deployment.
 
@@ -1651,9 +1644,7 @@ specified in the ActivationSpec instance takes precedence.
 [[a516]]
 ===== JavaBean Validation
 
-The Jakarta Bean Validation specification (see
-<<a9753, Jakarta Bean Validation Specification, version
-3.0>>) defines “a metadata model and API for JavaBean validation. The
+The {lkValSpec} defines “a metadata model and API for JavaBean validation. The
 default metadata source is annotations, with the ability to override and
 extend the meta-data through the use of XML validation descriptors.”
 
@@ -1715,8 +1706,7 @@ to the returned set of _ConstraintViolation_ objects, and must not put
 the JavaBean in use. The application server must treat all JavaBean
 properties as “reachable” and “cascadable” as defined by the
 BeanValidation Specification. For more details on reachability and
-cascaded validation, see Section 3.5 of the
-<<a9753, Jakarta Bean Validation Specification, version 3.0>>.
+cascaded validation, see Section 3.5 of the {lkValSpec}.
 
 Application server configuration tools and
 third-party tools are recommended to leverage the constraint metadata
@@ -2020,8 +2010,7 @@ component using a deployment descriptor mechanism. For example, a bean
 provider specifies the following elements in the deployment descriptor
 for a connection factory reference. Note that the connection factory
 reference is part of the deployment descriptor for Jakarta Enterprise Bean components and
-not the resource adapter. Refer Jakarta Enterprise Beans specification (see
-<<a9723, Jakarta Enterprise Beans Specification, version 4.0>>)
+not the resource adapter. Refer {lkEjbSpec}
 for details on the deployment mechanism for Jakarta Enterprise Bean components:
 
 * _res-ref-name: eis/MyEIS_
@@ -2163,7 +2152,7 @@ implementation:
 image:conn-38.svg[image]
 
 [[a663]]
-==== ConnectionFactory and Connection <<a10024, [3]>>
+==== ConnectionFactory and Connection {fnConnectionSymantics}
 
 A connection factory provides an interface to
 get a connection to an EIS instance. A connection provides connectivity
@@ -2226,7 +2215,7 @@ connection interfaces.
 Note that the methods defined on a non-CCI
 interface are not required to throw a _ResourceException_ . The
 exception can be specific to a resource adapter, for example:
-_java.sql.SQLException_ for JDBC (see <<a9727, JDBC API Specification, version 4.1>>) interfaces.
+_java.sql.SQLException_ for {lkJdbcSpecLink} interfaces.
 
 The following are additional guidelines for
 the recommended interface template:
@@ -2258,8 +2247,8 @@ interfaces.
 
 In the Jakarta Connector Architecture, a resource
 adapter provides an implementation of the connection factory interface
-in both managed and non-managed scenarios. This differs from the JDBC
-(see <<a9727, JDBC API Specification, version 4.1>>) architecture.
+in both managed and non-managed scenarios. This differs from the {lkJdbcSpec}
+architecture.
 
 In the JDBC architecture, an application
 server provides the implementation of _javax.sql.DataSource_ interface.
@@ -3637,8 +3626,7 @@ transaction manager) and an EIS resource manager.
 This chapter focuses only on the system-level
 aspects of transaction management. The Jakarta EE component model
 specifications describe the application level transaction model. For
-example, the Jakarta Enterprise Beans specification (see <<a9723,
-Jakarta Enterprise Beans Specification, version 4.0>>) specifies the
+example, the {lkEjbSpec} specifies the
 transaction model for Jakarta Enterprise Bean components.
 
 === Overview
@@ -3852,16 +3840,11 @@ _LocalTransaction_ interface to manage local transactions.
 
 The _javax.transaction.xa.XAResource_
 interface is a Java mapping of the industry standard _XA_ interface
-based on _X/Open CAE specification_ (see
-<<a9729, X/Open CAE Specification -- Distributed
-Transaction Processing: the XA Specification, X/Open document>>).
+based on _X/Open CAE specification_ (see {lkXOpenSpec}).
 
 The following code extract shows the
 interface specification for the _XAResource_ interface. For more details
-and API documentation, refer to the Jakarta Transaction (see
-<<a9725, Jakarta™ Transaction Specification]) and XA (see
-<<a9729, X/Open CAE Specification -- Distributed
-Transaction Processing: the XA Specification, X/Open document>>)
+and API documentation, refer to the {lkTransSpec} and XA (see {lkXOpenSpec})
 specifications:
 
 [source,Java]
@@ -3944,8 +3927,7 @@ contract.
 
 === Relationship to Jakarta Transaction and JTS
 
-The Jakarta Transaction (see
-<<a9725, Jakarta™ Transaction Specification>>)
+The {lkTransSpec}
 is a specification of interfaces between a
 transaction manager and the other parties involved in a distributed
 transaction processing system: application programs, resource managers,
@@ -4183,8 +4165,7 @@ recoverable units of work being done on the RM.
 * The RM must ensure that the TM invokes
 _XAResource_ calls in the legal sequence, and must return _XAER_PROTO_
 or another suitable error if the caller TM violates the state tables, as
-defined in Chapter 6 of the XA specification (see
-<<a9725, Jakarta™ Transaction Specification, Version 2.0>>).
+defined in Chapter 6 of the XA specification (see {lkTransSpec}).
 
 ===== Unilateral Roll-back
 
@@ -4244,9 +4225,7 @@ discard its knowledge of all other branches.
 
 The following section specifies requirements
 of a TM. This section assumes that the TM is compliant with Jakarta Transaction/JTS
-and X/Open (see <<a9729, X/Open CAE Specification --
-Distributed Transaction Processing: the XA Specification, X/Open
-document>>) specifications.
+and X/Open (see {lkXOpenSpec}) specifications.
 
 ===== Interfaces
 
@@ -4263,7 +4242,7 @@ Section 7.3, XA specification]
 
 The TM must generate XIDs conforming to the
 structure defined in section 4.2 on page 19 of the XA specification (see
-<<a9725, Jakarta™ Transaction Specification, Version 2.0>>).
+{lkTransSpec}).
 The generated XIDs must be globally unique
 and must adequately describe a transaction branch.
 
@@ -4707,13 +4686,10 @@ connections that are marked _unshareable_ .
 
 Jakarta EE application components may use the
 optional deployment descriptor element _res-sharing-scope_ or the
-_shareable_ annotation element of _Resource_ annotation defined in the
-Common Annotations specification (see <<a9757, Jakarta™ Annotations 2.1>>),
+_shareable_ annotation element of _Resource_ annotation defined in the {lkAnnoSpec},
 to indicate whether a connection to a resource manager is shareable or
 unshareable. Containers must assume connections to be shareable if no
-deployment hint is provided. Refer to the Enterprise Beans specification
-(see <<a9723, Jakarta™ Enterprise Beans Specification, Version 4.0>>) and the servlet specification (see
-<<a9741, Jakarta™ Servlet Specification, Version 6.0>>)
+deployment hint is provided. Refer to the {lkEjbSpec} and the {lkServletSpec}
 for a description of the deployment descriptor element.
 
 Jakarta EE application components may cache
@@ -4792,8 +4768,7 @@ various transaction scenarios.
 
 ==== Requirements
 
-The Jakarta EE platform specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 10>>) identifies the following as transactional
+The {lkPlatformSpec} identifies the following as transactional
 resources:
 
 * JDBC connections
@@ -5216,8 +5191,7 @@ a Jakarta Transactions transaction only when more than one resource managers are
 in an existing transaction. The mechanism through which the application
 server and its transaction manager coordinates the initial local
 transaction and lazily started Jakarta Transaction transactions is outside the scope of
-the connector specification. Refer to the Jakarta EE platform specification
-(see <<a9737, Jakarta™ EE Platform Specification Version 10>>)
+the connector specification. Refer to the {lkPlatformSpec}
 for more details on the local
 transaction optimization.
 
@@ -5296,8 +5270,7 @@ than the resource adapter’s transaction support classification.
 === Interface: TransactionSynchronizationRegistry
 
 The _TransactionSynchronizationRegistry_
-interface is defined in the Jakarta Transaction specification (see
-<<a9725, Jakarta™ Transaction Specification, Version 2.0>>)
+interface is defined in the Jakarta Transaction specification (see {lkTransSpec})
 and could be used by system level
 components to interact with the transaction manager. This interface
 provides the ability to register synchronization objects, associate
@@ -5751,9 +5724,7 @@ be used. The latter is termed principal delegation.
 * *End user.* An end user is an entity, human or
 service, that acts as a source of a request to an application. An end
 user is represented as a security principal within a _Subject_ as
-specified in the JAAS framework (see <<a9735,
-Java Authentication and Authorization Service Specification, version
-1.0>>).
+specified in the JAAS framework {lkJaasSpec}.
 
 * *Initiating Principal.* The security principal
 representing the end-user that interacts directly with the application.
@@ -6277,8 +6248,7 @@ Server Vendor for supporting the security contract.
 This chapter references the following
 chapters and documents:
 
-The security model specified in the Jakarta EE platform specification
-(see <<a9737, Jakarta Platform, Enterprise Edition (Jakarta EE) Specification, version 10>>).
+The security model specified in the {lkPlatformSpec}.
 
 Security architecture specified in
 <<a1563, Security Architecture>>.
@@ -6313,8 +6283,7 @@ classes and interfaces:
 
 The following text has been taken from the
 JAAS specification. For detailed information, refer to the JAAS
-specification (see <<a9735, Java Authentication
-and Authorization Service Specification, version 1.0>>).
+specification {lkJaasSpec}.
 
 A _Subject_ represents a grouping of related
 information for a single entity, such as a person. Such information
@@ -6418,9 +6387,7 @@ by any of the following:
 manner if the underlying EIS supports the security mechanism type
 represented by the _GenericCredential_ instance
 
-* Using GSS-AP I (see
-<<a9730, RFC: Generic Security Service API
-(GSS-API) Specification, version 2>>) if the resource adapter and
+* Using {lkGssSpec} if the resource adapter and
 underlying EIS instance support GSS-API.
 
 ===== Interface
@@ -6454,9 +6421,8 @@ resource principal associated with a _GenericCredential_ instance.
 The method _getMechType_ returns the mechanism
 type for the _GenericCredential_ instance. The mechanism type definition
 for _GenericCredential_ must be consistent with the Object Identifier
-(OID) based representation specified in the GSS specification (see
-<<a9730, RFC: Generic Security Service API
-(GSS-API) Specification, version 2>>). In the _GenericCredential_
+(OID) based representation specified in the {lkGssSpec}.
+In the _GenericCredential_
 interface, the mechanism type is returned as a stringified
 representation of the OID specification.
 
@@ -8945,9 +8911,8 @@ adapter that supplies connection objects for use by applications to send
 and synchronously receive messages using the specific messaging API.
 
 * It may use message-driven beans to
-asynchronously receive messages through a message provider. The Jakarta Enterprise Beans
-specification (see <<a9723, Jakarta™ Enterprise Beans
-Specification, Version 4.0>>) describes the message-driven bean
+asynchronously receive messages through a message provider. The {lkEjbSpec}
+describes the message-driven bean
 component contract in detail.
 
 While the above patterns allow a Jakarta EE
@@ -9161,9 +9126,8 @@ endpoint. The resource adapter may use the _Class_ object to discover
 annotations, interfaces implemented, etc. and modify the message
 delivery behavior of the resource adapter accordingly. In the case of
 message driven beans, the _Class_ object returned is the bean class
-provided by the application component developer. Refer to the Jakarta Enterprise
-Beans specification (see <<a9723, Jakarta™ Enterprise Beans
- Specification, Version 4.0>>) for more details on the
+provided by the application component developer. Refer to the {lkEjbSpec}
+for more details on the
 requirements for message driven beans with no-methods listener
 interface. The _MessageEndpointFactory_ must return _null_ if the
 _MessageEndpoint_ does not implement the business methods of the message
@@ -9247,9 +9211,7 @@ MDBs). This includes messaging style specific configuration details, and
 possibly message provider-specific details as well, which is used by the
 message-driven bean deployer to setup the activation.
 
-The Jakarta Enterprise Beans specification (see
-<<a9723, Jakarta™ Enterprise Beans Specification,
- Version 4.0>>) has more details on the message-driven bean
+The {lkEjbSpec} has more details on the message-driven bean
 deployment descriptor element activation-config used to hold the
 activation configuration information. For example, the deployment
 descriptor of a message-driven bean which consumes from a Jakarta Messaging resource
@@ -9347,9 +9309,8 @@ The _ActivationSpec_ JavaBean implementation
 is recommended to use the JavaBean validation mechanisms described in
 <<a516, JavaBean Validation>> instead of the
 _validate_ method to request validation by the container. If the
-application server provides an implementation of the Bean Validation
-specification (see <<a9753, Jakarta™ Bean Validation
-Specification, Version 3.0>>), the application server must check the
+application server provides an implementation of the {lkValSpec},
+the application server must check the
 validity of the configuration settings provided by the deployer for a
 JavaBean, using the capabilities provided by the Bean Validation
 specification before calling the _validate_ method.
@@ -9727,9 +9688,7 @@ to receive messages. When messages arrive, the resource adapter uses the
 MessageEndpointFactory to create an endpoint instance. The resource
 adapter narrows the endpoint instance to the actual message listener
 type (it knows the endpoint type from the ActivationSpec), and delivers
-the message to the endpoint instance. The Jakarta Enterprise Beans
-specification (see <<a9723, Jakarta™ Enterprise Beans
-Specification,Version 4.0>>) prescribes the rules for the message
+the message to the endpoint instance. The {lkEjbSpec} prescribes the rules for the message
 listener interface structure. The same endpoint instance may be used
 again to deliver subsequent messages serially, but it must not use the
 same endpoint instance concurrently.
@@ -10674,8 +10633,7 @@ ConnectionFactory supplied by the Jakarta Messaging resource adapter.
 * Based on the Jakarta Enterprise Beans deployment descriptor
 information (resource-ref’s and resource-env-ref’s) or resource
 reference injection annotations (Resource annotation defined in
-<<a9757, Jakarta™ Annotations Specification,
- Version 2.1>>), the Jakarta Enterprise Beans deployer configures the
+{lkAnnoSpec}), the Jakarta Enterprise Beans deployer configures the
 appropriate ConnectionFactory objects (resource-ref’s) in the component
 name space (java:comp/env). The application deployer also configures the
 necessary Queue or Topic administered objects (resource-env-ref’s) in
@@ -11026,9 +10984,8 @@ image:conn-114.svg[image]
 
 For session or entity bean invocations, the
 resource adapter’s bean dispatch logic can use the bean client view
-model by way of a message-driven bean. The Jakarta Enterprise Beans specification (see
-<<a9723, Jakarta™ Enterprise Beans
-Specification, Version 4.0>>) defines the Jakarta Enterprise Beans client view, and describes
+model by way of a message-driven bean. The {lkEjbSpec}
+defines the Jakarta Enterprise Beans client view, and describes
 how the client view is used to access session or entity beans. The Jakarta Enterprise Beans
 client view is available to a message-driven bean.
 
@@ -11551,8 +11508,7 @@ and documents:
 architecture (Refer to Appendix D <<a9530,
 Security Scenarios>>)
 
-* <<a9751, Jakarta™ Authentication
-Specification, Version 3.0>> (JSR-196)
+* {lkAuthSpec} (JSR-196)
 
 *Security Inflow Contract*
 
@@ -11593,8 +11549,7 @@ into corresponding identities in the receiving container or context
 
 * Ensure backward compatibility with the
 existing "Security Management contract", defined in Chapter-17 of
-<<a9723, Jakarta™ Enterprise Beans Specification,
- Version 4.0>> Core Contracts and Requirements
+{lkEjbSpec} Core Contracts and Requirements
 specification, for security context inflow to _MessageEndpoint_ s
 realized as message-driven beans
 
@@ -11780,7 +11735,7 @@ server provider while calling the _setupSecurityContext_ method:
 * The _handler_ argument must not be null, and
 the _CallbackHandler_ implementation passed as the argument _handler_ to
 _setupSecurityContext_ must support the following _Callback_ s defined
-in <<a9751, Jakarta™ Authentication Specification, Version 3.0>>:
+in {lkAuthSpec}:
 ** _CallerPrincipalCallback_
 ** _GroupPrincipalCallback_
 ** _PasswordValidationCallback_
@@ -11864,9 +11819,9 @@ image:conn-129.svg[image]
 As part of step 3 described in the section
 above, the following _Callback_ s may be employed by a resource adapter.
 The descriptions of the _Callback_ s below have been taken from the
-<<a9751, Jakarta™ Authentication Specification, Version 3.0>>. For
-detailed information, refer to the <<a9751, Jakarta™ Authentication
-Specification, Version 3.0>> and the Java API documentation of the _Callback_ s defined
+{lkAuthSpec}. For
+detailed information, refer to the {lkAuthSpec} 
+and the Java API documentation of the _Callback_ s defined
 in the _jakarta.security.auth.message.callback_ package of that
 specification:
 
@@ -12050,8 +12005,7 @@ realm assignment.
 
 When _MessageEndpoint_ s are realized as
 message-driven beans, the Jakarta Enterprise Beans Core Contracts
-and Requirements of <<a9723, Jakarta™ Enterprise
-Beans Specification, Version 4.0>>, states the following responsibilities:
+and Requirements of {lkEjbSpec}, states the following responsibilities:
 
 * Deployer: (section 17.4.2) : The Deployer
 assigns principals and/or groups of principals (such as individual users
@@ -12912,9 +12866,7 @@ entries in the component’s environment. The deployer binds a resource
 environment reference to an _InteractionSpec_ administered object in the
 operational environment.
 
-The Jakarta Enterprise Beans specification (see
-<<a9723, Jakarta™ Enterprise Beans
- Specification, Version 4.0>>) specifies resource environment references
+The {lkEjbSpec} specifies resource environment references
 in more detail.
 
 ===== Illustrative Scenario
@@ -13574,9 +13526,8 @@ image:conn-144.svg[image]
 The following section specifies the
 requirements for a CCI _ResultSet_ implementation.
 
-Refer to the JDBC (see
-<<a9727, JDBC API Specification, version 4.1>>)
-specification and Java docs for more details on the _java.sql.ResultSet_
+Refer to the {lkJdbcSpecLink}
+and Java docs for more details on the _java.sql.ResultSet_
 interface. The following section specifies only a brief outline of the
 _ResultSet_ interface. It focuses on the differences between the
 implementation requirements set by the CCI and JDBC. Note that the JDBC
@@ -13669,8 +13620,8 @@ _ownInsertsAreVisible_ methods of the _ResultSetInfo_ interface to
 determine whether a result set can “see” its own changes while the
 result set is open. For example, a result set’s own changes are visible
 if the updated column values can be retrieved by calling the _get_ XXX
-method after the corresponding _update_ XXX method. Refer to the JDBC
-(see <<a9727, JDBC API Specification, version 4.1>>) specification for more details on this feature.
+method after the corresponding _update_ XXX method. Refer to the {lkJdbcSpec}
+for more details on this feature.
 
 ===== Scrolling
 
@@ -13706,8 +13657,7 @@ does not allow updates of its content, while an updatable result set
 allows updates to its contents. An updatable result set may hold a write
 lock on the underlying data item and thus reduce concurrency.
 
-Refer to the JDBC specification (see
-<<a9727, JDBC API Specification, version 4.1>>)
+Refer to the {lkJdbcSpec}
 for detailed information and examples.
 
 ===== Updatability
@@ -13725,8 +13675,7 @@ A resource adapter may discard changes made by a component if the
 component moves the cursor from the current row before calling the
 method _updateRow_ .
 
-Refer to the JDBC specification (see
-<<a9727, JDBC API Specification, version 4.1>>)
+Refer to the {lkJdbcSpec}
 for more information.
 
 ===== Persistence of Java Objects
@@ -14097,7 +14046,7 @@ components written to the new Connector 1.6 APIs.
 
 The simplified API makes extensive use of Java
 language annotations, that was introduced in Java SE 5.0 (see
-<<a9755, A Metadata Facility for the Java Programming Language>>).
+{lkMetaSpec}).
 The purpose of the API is to improve the
 existing Jakarta Connectors by reducing its complexity from a
 resource adapter developer’s point of view.
@@ -14146,7 +14095,7 @@ stage of the development or application assembly etc).
 For additional requirements on annotations
 discovery and processing by the application server, see the Deployment
 Section of the “Application Assembly and Deployment” chapter of
-<<a9737, Jakarta™ EE Platform Specification, Version 10>>.
+{lkPlatformSpec}.
 
 Deployment descriptors may be “sparse”,
 unlike the full deployment descriptors required as part of the J2EE
@@ -14198,8 +14147,7 @@ in a resource adapter archive.
 An application assembler or deployer may use
 the deployment descriptor to override the metadata annotations specified
 by the resource adapter developer. See the chapter titled “Resources,
-Naming, and Injection” in the Jakarta EE Platform specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 10>>)
+Naming, and Injection” in the {lkPlatformSpec}
 for general rules on annotations and
 injection and override behavior. The rules below complement the rules
 specified in that section.
@@ -14224,8 +14172,7 @@ deployment descriptor, the deployment tool must examine the classes of
 the resource adapter for annotations. The deployment tool must follow
 the annotation discovery and processing requirements specified in the
 “Deployment Section” of the “Application Assembly and Deployment”
-chapter of the Jakarta EE Platform Specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 10>>).
+chapter of the {lkPlatformSpec}.
 
 The information provided by the annotations
 must be merged with the deployment descriptor packaged along with the
@@ -14877,8 +14824,7 @@ Resource definition annotations allow an
 application to be deployed into a Jakarta EE environment with less
 administrative configuration. Refer to the section titled “Resource
 Definition and Configuration” in the “Resources, Naming and Injection”
-chapter of the Jakarta EE Platform Specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 10>>)
+chapter of the {lkPlatformSpec}
 for an overview of resource definition annotations.
 
 The _ConnectionFactoryDefinition_ and
@@ -15387,11 +15333,11 @@ the java.io.Serializable interface is not necessary. The XML long-term
 persistence mechanism introduced in J2SE 1.4 can save the state of a
 JavaBean in an XML format that is resilient to version changes in the
 implementation of that JavaBean. Refer to Java SE (see
-<<a9745, Java Platform, Standard Edition 7API Specification>>) classes _java.beans.XMLEncoder_ ,
+{lkJavaSE7}) classes _java.beans.XMLEncoder_ ,
 _java.beans.XMLEncoder_ , and _java.beans.PersistenceDelegate_ .
 
 For details, refer to JavaBeans specification
-(see <<a9749, JavaBeans Specification 1.01 Final Release>>).
+(see {lkJavaBeansSpec}).
 
 [[a5078]]
 === Equality Constraints
@@ -15459,8 +15405,7 @@ image:conn-154.svg[image]
 
 A resource adapter module corresponds to a
 Jakarta EE module in terms of the Jakarta EE composition hierarchy. Refer to
-the Jakarta EE Platform specification (see <<a9737,
-Jakarta™ EE Platform Specification Version 10>>)
+the {lkPlatformSpec}
 for more details on the deployment of Jakarta EE modules and applications.
 A Jakarta EE module represents the basic unit of composition of a Jakarta EE
 application. Examples of Jakarta EE modules include Jakarta Enterprise Beans modules,
@@ -15532,8 +15477,7 @@ must use the _.jar_ file extension.
 
 The resource adapter may also use the library
 support mechanisms described in the Jakarta EE Platform Specification to
-specify library dependencies. See the <<a9737,
-Jakarta™ EE Platform Specification Version 10>>
+specify library dependencies. See the {lkPlatformSpec}
 for more information on the Jakarta EE Platform’s support for libraries.
 
 The platform-specific libraries required by
@@ -15627,7 +15571,7 @@ resource adapter must be made available to the application.
 * If an application references an extension
 using the Extension Mechanism Architecture (see the section titled
 “Library Support” in the “Application Assembly and Deployment” chapter
-of the <<a9737, Jakarta™ EE Platform Specification Version 10>> and a jar file within a
+of the {lkPlatformSpec} and a jar file within a
 standalone resource adapter supplies that extension, the standalone
 resource adapter must be made available to the application.
 
@@ -15666,8 +15610,7 @@ specifies the XML Schema for the deployment descriptor for a resource
 adapter module. See <<a4517, Metadata Annotations>> for more information on the metadata annotations that can
 be employed.
 
-The J2EE Deployment API Specification (
-<<a9747, J2EE Deployment API Specification>>)
+The {lkDeployApi}
 describes the general deployment procedure in detail.
 
 [[a5165]]
@@ -15852,8 +15795,7 @@ deployment descriptor.
 
 ===== Resource Adapter Module with Jakarta EE Application
 
-Refer to the Jakarta EE platform specification
-(see <<a9737, Jakarta™ EE Platform Specification Version 10>>)
+Refer to the {lkPlatformSpec}
 for the requirements specified for
 the deployment of a Jakarta EE application.
 
@@ -16426,9 +16368,8 @@ various JavaBean instances.
 
 This section specifies the XML Schema
 Definition (XSD) for the deployment descriptor for a resource adapter.
-Some of the types used in this XSD are defined in the Jakarta EE platform
-specification (<<a9737, Jakarta™ EE Platform
-Specification Version 10>>). The comments in
+Some of the types used in this XSD are defined in the {lkPlatformSpec}.
+The comments in
 the XSD specify additional requirements for syntax and semantics that
 cannot be specified by using the XML Schema language. Note, the
 description-group element defined in javaee_7.xsd allows multiple
@@ -17635,11 +17576,10 @@ EE compliant application server to provide the following APIs:
 * Java SDK, Standard Edition, version 11.0 or above that
 includes the following as part of either the core platform or standard
 extensions: JNDI Standard Extension. (see
-<<a9745, Java Platform, Standard Edition 11 APISpecification>>)
+{lkJavaSE7})
 
 * Required APIs for Jakarta _TM_ Platform,
-Enterprise Edition, Version 10 as specified in the Jakarta EE platform
-specification (see <<a9737, Jakarta™ EE Platform Specification Version 10>>).
+Enterprise Edition, Version 10 as specified in the {lkPlatformSpec}.
 
 * Java Authentication and Authorization Service
 (JAAS) 1.0 that requires at least Java 2 SDK, Standard Edition, version
@@ -17686,7 +17626,7 @@ read/write files as specified by the _pathname_ , which is specific to a
 configured operational environment.
 
 It is important to consider the implications
-of granting _Write_ permission for _<<ALL FILES>>_ because this grants
+of granting _Write_ permission for _ALL FILES_ because this grants
 the resource adapter permissions to write to the entire file system.
 This can allow a malicious resource adapter to mangle system binaries
 for the JVM environment.
@@ -17915,11 +17855,9 @@ permission restrictions.
 === Dependency Injection
 
 A resource adapter archive can be a bean
-archive (see Chapter 12 of <<a9759, Jakarta™ Contexts and Dependency
-Injection Specification, Version 4.0>>). The section titled
+archive (see Chapter 12 of {lkCdiSpec}). The section titled
 “Support for Dependency Injection” in the “Resources, Naming and
-Injection” chapter of the Jakarta EE Platform Specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 10>>)
+Injection” chapter of the {lkPlatformSpec}
 provides more details on the dependency
 injection requirements of an application server.
 
@@ -18170,8 +18108,7 @@ an exception.
 
 === Additional Exceptions
 
-The Jakarta Transaction specification (see
-<<a9725, Jakarta™ Transaction Specification, Version 2.0>>) specifies the
+The {lkTransSpec} specifies the
 javax.transaction.xa.XAException class for exceptions related to the
 XAResource-based transaction management contract.
 
@@ -18183,8 +18120,7 @@ This chapter summarizes compatibility and
 migration issues for the Jakarta EE Connectors specification. For a
 detailed description on Compatibility and Migration and how they relate
 to the Jakarta EE Platform in general, refer the chapter on “Compatibility
-and Migration” in the Jakarta EE platform specification (see
-<<a9737, Jakarta™ EE Platform Specification Version 10>>).
+and Migration” in the {lkPlatformSpec}.
 
 === Compatibility
 
@@ -18689,8 +18625,7 @@ include support for JAAS-based pluggable authentication. The chapter
 refers to the following documents:
 
 White Paper on User Authentication and
-Authorization in Java platform:
-_http://java.sun.com/security/jaas/doc/jaas.html_
+Authorization in Java platform: {lkJaasSample}
 
 JAAS 1.0 documentation
 
@@ -18726,7 +18661,7 @@ architecture uses the JAAS _Subject_ class as part of the security
 contract between an application server and a resource adapter. Use of
 JAAS interfaces enables the security contract to remain independent of
 specific security technologies or mechanisms. The security contract has
-been specified in <<a1871, Requirements>>.
+been specified in <<a1713, Security Contract>> requirements.
 
 * JAAS Pluggable Authentication framework. This
 framework lets an application server and its underlying authentication
@@ -18776,8 +18711,7 @@ A custom _JAAS_ module can be packaged
 together with a resource adapter and can be pluggable into an
 application server using the JAAS architecture.
 
-The JAAS specification
-(<<a9735, Java Authentication and Authorization Service Specification, version 1.0>>)
+The {lkJaasSpec}
 specifies requirements for
 developing and configuring JAAS modules.
 
@@ -18876,8 +18810,7 @@ insecure links.
 
 The GSS-API has been implemented over a range
 of security mechanisms, including Kerberos V5. See
-<<a9733, Java Specification Request: Generic Security Service API (GSS-API), Java bindings>>
-for a Java binding of GSS-API.
+{lkGssSpec} for a Java binding of GSS-API.
 
 [NOTE]
 ====

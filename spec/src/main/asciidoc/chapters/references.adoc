@@ -1,0 +1,43 @@
+//
+// Copyright (c) 2025 Contributors to the Eclipse Foundation
+//
+// Contains all footnotes for the Jakarta Connectors Specification
+// :id: footnote:[content]
+
+// FOOTNOTES //
+:fnConnectionSymantics: footnote:[In this document, the term ‘physical connection’ refers to a `ManagedConnection` instance, while the term ‘connection handle’ refers to an application-level connection handle. When the distinction between ‘physical connection’ and ‘connection handle’ is not important, the term ‘connection’ is used to refer to an EIS connection.]
+:fnJVM: footnote:[The terms "Java(TM) Virtual Machine" and "JVM" mean a Virtual Machine for the Java(TM) platform.]
+
+// LINKS //
+
+// JAVA SE SPECS //
+:lkJdbcSpec: link:https://jcp.org/en/jsr/detail?id=221[Java Database Connectivity (JDBC) Specification, version 4.1]
+:lkGssSpec: link:https://jcp.org/en/jsr/detail?id=72[Java Generic Security Service (GSS) API Specification, version 1.0]
+:lkMetaSpec: link:https://jcp.org/en/jsr/detail?id=175[A Metadata Facility for the Java Programming Language, version 1.0]
+:lkJavaBeansSpec: link:https://www.oracle.com/java/technologies/javase/javabeans-spec.html[JavaBeans Specification, version 1.01]
+
+// TODO - is there a better place to link to for JAAS 1.0?
+:lkJaasSpec: link:https://www.oracle.com/java/technologies/java-archive-downloads-java-plat-downloads.html#7192-jaas-1.0_01-doc-oth-JPR[Java Authentication and Authorization Service (JAAS) Specification, version 1.0]
+
+// JAVA SE API //
+:lkJavaSE7: link:https://docs.oracle.com/javase/7/docs/api/[Java Platform, Standard Edition (SE) API, version 7]
+
+// JAKARTA EE SPECS //
+// TODO: update for EE 12
+:lkEjbSpec: link:https://jakarta.ee/specifications/enterprise-beans/4.0/[Jakarta Enterprise Beans Specification, version 4.0]
+:lkPlatformSpec: link:https://jakarta.ee/specifications/platform/10/[Jakarta Platform Specification, version 10]
+:lkAuthSpec: link:https://jakarta.ee/specifications/authentication/3.0/[Jakarta Authentication Specification, version 3.0]
+:lkValSpec: link:https://jakarta.ee/specifications/bean-validation/3.1/[Jakarta Validation Specification, version 3.1]
+:lkTransSpec: link:https://jakarta.ee/specifications/transactions/2.0/[Jakarta Transactions Specification, version 2.0]
+:lkAnnoSpec: link:https://jakarta.ee/specifications/annotations/3.0/[Jakarta Annotations Specification, version 3.0]
+:lkServletSpec: link:https://jakarta.ee/specifications/servlet/6.1/[Jakarta Servlet Specification, version 6.1]
+:lkCdiSpec: link:https://jakarta.ee/specifications/cdi/4.1/[Jakarta Contexts and Dependency Injection (CDI) Specification, version 4.1]
+
+// JAKARTA EE API //
+:lkDeployApi: link:https://jakarta.ee/specifications/deployment/[Jakarta Deployment API, version 1.7]]
+
+// OTHER SPECS //
+:lkXOpenSpec: link:https://pubs.opengroup.org/onlinepubs/009680699/toc.pdf[X/Open CAE Specification -- Distributed Transaction Processing: the XA Specification, X/Open document]
+
+// OTHER //
+:lkJaasSample: link:https://www.oracle.com/java/technologies/java-archive-downloads-java-plat-downloads.html#7331-jaas-1.0-demo-oth-JPR[JAAS Sample Code]
