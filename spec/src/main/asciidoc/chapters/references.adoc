@@ -5,7 +5,7 @@
 // :id: footnote:[content]
 
 // FOOTNOTES //
-:fnConnectionSymantics: footnote:[In this document, the term 'physical connection' refers to a `ManagedConnection` instance, while the term 'connection handle' refers to an application-level connection handle. When the distinction between 'physical connection' and 'connection handle' is not important, the term 'connection' is used to refer to an EIS connection.]
+:fnConnectionSemantics: footnote:[In this document, the term 'physical connection' refers to a `ManagedConnection` instance, while the term 'connection handle' refers to an application-level connection handle. When the distinction between 'physical connection' and 'connection handle' is not important, the term 'connection' is used to refer to an EIS connection.]
 :fnJVM: footnote:[The terms "Java(TM) Virtual Machine" and "JVM" mean a Virtual Machine for the Java(TM) platform.]
 
 // LINKS //
