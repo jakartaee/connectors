@@ -25,7 +25,7 @@
 // JAKARTA EE SPECS //
 // TODO: update for EE 12
 :lkEjbSpec: link:https://jakarta.ee/specifications/enterprise-beans/4.0/[Jakarta Enterprise Beans Specification, version 4.0]
-:lkPlatformSpec: link:https://jakarta.ee/specifications/platform/10/[Jakarta Platform Specification, version 10]
+:lkPlatformSpec: link:https://jakarta.ee/specifications/platform/11/[Jakarta Platform Specification, version 11]
 :lkAuthSpec: link:https://jakarta.ee/specifications/authentication/3.0/[Jakarta Authentication Specification, version 3.0]
 :lkValSpec: link:https://jakarta.ee/specifications/bean-validation/3.1/[Jakarta Validation Specification, version 3.1]
 :lkTransSpec: link:https://jakarta.ee/specifications/transactions/2.0/[Jakarta Transactions Specification, version 2.0]
