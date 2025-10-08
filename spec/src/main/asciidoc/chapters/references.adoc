@@ -20,7 +20,7 @@
 :lkJaasSpec: link:https://www.oracle.com/java/technologies/java-archive-downloads-java-plat-downloads.html#7192-jaas-1.0_01-doc-oth-JPR[Java Authentication and Authorization Service (JAAS) Specification, version 1.0]
 
 // JAVA SE API //
-:lkJavaSE7: link:https://docs.oracle.com/javase/7/docs/api/[Java Platform, Standard Edition (SE) API, version 7]
+:lkJavaSE: link:https://docs.oracle.com/en/java/javase/25/docs/api/[Java Platform, Standard Edition (SE) API, version 25]
 
 // JAKARTA EE SPECS //
 // TODO: update for EE 12
