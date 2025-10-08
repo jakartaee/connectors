@@ -15339,8 +15339,8 @@ the java.io.Serializable interface is not necessary. The XML long-term
 persistence mechanism introduced in J2SE 1.4 can save the state of a
 JavaBean in an XML format that is resilient to version changes in the
 implementation of that JavaBean. Refer to Java SE (see
-{lkJavaSE7}) classes _java.beans.XMLEncoder_ ,
-_java.beans.XMLEncoder_ , and _java.beans.PersistenceDelegate_ .
+{lkJavaSE}) classes _java.beans.XMLEncoder_
+and _java.beans.PersistenceDelegate_ .
 
 For details, refer to JavaBeans specification
 (see {lkJavaBeansSpec}).
