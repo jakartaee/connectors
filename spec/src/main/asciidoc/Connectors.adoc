@@ -1,5 +1,5 @@
 :sectnums:
-== Jakarta Connectors, Version 2.1
+== Jakarta Connectors, Version {specVersion}
 
 Copyright (c) 2013, 2022 Eclipse Foundation, Oracle and/or its affiliates
 
@@ -74,7 +74,7 @@ application server that supports the connector architecture.
 
 === Scope
 
-Version 2.1 of the connector architecture
+Version {specVersion} of the connector architecture
 defines:
 
 * A standard set of system-level contracts

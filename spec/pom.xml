@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
  
-    Copyright (c) 2017, 2019 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2017, 2025 Oracle and/or its affiliates. All rights reserved.
  
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -17,28 +17,33 @@
  
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <groupId>org.eclipse.ee4j</groupId>
-        <artifactId>project</artifactId>
-        <version>1.0.6</version>
-        <relativePath/>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>jakarta.connectors</groupId>
+
+    <parent>
+        <groupId>jakarta.resource</groupId>
+        <artifactId>jakarta.resource.parent</artifactId>
+        <version>2.2.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>connectors-spec</artifactId>
     <packaging>pom</packaging>
-    <version>2.1</version>
+
     <name>Jakarta Connectors Specification</name>
 
     <properties>
         <site.output.dir>${project.build.directory}/staging</site.output.dir>
         <maven.site.skip>true</maven.site.skip>
-        <asciidoctor.maven.plugin.version>1.5.7.1</asciidoctor.maven.plugin.version>
-        <asciidoctorj.version>1.6.2</asciidoctorj.version>
-        <asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
-        <jruby.version>9.2.6.0</jruby.version>
+
+        <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
+        <asciidoctorj.version>3.0.0</asciidoctorj.version>
+        <asciidoctorj.pdf.version>2.3.20</asciidoctorj.pdf.version>
+        <jruby.version>9.4.14.0</jruby.version> 
+        
         <!-- status: DRAFT, BETA, etc., or blank for final -->
-        <status></status>
+        <status>DRAFT</status>
+
+        <maven.build.timestamp.format>MMMM dd, yyyy</maven.build.timestamp.format>
+        <revisiondate>${maven.build.timestamp}</revisiondate>
     </properties>
 
     <scm>
@@ -70,7 +75,7 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[11.0,12.0)</version>
+                                    <version>[11.0,)</version>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
@@ -84,7 +89,7 @@
                 <dependencies>
                     <dependency>
                         <groupId>org.jruby</groupId>
-                        <artifactId>jruby-complete</artifactId>
+                        <artifactId>jruby</artifactId>
                         <version>${jruby.version}</version>
                     </dependency>
                     <dependency>
@@ -106,8 +111,11 @@
                             <goal>process-asciidoc</goal>
                         </goals>
                         <configuration>
-                            <backend>xhtml</backend>
+                            <backend>html5</backend>
+                            <sourceDirectory>${basedir}/src/main/asciidoc</sourceDirectory>
                             <attributes>
+                                <source-highlighter>coderay</source-highlighter>
+                                <imagesdir>images</imagesdir>
                                 <doctype>book</doctype>
                                 <status>${status}</status>
                                 <data-uri />
@@ -129,7 +137,10 @@
                         </goals>
                         <configuration>
                             <backend>pdf</backend>
+                            <sourceDirectory>${basedir}/src/main/asciidoc</sourceDirectory>
                             <attributes>
+                                <source-highlighter>coderay</source-highlighter>
+                                <imagesdir>images</imagesdir>
                                 <pdf-stylesdir>${project.basedir}/src/theme</pdf-stylesdir>
                                 <pdf-style>jakartaee</pdf-style>
                                 <doctype>book</doctype>
@@ -150,11 +161,11 @@
                 </executions>
                 <configuration>
                     <sourceDocumentName>jakarta-connectors-spec.adoc</sourceDocumentName>
-                    <sourceHighlighter>coderay</sourceHighlighter>
                     <attributes>
                         <revnumber>${project.version}</revnumber>
                         <revremark>${status}</revremark>
                         <revdate>${revisiondate}</revdate>
+                        <specVersion>${spec.version}</specVersion>
                     </attributes>
                 </configuration>
             </plugin>

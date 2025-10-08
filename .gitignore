@@ -7,3 +7,5 @@ target/
 .vscode/
 .idea
 nb-configuration.xml
+**/bin/
+.DS_Store
