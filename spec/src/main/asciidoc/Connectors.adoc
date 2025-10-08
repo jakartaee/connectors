@@ -10637,7 +10637,7 @@ receive messages. The jakarta.jms.Connection objects are obtained from a
 ConnectionFactory supplied by the Jakarta Messaging resource adapter.
 
 * Based on the Jakarta Enterprise Beans deployment descriptor
-information (resource-ref's and resource-env-ref's) or resource
+information (resource-ref and resource-env-ref) or resource
 reference injection annotations (Resource annotation defined in
 {lkAnnoSpec}), the Jakarta Enterprise Beans deployer configures the
 appropriate ConnectionFactory objects (resource-ref's) in the component
