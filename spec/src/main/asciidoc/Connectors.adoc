@@ -17582,7 +17582,7 @@ EE compliant application server to provide the following APIs:
 * Java SDK, Standard Edition, version 11.0 or above that
 includes the following as part of either the core platform or standard
 extensions: JNDI Standard Extension. (see
-{lkJavaSE7})
+{lkJavaSE})
 
 * Required APIs for Jakarta _TM_ Platform,
 Enterprise Edition, Version 10 as specified in the {lkPlatformSpec}.
