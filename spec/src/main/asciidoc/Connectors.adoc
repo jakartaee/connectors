@@ -4229,7 +4229,7 @@ and X/Open (see {lkXOpenSpec}) specifications.
 
 ===== Interfaces
 
-{empty}The TM must use the _XAResource_
+The TM must use the _XAResource_
 interface supported by an RM for transaction coordination and recovery.
 The TM must be written to handle consistently any information or status
 that an RM can legally return. The TM must assume that it can support
@@ -8361,7 +8361,7 @@ either choose to fall back to a superclass that is supported by the
 application server (again ascertained by way of the _isContextSupported_
 method) or fail the _Work_ submission.
 
-{empty}For _WorkContext_ classes that are
+For _WorkContext_ classes that are
 defined as abstract classes, such as _SecurityContext_ , the resource
 adapter must use the abstract class while invoking the
 _isContextSupported_ method and not its implementation class. For more
@@ -11507,7 +11507,7 @@ established identity.
 This chapter references the following chapters
 and documents:
 
-* {empty}Security Architecture specified in
+* Security Architecture specified in
 <<a1563, Security Architecture>>
 
 * Security scenarios based on the connector
@@ -12041,7 +12041,7 @@ the scope of the Jakarta Enterprise Beans architecture.
 
 === Requirements
 
-* {empty}The application server must support the
+* The application server must support the
 _SecurityContext_ interface. It must also satisfy all the requirements
 stated in <<a3781, Establishing the Security Context>>
 
@@ -12060,7 +12060,7 @@ for configuring principal mapping. The application server must also
 support the simplifications detailed in <<a3827,
 Establishing a Principal as the Caller Identity>>.
 
-* {empty}The application server must support
+* The application server must support
 the security role assignments relevant to the MessageEndpoint
 implementation as stated in <<a3841, Security
 Configuration Responsibilities>>
@@ -16248,7 +16248,7 @@ public class com.wombatserver.ApplicationServerJNDIHandler
  // a configured property set and then configure a
  // ManagedConnectionFactory instance with specified
  // properties.
-{empty} ... // [implementation specific]
+ // ... [implementation specific]
  //
  // For example, instantiation of the
  // ManagedConnectionFactory
@@ -19025,7 +19025,7 @@ through the _GSSCredential_ interface.
 _ManagedConnectionFactory_ . _create-ManagedConnection_ passing in a
 _Subject_ instance with the resource principal and its Kerberos
 credentials.
-. {empty}The remaining steps are the same as in
+. The remaining steps are the same as in
 the previous scenario, <<a9679, Scenario:Kerberos and Principal Delegation>>
 
 ==== Scenario: EIS-Specific Authentication
