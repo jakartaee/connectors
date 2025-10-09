@@ -7,11 +7,11 @@ on:
   push:
     branches: 
         - 'main'
-        - 'RELEASE-*'
+        - '*-RELEASE'
   pull_request:
     branches:
         - 'main'
-        - 'RELEASE-*'
+        - '*-RELEASE'
 
 permissions:
   contents: read
