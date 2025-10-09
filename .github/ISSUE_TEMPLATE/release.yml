@@ -27,7 +27,6 @@ body:
   - type: textarea
     attributes:
       label: Check List
-      # TODO replace master with main when we switch default branch
       description: |
         This is a checklist of what needs to be completed during the release process.
         This checklist typically does not need to be edited prior to submitting this form.
@@ -52,6 +51,6 @@ body:
               - upload [generated specification documentation](https://github.com/jakartaee/connectors/actions/workflows/specification.yml)
             - [ ] Update versions in non-build files, such as:
               Documentation:
-              - [README.adoc](https://github.com/jakartaee/connectors/blob/master/README.adoc)
+              - [README.adoc](https://github.com/jakartaee/connectors/blob/main/README.adoc)
     validations:
       required: true
