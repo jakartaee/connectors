@@ -3,14 +3,17 @@
 
 name: Java CI with Maven
 
+#TODO remove master branch once main is the default branch
 on:
   push:
     branches: 
         - 'main'
+        - 'master'
         - '*-RELEASE'
   pull_request:
     branches:
         - 'main'
+        - 'master'
         - '*-RELEASE'
 
 permissions:
