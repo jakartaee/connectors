@@ -3,15 +3,14 @@
 
 name: Java CI with Maven
 
-# FIXME: master -> main
 on:
   push:
     branches: 
-        - 'master'
+        - 'main'
         - 'RELEASE-*'
   pull_request:
     branches:
-        - 'master'
+        - 'main'
         - 'RELEASE-*'
 
 permissions:
