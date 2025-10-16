@@ -41,6 +41,8 @@ package jakarta.resource;
 
 public class ResourceException extends Exception {
 
+    private static final long serialVersionUID = 3949578663770982641L;
+
     /** Vendor specific error code */
     private String errorCode;
 

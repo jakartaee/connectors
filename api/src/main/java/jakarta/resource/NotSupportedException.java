@@ -33,6 +33,9 @@ package jakarta.resource;
 
 public class NotSupportedException extends ResourceException {
     
+
+    private static final long serialVersionUID = 1580789707840169533L;
+
     /**
      * Constructs a new instance with null as its detail message.
      */
