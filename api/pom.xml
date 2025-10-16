@@ -23,14 +23,14 @@
     <parent>
         <groupId>jakarta.resource</groupId>
         <artifactId>jakarta.resource.parent</artifactId>
-        <version>2.2.0-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>jakarta.resource-api</artifactId>
     
     <properties>
         <extension.name>jakarta.resource</extension.name>
-        <spec.version>2.2</spec.version>
+        <spec.version>3.0</spec.version>
         <non.final>false</non.final>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
