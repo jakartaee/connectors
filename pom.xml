@@ -43,9 +43,33 @@
     </scm>
 
     <properties>
+        <!-- General properties -->
         <extension.name>jakarta.resource</extension.name>
         <spec.version>2.2</spec.version>
         <non.final>false</non.final>
+
+        <!-- Versioning for API and SPEC-->
+        <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
+        <asciidoctorj.version>3.0.0</asciidoctorj.version>
+        <asciidoctorj.pdf.version>2.3.20</asciidoctorj.pdf.version>
+        <jruby.version>9.4.14.0</jruby.version> 
+        
+        <build.helper.plugin.version>3.6.1</build.helper.plugin.version>
+        <spotbugs.version>4.5.0.0</spotbugs.version>
+        <spec.version.plugin.version>2.2</spec.version.plugin.version>
+
+        <maven.complier.plugin.version>3.14.1</maven.complier.plugin.version>
+        <maven.bundle.plugin.version>6.0.0</maven.bundle.plugin.version>
+        <maven.jar.plugin.version>3.4.2</maven.jar.plugin.version>
+        <maven.javadoc.plugin.version>3.12.0</maven.javadoc.plugin.version>
+        <maven.release.plugin.version>3.1.1</maven.release.plugin.version>
+        <maven.scm.provider.gitexe.version>2.2.1</maven.scm.provider.gitexe.version>
+        <maven.assembly.plugin.version>3.7.1</maven.assembly.plugin.version>
+
+        <!-- TODO update to EE12 versions -->
+        <jakarta.transaction.version>2.0.1</jakarta.transaction.version>
+        <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
+        <jakarta.enterprise.cdi.version>4.1.0</jakarta.enterprise.cdi.version>
     </properties>
 
     <modules>
