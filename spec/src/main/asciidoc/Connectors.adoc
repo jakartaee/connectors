@@ -2753,11 +2753,10 @@ of listeners.
 
 The _removeConnectionEventListener_ method
 removes a registered _ConnectionEventListener_ instance from a
-_ManagedConnection_ instance. Since an application server may modify the
-list of event listeners at a time when the _ManagedConnection_ may be
-iterating through its list of event listeners, the resource adapter is
-recommended to handle this scenario by synchronizing access to its list
-of event listeners.
+_ManagedConnection_ instance. Because an application server can modify the
+list of event listeners at a time when the _ManagedConnection_ might be
+iterating through its list of event listeners, the resource adapter must
+always ensure thread-safe access to its list of event listeners.
 
 The method _getMetaData_ returns the metadata
 information (represented by the _ManagedConnectionMetaData_ interface)
