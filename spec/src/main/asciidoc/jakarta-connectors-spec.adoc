@@ -8,7 +8,8 @@
 :version-label!:
 :doctype: book
 :docinfo: shared
-:license: Eclipse Foundation Specification License v1.0
+:license: Eclipse Foundation Specification License v1.1
+:inceptionYear: 2018
 :source-highlighter: coderay
 :toc: left
 :toclevels: 4
@@ -19,6 +20,9 @@ ifdef::backend-pdf[]
 :numbered:
 :title-logo-image: image:jakarta_ee_logo_schooner_color_stacked_default.png[pdfwidth=4.25in,align=right]
 endif::[]
+
+// == References
+include::chapters/references.adoc[]
 
 // == License
 :sectnums!:
