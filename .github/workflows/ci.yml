@@ -3,16 +3,18 @@
 
 name: Java CI with Maven
 
-# FIXME: master -> main
+#TODO remove master branch once main is the default branch
 on:
   push:
     branches: 
+        - 'main'
         - 'master'
-        - 'RELEASE-*'
+        - '*-RELEASE'
   pull_request:
     branches:
+        - 'main'
         - 'master'
-        - 'RELEASE-*'
+        - '*-RELEASE'
 
 permissions:
   contents: read
@@ -22,7 +24,7 @@ jobs:
 
     strategy:
       matrix:
-        java-version: [ '21' ] # TODO add 25
+        java-version: [ '21', '25' ]
 
     runs-on: ubuntu-latest
 
