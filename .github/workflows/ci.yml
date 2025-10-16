@@ -3,17 +3,14 @@
 
 name: Java CI with Maven
 
-#TODO remove master branch once main is the default branch
 on:
   push:
     branches: 
         - 'main'
-        - 'master'
         - '*-RELEASE'
   pull_request:
     branches:
         - 'main'
-        - 'master'
         - '*-RELEASE'
 
 permissions:
@@ -24,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        java-version: [ '21', '25' ]
+        java-version: [ '17', '21', '25' ]
 
     runs-on: ubuntu-latest
 

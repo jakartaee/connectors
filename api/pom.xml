@@ -29,12 +29,8 @@
     <artifactId>jakarta.resource-api</artifactId>
     
     <properties>
-        <extension.name>jakarta.resource</extension.name>
-        <spec.version>2.2</spec.version>
-        <non.final>false</non.final>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.5.0.0</spotbugs.version>
     </properties>
 
     <name>${extension.name} API</name>
@@ -103,7 +99,7 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[11,)</version>
+                                    <version>[${maven.compiler.source},)</version>
                                 </requireJavaVersion>
                                 <requireMavenVersion>
                                     <version>[3.6.0,)</version>
@@ -115,9 +111,8 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven.complier.plugin.version}</version>
                 <configuration>
-                    <release>11</release>
                     <compilerArgs>
                         <!-- -dep-ann - cannot add @Deprecated and do not want to see warnings -->
                         <arg>-Xlint:all,-dep-ann</arg>
@@ -129,7 +124,7 @@
             <plugin>
                 <groupId>org.glassfish.build</groupId>
                 <artifactId>spec-version-maven-plugin</artifactId>
-                <version>2.1</version>
+                <version>${spec.version.plugin.version}</version>
                 <configuration>
                     <specMode>jakarta</specMode>
                     <spec>
@@ -152,7 +147,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.3</version>
+                <version>${maven.bundle.plugin.version}</version>
                 <configuration>
                     <supportedProjectTypes>
                         <supportedProjectType>jar</supportedProjectType>
@@ -186,7 +181,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>${maven.jar.plugin.version}</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -199,7 +194,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>${build.helper.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>currentyear-property</id>
@@ -237,14 +232,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>${maven.javadoc.plugin.version}</version>
                 <configuration>
                     <archive>
                         <manifest>
                             <addDefaultEntries>false</addDefaultEntries>
                         </manifest>
                     </archive>
-                    <source>11</source>
+                    <source>${maven.compiler.source}</source>
                     <doclint>none</doclint>
                     <notimestamp>true</notimestamp>
                     <docfilessubdirs>true</docfilessubdirs>
@@ -280,18 +275,18 @@
         <dependency>
             <groupId>jakarta.transaction</groupId>
             <artifactId>jakarta.transaction-api</artifactId>
-            <version>2.0.1</version>
+            <version>${jakarta.transaction.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
-            <version>2.1.0</version>
+            <version>${jakarta.annotation.version}</version>
         </dependency>
         
         <dependency>
             <groupId>jakarta.enterprise</groupId>
             <artifactId>jakarta.enterprise.cdi-api</artifactId>
-            <version>3.0.1</version>
+            <version>${jakarta.enterprise.cdi.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
