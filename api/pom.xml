@@ -99,7 +99,7 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[11,)</version>
+                                    <version>[${maven.compiler.source},)</version>
                                 </requireJavaVersion>
                                 <requireMavenVersion>
                                     <version>[3.6.0,)</version>
@@ -113,7 +113,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.complier.plugin.version}</version>
                 <configuration>
-                    <release>11</release>
                     <compilerArgs>
                         <!-- -dep-ann - cannot add @Deprecated and do not want to see warnings -->
                         <arg>-Xlint:all,-dep-ann</arg>
@@ -240,7 +239,7 @@
                             <addDefaultEntries>false</addDefaultEntries>
                         </manifest>
                     </archive>
-                    <source>11</source>
+                    <source>${maven.compiler.source}</source>
                     <doclint>none</doclint>
                     <notimestamp>true</notimestamp>
                     <docfilessubdirs>true</docfilessubdirs>

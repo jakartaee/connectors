@@ -69,7 +69,7 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[11.0,)</version>
+                                    <version>[${maven.compiler.source},)</version>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
