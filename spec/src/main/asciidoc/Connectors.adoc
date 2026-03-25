@@ -153,6 +153,7 @@ _Work_ instance in the context of an established identity. It also
 supports the propagation of user information/Principal information from
 an EIS to a MessageEndpoint during Message Inflow.
 
+Version 3.0 of Jakarta Connectors provides major updates required for Jakarta EE 11 including compiled with Java 17
 Version 2.1 of Jakarta Connectors provides minor updates required for Jakarta EE 10 including compiled with Java 11
 Version 2.0 of Jakarta Connectors moves the old Java Connectors Architecture specification to Jakarta EE.
 
