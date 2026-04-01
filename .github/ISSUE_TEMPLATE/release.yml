@@ -1,0 +1,56 @@
+name: Release
+description: Propose a new major/minor/milestone release
+title: "[Release]: "
+labels: ["release"] #TODO - create this label
+body:
+  - type: markdown
+    attributes: 
+      value: |
+        This issue is to help the committers to the Jakarta Connectors project to propose
+        and complete the release process.
+  - type: textarea
+    attributes:
+      label: Proposal
+      description: |
+        Why is a release needed?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Outstanding work
+      description: |
+        Issues / pulls to finish before this release can become generally available.
+      value: |
+        - [ ] 
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Check List
+      description: |
+        This is a checklist of what needs to be completed during the release process.
+        This checklist typically does not need to be edited prior to submitting this form.
+      value: |
+          #### Prepare
+            - [X] Open this issue.
+            - [ ] Complete outstanding work
+            - [ ] [Update TCK Signatures to capture API changes](https://github.com/jakartaee/platform-tck/blob/main/tcks/profiles/platform/signaturevalidation/src/main/java/com/sun/ts/tests/signaturetest/jakarta.resource.sig)
+          #### Stage release
+            - [ ] [Build and stage artifacts to staging repository](https://ci.eclipse.org/jca/)
+            - [ ] Update this issue with a comment that links to the staged artifacts and the generated GitHub branch and tag
+            - [ ] [Create a `draft` release on GitHub](https://github.com/jakartaee/connectors/releases/new)
+          #### Verify and modify
+            - [ ] Ask for feedback from the community to verify the staged artifact has all the expected changes.
+            - [ ] If anything needs to be added before publishing do that now and repeat the `Stage Release` section
+          #### Publish release
+            - [ ] [Publish staged artifacts to the public repository](https://ci.eclipse.org/jca/)
+            - [ ] Update this issue with a comment that links to the published artifacts and the generated GitHub branch and tag
+            - [ ] [Modify the `draft` release on GitHub to be `pre-release` or `latest`](https://github.com/jakartaee/connectors/releases)
+          #### Follow up
+            - [ ] [Create pull request to https://github.com/jakartaee/specifications](https://github.com/jakartaee/specifications/blob/master/.github/PULL_REQUEST_TEMPLATE/pull_request_template.md)
+              - upload [generated specification documentation](https://github.com/jakartaee/connectors/actions/workflows/specification.yml)
+            - [ ] Update versions in non-build files, such as:
+              Documentation:
+              - [README.adoc](https://github.com/jakartaee/connectors/blob/main/README.adoc)
+    validations:
+      required: true
