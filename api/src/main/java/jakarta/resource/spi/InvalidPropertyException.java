@@ -28,6 +28,8 @@ import java.beans.PropertyDescriptor;
 public class InvalidPropertyException
         extends jakarta.resource.ResourceException {
 
+    private static final long serialVersionUID = 7083381247403866759L;
+
     /*
      * Holder for invalid properties.
      */
