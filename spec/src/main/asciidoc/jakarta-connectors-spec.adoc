@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017, 2025 Contributors to the Eclipse Foundation
+// Copyright (c) 2017, 2026 Contributors to the Eclipse Foundation
 //
 
 = Jakarta Connectors
@@ -8,7 +8,7 @@
 :version-label!:
 :doctype: book
 :docinfo: shared
-:license: Eclipse Foundation Specification License v1.1
+:license: Eclipse Foundation Specification License v2.0
 :inceptionYear: 2018
 :source-highlighter: coderay
 :toc: left
