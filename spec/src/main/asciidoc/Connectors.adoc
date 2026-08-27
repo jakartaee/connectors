@@ -1,7 +1,7 @@
 :sectnums:
 == Jakarta Connectors, Version {specVersion}
 
-Copyright (c) 2013, 2026 Eclipse Foundation, Oracle and/or its affiliates
+Copyright (c) {inceptionYear}, {docyear} Eclipse Foundation, Oracle and/or its affiliates
 
 Oracle and Java are registered trademarks of Oracle and/or its 
 affiliates. Other names may be trademarks of their respective owners. 

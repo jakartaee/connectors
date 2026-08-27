@@ -9,3 +9,4 @@ target/
 nb-configuration.xml
 **/bin/
 .DS_Store
+.envrc
