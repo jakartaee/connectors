@@ -48,6 +48,8 @@ package jakarta.resource.spi;
 
 public class ConnectionEvent extends java.util.EventObject {
 
+  private static final long serialVersionUID = 6722807342334835364L;
+
   /** Event notification that an application component has closed the 
    *  connection
   **/

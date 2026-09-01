@@ -27,6 +27,8 @@ import java.util.EventObject;
  */
 public class WorkEvent extends EventObject {
 
+    private static final long serialVersionUID = 5258766792646657146L;
+
     /**
      * Indicates <code>Work</code> instance has been accepted.
      */

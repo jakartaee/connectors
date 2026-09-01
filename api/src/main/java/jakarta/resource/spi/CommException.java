@@ -28,6 +28,8 @@ package jakarta.resource.spi;
  */
 public class CommException extends jakarta.resource.ResourceException {
 
+    private static final long serialVersionUID = 4988700038751402960L;
+
     /**
      * Constructs a new instance with null as its detail message.
      */
