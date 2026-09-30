@@ -1,0 +1,91 @@
+/*
+ * Snapshot Pipeline
+ *
+ * Deploys a daily SNAPSHOT build of the Jakarta API to the OSS release
+ * repository. The pipeline is triggered automatically once per day at midnight
+ * (UTC) when new commits are detected on the main branch.
+ *
+ * Credentials required:
+ *   secret-subkeys.asc  - GPG keyring file used to sign published artifacts.
+ *
+ * Triggers:
+ *   pollSCM('0 0 * * *') - Polls the main branch daily at midnight; only
+ *                          triggers a build when new commits are detected.
+ */
+
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '14', numToKeepStr: '10'))
+        disableConcurrentBuilds()
+        skipDefaultCheckout()
+        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true)
+    }
+
+    // Always use the latest LTS version
+    tools {
+        jdk 'openjdk-jdk25-latest'
+    }
+
+    triggers {
+        pollSCM('0 0 * * *')
+    }
+
+    environment {
+        TOOLS_PREFIX = '/opt/tools'
+        JAVA_HOME    = "${TOOLS_PREFIX}/java/openjdk/jdk-25/latest"
+        MVN_HOME     = "${TOOLS_PREFIX}/apache-maven/latest"
+        PATH         = "${MVN_HOME}/bin:${JAVA_HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        /*
+         * Import GPG Keys
+         * Imports and fully trusts the signing keys from the 'secret-subkeys.asc'
+         * credential so that Maven can sign artifacts during deployment.
+         */
+        stage('Import GPG Keys') {
+            steps {
+                withCredentials([file(credentialsId: 'secret-subkeys.asc', variable: 'KEYRING')]) {
+                    sh '''
+                        #!/bin/bash -e
+                        gpg --batch --import ${KEYRING}
+                        for fpr in $(gpg --list-keys --with-colons | awk -F: '/fpr:/ {print $10}' | sort -u); do
+                            printf "5\ny\n" | gpg --batch --command-fd 0 --expert --edit-key $fpr trust
+                        done
+                        '''
+                }
+            }
+        }
+
+        /*
+         * Deploy Snapshot
+         * Runs `mvn clean deploy` with the oss-release profile, 
+         * skipping tests, javadoc linting, and asciidoctor generation.
+         */
+        stage('Deploy Snapshot') {
+            steps {
+                sh '''
+                    #!/bin/bash -ex
+                    mvn -U -C -B \
+                        -Poss-release \
+                        -DskipTests -Ddoclint=none \
+                        clean deploy
+                    '''
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}

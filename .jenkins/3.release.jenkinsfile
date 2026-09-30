@@ -1,0 +1,226 @@
+/*
+ * Release Pipeline
+ *
+ * Promotes the staged Jakarta project — Parent POM and API jar — from the
+ * Eclipse Nexus staging repository at
+ * https://repo.eclipse.org/repository/${SHORT_NAME)-maven2-staging/
+ * to the Maven Central repository at https://repo1.maven.org/maven2/jakarta/${SHORT_NAME)/
+ * using the central-staging-plugins promote-stage profile.
+ *
+ * Credentials required:
+ *   secret-subkeys.asc  - GPG keyring file used to sign published artifacts.
+ *   github-bot-ssh      - SSH key used to check out the tag from GitHub.
+ *
+ * Optional:
+ *   Requires `gh` CLI available on the agent to post the release summary comment.
+ *
+ * Triggers:
+ *   Manual     - Always ran manually
+ */
+
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '14', numToKeepStr: '10'))
+        disableConcurrentBuilds()
+        skipDefaultCheckout()
+        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true)
+    }
+
+    // Always use the latest LTS version
+    tools {
+        jdk 'openjdk-jdk25-latest'
+    }
+
+    parameters {
+        string(
+            name: 'TAG',
+            defaultValue: '',
+            description: 'The TAG that was created during the stage pipeline.'
+        )
+        string(
+            name: 'RELEASE_ISSUE',
+            defaultValue: '',
+            description: '''
+                        GitHub issue number to comment on with the release summary (e.g. 123).
+                        Leave blank to skip.
+                        '''
+        )
+        booleanParam(
+            name: 'DRY_RUN',
+            defaultValue: true,
+            description: '''
+                        Do not actually release to Maven Central.
+                        Instead just list the artifacts that are currently in the staging repository.
+                        '''
+        )
+    }
+
+    environment {
+        // Path
+        TOOLS_PREFIX = '/opt/tools'
+        JAVA_HOME    = "${TOOLS_PREFIX}/java/openjdk/jdk-25/latest"
+        MVN_HOME     = "${TOOLS_PREFIX}/apache-maven/latest"
+        PATH         = "${MVN_HOME}/bin:${JAVA_HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+        // Plugins
+        HELP_PLUGIN    = 'org.apache.maven.plugins:maven-help-plugin:3.5.1'
+
+        // Project
+        GH_REPO    = "jakartaee/connectors"
+        SHORT_NAME = 'jca'
+        GIT_URL    = 'git@github.com:jakartaee/connectors.git'
+    }
+
+    stages {
+        /* Confirms Maven is functional and that NEXT_VERSION is present.
+         */
+        stage('Verify Setup') {
+            steps {
+                sh '''
+                    echo "Test Maven"
+                    mvn -version
+
+                    echo "Verify tag is set"
+                    if [ -z "${TAG}" ]; then
+                      echo "ERROR: Missing build parameter TAG"
+                      exit 1
+                    fi
+                    '''
+            }
+        }
+
+        /* Checks out the exact tag that was created and pushed during the
+         * stage pipeline, ensuring promotion targets the correct artifacts.
+         */
+        stage('Checkout') {
+            steps {
+                sshagent(credentials: ['github-bot-ssh']) {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: "refs/tags/${TAG}"]],
+                        userRemoteConfigs: [[
+                            url: "${GIT_URL}",
+                            credentialsId: 'github-bot-ssh'
+                        ]]
+                    ])
+                }
+            }
+        }
+
+        /* Imports and fully trusts the signing keys from the 'secret-subkeys.asc'
+         * credential so that Maven can sign artifacts during deployment.
+         */
+        stage('Import GPG Keys') {
+            steps {
+                withCredentials([file(credentialsId: 'secret-subkeys.asc', variable: 'KEYRING')]) {
+                    sh '''
+                        gpg --batch --import ${KEYRING}
+                        for fpr in $(gpg --list-keys --with-colons | awk -F: '/fpr:/ {print $10}' | sort -u); do
+                            printf "5\ny\n" | gpg --batch --command-fd 0 --expert --edit-key $fpr trust
+                        done
+                        '''
+                }
+            }
+        }
+
+        /* Derives CURRENT_VERSION, GROUP_ID, and ARTIFACT_ID from the checked-out source.
+         */
+        stage('Compute Variables') {
+            steps {
+                sh '''
+                    echo "Compute current version"
+                    CURRENT_VERSION=$(mvn -B ${HELP_PLUGIN}:evaluate \
+                      -Dexpression=project.version \
+                      2> /dev/null | grep -Ev '(^\\[)')
+                    echo "CURRENT_VERSION=${CURRENT_VERSION}" >> computed.env
+
+                    echo "Compute project ids"
+                    ARTIFACT_ID=$(mvn -B ${HELP_PLUGIN}:evaluate -Dexpression=project.artifactId 2>/dev/null | grep -Ev '(^\\[)')
+                    GROUP_ID=$(mvn -B ${HELP_PLUGIN}:evaluate -Dexpression=project.groupId 2>/dev/null | grep -Ev '(^\\[)')
+                    echo "GROUP_ID=${GROUP_ID}"       >> computed.env
+                    echo "ARTIFACT_ID=${ARTIFACT_ID}" >> computed.env
+                    '''
+                script {
+                    def props = [:]
+                    readFile('computed.env').trim().split('\n').each { line ->
+                        def idx = line.indexOf('=')
+                        if (idx > 0) {
+                            props[line.substring(0, idx)] = line.substring(idx + 1)
+                        }
+                    }
+                    env.CURRENT_VERSION = props.CURRENT_VERSION
+                    env.GROUP_ID        = props.GROUP_ID
+                    env.ARTIFACT_ID     = props.ARTIFACT_ID
+                }
+            }
+        }
+
+        /* Promotes staged artifacts to Maven Central.
+         * In DRY_RUN mode, uses -Dcentral.dryRun=true to list staging content
+         * without actually releasing.
+         */
+        stage('Sync Stage to Release') {
+            steps {
+                sh '''
+                    echo "Remove computed.env to avoid license check failure"
+                    rm -f computed.env
+
+                    if [ ${DRY_RUN} = 'true' ]; then
+                      echo "DRY_RUN: clean deploy"
+                      mvn -U -C -B \
+                        -Ppromote-stage -Dcentral.dryRun=true \
+                        -DskipTests -Ddoclint=none -Dasciidoctor.skip=true \
+                        clean deploy
+                    else
+                      echo "Clean deploy"
+                      mvn -U -C -B \
+                        -Ppromote-stage \
+                        -DskipTests -Ddoclint=none -Dasciidoctor.skip=true \
+                        clean deploy
+                    fi
+                    '''
+            }
+        }
+
+        /* Prints the artifact, branch, and tag links confirming the release.
+         * If RELEASE_ISSUE is provided, also posts the summary as a comment
+         * on that GitHub issue using the gh CLI.
+         */
+        stage('Summary') {
+            steps {
+                sshagent(credentials: ['github-bot-ssh']) {
+                    sh '''
+                        GROUP_PATH=$(echo "${GROUP_ID}" | tr '.' '/')
+                        ARTIFACT_PATH="${GROUP_PATH}/${ARTIFACT_ID}/${CURRENT_VERSION}/${ARTIFACT_ID}-${CURRENT_VERSION}.pom"
+
+                        COMMENT="=============================== Release is Published =============================="
+                        COMMENT="${COMMENT}\nArtifact:   https://central.sonatype.com/artifact/${ARTIFACT_PATH}"
+                        COMMENT="${COMMENT}\nBranch:     https://github.com/${GH_REPO}/tree/${RELEASE_BRANCH}"
+                        COMMENT="${COMMENT}\nTag:        https://github.com/${GH_REPO}/tree/${TAG}"
+                        COMMENT="${COMMENT}\nRelease:    https://github.com/${GH_REPO}/releases/tag/${TAG} [TODO]"
+                        COMMENT="${COMMENT}\n================================================================================="
+
+                        # TODO: Verify gh CLI is available on the Jenkins agent PATH
+                        if [ -n "${RELEASE_ISSUE}" ] && [ "${DRY_RUN}" = 'false' ]; then
+                          echo "Posting summary to issue #${RELEASE_ISSUE}"
+                          gh issue comment "${RELEASE_ISSUE}" \
+                            --repo "${GH_REPO}" \
+                            --body "${COMMENT}"
+                        else
+                          echo "RELEASE_ISSUE not set or DRY_RUN is true — skipping GitHub comment"
+                          echo -e "${COMMENT}"
+                        fi
+                        '''
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
