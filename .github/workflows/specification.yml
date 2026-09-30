@@ -5,10 +5,6 @@ name: Generate specification documentation
 
 on: 
     workflow_dispatch:
-        inputs:
-            specVersion:
-                description: 'Major and Minor level of release. Example: 1.0'
-                required: true
 
 jobs:
   generate:
@@ -24,15 +20,12 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Generate specification docs
-      run: |
-        mvn package --file api/pom.xml -Dspec.version=${{ github.event.inputs.specVersion }}
-        mvn package --file spec/pom.xml -Drevremark=FINAL -Dspec.version=${{ github.event.inputs.specVersion }}
+      run: mvn clean package
     - name: Assemble documentation
       run: |
         mkdir documentation/
-        cp spec/target/generated-docs/jakarta-connectors-spec-${{ github.event.inputs.specVersion }}.pdf   documentation/jakarta-connectors-spec-${{ github.event.inputs.specVersion }}.pdf
-
-        cp spec/target/generated-docs/jakarta-connectors-spec-${{ github.event.inputs.specVersion }}.html  documentation/jakarta-connectors-spec-${{ github.event.inputs.specVersion }}.html
+        cp spec/target/generated-docs/jakarta-connectors-spec.pdf   documentation/jakarta-connectors-spec.pdf
+        cp spec/target/generated-docs/jakarta-connectors-spec.html  documentation/jakarta-connectors-spec.html
 
         cp -r api/target/reports/apidocs/ documentation/apidocs
     - name: Upload documentation

@@ -2,6 +2,7 @@
 <!--
  
     Copyright (c) 2017, 2025 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2026 Contributors to the Eclipse Foundation
  
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -21,22 +22,16 @@
 
     <parent>
         <groupId>jakarta.resource</groupId>
-        <artifactId>jakarta.resource.parent</artifactId>
+        <artifactId>jakarta.resource-parent</artifactId>
         <version>3.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>connectors-spec</artifactId>
+    <artifactId>jakarta.resource-spec</artifactId>
     <packaging>pom</packaging>
 
     <name>Jakarta Connectors Specification</name>
 
     <properties>
-        <site.output.dir>${project.build.directory}/staging</site.output.dir>
-        <maven.site.skip>true</maven.site.skip>
-        
-        <!-- status: DRAFT, BETA, etc., or blank for final -->
-        <status>DRAFT</status>
-
         <maven.build.timestamp.format>MMMM dd, yyyy</maven.build.timestamp.format>
         <revisiondate>${maven.build.timestamp}</revisiondate>
     </properties>
@@ -57,25 +52,6 @@
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enforce-versions</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireJavaVersion>
-                                    <version>[${maven.compiler.source},)</version>
-                                </requireJavaVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
@@ -111,7 +87,7 @@
                                 <source-highlighter>coderay</source-highlighter>
                                 <imagesdir>images</imagesdir>
                                 <doctype>book</doctype>
-                                <status>${status}</status>
+                                <status>${doc.mark}</status>
                                 <data-uri />
                                 <icons>font</icons>
                                 <toc>left</toc>
@@ -138,7 +114,7 @@
                                 <pdf-stylesdir>${project.basedir}/src/theme</pdf-stylesdir>
                                 <pdf-style>jakartaee</pdf-style>
                                 <doctype>book</doctype>
-                                <status>${status}</status>
+                                <status>${doc.mark}</status>
                                 <data-uri />
                                 <icons>font</icons>
                                 <pagenums />
@@ -156,10 +132,9 @@
                 <configuration>
                     <sourceDocumentName>jakarta-connectors-spec.adoc</sourceDocumentName>
                     <attributes>
-                        <revnumber>${project.version}</revnumber>
-                        <revremark>${status}</revremark>
+                        <revnumber>${spec.version}</revnumber>
+                        <revremark>${doc.mark}</revremark>
                         <revdate>${revisiondate}</revdate>
-                        <specVersion>${spec.version}</specVersion>
                     </attributes>
                 </configuration>
             </plugin>

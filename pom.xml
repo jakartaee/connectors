@@ -28,11 +28,11 @@
     </parent>
 
     <groupId>jakarta.resource</groupId>
-    <artifactId>jakarta.resource.parent</artifactId>
+    <artifactId>jakarta.resource-parent</artifactId>
     <packaging>pom</packaging>
     <version>3.0.0-SNAPSHOT</version>
 
-    <name>${extension.name} project</name>
+    <name>Jakarta Connectors</name>
     <description>Jakarta Connectors</description>
     <url>https://github.com/jakartaee/connectors</url>
 
@@ -51,11 +51,6 @@
 
          <nexus.staging.repository>jca-maven2-staging</nexus.staging.repository>
 
-         <!-- General properties -->
-         <extension.name>jakarta.resource</extension.name>
-         <spec.version>3.0</spec.version>
-         <non.final>false</non.final>
-
          <!-- Versioning for API and SPEC-->
          <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
          <asciidoctorj.version>3.0.1</asciidoctorj.version>
@@ -64,8 +59,6 @@
         
          <build.helper.plugin.version>3.6.1</build.helper.plugin.version>
          <spotbugs.version>4.9.8.3</spotbugs.version>
-         <spec.version.plugin.version>2.2</spec.version.plugin.version>
-
          <maven.complier.plugin.version>3.14.1</maven.complier.plugin.version>
          <maven.bundle.plugin.version>6.0.0</maven.bundle.plugin.version>
          <maven.jar.plugin.version>3.4.2</maven.jar.plugin.version>
@@ -79,6 +72,119 @@
          <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
          <jakarta.enterprise.cdi.version>4.1.0</jakarta.enterprise.cdi.version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>[${maven.compiler.source},)</version>
+                                </requireJavaVersion>
+                                <requireMavenVersion>
+                                    <version>[3.6.0,)</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>[${maven.compiler.source},)</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build.helper.plugin.version}</version>
+                <executions>
+                    <!-- Parse spec.version: major.minor from project.version (e.g. 3.0 from 3.0.0-SNAPSHOT) -->
+                    <execution>
+                        <id>parse-spec-version</id>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <name>spec.version</name>
+                            <value>${project.version}</value>
+                            <regex>^([0-9]+\.[0-9]+)\..*</regex>
+                            <replacement>$1</replacement>
+                            <failIfNoMatch>true</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                    <!-- Parse minor.version: incremental digit from project.version (e.g. 0 from 3.0.0-SNAPSHOT) -->
+                    <execution>
+                        <id>parse-minor-version</id>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <name>minor.version</name>
+                            <value>${project.version}</value>
+                            <regex>^[0-9]+\.[0-9]+\.([0-9]+).*</regex>
+                            <replacement>$1</replacement>
+                            <failIfNoMatch>true</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                    <!-- Parse doc.mark: DRAFT for -SNAPSHOT, -M*, -RC* versions -->
+                    <execution>
+                        <id>parse-doc-mark-draft</id>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <name>doc.mark</name>
+                            <value>${project.version}</value>
+                            <regex>.*-(SNAPSHOT|M[0-9]+|RC[0-9]+).*</regex>
+                            <replacement>DRAFT</replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                    <!-- Parse doc.mark: FINAL fallback when no DRAFT suffix matched -->
+                    <execution>
+                        <id>parse-doc-mark-final</id>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <name>doc.mark</name>
+                            <value>${doc.mark}</value>
+                            <regex>^(?!DRAFT$).*$</regex>
+                            <replacement>FINAL</replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <modules>
         <module>api</module>
