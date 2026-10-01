@@ -1502,9 +1502,7 @@ ResourceAdapter JavaBean instance or before using other objects that
 belong to the same resource adapter instance.
 * The application server thread which calls the
 start and the stop method on the ResourceAdapter JavaBean executes in an
-unspecified context. However, the application server thread must have at
-least the same level of security permissions as that of the resource
-adapter instance.
+unspecified context.
 
 
 
@@ -5774,7 +5772,7 @@ authentication mechanism.
 * *Security Attributes.* A principal has a set of
 security attributes associated with it. These security attributes are
 related to the authentication and authorization mechanisms. Some
-examples are security permissions, and credentials for a principal.
+examples are roles and credentials for a principal.
 
 * *Credential.* A credential contains or
 references security information that can authenticate a principal to
@@ -6771,12 +6769,6 @@ checks whether the passed _Subject_ instance carries a
 _PasswordCredential_ instance using the _Subject.getPrivateCredentials_
 method.
 
-Note that the security contract assumes that a
-resource adapter has the necessary security permissions to extract a
-private credential set from a _Subject_ instance. The specific mechanism
-through which such permission is set up is outside the scope of the
-Jakarta Connector Architecture.
-
 If the _Subject_ instance contains a
 _PasswordCredential_ instance, the resource adapter extracts the
 username and password from the _PasswordCredential_ . It uses the
@@ -7343,10 +7335,9 @@ thread-safe, and this method must be re-entrant.
 The application server thread that calls the
 run method in the Work implementation must execute with an unspecified
 context if no execution context has been specified, or must execute with
-the specified execution context. It must have at least the same level of
-security permissions as that of the resource adapter instance. Further,
-the application server thread that calls the _run_ and _release_
-methods, may or may not have access to a JNDI context.
+the specified execution context. Further, the application server thread
+that calls the _run_ and _release_ methods, may or may not have access
+to a JNDI context.
 
 
 
@@ -7756,12 +7747,8 @@ execute _Work_ instances. It may use the java.util.Timer facility
 available in the Java platform or may use the BootstrapContext instance
 provided by the application server to obtain a Timer instance.
 
-A resource adapter may not be able to
-directly create a Timer instance, if it does not have adequate runtime
-permissions to create threads. This is because the Timer instance starts
-a background thread. In such a case, the resource adapter can instead
-use the BootstrapContext instance to obtain a Timer instance from the
-application server.
+A resource adapter may use the BootstrapContext instance to obtain a
+Timer instance from the application server.
 
 [source,Java]
 ----
@@ -11648,9 +11635,9 @@ application server's _WorkManager_
 
 ** In the absence of inflow of security
 identities during _Work_ submission, the container cannot ensure the
-task has been granted fine-grained permissions/access-control based on
-authenticated user identities but is limited to making access decisions
-based on code-based identity information.
+task is executed under the correct authenticated user identity but is
+limited to making access decisions based on code-based identity
+information.
 * When a message is delivered asynchronously to
 _MessageEndpoint_ s residing in the application server, the resource
 adapter cannot establish the security identity of the caller of the
@@ -12019,9 +12006,7 @@ _Principal_ it requires to be set as the Caller identity in the
 _Principal_ _Set_ of the _executionSubject_ . See
 <<a3840, Case A: Establishing a Single Principal
 as the Caller Identity (Seq. Diagram)>> for a sequence diagram depicting
-this case. Note that the resource adapter must be configured to have the
-necessary security permissions to add a Principal to the
-executionSubject.
+this case.
 
 On return from _setupSecurityContext_ , the
 container must determine whether or not it handled the
@@ -14364,7 +14349,6 @@ _Connector_ annotation and not providing a deployment descriptor.
  boolean licenseRequired() default false;
  AuthenticationMechanism[] authMechanisms() default {};
  boolean reauthenticationSupport() default false;
- SecurityPermission[] securityPermissions() default {};
  TransactionSupport.TransactionSupportLevel transactionSupport()
  default TransactionSupport.TransactionSupportLevel.NoTransaction;
 
@@ -14402,12 +14386,6 @@ element _reauthenticationSupport_ specifies whether the resource adapter
 implementation supports re-authentication of existing ManagedConnection
 instance. Note that this information is for the resource adapter
 implementation and not for theunderlying EIS instance.
-
-The _securityPermissions_ annotation element
-specifies the extended security permissions required to be provided for
-the operation of the resource adapter module. See
-<<a4658, @SecurityPermission>> for more
-information on the _SecurityPermission_ annotation.
 
  The _transactionSupport_ annotation element
 specifies the level of transaction support provided by the resource
@@ -14505,40 +14483,6 @@ enumeration is used to represent the various credential interfaces that
 can be used by the resource adaper to support the representation of
 credentials and the _credentialInterface_ annotation element is used to
 specify the credential interface supported by the resource adapter.
-
-[[a4658]]
-==== @SecurityPermission
-
-The _SecurityPermission_ annotation can be
-used by the developer, as part of the _Connector_ annotation, to specify
-the extended security permissions required by the resource adapter (see
-<<a5165, Resource Adapter Provider>>).
-
-
-
-.SecurityPermission annotation
-[source,java]
-----
- package jakarta.resource.spi;
-
- @Documented
- @Retention(RUNTIME)
- @Target({})
- public @interface SecurityPermission {
- String[] description() default {};
- String permissionSpec() default "";
-
- }
-----
-
-The _description_ element is used to provide
-an optional description to mention any specific reason that a resource
-requires a given security permission.
-
-The _permissionSpec_ element specifies a
-security permission based on the Security policy file syntax. These
-security permissions are different from those required by the default
-permission set as specified in <<a6602, Security Permissions>>.
 
 [[a4675]]
 === @ConfigProperty
@@ -15787,11 +15731,6 @@ contract.
 ** Reauthentication support: The resource adapter
 provider must specify whether a resource adapter supports
 re-authentication of an existing physical connection.
-** Extended security permissions: The security
-permissions listed in the deployment descriptor are different from those
-required by the default permission set. Refer to
-<<a6592, Runtime Environment>> for more details
-on security permissions.
 * Inbound resource adapter information
 ** Message listener type: The resource adapter
 provider must specify one or more message listener types supported by a
@@ -15888,8 +15827,7 @@ specified by the resource adapter.
 
 * Configure security in the target operational
 environment based on the security requirements specified by the resource
-adapter in its deployment descriptor or annotations discussed in
-<<a4658, @SecurityPermission>>.
+adapter in its deployment descriptor or annotations.
 
 ===== Security Configuration
 
@@ -17370,8 +17308,7 @@ different locales.
         qualified names of classes/interfaces required as part of
         the connector architecture specified contracts for
         connection management, level of transaction support
-        provided, one or more authentication mechanisms supported
-        and additional required security permissions.
+        provided, and one or more authentication mechanisms supported.
         
         If any of the outbound resource adapter elements (transaction-support,
         authentication-mechanism, reauthentication-support) is specified through
@@ -17550,55 +17487,6 @@ different locales.
           <xsd:field xpath="jakartaee:adminobject-class"/>
         </xsd:unique>
       </xsd:element>
-      <xsd:element name="security-permission"
-                   type="jakartaee:security-permissionType"
-                   minOccurs="0"
-                   maxOccurs="unbounded"/>
-    </xsd:sequence>
-    <xsd:attribute name="id"
-                   type="xsd:ID"/>
-  </xsd:complexType>
-
-
-<!-- **************************************************** -->
-
-  <xsd:complexType name="security-permissionType">
-    <xsd:annotation>
-      <xsd:documentation>
-
-        The security-permissionType specifies a security
-        permission that is required by the resource adapter code.
-        
-        The security permission listed in the deployment descriptor
-        are ones that are different from those required by the
-        default permission set as specified in the connector
-        specification. The optional description can mention specific
-        reason that resource adapter requires a given security
-        permission.
-        
-      </xsd:documentation>
-    </xsd:annotation>
-    <xsd:sequence>
-      <xsd:element name="description"
-                   type="jakartaee:descriptionType"
-                   minOccurs="0"
-                   maxOccurs="unbounded"/>
-      <xsd:element name="security-permission-spec"
-                   type="jakartaee:xsdStringType">
-        <xsd:annotation>
-          <xsd:documentation>
-
-            The element security-permission-spec specifies a security
-            permission based on the Security policy file
-            syntax. Refer to the following URL for Sun's
-            implementation of the security permission
-            specification:
-            
-            http://docs.oracle.com/javase/6/docs/technotes/guides/security/PolicyFiles.html
-            
-          </xsd:documentation>
-        </xsd:annotation>
-      </xsd:element>
     </xsd:sequence>
     <xsd:attribute name="id"
                    type="xsd:ID"/>
@@ -17645,272 +17533,6 @@ Enterprise Edition, Version 10 as specified in the {lkPlatformSpec}.
 * Java Authentication and Authorization Service
 (JAAS) 1.0 that requires at least Java 2 SDK, Standard Edition, version
 1.3 or the Java 2 Runtime Environment version 1.3.
-
-[[a6602]]
-=== Security Permissions
-
-An application server must provide a set of
-security permissions for executing a resource adapter in a managed
-runtime environment. A resource adapter must be granted explicit
-permissions to access system resources.
-
-Since the exact set of required security
-permissions for a resource adapter depends on the overall security
-policy for an operational environment and the implementation
-requirements of a resource adapter, Jakarta Connectors does not
-define a fixed set of permissions.
-
-The following permission set represents the
-default set of security permissions that a resource adapter should
-expect from an application server. 
-
-[[a6606]]
-.Table Default Security Permission Set
-|===
-|Security Permission |Default Policy |Notes
-| _java.security.AllPermission_ | deny
-| Extreme care should be taken before granting
-this permission to a resource adapter. This permission should only be
-granted if the resource adapter code is completely trusted and when it
-is prohibitively cumbersome to add necessary permissions to the security
-policy.
-
-| _java.awt.AWTPermission_ |deny * | A resource adapter must not use AWT code to interact with display or input devices.
-| _java.io.FilePermission_ | grant read and write <pathname>
-deny rest
-| A _java.io.FilePermission_ represents access
-to a file or directory. A _FilePermission_ consists of a pathname and a
-set of actions valid for that pathname.
-
-A resource adapter is granted permission to
-read/write files as specified by the _pathname_ , which is specific to a
-configured operational environment.
-
-It is important to consider the implications
-of granting _Write_ permission for _ALL FILES_ because this grants
-the resource adapter permissions to write to the entire file system.
-This can allow a malicious resource adapter to mangle system binaries
-for the JVM environment.
-
-| _java.net.NetPermission_ | deny * |
-| _java.util.PropertyPermission_ |grant read
-(allows _System.getProperty_ to be called)
-deny rest
-|Granting code permission to access certain
-system properties ( _java.home_ ) can potentially give malevolent code
-sensitive information about the system environment, such as the Java
-installation directory.
-
-| _java.lang.reflect.ReflectPermission_ |deny * |
-| _java.lang.RuntimePermission_ | deny _*_
-| By default, _RuntimePermission_ is denied to
-the resource adapter code.
-A resource adapter should explicitly request
-_LoadLibrary.\{libraryName}_ to link a dynamic library. The
-_libraryName_ represents a specific library.
-A resource adapter that manages threads must
-explicitly request permission to _modifyThread_ through its deployment
-descriptor.
-
-A resource adapter should never be granted
-_exitVM_ permission in a managed application server environment.
-
-| _java.security.SecurityPermission_
-| deny * |
-| _java.net.SocketPermission_
-| grant connect *
-deny rest
-
-| This represents permission to access a
-network by way of sockets. A _SocketPermission_ consists of a host
-specification and a set of actions specifying ways to connect to that
-host.
-
-A resource adapter is granted permission to
-connect to any host as indicated by the wildcard *.
-
-A resource adapter may be granted permission
-to accept connections from other hosts by way of a “grant accept *”.
-This may be necessary for resource adapters that support inbound
-communication.
-
-| _java.security.SerializablePermission_
-| deny *
-| This ensures that a resource adapter cannot
-subclass _ObjectOutputStream_ or _ObjectInputStream_ to override the
-default serialization or deserialization of objects or to substitute one
-object for another during serialization or deserialization.
-
-|=== 
-
-=== Requirements
-
-A resource adapter provider must ensure that
-resource adapter code does not conflict with the default security
-permission set. By ensuring this, a resource adapter can be deployed and
-run in any application server without execution or manageability
-problems.
-
-If a resource adapter requires security
-permissions other than those specified in the default set, it must
-describe such requirements in the XML deployment descriptor using the
-_security-permission_ element or through the _SecurityPermission_
-annotation described in <<a4658, @SecurityPermission>>.
-
-A deployment descriptor-based specification of
-an extended permission set for a resource adapter allows the deployer to
-analyze the security implications of the extended permission set and
-make a deployment decision accordingly. An application server must be
-capable of deploying a resource adapter with the default permission set.
-
-==== Example
-
-The resource adapter implementation creates a
-_java.net.Socket_ and retrieves the hostname using the _getHostName_
-method in _java.net.InetAddress_ .
-
-.Table Methods and Security Permissions Required
-|===
-|Method |Security Manager Method Called |Permission
-| _java.net.Socket_
- _Socket(...)_
-| _checkConnect(_ host, port _)_
-| _java.net.SocketPermission_ "host:port _",
-"connect"_
-
-| _java.net.InetAddress_ _public String_  _getHostName()_
-| _checkConnect(_ host, -1 _)_
-| _java.net.SocketPermission "_ host _", "_
-resolve _"_
-|===
-
-
-The default _SocketPermission_ , as specified
-in <<a6606, Default Security Permission Set>>, is
-_grant connect_ and _deny rest_ . This means that if resource adapter
-uses the default permission set, the first method _Socket(...)_ will be
-allowed while the second method _InetAddress_ . _getHostName_ is
-disallowed.
-
-The resource adapter is required to explicitly
-request security permission for the _InetAddress_ . _getHostName_ method
-in the _security-permission-spec_ element of its XML deployment
-descriptor or through the _SecurityPermission_ annotation described in
-<<a4658, @SecurityPermission>>. The following is
-an example of allowing additional security permissions:
-
-[source,xml]
-----
-<security-permission-spec>
-
- grant {
- permission java.net.SocketPermission *, "resolve";
- };
-</security-permission-spec>
-----
-
-=== Privileged Code
-
-A resource adapter runs in its own protection
-domain as identified by its code source and security permission set. For
-the resource adapter to be allowed to perform a secured action, such as
-writing a file, it must have been granted permission for that particular
-action.
-
-Resource adapter code is considered system
-code which may require more security permissions than the calling
-application component code. For example, when an application component
-calls a resource adapter method to execute a function call on the
-underlying EIS instance, the resource adapter code may need more
-security permissions than allowed to the calling component, such as the
-ability to create a thread.
-
-The Java security architecture requires that
-whenever a system resource access or any secured action is attempted,
-all code traversed by the current execution thread up to that point must
-have the necessary permissions for the system resource access, unless
-some code on the thread has been marked as privileged. Refer to
-_http://docs.oracle.com/javase/6/docs/technotes/guides/security/doprivileged.html._
-
-To support such scenarios, the resource
-adapter code should use the _privileged_ code feature in the Java
-security architecture. This enables the resource adapter code to
-temporarily perform more secured actions than are available directly to
-the application code calling the resource adapter.
-
-==== Example
-
-A resource adapter from Wombat Systems
-packaged in the wombat.rar file contains the following permission
-specification:
-
-[source,xml]
-----
-<security-permission>
- <security-permission-spec>
-
- grant {
-
- permission java.io.FilePermission
-"${user.home}${file.separator}trace{file.separator}-",
- "read,write,delete";
- };
-
- </security-permission-spec>
-
-</security-permission>
-----
-
-During resource adapter deployment, the
-application server processes this _security-permission-spec_ and grants
-the necessary permissions to the _wombat.rar_ code base. This is an
-implementation-specific mechanism and not prescribed by the
-specification. As an example, the application server may append these
-permissions to the _java.policy_ file or some implementation-specific
-policy file, and this may involve manual intervention.
-
-[source,java]
-----
-// application code
-
-...
-
-WombatConnectionFactory wcf =  (WombatConnectionFactory) jndi.lookup("WombatConnectionFactory");
-WombatConnection wc = wcf.getConnection(..);
-doWork(wc); // calls into resource adapter code
-
-// resource adapter implementation of WombatConnection
-
-...
-
-AccessController.doPrivileged(new
-PrivilegedAction() {
-
- public Object run() {
-
- // privileged code goes here, for example:
-
- File file = File.createNewFile();
-
- writeTraceInfoToFile(file);
-
- return null; // nothing to return
-
- }
-
-});
-
-----
-
-In addition to specifying these required
-permissions, the resource adapter must also use _doPrivileged_ blocks at
-strategic locations in its code to prevent the permission checking from
-reaching the application code or the application server code. The
-_doPrivileged_ block allows the _AccessController_ to temporarily grant
-the necessary permissions to the resource adapter code and to stop
-checking the rest of the call stack. This allows the resource adapter
-code to be unaffected by the calling application code's security
-permission restrictions.
 
 [[a6725]]
 === Dependency Injection
