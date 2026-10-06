@@ -1,5 +1,5 @@
 :sectnums:
-== Jakarta Connectors, Version {specVersion}
+== Jakarta Connectors, Version {revnumber}
 
 Copyright (c) {inceptionYear}, {docyear} Eclipse Foundation, Oracle and/or its affiliates
 
