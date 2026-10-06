@@ -74,7 +74,7 @@ public interface MessageEndpointFactory {
      * This is used to find out whether message deliveries to a target method
      * on a message listener interface that is implemented by a message 
      * endpoint or a target method in the <code>Class</code> returned by the 
-     * <code>getBeanClass</code> method, will be transacted or not. 
+     * <code>getEndpointClass</code> method, will be transacted or not. 
      *
      * The message endpoint may indicate its transacted delivery preferences 
      * (at a per method level) through its deployment descriptor. The message 
