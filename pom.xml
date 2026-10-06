@@ -87,30 +87,11 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[${maven.compiler.source},)</version>
+                                    <version>[${maven.compiler.release},)</version>
                                 </requireJavaVersion>
                                 <requireMavenVersion>
                                     <version>[3.6.0,)</version>
                                 </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enforce-versions</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireJavaVersion>
-                                    <version>[${maven.compiler.source},)</version>
-                                </requireJavaVersion>
                             </rules>
                         </configuration>
                     </execution>
