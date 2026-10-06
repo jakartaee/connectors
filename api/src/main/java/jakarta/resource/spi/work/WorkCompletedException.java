@@ -40,6 +40,8 @@ package jakarta.resource.spi.work;
  */
 public class WorkCompletedException extends WorkException {
 
+    private static final long serialVersionUID = 5415262513119961421L;
+
     /**
      * Constructs a new instance with null as its detail message.
      */

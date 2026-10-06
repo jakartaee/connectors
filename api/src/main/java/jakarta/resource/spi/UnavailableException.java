@@ -24,6 +24,8 @@ package jakarta.resource.spi;
  */
 public class UnavailableException extends jakarta.resource.ResourceException {
 
+    private static final long serialVersionUID = 2670205932554330189L;
+
     /**
      * Constructs a new instance with null as its detail message.
      */

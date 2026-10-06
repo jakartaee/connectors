@@ -24,6 +24,7 @@ package jakarta.resource.spi.work;
  */
 public class WorkException extends jakarta.resource.ResourceException {
 
+    private static final long serialVersionUID = 7845324676753233876L;
 
     /**
      * Indicates an internal error condition.
