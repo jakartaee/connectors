@@ -109,13 +109,16 @@
                             Jakarta Connectors ${spec.version} API jar
                         </Bundle-Description>
                         <Bundle-Name>Jakarta Connectors API jar</Bundle-Name>
-                        <Bundle-SymbolicName>jakarta.resource-api</Bundle-SymbolicName>
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                        <Extension-Name>jakarta.resource</Extension-Name>
-                        <Implementation-Version>${project.version}</Implementation-Version>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Version>${bundle.version}</Bundle-Version>
+                        <Extension-Name>${project.groupId}</Extension-Name>
+                        <Implementation-Version>${bundle.version}</Implementation-Version>
                         <Specification-Vendor>Eclipse Foundation</Specification-Vendor>
                         <Specification-Version>${spec.version}</Specification-Version>
                         <Import-Package>jakarta.transaction;version="[2.0,3.0)",*</Import-Package>
+                        <Export-Package>
+                            jakarta.resource.*; version=${bundle.version}
+                        </Export-Package>
                         <_include>-${basedir}/osgi.bundle</_include>
                     </instructions>
                 </configuration>
