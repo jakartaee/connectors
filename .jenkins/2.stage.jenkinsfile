@@ -10,9 +10,6 @@
  *   secret-subkeys.asc  - GPG keyring file used to sign published artifacts.
  *   github-bot-ssh      - SSH key used to push to GitHub.
  *
- * Optional:
- *   Requires `gh` CLI available on the agent to post the release summary comment.
- *
  * Triggers:
  *   Manual     - Always ran manually
  */
@@ -47,14 +44,6 @@ pipeline {
             name: 'NEXT_VERSION',
             defaultValue: '',
             description: 'Next development snapshot version (e.g. x.x.x-SNAPSHOT). [REQUIRED]'
-        )
-        string(
-            name: 'RELEASE_ISSUE',
-            defaultValue: '',
-            description: '''
-                        GitHub issue number to comment on with the release summary (e.g. 123).
-                        Leave blank to skip.
-                        '''
         )
         booleanParam(
             name: 'DRY_RUN',
@@ -435,37 +424,30 @@ pipeline {
         }
 
         /* Prints the artifact, branch, and tag links needed to update the
-         * release issue. If RELEASE_ISSUE is provided, also posts the summary
-         * as a comment on that GitHub issue using the gh CLI.
+         * release issue.
          */
         stage('Summary') {
             steps {
-                sshagent(credentials: ['github-bot-ssh']) {
-                    sh '''
-                        GROUP_PATH=$(echo "${GROUP_ID}" | tr '.' '/')
-                        ARTIFACT_PATH="${GROUP_PATH}/${ARTIFACT_ID}/${RELEASE_VERSION}/${ARTIFACT_ID}-${RELEASE_VERSION}.pom"
-                        ENCODED_PATH=$(echo "${ARTIFACT_PATH}" | sed 's|/|%2F|g')
+                sh '''
+                    GROUP_PATH=$(echo "${GROUP_ID}" | tr '.' '/')
+                    ARTIFACT_PATH="${GROUP_PATH}/${ARTIFACT_ID}/${RELEASE_VERSION}/${ARTIFACT_ID}-${RELEASE_VERSION}.pom"
 
-                        COMMENT="=============================== Release is Staged ==============================="
-                        COMMENT="${COMMENT}\nArtifact:   https://repo.eclipse.org/#browse/browse:ee4j-staging:${ENCODED_PATH}"
-                        COMMENT="${COMMENT}\nBranch:     https://github.com/${GH_REPO}/tree/${RELEASE_BRANCH}"
-                        COMMENT="${COMMENT}\nTag:        https://github.com/${GH_REPO}/tree/${RELEASE_TAG}"
-                        COMMENT="${COMMENT}\nRelease:    https://github.com/${GH_REPO}/releases/new [TODO]"
-                        COMMENT="${COMMENT}\n================================================================================="
+                    COMMENT="############################### Release is Staged ###############################"
+                    COMMENT="${COMMENT}\nArtifact:   https://repo.eclipse.org/repository/ee4j-staging/${ARTIFACT_PATH}"
+                    COMMENT="${COMMENT}\nBranch:     https://github.com/${GH_REPO}/tree/${RELEASE_BRANCH}"
+                    COMMENT="${COMMENT}\nTag:        https://github.com/${GH_REPO}/tree/${RELEASE_TAG}"
+                    COMMENT="${COMMENT}\nRelease:    https://github.com/${GH_REPO}/releases/new [DRAFT]"
+
+                    if [ -n "${TCK_SHA256}" ]; then
+                        COMMENT="${COMMENT}\nTCK SHA256: ${TCK_SHA256}"
+                    fi
+
+                    COMMENT="${COMMENT}\n#################################################################################"
 
 
-                        # TODO: Verify gh CLI is available on the Jenkins agent PATH
-                        if [ -n "${RELEASE_ISSUE}" ] && [ "${DRY_RUN}" = 'false' ]; then
-                          echo "Posting summary to issue #${RELEASE_ISSUE}"
-                          gh issue comment "${RELEASE_ISSUE}" \
-                            --repo "${GH_REPO}" \
-                            --body "${COMMENT}"
-                        else
-                          echo "RELEASE_ISSUE not set or DRY_RUN is true — skipping GitHub comment"
-                          echo -e "${COMMENT}"
-                        fi
-                        '''
-                }
+                    echo "Copy to issue:"
+                    echo -e "${COMMENT}"
+                    '''
             }
         }
     }

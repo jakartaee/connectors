@@ -11,9 +11,6 @@
  *   secret-subkeys.asc  - GPG keyring file used to sign published artifacts.
  *   github-bot-ssh      - SSH key used to check out the tag from GitHub.
  *
- * Optional:
- *   Requires `gh` CLI available on the agent to post the release summary comment.
- *
  * Triggers:
  *   Manual     - Always ran manually
  */
@@ -38,14 +35,6 @@ pipeline {
             name: 'TAG',
             defaultValue: '',
             description: 'The TAG that was created during the stage pipeline.'
-        )
-        string(
-            name: 'RELEASE_ISSUE',
-            defaultValue: '',
-            description: '''
-                        GitHub issue number to comment on with the release summary (e.g. 123).
-                        Leave blank to skip.
-                        '''
         )
         booleanParam(
             name: 'DRY_RUN',
@@ -184,36 +173,30 @@ pipeline {
             }
         }
 
-        /* Prints the artifact, branch, and tag links confirming the release.
-         * If RELEASE_ISSUE is provided, also posts the summary as a comment
-         * on that GitHub issue using the gh CLI.
+        /* 
+         * Prints the artifact, branch, and tag links confirming the release.
          */
         stage('Summary') {
             steps {
-                sshagent(credentials: ['github-bot-ssh']) {
-                    sh '''
-                        GROUP_PATH=$(echo "${GROUP_ID}" | tr '.' '/')
-                        ARTIFACT_PATH="${GROUP_PATH}/${ARTIFACT_ID}/${CURRENT_VERSION}/${ARTIFACT_ID}-${CURRENT_VERSION}.pom"
+                sh '''                 
+                    COMMENT="############################### Release is Published ##############################"
+                    COMMENT="${COMMENT}\nArtifact:   https://central.sonatype.com/artifact/${GROUP_ID}/${ARTIFACT_ID}/${CURRENT_VERSION}"
+                    COMMENT="${COMMENT}\nTag:        https://github.com/${GH_REPO}/tree/${TAG}"
+                    COMMENT="${COMMENT}\nRelease:    https://github.com/${GH_REPO}/releases/tags/${TAG} [TODO]"
 
-                        COMMENT="=============================== Release is Published =============================="
-                        COMMENT="${COMMENT}\nArtifact:   https://central.sonatype.com/artifact/${ARTIFACT_PATH}"
-                        COMMENT="${COMMENT}\nBranch:     https://github.com/${GH_REPO}/tree/${RELEASE_BRANCH}"
-                        COMMENT="${COMMENT}\nTag:        https://github.com/${GH_REPO}/tree/${TAG}"
-                        COMMENT="${COMMENT}\nRelease:    https://github.com/${GH_REPO}/releases/tag/${TAG} [TODO]"
-                        COMMENT="${COMMENT}\n================================================================================="
+                    if [ -n "${PROMOTED_URL}" ]; then
+                        COMMENT="${COMMENT}\nTCK:        ${PROMOTED_URL}/"
+                    fi
 
-                        # TODO: Verify gh CLI is available on the Jenkins agent PATH
-                        if [ -n "${RELEASE_ISSUE}" ] && [ "${DRY_RUN}" = 'false' ]; then
-                          echo "Posting summary to issue #${RELEASE_ISSUE}"
-                          gh issue comment "${RELEASE_ISSUE}" \
-                            --repo "${GH_REPO}" \
-                            --body "${COMMENT}"
-                        else
-                          echo "RELEASE_ISSUE not set or DRY_RUN is true — skipping GitHub comment"
-                          echo -e "${COMMENT}"
-                        fi
-                        '''
-                }
+                    if [ -n "${TCK_SHA256}" ]; then
+                        COMMENT="${COMMENT}\nTCK SHA256: ${TCK_SHA256}"
+                    fi
+
+                    COMMENT="${COMMENT}\n#################################################################################"
+
+                    echo "Copy to issue:"
+                    echo -e "${COMMENT}"
+                    '''
             }
         }
     }
