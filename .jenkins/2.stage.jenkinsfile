@@ -1,0 +1,460 @@
+/*
+ * Staging Pipeline
+ *
+ * Builds and stages the Jakarta project — Parent POM and API jar — to the
+ * Eclipse Nexus staging repository at
+ * https://repo.eclipse.org/service/rest/repository/browse/ee4j-staging/
+ * using the repository on GitHub.
+ *
+ * Credentials required:
+ *   secret-subkeys.asc  - GPG keyring file used to sign published artifacts.
+ *   github-bot-ssh      - SSH key used to push to GitHub.
+ *
+ * Triggers:
+ *   Manual     - Always ran manually
+ */
+
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(daysToKeepStr: '14', numToKeepStr: '10'))
+        disableConcurrentBuilds()
+        skipDefaultCheckout()
+        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true)
+    }
+
+    // Always use the latest LTS version
+    tools {
+        jdk 'openjdk-jdk25-latest'
+    }
+
+    parameters {
+        string(
+            name: 'BRANCH',
+            defaultValue: 'main',
+            description: 'Branch to release. Default value is main.'
+        )
+        string(
+            name: 'RELEASE_VERSION',
+            defaultValue: '',
+            description: 'Version to release. [REQUIRED]'
+        )
+        string(
+            name: 'NEXT_VERSION',
+            defaultValue: '',
+            description: 'Next development snapshot version (e.g. x.x.x-SNAPSHOT). [REQUIRED]'
+        )
+        booleanParam(
+            name: 'DRY_RUN',
+            defaultValue: true,
+            description: '''
+                        Do not publish artifacts to staging repo.
+                        Do not create GitHub branch/tag.
+                        '''
+        )
+        booleanParam(
+            name: 'OVERWRITE',
+            defaultValue: false,
+            description: '''
+                        true (checked):
+                            If release with given version string already exists, it's overwritten with new artifacts.
+                            Both staging repository and GitHub branch and tag are updated.
+                        false (unchecked):
+                            If release with given version already exists, job will be terminated with an error.
+                        '''
+        )
+    }
+
+    environment {
+        // Path
+        TOOLS_PREFIX = '/opt/tools'
+        JAVA_HOME    = "${TOOLS_PREFIX}/java/openjdk/jdk-25/latest"
+        MVN_HOME     = "${TOOLS_PREFIX}/apache-maven/latest"
+        PATH         = "${MVN_HOME}/bin:${JAVA_HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+        // Plugins
+        VERSIONS_PLUGIN = 'org.codehaus.mojo:versions-maven-plugin:2.18.0'
+        HELP_PLUGIN     = 'org.apache.maven.plugins:maven-help-plugin:3.5.1'
+        STAGING_PLUGIN  = 'org.eclipse.cbi.central:central-staging-plugins:1.4.7'
+
+        // Project
+        GH_EMAIL                = 'jca-bot@eclipse.org'
+        GH_USER                 = 'jca-bot'
+        GH_REPO                 = "jakartaee/connectors"
+        SHORT_NAME              = 'jca'
+        GIT_URL                 = 'git@github.com:jakartaee/connectors.git'
+        RELEASE_BRANCH_TEMPLATE = '{VERSION}-RELEASE'
+    }
+
+    stages {
+        /* Confirms Maven is functional and that required build parameters
+         * (RELEASE_VERSION, NEXT_VERSION) are present and that the project
+         * carries a SNAPSHOT version.
+         */
+        stage('Verify Setup') {
+            steps {
+                sh '''
+                    echo "Test Maven"
+                    mvn -version
+
+                    echo "Verify release version is set"
+                    if [ -z "${RELEASE_VERSION}" ]; then
+                      echo "ERROR: Missing build parameter RELEASE_VERSION"
+                      exit 1
+                    fi
+
+                    echo "Verify next version is set"
+                    if [ -z "${NEXT_VERSION}" ]; then
+                      echo "ERROR: Missing build parameter NEXT_VERSION"
+                      exit 1
+                    fi
+                    '''
+            }
+        }
+
+        /* Checks out the branch specified by the BRANCH parameter, ensuring
+         * the pipeline operates on the correct source for the release.
+         */
+        stage('Checkout') {
+            steps {
+                sshagent(credentials: ['github-bot-ssh']) {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: "refs/heads/${BRANCH}"]],
+                        extensions: [[$class: 'LocalBranch', localBranch: "${BRANCH}"]],
+                        userRemoteConfigs: [[
+                            url: "${GIT_URL}",
+                            credentialsId: 'github-bot-ssh'
+                        ]]
+                    ])
+                }
+            }
+        }
+
+        /* Imports and fully trusts the signing keys from the 'secret-subkeys.asc'
+         * credential so that Maven can sign artifacts during deployment.
+         */
+        stage('Import GPG Keys') {
+            steps {
+                withCredentials([file(credentialsId: 'secret-subkeys.asc', variable: 'KEYRING')]) {
+                    sh '''
+                        #!/bin/bash -e
+                        gpg --batch --import ${KEYRING}
+                        for fpr in $(gpg --list-keys --with-colons | awk -F: '/fpr:/ {print $10}' | sort -u); do
+                            printf "5\ny\n" | gpg --batch --command-fd 0 --expert --edit-key $fpr trust
+                        done
+                        '''
+                }
+            }
+        }
+
+        /* Derives SNAPSHOT_VERSION, RELEASE_BRANCH, RELEASE_TAG, GROUP_ID,
+         * ARTIFACT_ID, and staging descriptor values from the checked-out source.
+         */
+        stage('Compute Variables') {
+            steps {
+                sh '''
+                    echo "Verify project version"
+                    if ! grep '<version>' pom.xml | grep 'SNAPSHOT' ; then
+                      echo "ERROR: Missing required snapshot version number"
+                      exit 1
+                    fi
+
+                    echo "List configured versions"
+                    echo "Release version: ${RELEASE_VERSION}"
+                    echo "Next version:    ${NEXT_VERSION}"
+
+                    echo "Compute current version"
+                    SNAPSHOT_VERSION=$(mvn -B ${HELP_PLUGIN}:evaluate \
+                      -Dexpression=project.version \
+                      2> /dev/null | grep -E '^[0-9]+(\\.[0-9]+)+-SNAPSHOT$')
+                    echo "SNAPSHOT_VERSION=${SNAPSHOT_VERSION}" >> computed.env
+
+                    echo "Compute GitHub origin/branch/tag"
+                    RELEASE_ORIGIN=$(git remote)
+                    RELEASE_TAG="${RELEASE_VERSION}"
+                    RELEASE_BRANCH=$(echo "${RELEASE_BRANCH_TEMPLATE}" | sed "s/{VERSION}/${RELEASE_VERSION}/g")
+                    echo "RELEASE_ORIGIN=${RELEASE_ORIGIN}"     >> computed.env
+                    echo "RELEASE_TAG=${RELEASE_TAG}"           >> computed.env
+                    echo "RELEASE_BRANCH=${RELEASE_BRANCH}"     >> computed.env
+
+                    echo "Compute project ids"
+                    GROUP_ID=$(mvn -B ${HELP_PLUGIN}:evaluate -Dexpression=project.groupId | grep -Ev '(^\\[)')
+                    ARTIFACT_ID=$(mvn -B ${HELP_PLUGIN}:evaluate -Dexpression=project.artifactId | grep -Ev '(^\\[)')
+                    echo "GROUP_ID=${GROUP_ID}"                 >> computed.env
+                    echo "ARTIFACT_ID=${ARTIFACT_ID}"           >> computed.env
+
+                    echo "Compute staging targets"
+                    STAGING_DESC="${GROUP_ID}:${ARTIFACT_ID}:${RELEASE_VERSION}"
+                    STAGING_KEY=$(echo ${STAGING_DESC} | sed -e 's/\\./\\\\\\./g')
+                    echo "STAGING_DESC=${STAGING_DESC}"         >> computed.env
+                    echo "STAGING_KEY=${STAGING_KEY}"           >> computed.env
+                    '''
+                script {
+                    def props = [:]
+                    readFile('computed.env').trim().split('\n').each { line ->
+                        def idx = line.indexOf('=')
+                        if (idx > 0) {
+                            props[line.substring(0, idx)] = line.substring(idx + 1)
+                        }
+                    }
+                    env.SNAPSHOT_VERSION = props.SNAPSHOT_VERSION
+                    env.RELEASE_ORIGIN   = props.RELEASE_ORIGIN
+                    env.RELEASE_TAG      = props.RELEASE_TAG
+                    env.RELEASE_BRANCH   = props.RELEASE_BRANCH
+                    env.GROUP_ID         = props.GROUP_ID
+                    env.ARTIFACT_ID      = props.ARTIFACT_ID
+                    env.STAGING_DESC     = props.STAGING_DESC
+                    env.STAGING_KEY      = props.STAGING_KEY
+                }
+            }
+        }
+
+        /* Guards against empty computed values and, unless OVERWRITE is true,
+         * aborts early when the target branch or tag already exists on the remote.
+         */
+        stage('Verify Variables') {
+            steps {
+                sh '''
+                    echo "Verify current version"
+                    if [ -z "${SNAPSHOT_VERSION}" ]; then
+                      echo "ERROR: Missing build parameter SNAPSHOT_VERSION"
+                      exit 1
+                    fi
+
+                    if [ "${OVERWRITE}" == 'true' ]; then
+                      echo "Skip GitHub branch/tag verification (OVERWRITE)"
+                    else
+                      echo "Verify GitHub branch/tag do not already exist"
+
+                      if [[ -n $(git branch -r | grep "${RELEASE_ORIGIN}/${RELEASE_BRANCH}") ]]; then
+                        echo "ERROR: ${RELEASE_ORIGIN}/${RELEASE_BRANCH} branch already exists"
+                        exit 1
+                      fi
+
+                      if [[ -n $(git ls-remote --tags ${RELEASE_ORIGIN} | grep "${RELEASE_TAG}") ]]; then
+                        echo "Error: ${RELEASE_TAG} tag already exists"
+                        exit 1
+                      fi
+                    fi
+                    '''
+            }
+        }
+
+        /* Creates the local release branch, removes any stale local tag, and
+         * configures the git committer identity for the api-bot service account.
+         */
+        stage('Setup GitHub') {
+            steps {
+                sshagent(credentials: ['github-bot-ssh']) {
+                    sh '''
+                        echo "Checkout branch $RELEASE_BRANCH"
+                        git branch --delete "${RELEASE_BRANCH}" && true
+                        git checkout -b ${RELEASE_BRANCH}
+
+                        echo "Remove existing tag $RELEASE_TAG (if exists)"
+                        git tag --delete "${RELEASE_TAG}" && true
+
+                        echo "Configure api-bot user info"
+                        git config --global user.email "${GH_EMAIL}"
+                        git config --global user.name "${GH_USER}"
+                        git config --global --list
+                        '''
+                }
+            }
+        }
+
+        /* Bumps all pom.xml files to RELEASE_VERSION, commits the change,
+         * and creates the release tag locally.
+         */
+        stage('Set Version') {
+            steps {
+                sh '''
+                    echo "Set release version to $RELEASE_VERSION"
+                    mvn -U -C -B \
+                        -DnewVersion="${RELEASE_VERSION}" \
+                        -DgenerateBackupPoms=false \
+                        clean ${VERSIONS_PLUGIN}:set
+
+                    echo "Commit modified pom.xml files"
+                    POM_FILES=$(git status \
+                      | grep -E 'modified:.*pom\\.xml' \
+                      | sed -e 's/[[:space:]][[:space:]]*modified:[[:space:]][[:space:]]*//')
+                    git add ${POM_FILES}
+                    git status
+                    git commit -m "Prepare release ${GROUP_ID}:${ARTIFACT_ID}:${RELEASE_VERSION}"
+
+                    echo "Create tag"
+                    git tag "${RELEASE_TAG}" -m "Release ${GROUP_ID}:${ARTIFACT_ID}:${RELEASE_VERSION}"
+                    '''
+            }
+        }
+
+        /* Lists existing staging deployments for the target version;
+         * fails if one exists and OVERWRITE is false.
+         */
+        stage('Check Deployments') {
+            steps {
+                sh '''
+                    echo "Find previous deployments for ${RELEASE_VERSION}"
+                    readarray -t DEPLOYMENTS < <(mvn ${STAGING_PLUGIN}:nexus-list \
+                      -Dnexus.showDetails=true \
+                      -Dnexus.serverId=repo.eclipse.org \
+                      -Dnexus.repository=${SHORT_NAME}-maven2-staging \
+                      -Dnexus.version=${RELEASE_VERSION} \
+                      | grep "id=")
+
+                    echo "List old deployment ids"
+                    for i in ${!DEPLOYMENTS[@]}; do
+                      echo "Deployment $i: ${DEPLOYMENTS[$i]}"
+                    done
+
+                    if [ ${#DEPLOYMENTS[@]} -eq 0 ]; then
+                      echo "No previous deployment for version ${RELEASE_VERSION}"
+                    else
+                      if [ "${OVERWRITE}" = 'true' ]; then
+                        echo "Will overwrite previous deployment for version ${RELEASE_VERSION}"
+                      else
+                        echo "ERROR: a previous deployment exists for version ${RELEASE_VERSION}, but overwrite was set to false"
+                        exit 1
+                      fi
+                    fi
+                    '''
+            }
+        }
+
+        /* Runs `mvn clean deploy` with the stage-release profile
+         * (or `clean install` during a DRY_RUN).
+         */
+        stage('Deploy') {
+            steps {
+                sh '''
+                    echo "Remove computed.env to avoid license check failure"
+                    rm -f computed.env
+
+                    if [ ${DRY_RUN} = 'true' ]; then
+                      echo "DRY_RUN: Clean install"
+                      mvn -U -C -B \
+                        -Pstage-release \
+                        -DskipTests -Ddoclint=none -Dasciidoctor.skip=true \
+                        clean install
+                    else
+                      echo "Clean deploy"
+                      mvn -U -C -B \
+                        -Pstage-release \
+                        -DskipTests -Ddoclint=none -Dasciidoctor.skip=true \
+                        clean deploy
+                    fi
+                    '''
+            }
+        }
+
+        /* Pushes the release branch and tag to origin (skipped during a DRY_RUN);
+         * removes pre-existing remote branch/tag first when OVERWRITE is true.
+         */
+        stage('Update GitHub') {
+            steps {
+                sshagent(credentials: ['github-bot-ssh']) {
+                    sh '''
+                        if [ ${DRY_RUN} = 'true' ]; then
+                          echo "DRY_RUN: skipping GitHub update"
+                        else
+                          if [ "${OVERWRITE}" = 'true' ]; then
+
+                            if [[ -n $(git branch -r | grep "${RELEASE_ORIGIN}/${RELEASE_BRANCH}") ]]; then
+                              echo "Delete existing branch $RELEASE_BRANCH"
+                              git push --delete ${RELEASE_ORIGIN} "${RELEASE_BRANCH}" || true
+                            fi
+
+                            if [[ -n $(git ls-remote --tags ${RELEASE_ORIGIN} | grep "${RELEASE_TAG}") ]]; then
+                              echo "Delete existing tag $RELEASE_TAG"
+                              git push --delete ${RELEASE_ORIGIN} "${RELEASE_TAG}" || true
+                            fi
+
+                          fi
+
+                          echo "Push branch $RELEASE_BRANCH and tag $RELEASE_TAG"
+                          git push ${RELEASE_ORIGIN} "${RELEASE_BRANCH}"
+                          git push ${RELEASE_ORIGIN} "${RELEASE_TAG}"
+                        fi
+                        '''
+                }
+            }
+        }
+        /* Bumps all pom.xml files to NEXT_VERSION and commits the change on the
+         * release branch, preparing the repo for the next development cycle.
+         */
+        stage('Set Next Development Version') {
+            steps {
+                sh '''
+                    echo "Set next development version to $NEXT_VERSION"
+                    mvn -U -C -B \
+                        -DnewVersion="${NEXT_VERSION}" \
+                        -DgenerateBackupPoms=false \
+                        clean ${VERSIONS_PLUGIN}:set
+
+                    echo "Commit modified pom.xml files"
+                    POM_FILES=$(git status \
+                      | grep -E 'modified:.*pom\\.xml' \
+                      | sed -e 's/[[:space:]][[:space:]]*modified:[[:space:]][[:space:]]*//')
+                    git add ${POM_FILES}
+                    git status
+                    git commit -m "Prepare next development cycle ${GROUP_ID}:${ARTIFACT_ID}:${NEXT_VERSION}"
+                    '''
+            }
+        }
+
+        /* Pushes the next-development-version commit to the release branch on origin.
+         * Skipped during a DRY_RUN.
+         */
+        stage('Push Next Development Version') {
+            steps {
+                sshagent(credentials: ['github-bot-ssh']) {
+                    sh '''
+                        if [ ${DRY_RUN} = 'true' ]; then
+                          echo "DRY_RUN: skipping push of next development version"
+                        else
+                          echo "Push branch $RELEASE_BRANCH"
+                          git push ${RELEASE_ORIGIN} "${RELEASE_BRANCH}"
+                        fi
+                        '''
+                }
+            }
+        }
+
+        /* Prints the artifact, branch, and tag links needed to update the
+         * release issue.
+         */
+        stage('Summary') {
+            steps {
+                sh '''
+                    GROUP_PATH=$(echo "${GROUP_ID}" | tr '.' '/')
+                    ARTIFACT_PATH="${GROUP_PATH}/${ARTIFACT_ID}/${RELEASE_VERSION}/${ARTIFACT_ID}-${RELEASE_VERSION}.pom"
+
+                    COMMENT="############################### Release is Staged ###############################"
+                    COMMENT="${COMMENT}\nArtifact:   https://repo.eclipse.org/repository/ee4j-staging/${ARTIFACT_PATH}"
+                    COMMENT="${COMMENT}\nBranch:     https://github.com/${GH_REPO}/tree/${RELEASE_BRANCH}"
+                    COMMENT="${COMMENT}\nTag:        https://github.com/${GH_REPO}/tree/${RELEASE_TAG}"
+                    COMMENT="${COMMENT}\nRelease:    https://github.com/${GH_REPO}/releases/new [DRAFT]"
+
+                    if [ -n "${TCK_SHA256}" ]; then
+                        COMMENT="${COMMENT}\nTCK SHA256: ${TCK_SHA256}"
+                    fi
+
+                    COMMENT="${COMMENT}\n#################################################################################"
+
+
+                    echo "Copy to issue:"
+                    echo -e "${COMMENT}"
+                    '''
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
